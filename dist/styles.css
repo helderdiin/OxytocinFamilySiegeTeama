@@ -308,3 +308,160 @@ legend small { margin-top: 2px; color: var(--muted); font-size: 10px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* Approved visual direction: night operations desk */
+:root {
+  color-scheme: dark;
+  --bg: #142428;
+  --surface: #1a2e32;
+  --surface-2: #223b40;
+  --surface-3: #2b484e;
+  --line: #365158;
+  --line-strong: #58747a;
+  --text: #f0eee6;
+  --muted: #9dacaf;
+  --muted-strong: #c3cccb;
+  --green: #7fac9f;
+  --green-dark: #638f84;
+  --red: #d47b58;
+  --gold: #d5a14c;
+  --blue: #7faec3;
+}
+
+::selection { background: #b86749; color: #fffaf0; }
+* { scrollbar-color: #547178 #192c30; }
+body { background: var(--bg); color: var(--text); }
+.ambient, .eyebrow { display: none; }
+.brand-mark, .brand-symbol { position: relative; }
+.brand-mark > span, .brand-symbol > span { position: absolute; right: 7px; bottom: 5px; font-size: 8px; line-height: 1; vertical-align: baseline; }
+.brand-mark > span { right: 11px; bottom: 9px; font-size: 10px; }
+
+.login-screen { background: var(--bg); }
+.login-card { background: #1a2e32; border-color: #3b575d; box-shadow: 0 26px 74px rgba(5,14,16,.28); }
+.brand-mark { color: #fff8ef; background: #b86749; border-color: #c98569; }
+.login-card h1, .command-intro h1, .results-heading h2, .playbook-heading h3, .dialog-header h2 { font-family: "Space Grotesk", sans-serif; letter-spacing: -.03em; }
+.login-card h1 span { color: #8fb8b1; }
+.login-copy, .helper { color: var(--muted); }
+input, textarea, select { color: var(--text); background: #17292d; border-color: #3a555b; }
+input::placeholder, textarea::placeholder { color: #9dacaf; }
+input:focus, textarea:focus, select:focus { border-color: #ce7655; box-shadow: 0 0 0 3px rgba(206,118,85,.13); }
+.button-primary { color: #fffaf3; background: #b86749; }
+.button-primary:hover { background: #ca7656; }
+.button-secondary, .button-ghost { color: var(--text); background: #223b40; border-color: #466168; }
+.button-secondary:hover, .button-ghost:hover { background: #2b484e; border-color: #678086; }
+
+.topbar { background: #1d3439; border-bottom-color: #38545a; box-shadow: 0 8px 26px rgba(4,13,15,.22); }
+.brand { color: #fffaf3; }
+.brand-symbol { color: #fffaf3; background: #b86749; }
+.brand small, .user-label small { color: #9bafb2; }
+.avatar { color: #fffaf3; background: #486b67; }
+.user-label strong { color: #f0eee6; }
+.sync-chip { color: #b9c5c6; border-color: #4a666c; background: #20383d; }
+.sync-chip.cloud i { background: #90b3a5; box-shadow: none; }
+.top-add-button { color: #fffaf3; background: #b86749; border-color: #c37658; }
+.top-add-button:hover { color: #fffaf3; background: #ca7656; border-color: #d4896c; }
+.icon-button { color: #a9b8ba; }
+.icon-button:hover { color: #fffaf3; background: #29454a; }
+
+.command-center { border-bottom-color: #365158; }
+.command-intro h1 { color: #f3f0e8; }
+.command-intro > div > p:last-child, .arsenal-summary { color: var(--muted); }
+.arsenal-summary span + span { border-left-color: #3b575d; }
+.arsenal-summary strong { color: #e19677; }
+.primary-search { color: #e19677; background: #1d3337; border-color: #6c7774; box-shadow: 0 12px 32px rgba(4,13,15,.17); }
+.primary-search:focus-within { border-color: #d47b58; box-shadow: 0 0 0 3px rgba(212,123,88,.12), 0 12px 32px rgba(4,13,15,.17); }
+.primary-search input { color: #f3f0e8; }
+.primary-search input::placeholder { color: #9dacaf; }
+.primary-search kbd { color: #c3cfce; background: #284348; border-color: #4b666b; }
+.advanced-filters label { color: #9baaad; }
+.clear-filters { color: #9baaad; }
+.clear-filters:hover { color: #e19677; }
+
+.results-heading { border-bottom-color: #547178; }
+.results-heading h2 { color: #f3f0e8; }
+.result-count { color: var(--muted); }
+.strategy-card { background: #1a2e32; border-color: #365158; box-shadow: 0 9px 26px rgba(4,13,15,.16); }
+.strategy-card:hover, .strategy-card[open] { border-color: #617d83; }
+.strategy-summary:focus-visible { outline-color: #d47b58; }
+.strategy-badge { color: #aebabb; border-color: #4b656a; background: #21383d; }
+.strategy-badge.safe { color: #a9cabd; border-color: #52766c; background: #223b38; }
+.strategy-badge.caution { color: #e2ba70; border-color: #765f38; background: #3a3325; }
+.strategy-badge.proven { color: #a6c6d5; border-color: #4f7180; background: #223a44; }
+.strategy-source { color: #8fa0a2; }
+.strategy-source strong { color: #c5cecd; }
+.team-label { color: #9ba9ab; }
+.defense-team .team-label { color: #e19677; }
+.attack-team .team-label { color: #9bc2b5; }
+.monster { color: #edf0eb; background: #17282c; border-color: #3d575d; }
+.defense-team .monster { border-color: #774c41; background: #312925; }
+.attack-team .monster { border-color: #476a61; background: #203734; }
+.monster-image { background: #223b40; }
+.wildcard-chip { color: #9ba9ab; }
+.wildcard-chip .wildcard-avatar { color: #9bc2b5; border-color: #5c8277; }
+.matchup-arrow { color: #6f888c; }
+.decision-strip { border-color: #3b565c; background: #192b2f; }
+.decision-item + .decision-item { border-color: #3b565c; }
+.decision-item p { color: #d5dcda; }
+.fit-signal { background: #1d3238; }
+.fit-signal span { color: #8db8ca; }
+.risk-signal { background: #302825; }
+.risk-signal span { color: #e19677; }
+.turn-signal { background: #203532; }
+.turn-signal span { color: #9bc2b5; }
+.open-hint { color: #9ba9ab; }
+.strategy-card[open] .expand-icon { color: #e19677; }
+.strategy-details { border-top-color: #3b565c; background: #172a2e; }
+.playbook-heading h3 { color: #f3f0e8; }
+.strategy-overview { border-color: #3b565c; }
+.detail-section { background: #1b3034; border-color: #3b565c; }
+.detail-section.primary { border-left: 1px solid #5b8075; background: #203634; }
+.detail-section.warning { border-left: 1px solid #805448; background: #302925; }
+.detail-section h4 { color: #9daaad; }
+.detail-section p { color: #d3dbd9; }
+.detail-section.empty p { color: #73888b; }
+.card-footer { color: #87999b; }
+.share-button { color: #91bacb; }
+.share-button:hover { background: #223b44; }
+.delete-button { color: #e19677; }
+.delete-button:hover { background: #392a26; }
+.shared-strategy { border-color: #6d9186; box-shadow: 0 0 0 1px rgba(109,145,134,.15), 0 14px 34px rgba(4,13,15,.2); }
+.empty-state { color: var(--muted); border-color: #4c686e; }
+.empty-state h3 { color: #f3f0e8; }
+.empty-state > svg { color: #71878b; }
+footer { color: #7e9194; border-top-color: #365158; }
+
+dialog { color: var(--text); background: #192c30; border-color: #456168; box-shadow: 0 30px 95px rgba(3,10,12,.5); }
+dialog::backdrop { background: rgba(5,14,17,.78); }
+.dialog-header { border-bottom-color: #3b565c; }
+.dialog-header > div > p:last-child { color: var(--muted); }
+.close-button { color: #9dacaf; }
+.close-button:hover { color: #f3f0e8; background: #253f44; }
+legend small, .monster-grid label, .select-grid label > small, .strategy-field small { color: var(--muted); }
+.legend-icon.attack { color: #9bc2b5; background: #223b38; }
+.legend-icon.defense { color: #e19677; background: #392a26; }
+.legend-icon.strategy { color: #91bacb; background: #223b44; }
+.monster-select { color: #9dacaf; background: #17292d; border-color: #456168; }
+.monster-select:not(:disabled):hover { color: #f3f0e8; border-color: #d47b58; }
+.monster-select.selected { color: #f3f0e8; border-color: #627b80; }
+.select-plus { color: #e19677; background: #243d42; }
+.wildcard-select .wildcard-avatar { color: #9bc2b5; border-color: #5b8075; background: #203634; }
+.versus-divider { color: #819396; }
+.versus-divider::before, .versus-divider::after { background: #3b565c; }
+.classification-fields, .strategy-field { background: #17292d; border-color: #3f5a60; }
+.strategy-field:first-child { border-color: #52766c; }
+.strategy-field.warning-field { border-color: #805448; }
+.strategy-field strong, .select-grid label { color: #e7ebe5; }
+.search-field { color: #e19677; background: #17292d; border-color: #456168; }
+.element-filters button { color: #9dacaf; border-color: #456168; }
+.element-filters button:hover, .element-filters button.active { color: #fffaf3; border-color: #b86749; background: #b86749; }
+.monster-option { color: #edf0eb; background: #17292d; border-color: #3f5a60; }
+.monster-option:hover { background: #223b40; border-color: #5d777d; }
+.picker-avatar { background: #223b40; }
+.option-copy small { color: var(--muted); }
+.add-label { color: #9bc2b5; }
+.toast { color: #fffaf3; background: #b86749; border-color: #c37658; box-shadow: 0 14px 40px rgba(4,13,15,.34); }
+
+@media (max-width: 620px) {
+  .top-add-button { background: #b86749; }
+  .share-button, .delete-button { border-color: #456168; }
+}

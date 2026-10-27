@@ -45,8 +45,8 @@ This is not a general team builder or a public database. It is a defense-first, 
 ## Brand and visual commitments
 
 - Use the Oxytocin name and O2 mark.
-- Preserve the dark tactical “war room” visual world.
-- Use the lime accent as a focused action/status color, not as decoration everywhere.
+- Preserve the dark tactical “war room” visual world without falling into pure-black or neon-gaming conventions.
+- Use deep petrol blue as the primary environment, copper for actions and danger, and desaturated aqua for safe counters.
 - Monster artwork is functional identification and should stay prominent.
 
 ## Design principles

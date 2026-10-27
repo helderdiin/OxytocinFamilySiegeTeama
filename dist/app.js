@@ -167,7 +167,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.12 · Supabase" : "POC v0.12 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.13 · Supabase" : "POC v0.13 · dados locais";
 }
 
 async function connectCloudUser() {

@@ -1,0 +1,356 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-27T12:40:05Z",
+  "title": "Design System: Oxytocin Siege Teams",
+  "extensions": {
+    "colorMeta": {
+      "operations-bg": {
+        "role": "neutral",
+        "displayName": "Operations Background",
+        "canonical": "#142428",
+        "tonalRamp": ["oklch(15% 0.018 205)", "oklch(25% 0.018 205)", "oklch(35% 0.018 205)", "oklch(45% 0.018 205)", "oklch(58% 0.018 205)", "oklch(70% 0.018 205)", "oklch(83% 0.018 205)", "oklch(95% 0.018 205)"]
+      },
+      "surface-primary": {
+        "role": "neutral",
+        "displayName": "Primary Surface",
+        "canonical": "#1a2e32",
+        "tonalRamp": ["oklch(15% 0.020 205)", "oklch(25% 0.020 205)", "oklch(35% 0.020 205)", "oklch(45% 0.020 205)", "oklch(58% 0.020 205)", "oklch(70% 0.020 205)", "oklch(83% 0.020 205)", "oklch(95% 0.020 205)"]
+      },
+      "surface-raised": {
+        "role": "neutral",
+        "displayName": "Raised Surface",
+        "canonical": "#223b40",
+        "tonalRamp": ["oklch(15% 0.024 205)", "oklch(25% 0.024 205)", "oklch(35% 0.024 205)", "oklch(45% 0.024 205)", "oklch(58% 0.024 205)", "oklch(70% 0.024 205)", "oklch(83% 0.024 205)", "oklch(95% 0.024 205)"]
+      },
+      "surface-active": {
+        "role": "neutral",
+        "displayName": "Active Surface",
+        "canonical": "#2b484e",
+        "tonalRamp": ["oklch(15% 0.028 205)", "oklch(25% 0.028 205)", "oklch(35% 0.028 205)", "oklch(45% 0.028 205)", "oklch(58% 0.028 205)", "oklch(70% 0.028 205)", "oklch(83% 0.028 205)", "oklch(95% 0.028 205)"]
+      },
+      "border-subtle": {
+        "role": "neutral",
+        "displayName": "Subtle Border",
+        "canonical": "#365158",
+        "tonalRamp": ["oklch(15% 0.026 205)", "oklch(25% 0.026 205)", "oklch(35% 0.026 205)", "oklch(45% 0.026 205)", "oklch(58% 0.026 205)", "oklch(70% 0.026 205)", "oklch(83% 0.026 205)", "oklch(95% 0.026 205)"]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Strong Border",
+        "canonical": "#58747a",
+        "tonalRamp": ["oklch(15% 0.026 205)", "oklch(25% 0.026 205)", "oklch(35% 0.026 205)", "oklch(45% 0.026 205)", "oklch(58% 0.026 205)", "oklch(70% 0.026 205)", "oklch(83% 0.026 205)", "oklch(95% 0.026 205)"]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Primary Text",
+        "canonical": "#f0eee6",
+        "tonalRamp": ["oklch(15% 0.012 88)", "oklch(25% 0.012 88)", "oklch(35% 0.012 88)", "oklch(45% 0.012 88)", "oklch(58% 0.012 88)", "oklch(70% 0.012 88)", "oklch(83% 0.012 88)", "oklch(95% 0.012 88)"]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Muted Text",
+        "canonical": "#9dacaf",
+        "tonalRamp": ["oklch(15% 0.012 210)", "oklch(25% 0.012 210)", "oklch(35% 0.012 210)", "oklch(45% 0.012 210)", "oklch(58% 0.012 210)", "oklch(70% 0.012 210)", "oklch(83% 0.012 210)", "oklch(95% 0.012 210)"]
+      },
+      "text-muted-strong": {
+        "role": "neutral",
+        "displayName": "Strong Muted Text",
+        "canonical": "#c3cccb",
+        "tonalRamp": ["oklch(15% 0.010 190)", "oklch(25% 0.010 190)", "oklch(35% 0.010 190)", "oklch(45% 0.010 190)", "oklch(58% 0.010 190)", "oklch(70% 0.010 190)", "oklch(83% 0.010 190)", "oklch(95% 0.010 190)"]
+      },
+      "safe-aqua": {
+        "role": "secondary",
+        "displayName": "Safe Aqua",
+        "canonical": "#7fac9f",
+        "tonalRamp": ["oklch(15% 0.055 172)", "oklch(25% 0.055 172)", "oklch(35% 0.055 172)", "oklch(45% 0.055 172)", "oklch(58% 0.055 172)", "oklch(70% 0.055 172)", "oklch(83% 0.055 172)", "oklch(95% 0.055 172)"]
+      },
+      "safe-aqua-deep": {
+        "role": "secondary",
+        "displayName": "Deep Safe Aqua",
+        "canonical": "#638f84",
+        "tonalRamp": ["oklch(15% 0.050 172)", "oklch(25% 0.050 172)", "oklch(35% 0.050 172)", "oklch(45% 0.050 172)", "oklch(58% 0.050 172)", "oklch(70% 0.050 172)", "oklch(83% 0.050 172)", "oklch(95% 0.050 172)"]
+      },
+      "danger-copper": {
+        "role": "primary",
+        "displayName": "Danger Copper",
+        "canonical": "#d47b58",
+        "tonalRamp": ["oklch(15% 0.105 43)", "oklch(25% 0.105 43)", "oklch(35% 0.105 43)", "oklch(45% 0.105 43)", "oklch(58% 0.105 43)", "oklch(70% 0.105 43)", "oklch(83% 0.105 43)", "oklch(95% 0.105 43)"]
+      },
+      "caution-amber": {
+        "role": "tertiary",
+        "displayName": "Caution Amber",
+        "canonical": "#d5a14c",
+        "tonalRamp": ["oklch(15% 0.105 78)", "oklch(25% 0.105 78)", "oklch(35% 0.105 78)", "oklch(45% 0.105 78)", "oklch(58% 0.105 78)", "oklch(70% 0.105 78)", "oklch(83% 0.105 78)", "oklch(95% 0.105 78)"]
+      },
+      "proven-blue": {
+        "role": "tertiary",
+        "displayName": "Proven Blue",
+        "canonical": "#7faec3",
+        "tonalRamp": ["oklch(15% 0.060 225)", "oklch(25% 0.060 225)", "oklch(35% 0.060 225)", "oklch(45% 0.060 225)", "oklch(58% 0.060 225)", "oklch(70% 0.060 225)", "oklch(83% 0.060 225)", "oklch(95% 0.060 225)"]
+      },
+      "action-copper": {
+        "role": "primary",
+        "displayName": "Action Copper",
+        "canonical": "#b86749",
+        "tonalRamp": ["oklch(15% 0.095 42)", "oklch(25% 0.095 42)", "oklch(35% 0.095 42)", "oklch(45% 0.095 42)", "oklch(58% 0.095 42)", "oklch(70% 0.095 42)", "oklch(83% 0.095 42)", "oklch(95% 0.095 42)"]
+      },
+      "action-copper-hover": {
+        "role": "primary",
+        "displayName": "Action Copper Hover",
+        "canonical": "#ca7656",
+        "tonalRamp": ["oklch(15% 0.100 42)", "oklch(25% 0.100 42)", "oklch(35% 0.100 42)", "oklch(45% 0.100 42)", "oklch(58% 0.100 42)", "oklch(70% 0.100 42)", "oklch(83% 0.100 42)", "oklch(95% 0.100 42)"]
+      },
+      "action-text": {
+        "role": "neutral",
+        "displayName": "Action Text",
+        "canonical": "#fffaf3",
+        "tonalRamp": ["oklch(15% 0.014 73)", "oklch(25% 0.014 73)", "oklch(35% 0.014 73)", "oklch(45% 0.014 73)", "oklch(58% 0.014 73)", "oklch(70% 0.014 73)", "oklch(83% 0.014 73)", "oklch(95% 0.014 73)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Login identity and rare brand-scale statements."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The command-center question or primary page task."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Results groups and major in-page sections."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Explanations, controls, and long-form playbook guidance."
+      },
+      "label": {
+        "displayName": "Operational Label",
+        "purpose": "Team roles, decision categories, fields, and compact status metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "search-lift",
+        "value": "0 12px 32px rgba(4,13,15,.17)",
+        "purpose": "Separates the primary defense search from the command-center field."
+      },
+      {
+        "name": "card-lift",
+        "value": "0 9px 26px rgba(4,13,15,.16)",
+        "purpose": "Keeps strategy records distinct against the operations background."
+      },
+      {
+        "name": "chrome-lift",
+        "value": "0 8px 26px rgba(4,13,15,.22)",
+        "purpose": "Anchors the sticky top bar during scrolling."
+      },
+      {
+        "name": "dialog-lift",
+        "value": "0 30px 95px rgba(3,10,12,.5)",
+        "purpose": "Establishes modal priority over the darkened backdrop."
+      },
+      {
+        "name": "toast-lift",
+        "value": "0 14px 40px rgba(4,13,15,.34)",
+        "purpose": "Holds transient confirmation above the active workspace."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "160ms ease",
+        "purpose": "Input, button, and compact control state changes."
+      },
+      {
+        "name": "disclosure",
+        "value": "180ms ease",
+        "purpose": "Strategy borders and disclosure-arrow rotation."
+      },
+      {
+        "name": "transient",
+        "value": "200ms ease",
+        "purpose": "Toast entrance and exit."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "Remove transitions and smooth scrolling when reduced motion is requested."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "900px"
+      },
+      {
+        "name": "mobile",
+        "value": "620px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The strongest local action, rendered in warm copper.",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Add strategy</button>",
+      "css": ".ds-btn-primary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 18px; border: 0; border-radius: 8px; background: var(--action-copper, #b86749); color: #fffaf3; font: 700 14px/1 'DM Sans', sans-serif; transition: background 160ms ease, transform 160ms ease; cursor: pointer; } .ds-btn-primary:hover { background: #ca7656; } .ds-btn-primary:focus-visible { outline: 3px solid rgba(206,118,85,.34); outline-offset: 2px; } .ds-btn-primary:active { transform: translateY(1px); } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A bordered petrol action for secondary or reversible choices.",
+      "html": "<button class=\"ds-btn-secondary\" type=\"button\">Clear filters</button>",
+      "css": ".ds-btn-secondary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 18px; border: 1px solid var(--line, #365158); border-radius: 8px; background: var(--surface-2, #223b40); color: var(--text, #f0eee6); font: 700 14px/1 'DM Sans', sans-serif; transition: background 160ms ease, border-color 160ms ease; cursor: pointer; } .ds-btn-secondary:hover { background: var(--surface-3, #2b484e); border-color: #678086; } .ds-btn-secondary:focus-visible { outline: 3px solid rgba(206,118,85,.34); outline-offset: 2px; } .ds-btn-secondary:active { background: #253f44; } @media (prefers-reduced-motion: reduce) { .ds-btn-secondary { transition: none; } }"
+    },
+    {
+      "name": "Defense Search",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "The dominant 62px search field used to identify an enemy defense.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"></circle><path d=\"m20 20-3.5-3.5\"></path></svg><span class=\"ds-sr-only\">Search enemy defense</span><input type=\"search\" placeholder=\"Search the enemy defense…\"><kbd>/</kbd></label>",
+      "css": ".ds-search { width: min(100%, 720px); height: 62px; display: flex; align-items: center; gap: 12px; padding: 0 18px; border: 1px solid #6c7774; border-radius: 10px; background: #1d3337; color: #e19677; box-shadow: 0 12px 32px rgba(4,13,15,.17); transition: border-color 160ms ease, box-shadow 160ms ease; } .ds-search:focus-within { border-color: var(--red, #d47b58); box-shadow: 0 0 0 3px rgba(212,123,88,.12), 0 12px 32px rgba(4,13,15,.17); } .ds-search svg { width: 22px; height: 22px; flex: 0 0 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; } .ds-search input { min-width: 0; height: 58px; flex: 1; border: 0; outline: 0; background: transparent; color: #f3f0e8; font: 600 18px/1 'DM Sans', sans-serif; } .ds-search input::placeholder { color: var(--muted, #9dacaf); font-weight: 500; } .ds-search kbd { padding: 4px 8px; border: 1px solid #4b666b; border-bottom-width: 2px; border-radius: 6px; background: #284348; color: #c3cfce; font: 600 11px 'DM Sans', sans-serif; } .ds-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); } @media (max-width: 620px) { .ds-search { height: 56px; padding: 0 14px; } .ds-search input { height: 52px; font-size: 16px; } .ds-search kbd { display: none; } } @media (prefers-reduced-motion: reduce) { .ds-search { transition: none; } }"
+    },
+    {
+      "name": "Operations Navigation",
+      "kind": "nav",
+      "description": "Sticky guild identity and primary action bar.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary\"><a class=\"ds-brand\" href=\"#\"><span class=\"ds-mark\">O<span>2</span></span><span><strong>Oxytocin</strong><small>Siege Teams</small></span></a><button class=\"ds-nav-action\" type=\"button\">Add strategy</button></nav>",
+      "css": ".ds-nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 24px; border-bottom: 1px solid #38545a; background: #1d3439; box-shadow: 0 8px 26px rgba(4,13,15,.22); } .ds-brand { display: flex; align-items: center; gap: 12px; color: #fffaf3; text-decoration: none; } .ds-mark { position: relative; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 9px; background: #b86749; color: #fffaf3; font: 700 20px 'Space Grotesk', sans-serif; } .ds-mark > span { position: absolute; right: 7px; bottom: 5px; font-size: 8px; } .ds-brand strong, .ds-brand small { display: block; } .ds-brand strong { font: 700 16px/1 'Space Grotesk', sans-serif; } .ds-brand small { margin-top: 3px; color: #9bafb2; font: 700 10px/1 'DM Sans', sans-serif; letter-spacing: .12em; text-transform: uppercase; } .ds-brand:focus-visible, .ds-nav-action:focus-visible { outline: 3px solid rgba(206,118,85,.34); outline-offset: 2px; } .ds-nav-action { min-height: 44px; padding: 0 13px; border: 1px solid #c37658; border-radius: 8px; background: #b86749; color: #fffaf3; font: 700 12px/1 'DM Sans', sans-serif; transition: background 160ms ease, border-color 160ms ease; } .ds-nav-action:hover { background: #ca7656; border-color: #d4896c; } .ds-nav-action:active { background: #ad5d42; } @media (max-width: 620px) { .ds-nav { min-height: 66px; padding: 0 16px; } .ds-brand small { display: none; } } @media (prefers-reduced-motion: reduce) { .ds-nav-action { transition: none; } }"
+    },
+    {
+      "name": "Safe Chip",
+      "kind": "chip",
+      "refersTo": "chip-safe",
+      "description": "Aqua status for a safe or forgiving counter.",
+      "html": "<span class=\"ds-chip-safe\">Safe</span>",
+      "css": ".ds-chip-safe { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border: 1px solid #52766c; border-radius: 999px; background: #223b38; color: #a9cabd; font: 700 8px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; } .ds-chip-safe:hover { border-color: #6d9186; background: #29443f; } .ds-chip-safe:focus-visible { outline: 3px solid rgba(127,172,159,.28); outline-offset: 2px; }"
+    },
+    {
+      "name": "Caution Chip",
+      "kind": "chip",
+      "refersTo": "chip-caution",
+      "description": "Amber status for a conditional matchup requiring attention.",
+      "html": "<span class=\"ds-chip-caution\">Caution</span>",
+      "css": ".ds-chip-caution { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border: 1px solid #765f38; border-radius: 999px; background: #3a3325; color: #e2ba70; font: 700 8px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; } .ds-chip-caution:hover { border-color: #927646; background: #443a28; } .ds-chip-caution:focus-visible { outline: 3px solid rgba(213,161,76,.28); outline-offset: 2px; }"
+    },
+    {
+      "name": "Proven Chip",
+      "kind": "chip",
+      "refersTo": "chip-proven",
+      "description": "Blue status for evidence-backed validation.",
+      "html": "<span class=\"ds-chip-proven\">Proven</span>",
+      "css": ".ds-chip-proven { display: inline-flex; align-items: center; min-height: 24px; padding: 4px 8px; border: 1px solid #4f7180; border-radius: 999px; background: #223a44; color: #a6c6d5; font: 700 8px/1 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; } .ds-chip-proven:hover { border-color: #64899a; background: #294652; } .ds-chip-proven:focus-visible { outline: 3px solid rgba(127,174,195,.28); outline-offset: 2px; }"
+    },
+    {
+      "name": "Strategy Record",
+      "kind": "custom",
+      "refersTo": "card-strategy",
+      "description": "The defense-first decision card with matchup, fit, risk, and turn order visible while collapsed.",
+      "html": "<article class=\"ds-strategy\"><div class=\"ds-badges\"><span class=\"ds-mini ds-safe\">Safe</span><span class=\"ds-mini ds-proven\">Proven</span></div><div class=\"ds-matchup\"><section><span class=\"ds-team-label ds-defense-label\">Enemy defense</span><strong>Carcano · Miles · Triana</strong></section><span class=\"ds-arrow\" aria-hidden=\"true\">→</span><section><span class=\"ds-team-label ds-attack-label\">Your counter</span><strong>Leo · Feng Yan · Aaliyah</strong></section></div><div class=\"ds-decisions\"><div class=\"ds-fit\"><span>Fit</span><p>Exact defense match</p></div><div class=\"ds-risk\"><span>Main risk</span><p>Miles outspeeds control</p></div><div class=\"ds-turn\"><span>Turn order</span><p>Leo → Aaliyah → Feng Yan</p></div></div></article>",
+      "css": ".ds-strategy { overflow: hidden; border: 1px solid var(--line, #365158); border-radius: var(--radius, 14px); background: var(--surface, #1a2e32); color: var(--text, #f0eee6); box-shadow: 0 9px 26px rgba(4,13,15,.16); font-family: 'DM Sans', sans-serif; transition: border-color 180ms ease; } .ds-strategy:hover { border-color: #617d83; } .ds-strategy:focus-within { outline: 2px solid var(--red, #d47b58); outline-offset: -3px; } .ds-badges { display: flex; gap: 6px; padding: 18px 20px 0; } .ds-mini { padding: 4px 8px; border: 1px solid; border-radius: 999px; font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; } .ds-safe { color: #a9cabd; border-color: #52766c; background: #223b38; } .ds-proven { color: #a6c6d5; border-color: #4f7180; background: #223a44; } .ds-matchup { display: grid; grid-template-columns: minmax(0,1fr) 46px minmax(0,1fr); align-items: center; gap: 12px; padding: 18px 20px; } .ds-matchup section { min-width: 0; padding: 10px; border: 1px solid #3d575d; border-radius: 8px; background: #17282c; } .ds-matchup section:first-child { border-color: #774c41; background: #312925; } .ds-matchup section:last-child { border-color: #476a61; background: #203734; } .ds-team-label { display: block; margin-bottom: 6px; font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; } .ds-defense-label { color: #e19677; } .ds-attack-label { color: #9bc2b5; } .ds-matchup strong { display: block; overflow: hidden; color: #edf0eb; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; } .ds-arrow { color: #6f888c; text-align: center; font-size: 24px; } .ds-decisions { display: grid; grid-template-columns: 1.1fr 1fr 1fr; border-top: 1px solid #3b565c; } .ds-decisions > div { min-width: 0; padding: 14px 16px; } .ds-decisions > div + div { border-left: 1px solid #3b565c; } .ds-decisions span { display: block; margin-bottom: 5px; font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; } .ds-decisions p { margin: 0; color: #d5dcda; font-size: 12px; line-height: 1.45; } .ds-fit { background: #1d3238; } .ds-fit span { color: #8db8ca; } .ds-risk { background: #302825; } .ds-risk span { color: #e19677; } .ds-turn { background: #203532; } .ds-turn span { color: #9bc2b5; } @media (max-width: 620px) { .ds-matchup { grid-template-columns: 1fr; } .ds-arrow { text-align: left; transform: rotate(90deg); transform-origin: center; } .ds-decisions { grid-template-columns: 1fr; } .ds-decisions > div + div { border-left: 0; border-top: 1px solid #3b565c; } } @media (prefers-reduced-motion: reduce) { .ds-strategy { transition: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Night Operations Desk",
+    "overview": "Night Operations Desk is a calm, high-readiness tactical workspace: deep petrol-blue surroundings, slate work surfaces, warm off-white type, and restrained semantic signals. It should feel like a shared guild station used during a live operation—not a game lobby, generic admin dashboard, or theatrical command center.\n\nThe interface is defense-first and decision-first. Enemy composition leads every matchup; fit, risk, validation, and turn order remain legible before expansion. Density is purposeful rather than cramped, monster artwork stays prominent as functional identification, and progressive disclosure keeps long-form playbook material available without slowing the first decision.\n\nNo gradients or neon effects belong in this world. Depth comes from tonal surface steps, thin borders, and controlled low-chroma shadows; color is reserved for operational meaning.",
+    "keyCharacteristics": [
+      "Deep petrol environment with layered slate/petrol surfaces.",
+      "Copper actions and danger, aqua safe/counter signals, blue proven/fit signals, and amber caution.",
+      "Defense-led matchup hierarchy with decision signals visible while collapsed.",
+      "Compact operational density, warm text, and prominent monster portraits.",
+      "Quiet depth, restrained motion, and no gradients or neon."
+    ],
+    "rules": [
+      {
+        "name": "The Copper Means Act Rule",
+        "body": "Copper is reserved for action, enemy danger, destructive intent, and focus; never use it as ambient decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Cool Signals Rule",
+        "body": "Aqua communicates safe counters, while blue communicates proven evidence or matchup fit; do not swap those meanings.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Neon Rule",
+        "body": "Semantic colors stay desaturated and bounded by tonal surfaces or borders—never glow, bloom, or become fluorescent.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Speed Type Rule",
+        "body": "Space Grotesk names the mission; DM Sans carries the decision. Do not introduce a third display voice.",
+        "section": "typography"
+      },
+      {
+        "name": "The Labels Scan, Body Explains Rule",
+        "body": "Uppercase tracking belongs to short operational labels only; never apply it to paragraphs, monster names, or user-entered content.",
+        "section": "typography"
+      },
+      {
+        "name": "The Defense Leads Rule",
+        "body": "Enemy composition appears before the proposed attack in reading order, visual emphasis, and mobile stacking.",
+        "section": "layout"
+      },
+      {
+        "name": "The Decision Before Documentation Rule",
+        "body": "Fit, risk, and turn order must be visible before builds, substitutions, evidence, or the full game plan.",
+        "section": "layout"
+      },
+      {
+        "name": "The Collapsed Utility Rule",
+        "body": "A closed strategy card must still answer whether the counter fits, how safe it is, what can fail, and what moves first.",
+        "section": "layout"
+      },
+      {
+        "name": "The Layer, Then Lift Rule",
+        "body": "Establish hierarchy with surface tone and borders first; add shadow only when an element must detach from its current plane.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Quiet Shadow Rule",
+        "body": "Shadows remain dark, diffuse, and low-chroma. They never become a colored glow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Nested Radius Rule",
+        "body": "Inner controls are always tighter than their container: controls at 8–10px sit inside cards at 14px and dialogs at 16px.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Shape Has Meaning Rule",
+        "body": "Pills are reserved for compact status and filters; circles are reserved for identity or point status; dashed edges mean optional, wildcard, or empty.",
+        "section": "shapes"
+      },
+      {
+        "name": "The One Signal per Meaning Rule",
+        "body": "Within a strategy record, copper means enemy/risk, aqua means counter/safe, blue means fit/proven, and amber means caution—never encode two different meanings with the same accent.",
+        "section": "components"
+      },
+      {
+        "name": "The Portraits Are Data Rule",
+        "body": "Monster artwork is functional identification, not decoration; keep it visible, consistently sized, and element-bordered.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do lead every result with the enemy defense, then show the proposed attack and its decision signals.",
+      "Do use the real petrol surface ladder, thin slate borders, and quiet dark shadows to create depth.",
+      "Do reserve copper for action, defense danger, destructive intent, and focus.",
+      "Do keep safe/counter aqua, proven/fit blue, and caution amber semantically distinct.",
+      "Do keep minimum 44px touch targets, visible keyboard focus, and reduced-motion behavior.",
+      "Do preserve prominent monster artwork and elemental borders as identification aids."
+    ],
+    "donts": [
+      "Don't use gradients, neon colors, colored glow, or pure-black gaming surfaces.",
+      "Don't hide fit, risk, validation, or turn order behind expansion.",
+      "Don't let long-form guidance outrank the collapsed decision layer.",
+      "Don't use copper as a decorative accent or apply semantic colors without a status meaning.",
+      "Don't turn every label into a pill; reserve pills for statuses and compact filters.",
+      "Don't add a third typeface or use uppercase tracked labels for prose."
+    ]
+  }
+}
