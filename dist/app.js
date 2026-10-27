@@ -167,7 +167,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.11 · Supabase" : "POC v0.11 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.12 · Supabase" : "POC v0.12 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -182,6 +182,22 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function icon(name, className = "") {
+  const paths = {
+    arrow: '<path d="M5 12h14M13 6l6 6-6 6" />',
+    chevron: '<path d="m9 18 6-6-6-6" />',
+    link: '<path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15" /><path d="M14 11a5 5 0 0 0-7.54-.54l-2 2a5 5 0 0 0 7.07 7.07l1.14-1.14" />',
+    plus: '<path d="M12 5v14M5 12h14" />',
+    trash: '<path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v5M14 11v5" />',
+  };
+  return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[name] || ""}</svg>`;
+}
+
+function compactText(value, fallback, maxLength = 150) {
+  const text = String(value || "").trim() || fallback;
+  return text.length > maxLength ? `${text.slice(0, maxLength).trimEnd()}…` : text;
 }
 
 function normalize(value) {
@@ -243,18 +259,26 @@ function showApp() {
 }
 
 function render() {
-  const query = normalize($("#searchInput")?.value || "");
+  const defenseTokens = normalize($("#searchInput")?.value || "").split(/\s+/).filter(Boolean);
+  const detailTokens = normalize($("#detailSearchInput")?.value || "").split(/\s+/).filter(Boolean);
   const activeStrategies = strategies.filter((strategy) => strategy.isActive !== false);
   const visible = activeStrategies.filter((strategy) => {
     const matchesSafety = activeSafety === "all" || strategy.safety === activeSafety;
     const matchesStatus = activeStatus === "all" || strategy.status === activeStatus;
-    const monsterText = [...strategy.attack, ...strategy.defense].map((id) => {
+    const defenseText = strategy.defense.map((id) => {
+      const monster = getMonster(id);
+      return [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
+    });
+    const attackText = strategy.attack.map((id) => {
       const monster = getMonster(id);
       return [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
     });
     const sectionText = Object.values(strategy.sections || {});
-    const haystack = normalize([...monsterText, strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText].join(" "));
-    return matchesSafety && matchesStatus && haystack.includes(query);
+    const defenseHaystack = normalize(defenseText.join(" "));
+    const detailHaystack = normalize([...attackText, strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText].join(" "));
+    const matchesDefense = defenseTokens.every((token) => defenseHaystack.includes(token));
+    const matchesDetails = detailTokens.every((token) => detailHaystack.includes(token));
+    return matchesSafety && matchesStatus && matchesDefense && matchesDetails;
   });
 
   $("#totalStrategies").textContent = activeStrategies.length;
@@ -280,41 +304,58 @@ function strategyCard(strategy) {
   const canDelete = cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser;
   const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
   const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
+  const flexibleDefense = strategy.defense[2] === "*";
+  const fit = compactText(
+    strategy.sections?.thirdVariations,
+    flexibleDefense ? "Terceiro defensor flexível; valide os riscos abaixo." : "Matchup específico para os três defensores acima."
+  );
+  const risk = compactText(strategy.sections?.risks, "Nenhum risco específico foi informado.");
+  const turnOrder = compactText(strategy.sections?.turnOrder, "Ordem de turno ainda não informada.");
   return `
     <details class="strategy-card" data-strategy-id="${escapeHtml(strategy.id)}">
       <summary class="strategy-summary">
-        <div class="team attack-team">
-          <span class="team-label attack-label">⚔ ATAQUE</span>
-          <div class="monsters">${strategy.attack.map((id) => monsterChip(id, "attack")).join("")}</div>
+        <div class="card-topline">
+          <div class="strategy-badges">
+            <span class="strategy-badge ${safetyClass}">${safetyNames[strategy.safety]}</span>
+            <span class="strategy-badge ${statusClass}">${statusNames[strategy.status]}</span>
+          </div>
+          <span class="strategy-source">Por <strong>${escapeHtml(strategy.player)}</strong> · <time datetime="${strategy.createdAt}">${date}</time></span>
         </div>
-        <span class="vs">VS</span>
-        <div class="team">
-          <span class="team-label">⬡ DEFESA</span>
-          <div class="monsters">${strategy.defense.map((id) => monsterChip(id, "defense")).join("")}</div>
+        <div class="matchup">
+          <div class="team defense-team">
+            <span class="team-label">Defesa encontrada</span>
+            <div class="monsters">${strategy.defense.map((id) => monsterChip(id, "defense")).join("")}</div>
+          </div>
+          <span class="matchup-arrow" aria-hidden="true">${icon("arrow")}</span>
+          <div class="team attack-team">
+            <span class="team-label">Counter recomendado</span>
+            <div class="monsters">${strategy.attack.map((id) => monsterChip(id, "attack")).join("")}</div>
+          </div>
         </div>
-        <div class="strategy-meta">
-          <div class="strategy-badges"><span class="strategy-badge ${safetyClass}">${safetyNames[strategy.safety]}</span><span class="strategy-badge ${statusClass}">${statusNames[strategy.status]}</span></div>
-          <strong>${escapeHtml(strategy.player)}</strong>
-          <time datetime="${strategy.createdAt}">${date}</time>
+        <div class="decision-strip">
+          <article class="decision-item fit-signal"><span>Serve quando</span><p>${escapeHtml(fit)}</p></article>
+          <article class="decision-item risk-signal"><span>Risco crítico</span><p>${escapeHtml(risk)}</p></article>
+          <article class="decision-item turn-signal"><span>Ordem de turno</span><p>${escapeHtml(turnOrder)}</p></article>
         </div>
-        <span class="expand-icon" aria-hidden="true">⌄</span>
+        <span class="open-hint"><span>Ver plano completo, builds e alvos</span>${icon("chevron", "expand-icon")}</span>
       </summary>
       <div class="strategy-details">
-        <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className)).join("")}</div>
+        <div class="playbook-heading"><p class="eyebrow">GUIA DE EXECUÇÃO</p><h3>Como montar e pilotar</h3></div>
+        <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className, key)).join("")}</div>
         <div class="card-footer">
           <span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>
           <div class="card-actions">
-            <button class="share-button" data-share-id="${escapeHtml(strategy.id)}" type="button">Copiar link</button>
-            ${canDelete ? `<button class="delete-button" data-delete-id="${escapeHtml(strategy.id)}" type="button">Excluir estratégia</button>` : ""}
+            <button class="share-button" data-share-id="${escapeHtml(strategy.id)}" type="button">${icon("link")}<span>Copiar link</span></button>
+            ${canDelete ? `<button class="delete-button" data-delete-id="${escapeHtml(strategy.id)}" type="button">${icon("trash")}<span>Excluir</span></button>` : ""}
           </div>
         </div>
       </div>
     </details>`;
 }
 
-function detailSection(title, content, className) {
+function detailSection(title, content, className, key) {
   const hasContent = Boolean(content?.trim());
-  return `<section class="detail-section ${className}${hasContent ? "" : " empty"}"><h4>${escapeHtml(title)}</h4><p>${hasContent ? escapeHtml(content) : "Não informado."}</p></section>`;
+  return `<section class="detail-section ${className} section-${key}${hasContent ? "" : " empty"}"><h4>${escapeHtml(title)}</h4><p>${hasContent ? escapeHtml(content) : "Não informado."}</p></section>`;
 }
 
 function monsterChip(id, side) {
@@ -350,7 +391,7 @@ function resetSelection() {
     if (button.dataset.optional === "true") renderOptionalWildcard(button);
     else {
       button.className = "monster-select";
-      button.innerHTML = '<span class="select-plus">＋</span><span>Selecionar</span>';
+      button.innerHTML = `<span class="select-plus">${icon("plus")}</span><span>Selecionar</span>`;
     }
   });
 }
@@ -396,7 +437,7 @@ function renderMonsterOptions() {
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
       <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
-      <span class="add-label">Adicionar ＋</span>
+      <span class="add-label">Adicionar</span>
     </button>`).join("");
   $("#monsterOptions").innerHTML = wildcardOption + monsterOptions + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") || '<div class="no-options">Nenhum monstro encontrado.</div>';
 }
@@ -469,7 +510,7 @@ $("#loginForm").addEventListener("submit", async (event) => {
     showToast("Não foi possível conectar ao Supabase. Confira a migration e o login anônimo.");
   } finally {
     submitButton.disabled = false;
-    submitButton.innerHTML = "Entrar <span>→</span>";
+    submitButton.textContent = "Entrar";
   }
 });
 
@@ -585,6 +626,7 @@ $("#strategyList").addEventListener("click", async (event) => {
 });
 
 $("#searchInput").addEventListener("input", render);
+$("#detailSearchInput").addEventListener("input", render);
 $("#safetyFilter").addEventListener("change", (event) => {
   activeSafety = event.target.value;
   render();
@@ -597,9 +639,18 @@ $("#clearFiltersButton").addEventListener("click", () => {
   activeSafety = "all";
   activeStatus = "all";
   $("#searchInput").value = "";
+  $("#detailSearchInput").value = "";
   $("#safetyFilter").value = "all";
   $("#statusFilter").value = "all";
   render();
+});
+
+document.addEventListener("keydown", (event) => {
+  const isTyping = ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName);
+  if (event.key === "/" && !isTyping && !strategyDialog.open && !monsterDialog.open) {
+    event.preventDefault();
+    $("#searchInput").focus();
+  }
 });
 
 async function init() {

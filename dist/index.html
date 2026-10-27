@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=0.12" />
   </head>
   <body>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -33,7 +33,7 @@
           <label for="playerName">Seu nome no jogo</label>
           <div class="input-action">
             <input id="playerName" name="playerName" autocomplete="nickname" maxlength="24" placeholder="Ex.: Helder" required />
-            <button type="submit" class="button button-primary">Entrar <span>→</span></button>
+            <button type="submit" class="button button-primary">Entrar</button>
           </div>
           <p class="helper">Sem senha nesta POC. Use seu nick para identificar suas sugestões.</p>
         </form>
@@ -52,81 +52,95 @@
             <span class="avatar" id="avatar">H</span>
             <span class="user-label"><small>Jogando como</small><strong id="currentUser">Helder</strong></span>
           </div>
-          <button class="icon-button" id="logoutButton" type="button" aria-label="Trocar jogador" title="Trocar jogador">↪</button>
+          <button class="button button-secondary top-add-button" id="openFormButton" type="button" aria-label="Adicionar um novo ataque">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+            <span>Novo ataque</span>
+          </button>
+          <button class="icon-button" id="logoutButton" type="button" aria-label="Trocar jogador" title="Trocar jogador">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /></svg>
+          </button>
         </nav>
       </header>
 
       <main>
-        <section class="hero">
-          <div>
-            <p class="eyebrow">BASE DE ESTRATÉGIAS</p>
-            <h1>O counter certo.<br /><span>Antes da batalha.</span></h1>
-            <p>Encontre ataques que a guilda já testou contra as defesas que aparecem no Siege.</p>
-          </div>
-          <button class="button button-primary button-large" id="openFormButton" type="button"><span>＋</span> Adicionar ataque</button>
-        </section>
-
-        <section class="stats" aria-label="Resumo das estratégias">
-          <article><small>ATAQUES SALVOS</small><strong id="totalStrategies">0</strong><span class="stat-icon">⚔</span></article>
-          <article><small>DEFESAS MAPEADAS</small><strong id="totalDefenses">0</strong><span class="stat-icon">⬡</span></article>
-          <article><small>COLABORADORES</small><strong id="totalPlayers">0</strong><span class="stat-icon">♟</span></article>
-        </section>
-
-        <section class="library" aria-labelledby="libraryTitle">
-          <div class="section-heading">
-            <div><p class="eyebrow">ARSENAL DA GUILDA</p><h2 id="libraryTitle">Ataques cadastrados</h2></div>
+        <section class="command-center" aria-labelledby="libraryTitle">
+          <div class="command-intro">
+            <div>
+              <p class="eyebrow">BUSCA RÁPIDA DE COUNTER</p>
+              <h1 id="libraryTitle">Qual defesa você encontrou?</h1>
+              <p>Digite os dois monstros fixos. A ordem dos nomes não importa.</p>
+            </div>
+            <div class="arsenal-summary" aria-label="Resumo do arsenal">
+              <span><strong id="totalStrategies">0</strong> counters ativos</span>
+              <span><strong id="totalDefenses">0</strong> defesas</span>
+              <span><strong id="totalPlayers">0</strong> colaboradores</span>
+            </div>
           </div>
 
-          <div class="filters">
-            <label class="search-field">
-              <span>⌕</span>
-              <input id="searchInput" type="search" placeholder="Buscar monstro, jogador, estratégia, risco ou status..." />
-            </label>
-          </div>
-          <div class="advanced-filters">
+          <label class="primary-search" for="searchInput">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <span class="sr-only">Buscar monstros da defesa inimiga</span>
+            <input id="searchInput" type="search" autocomplete="off" placeholder="Ex.: Galleon Bernard" />
+            <kbd>/</kbd>
+          </label>
+
+          <div class="advanced-filters" aria-label="Filtros adicionais">
+            <label class="secondary-search">Ataque, risco ou autor<input id="detailSearchInput" type="search" autocomplete="off" placeholder="Busca nos detalhes" /></label>
             <label>Segurança<select id="safetyFilter"><option value="all">Todos os níveis</option><option value="very_safe">Muito seguro</option><option value="safe">Seguro</option><option value="situational">Situacional</option><option value="experimental">Experimental</option></select></label>
             <label>Status<select id="statusFilter"><option value="all">Todos os status</option><option value="proven">Testada</option><option value="recommended">Recomendada</option><option value="needs_testing">Precisa de testes</option></select></label>
-            <button class="clear-filters" id="clearFiltersButton" type="button">Limpar filtros</button>
+            <button class="clear-filters" id="clearFiltersButton" type="button">Limpar</button>
+          </div>
+        </section>
+
+        <section class="library" aria-labelledby="resultsTitle">
+          <div class="results-heading">
+            <div>
+              <p class="eyebrow">COUNTERS ENCONTRADOS</p>
+              <h2 id="resultsTitle">Escolha com confiança</h2>
+            </div>
             <span class="result-count" id="resultCount">0 estratégias</span>
           </div>
 
           <div class="strategy-list" id="strategyList"></div>
           <div class="empty-state" id="emptyState" hidden>
-            <span>⌁</span><h3>Nenhum ataque encontrado</h3><p>Cadastre a primeira estratégia ou ajuste sua busca.</p>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3M9 9l6 6M15 9l-6 6" /></svg>
+            <h3>Nenhum counter para essa defesa</h3><p>Tente apenas os dois monstros fixos ou limpe os filtros.</p>
             <button class="button button-secondary" id="emptyAddButton" type="button">Adicionar ataque</button>
           </div>
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">POC v0.11 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">POC v0.12 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
       <div class="dialog-header">
         <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Informe pelo menos dois monstros de cada lado. O terceiro slot é opcional.</p></div>
-        <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">×</button>
+        <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
       </div>
       <form id="strategyForm">
         <fieldset>
-          <legend><span class="legend-icon attack">⚔</span><span><strong>Seu ataque</strong><small>Dois monstros obrigatórios + terceiro opcional</small></span></legend>
+          <legend><span class="legend-icon attack"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14.5 17.5 3-3M4 19l6-6M13 6l5-3 3 3-3 5M5 3l16 16M14 5l5 5M3 21l3-3" /></svg></span><span><strong>Seu ataque</strong><small>Dois monstros obrigatórios + terceiro opcional</small></span></legend>
           <div class="monster-grid">
-            <label>Monstro 1<button class="monster-select" data-slot="attack-0" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
-            <label>Monstro 2<button class="monster-select" data-slot="attack-1" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 1<button class="monster-select" data-slot="attack-0" type="button"><span class="select-plus"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span><span>Selecionar</span></button></label>
+            <label>Monstro 2<button class="monster-select" data-slot="attack-1" type="button"><span class="select-plus"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span><span>Selecionar</span></button></label>
             <label>Monstro 3 · opcional<button class="monster-select wildcard-select" data-slot="attack-2" data-optional="true" type="button"><span class="wildcard-avatar">X</span><span><strong>Sem terceiro</strong><small>Selecione se quiser usar</small></span></button></label>
           </div>
         </fieldset>
         <div class="versus-divider"><span>VS</span></div>
         <fieldset>
-          <legend><span class="legend-icon defense">⬡</span><span><strong>Defesa inimiga</strong><small>Dois monstros obrigatórios + terceiro opcional</small></span></legend>
+          <legend><span class="legend-icon defense"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z" /></svg></span><span><strong>Defesa inimiga</strong><small>Dois monstros obrigatórios + terceiro opcional</small></span></legend>
           <div class="monster-grid">
-            <label>Monstro 1<button class="monster-select" data-slot="defense-0" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
-            <label>Monstro 2<button class="monster-select" data-slot="defense-1" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 1<button class="monster-select" data-slot="defense-0" type="button"><span class="select-plus"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span><span>Selecionar</span></button></label>
+            <label>Monstro 2<button class="monster-select" data-slot="defense-1" type="button"><span class="select-plus"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span><span>Selecionar</span></button></label>
             <label>Monstro 3 · opcional<button class="monster-select wildcard-select" data-slot="defense-2" data-optional="true" type="button"><span class="wildcard-avatar">X</span><span><strong>Qualquer monstro</strong><small>Selecione se for específico</small></span></button></label>
           </div>
         </fieldset>
         <div class="versus-divider"><span>ESTRATÉGIA</span></div>
         <fieldset class="classification-fields">
-          <legend><span class="legend-icon strategy">◎</span><span><strong>Classificação</strong><small>Ajuda a guilda a escolher o ataque certo</small></span></legend>
+          <legend><span class="legend-icon strategy"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M12 2v3M22 12h-3M12 22v-3M2 12h3" /></svg></span><span><strong>Classificação</strong><small>Ajuda a guilda a escolher o ataque certo</small></span></legend>
           <div class="select-grid">
             <label>Nível de segurança<small>Quão confiável é a composição?</small><select name="safety" required><option value="very_safe">Muito seguro</option><option value="safe">Seguro</option><option value="situational" selected>Situacional</option><option value="experimental">Experimental</option></select></label>
             <label>Status da estratégia<small>Qual é o nível de validação?</small><select name="status" required><option value="proven">Testada</option><option value="recommended">Recomendada pela guilda</option><option value="needs_testing" selected>Ainda precisa de testes</option></select></label>
@@ -149,10 +163,12 @@
     <dialog id="monsterDialog" class="monster-dialog">
       <div class="dialog-header">
         <div><p class="eyebrow">CATÁLOGO DE MONSTROS</p><h2 id="pickerTitle">Selecionar monstro</h2><p>Escolha pelo nome, elemento ou ID.</p></div>
-        <button class="close-button" id="closeMonsterDialog" type="button" aria-label="Fechar catálogo">×</button>
+        <button class="close-button" id="closeMonsterDialog" type="button" aria-label="Fechar catálogo">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
       </div>
       <div class="picker-body">
-        <label class="search-field picker-search"><span>⌕</span><input id="monsterSearch" type="search" autocomplete="off" placeholder="Buscar por nome ou ID..." /></label>
+        <label class="search-field picker-search"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg><input id="monsterSearch" type="search" autocomplete="off" placeholder="Buscar por nome ou ID..." /></label>
         <div class="element-filters" id="elementFilters" role="group" aria-label="Filtrar por elemento">
           <button class="active" data-element="all" type="button">Todos</button>
           <button data-element="water" type="button">Água</button>
@@ -169,7 +185,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
-    <script src="./supabase-store.js?v=0.11"></script>
-    <script src="./app.js?v=0.11"></script>
+    <script src="./supabase-store.js?v=0.12"></script>
+    <script src="./app.js?v=0.12"></script>
   </body>
 </html>
