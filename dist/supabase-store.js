@@ -22,6 +22,7 @@
       status: row.validation_status,
       sections: row.sections || {},
       isSeed: row.is_seed,
+      isActive: row.is_active !== false,
       createdAt: row.created_at,
     };
   }
@@ -36,6 +37,7 @@
       validation_status: strategy.status,
       sections: strategy.sections,
       is_seed: false,
+      is_active: true,
       created_at: strategy.createdAt || new Date().toISOString(),
     };
   }
@@ -65,7 +67,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategies")
-      .select("id, owner_id, player_name, attack, defense, safety, validation_status, sections, is_seed, created_at")
+      .select("id, owner_id, player_name, attack, defense, safety, validation_status, sections, is_seed, is_active, created_at")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data.map(fromDatabase);
@@ -76,7 +78,7 @@
     const { data, error } = await client
       .from("strategies")
       .insert(toDatabase(strategy, userId, nick))
-      .select("id, owner_id, player_name, attack, defense, safety, validation_status, sections, is_seed, created_at")
+      .select("id, owner_id, player_name, attack, defense, safety, validation_status, sections, is_seed, is_active, created_at")
       .single();
     if (error) throw error;
     return fromDatabase(data);

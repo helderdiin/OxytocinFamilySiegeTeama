@@ -8,6 +8,7 @@ insert into public.strategies (
   validation_status,
   sections,
   is_seed,
+  is_active,
   created_at
 )
 values
@@ -30,6 +31,7 @@ values
       'evidence', 'Muito seguro + comprovado. Counters confirmados em Siege contra duas variações de Seara.'
     ),
     true,
+    true,
     '2026-10-26T18:00:00.000Z'
   ),
   (
@@ -50,6 +52,7 @@ values
       'substitutions', 'Sem substituições comprovadas; lead de RES, cleanse e tanque Wind formam o núcleo do counter.',
       'evidence', 'Muito seguro + comprovado. Vitória confirmada em Siege G2 contra Sylvia + Daphnis + Wind Zenitsu.'
     ),
+    true,
     true,
     '2026-10-26T18:05:00.000Z'
   ),
@@ -72,6 +75,7 @@ values
       'evidence', 'Muito seguro + comprovado. Vitória confirmada contra Galleon + Bernard + Leah e validação externa de uma composição equivalente no SWGT.'
     ),
     true,
+    true,
     '2026-10-26T18:10:00.000Z'
   ),
   (
@@ -93,6 +97,7 @@ values
       'evidence', 'Seguro + comprovado, avaliação 8,5/10. Três famílias de counters confirmadas, incluindo Tarnisha + Miles + Shahat em Siege G2.'
     ),
     true,
+    false,
     '2026-10-26T18:15:00.000Z'
   ),
   (
@@ -114,6 +119,7 @@ values
       'evidence', 'Seguro + comprovado. Vitória confirmada contra Carcano + Liu Mei + Eshir em disputa de velocidade durante Siege G2.'
     ),
     true,
+    false,
     '2026-10-26T18:20:00.000Z'
   )
 on conflict (source_key) do update
@@ -125,4 +131,5 @@ set
   validation_status = excluded.validation_status,
   sections = excluded.sections,
   is_seed = true,
+  is_active = excluded.is_active,
   updated_at = now();

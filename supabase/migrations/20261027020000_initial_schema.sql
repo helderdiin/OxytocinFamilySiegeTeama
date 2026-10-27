@@ -28,6 +28,7 @@ create table public.strategies (
   validation_status text not null check (validation_status in ('proven', 'recommended', 'needs_testing')),
   sections jsonb not null default '{}'::jsonb check (jsonb_typeof(sections) = 'object'),
   is_seed boolean not null default false,
+  is_active boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
   check ((is_seed and owner_id is null) or (not is_seed and owner_id is not null))
@@ -37,6 +38,7 @@ create index strategies_created_at_idx on public.strategies (created_at desc);
 create index strategies_owner_id_idx on public.strategies (owner_id);
 create index strategies_safety_idx on public.strategies (safety);
 create index strategies_validation_status_idx on public.strategies (validation_status);
+create index strategies_active_created_at_idx on public.strategies (created_at desc) where is_active;
 
 create or replace function public.set_updated_at()
 returns trigger

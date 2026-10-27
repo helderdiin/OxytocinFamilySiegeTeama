@@ -167,7 +167,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.10 · Supabase" : "POC v0.10 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.11 · Supabase" : "POC v0.11 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -244,7 +244,8 @@ function showApp() {
 
 function render() {
   const query = normalize($("#searchInput")?.value || "");
-  const visible = strategies.filter((strategy) => {
+  const activeStrategies = strategies.filter((strategy) => strategy.isActive !== false);
+  const visible = activeStrategies.filter((strategy) => {
     const matchesSafety = activeSafety === "all" || strategy.safety === activeSafety;
     const matchesStatus = activeStatus === "all" || strategy.status === activeStatus;
     const monsterText = [...strategy.attack, ...strategy.defense].map((id) => {
@@ -256,9 +257,9 @@ function render() {
     return matchesSafety && matchesStatus && haystack.includes(query);
   });
 
-  $("#totalStrategies").textContent = strategies.length;
-  $("#totalDefenses").textContent = new Set(strategies.map((item) => item.defense.slice(0, 2).sort().join("|"))).size;
-  $("#totalPlayers").textContent = new Set(strategies.map((item) => normalize(item.player))).size;
+  $("#totalStrategies").textContent = activeStrategies.length;
+  $("#totalDefenses").textContent = new Set(activeStrategies.map((item) => item.defense.slice(0, 2).sort().join("|"))).size;
+  $("#totalPlayers").textContent = new Set(activeStrategies.map((item) => normalize(item.player))).size;
   $("#strategyList").innerHTML = visible.map(strategyCard).join("");
   $("#emptyState").hidden = visible.length > 0;
   $("#resultCount").textContent = `${visible.length} ${visible.length === 1 ? "estratégia" : "estratégias"}`;

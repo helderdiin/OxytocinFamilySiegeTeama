@@ -20,6 +20,7 @@ Abra `http://localhost:4173`.
 - observações opcionais;
 - busca por texto, filtros de segurança/status e exclusão dos próprios registros;
 - compartilhamento de uma composição por link, abrindo o card correspondente já expandido;
+- estratégias podem ser mantidas no banco como inativas sem aparecer na UI;
 - persistência no `localStorage` do navegador;
 
 Enquanto a configuração do Supabase não estiver preenchida, os dados continuam somente no `localStorage` do navegador.
@@ -30,6 +31,7 @@ A primeira migration e o seed oficial estão em:
 
 - `supabase/migrations/20261027020000_initial_schema.sql`
 - `supabase/migrations/20261027130000_optional_third_slots.sql`
+- `supabase/migrations/20261027160000_strategy_activation.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente as próprias estratégias. As cinco comps oficiais do seed são protegidas.
