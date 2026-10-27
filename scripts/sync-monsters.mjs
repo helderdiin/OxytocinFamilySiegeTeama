@@ -25,7 +25,14 @@ const usedIds = new Set(localCatalog.monsters.map((monster) => monster.id));
 const merged = [...localCatalog.monsters];
 
 for (const remoteMonster of playable) {
-  if (existingByCom2us.has(remoteMonster.com2us_id)) continue;
+  const existingMonster = existingByCom2us.get(remoteMonster.com2us_id);
+  if (existingMonster) {
+    if (remoteMonster.awaken_level === 2) {
+      existingMonster.image = `assets/monsters/${basename(remoteMonster.image_filename)}`;
+      existingMonster.gameData.awakenLevel = remoteMonster.awaken_level;
+    }
+    continue;
+  }
   const element = remoteMonster.element.toLowerCase();
   const id = uniqueId(remoteMonster, usedIds);
   usedIds.add(id);

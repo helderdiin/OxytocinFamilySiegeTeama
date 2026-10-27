@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "metadata": {
     "identityProvider": "swarfarm",
-    "synchronizedAt": "2026-10-27T01:07:53.846Z",
+    "synchronizedAt": "2026-10-27T11:44:44.867Z",
     "remoteRecordCount": 3099,
     "selection": "obtainable awakened monsters, including second awakenings"
   },
@@ -5410,7 +5410,7 @@
       "name": "Bernard",
       "canonicalName": "Bernard",
       "element": "wind",
-      "image": "assets/monsters/bernard.png",
+      "image": "assets/monsters/unit_icon_0055_0_2.png",
       "aliases": [],
       "externalIds": {
         "com2us": 11533,
@@ -15236,7 +15236,7 @@
       "name": "Elucia",
       "canonicalName": "Elucia",
       "element": "water",
-      "image": "assets/monsters/elucia.png",
+      "image": "assets/monsters/unit_icon_0051_0_0.png",
       "aliases": [],
       "externalIds": {
         "com2us": 10131,
@@ -16011,7 +16011,7 @@
       "name": "Eshir",
       "canonicalName": "Eshir",
       "element": "light",
-      "image": "assets/monsters/eshir.png",
+      "image": "assets/monsters/unit_icon_0053_3_1.png",
       "aliases": [],
       "externalIds": {
         "com2us": 14034,
@@ -24185,7 +24185,7 @@
       "name": "Icaru",
       "canonicalName": "Icaru",
       "element": "water",
-      "image": "assets/monsters/icaru.png",
+      "image": "assets/monsters/unit_icon_0051_0_3.png",
       "aliases": [
         "Icaru 2A"
       ],
@@ -27928,7 +27928,7 @@
       "name": "Kahli",
       "canonicalName": "Kahli",
       "element": "fire",
-      "image": "assets/monsters/kahli.png",
+      "image": "assets/monsters/unit_icon_0074_3_2.png",
       "aliases": [],
       "externalIds": {
         "com2us": 12032,
@@ -33518,7 +33518,7 @@
       "name": "Lulu e suas Amigas",
       "canonicalName": "Lulu and Friends",
       "element": "water",
-      "image": "assets/monsters/lulu-and-friends.png",
+      "image": "assets/monsters/unit_icon_0070_3_0.png",
       "aliases": [
         "Lulu and Friends",
         "Lulu 2A"
@@ -39026,7 +39026,7 @@
       "name": "Nickel",
       "canonicalName": "Nickel",
       "element": "water",
-      "image": "assets/monsters/nickel.png",
+      "image": "assets/monsters/unit_icon_0125_3_1.png",
       "aliases": [],
       "externalIds": {
         "com2us": 16531,
@@ -44251,7 +44251,7 @@
       "name": "Raoq",
       "canonicalName": "Raoq",
       "element": "fire",
-      "image": "assets/monsters/raoq.png",
+      "image": "assets/monsters/unit_icon_0051_1_3.png",
       "aliases": [
         "Raoq 2A"
       ],
@@ -45825,7 +45825,7 @@
       "name": "Roid",
       "canonicalName": "Roid",
       "element": "wind",
-      "image": "assets/monsters/roid.png",
+      "image": "assets/monsters/unit_icon_0082_3_3.png",
       "aliases": [
         "Roid 2A"
       ],
@@ -46684,7 +46684,7 @@
       "name": "Sath",
       "canonicalName": "Sath",
       "element": "fire",
-      "image": "assets/monsters/sath.png",
+      "image": "assets/monsters/unit_icon_0071_3_1.png",
       "aliases": [],
       "externalIds": {
         "com2us": 16032,
@@ -53899,7 +53899,7 @@
       "name": "Tarq",
       "canonicalName": "Tarq",
       "element": "water",
-      "image": "assets/monsters/tarq.png",
+      "image": "assets/monsters/unit_icon_0211_3_1.png",
       "aliases": [],
       "externalIds": {
         "com2us": 10631,
@@ -54958,7 +54958,7 @@
       "name": "Thrain",
       "canonicalName": "Thrain",
       "element": "dark",
-      "image": "assets/monsters/thrain.png",
+      "image": "assets/monsters/unit_icon_0071_3_4.png",
       "aliases": [],
       "externalIds": {
         "com2us": 16035,
@@ -58087,7 +58087,7 @@
       "name": "Vigor",
       "canonicalName": "Vigor",
       "element": "water",
-      "image": "assets/monsters/vigor.png",
+      "image": "assets/monsters/unit_icon_0053_0_1.png",
       "aliases": [],
       "externalIds": {
         "com2us": 14031,

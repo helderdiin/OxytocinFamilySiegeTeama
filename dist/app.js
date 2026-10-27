@@ -167,7 +167,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.6 · Supabase" : "POC v0.6 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.7 · Supabase" : "POC v0.7 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -612,7 +612,7 @@ importConfirmDialog.addEventListener("cancel", (event) => {
 
 async function init() {
   try {
-    const response = await fetch("./data/monsters.json");
+    const response = await fetch("./data/monsters.json?v=0.7");
     if (!response.ok) throw new Error("Catálogo indisponível");
     const catalog = await response.json();
     const preparedCatalog = prepareMonsterCatalog(catalog.monsters);
