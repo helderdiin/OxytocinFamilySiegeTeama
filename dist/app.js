@@ -102,6 +102,7 @@ let activeStatus = "all";
 let activeElement = "all";
 let strategies = [];
 let pendingImport = null;
+let currentUserId = null;
 let monsters = [];
 let monsterById = new Map();
 let monsterByName = new Map();
@@ -114,6 +115,8 @@ const appShell = $("#appShell");
 const strategyDialog = $("#strategyDialog");
 const monsterDialog = $("#monsterDialog");
 const importConfirmDialog = $("#importConfirmDialog");
+const database = window.oxytocinDb;
+const cloudEnabled = Boolean(database?.isConfigured());
 
 function readStoredStrategies() {
   try {
@@ -155,7 +158,27 @@ function toMonsterId(value) {
 }
 
 function saveStrategies() {
+  if (cloudEnabled) return;
   localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 3, strategies }));
+}
+
+function updateStorageUi(mode) {
+  const chip = $("#syncChip");
+  chip.classList.toggle("cloud", mode === "cloud");
+  chip.classList.toggle("error", mode === "error");
+  $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.5 · Supabase" : "POC v0.5 · dados locais";
+}
+
+async function connectCloudUser() {
+  currentUserId = await database.ensureUser(currentUser);
+  strategies = migrateStrategies(await database.listStrategies());
+}
+
+async function refreshCloudStrategies() {
+  if (!cloudEnabled) return;
+  strategies = migrateStrategies(await database.listStrategies());
+  render();
 }
 
 function escapeHtml(value) {
@@ -208,7 +231,7 @@ function render() {
 
 function strategyCard(strategy) {
   const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(strategy.createdAt));
-  const canDelete = strategy.player === currentUser;
+  const canDelete = cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser;
   const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
   const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
   return `
@@ -318,12 +341,28 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("visible"), 2600);
 }
 
-$("#loginForm").addEventListener("submit", (event) => {
+$("#loginForm").addEventListener("submit", async (event) => {
   event.preventDefault();
-  currentUser = new FormData(event.currentTarget).get("playerName").trim();
-  if (!currentUser) return;
-  localStorage.setItem(STORAGE_KEYS.user, currentUser);
-  showApp();
+  const nextUser = new FormData(event.currentTarget).get("playerName").trim();
+  if (!nextUser) return;
+  const submitButton = event.currentTarget.querySelector("button[type='submit']");
+  submitButton.disabled = true;
+  submitButton.textContent = cloudEnabled ? "Conectando..." : "Entrando...";
+  try {
+    currentUser = nextUser;
+    if (cloudEnabled) await connectCloudUser();
+    else strategies = migrateStrategies(readStoredStrategies());
+    localStorage.setItem(STORAGE_KEYS.user, currentUser);
+    showApp();
+  } catch (error) {
+    console.error(error);
+    currentUser = "";
+    updateStorageUi("error");
+    showToast("Não foi possível conectar ao Supabase. Confira a migration e o login anônimo.");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = "Entrar <span>→</span>";
+  }
 });
 
 $("#logoutButton").addEventListener("click", () => {
@@ -359,14 +398,14 @@ $("#monsterOptions").addEventListener("click", (event) => {
   if (button) selectMonster(button.dataset.monsterId);
 });
 
-$("#strategyForm").addEventListener("submit", (event) => {
+$("#strategyForm").addEventListener("submit", async (event) => {
   event.preventDefault();
   if (selection.attack.some((id) => !id) || selection.defense.slice(0, 2).some((id) => !id)) {
     showToast("Selecione os cinco monstros antes de salvar.");
     return;
   }
   const data = new FormData(event.currentTarget);
-  strategies.unshift({
+  const strategy = {
     id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
     player: currentUser,
     attack: [...selection.attack],
@@ -384,22 +423,44 @@ $("#strategyForm").addEventListener("submit", (event) => {
       evidence: data.get("evidence").trim(),
     },
     createdAt: new Date().toISOString(),
-  });
-  saveStrategies();
-  render();
-  closeStrategyDialog();
-  showToast("Estratégia adicionada ao arsenal.");
+  };
+  const submitButton = event.currentTarget.querySelector("button[type='submit']");
+  submitButton.disabled = true;
+  submitButton.textContent = "Salvando...";
+  try {
+    if (cloudEnabled) strategies.unshift(await database.createStrategy(strategy, currentUserId, currentUser));
+    else {
+      strategies.unshift(strategy);
+      saveStrategies();
+    }
+    render();
+    closeStrategyDialog();
+    showToast("Estratégia adicionada ao arsenal.");
+  } catch (error) {
+    console.error(error);
+    showToast("Não foi possível salvar a estratégia.");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Salvar estratégia";
+  }
 });
 
-$("#strategyList").addEventListener("click", (event) => {
+$("#strategyList").addEventListener("click", async (event) => {
   const id = event.target.dataset.deleteId;
   if (!id) return;
   const strategy = strategies.find((item) => item.id === id);
-  if (!strategy || strategy.player !== currentUser || !window.confirm("Excluir esta estratégia?")) return;
-  strategies = strategies.filter((item) => item.id !== id);
-  saveStrategies();
-  render();
-  showToast("Estratégia excluída.");
+  const canDelete = cloudEnabled ? strategy?.ownerId === currentUserId && !strategy?.isSeed : strategy?.player === currentUser;
+  if (!strategy || !canDelete || !window.confirm("Excluir esta estratégia?")) return;
+  try {
+    if (cloudEnabled) await database.deleteStrategy(id, currentUserId);
+    strategies = strategies.filter((item) => item.id !== id);
+    saveStrategies();
+    render();
+    showToast("Estratégia excluída.");
+  } catch (error) {
+    console.error(error);
+    showToast("Não foi possível excluir a estratégia.");
+  }
 });
 
 $("#searchInput").addEventListener("input", render);
@@ -444,6 +505,21 @@ $("#importInput").addEventListener("change", async (event) => {
     pendingImport = migrateStrategies(imported).map((item) => ({ ...item, id: item.id || `${Date.now()}-${Math.random()}` }));
     $("#currentImportCount").textContent = strategies.length;
     $("#newImportCount").textContent = pendingImport.length;
+    if (cloudEnabled) {
+      $("#importConfirmTitle").textContent = "Adicionar estratégias à base?";
+      $("#importWarningText").textContent = "As estratégias do arquivo serão adicionadas à base compartilhada. Nenhuma composição existente será removida.";
+      $("#currentImportDescription").textContent = "estratégias existentes serão mantidas";
+      $("#importArrow").textContent = "+";
+      $("#importConfirmNote").innerHTML = "<strong>Base compartilhada:</strong> as novas estratégias ficarão vinculadas ao seu usuário atual.";
+      $("#confirmImportButton").textContent = "Adicionar à base";
+    } else {
+      $("#importConfirmTitle").textContent = "Substituir estratégias locais?";
+      $("#importWarningText").textContent = "A importação substitui toda a base salva neste navegador. Esta ação não pode ser desfeita.";
+      $("#currentImportDescription").textContent = "estratégias serão removidas";
+      $("#importArrow").textContent = "→";
+      $("#importConfirmNote").innerHTML = "<strong>Quer guardar a base atual?</strong> Cancele e use “Exportar” antes de importar o novo arquivo.";
+      $("#confirmImportButton").textContent = "Substituir e importar";
+    }
     importConfirmDialog.showModal();
   } catch {
     showToast("Não foi possível importar esse arquivo.");
@@ -458,14 +534,31 @@ function cancelImport() {
 }
 
 $("#cancelImportButton").addEventListener("click", cancelImport);
-$("#confirmImportButton").addEventListener("click", () => {
+$("#confirmImportButton").addEventListener("click", async () => {
   if (!pendingImport) return;
-  strategies = pendingImport;
-  pendingImport = null;
-  saveStrategies();
-  render();
-  importConfirmDialog.close();
-  showToast("Base substituída e estratégias importadas.");
+  const records = pendingImport;
+  const button = $("#confirmImportButton");
+  button.disabled = true;
+  button.textContent = cloudEnabled ? "Adicionando..." : "Importando...";
+  try {
+    if (cloudEnabled) {
+      await database.importStrategies(records, currentUserId, currentUser);
+      await refreshCloudStrategies();
+    } else {
+      strategies = records;
+      saveStrategies();
+      render();
+    }
+    pendingImport = null;
+    importConfirmDialog.close();
+    showToast(cloudEnabled ? "Estratégias adicionadas à base compartilhada." : "Base substituída e estratégias importadas.");
+  } catch (error) {
+    console.error(error);
+    showToast("Não foi possível importar as estratégias.");
+  } finally {
+    button.disabled = false;
+    button.textContent = cloudEnabled ? "Adicionar à base" : "Substituir e importar";
+  }
 });
 importConfirmDialog.addEventListener("click", (event) => {
   if (event.target === importConfirmDialog) cancelImport();
@@ -490,9 +583,26 @@ async function init() {
         if (!current || (monster.gameData.awakenLevel === 1 && current.gameData.awakenLevel !== 1)) monsterByName.set(key, monster);
       }
     }
-    strategies = migrateStrategies(readStoredStrategies());
-    saveStrategies();
-    if (currentUser) showApp();
+    updateStorageUi(cloudEnabled ? "cloud" : "local");
+    if (cloudEnabled) {
+      strategies = [];
+      if (currentUser) {
+        try {
+          await connectCloudUser();
+          showApp();
+        } catch (error) {
+          console.error(error);
+          updateStorageUi("error");
+          localStorage.removeItem(STORAGE_KEYS.user);
+          currentUser = "";
+          showToast("Supabase conectado, mas o banco ainda precisa da migration e do seed.");
+        }
+      }
+    } else {
+      strategies = migrateStrategies(readStoredStrategies());
+      saveStrategies();
+      if (currentUser) showApp();
+    }
   } catch (error) {
     console.error(error);
     strategies = seedStrategies;

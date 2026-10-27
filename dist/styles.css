@@ -61,6 +61,8 @@ input:focus, textarea:focus, select:focus { border-color: var(--green-dark); box
 .top-actions { display: flex; align-items: center; gap: 16px; }
 .sync-chip { padding: 7px 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; font-size: 11px; }
 .sync-chip i { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--gold); }
+.sync-chip.cloud i { background: var(--green); box-shadow: 0 0 9px rgba(184,242,56,.6); }
+.sync-chip.error i { background: var(--red); }
 .user-menu { display: flex; align-items: center; gap: 9px; }
 .avatar { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #243229; color: var(--green); font-weight: 700; }
 .user-label small { color: var(--muted); font-size: 9px; text-transform: uppercase; }

@@ -23,7 +23,33 @@ Abra `http://localhost:4173`.
 - exportação e importação manual em JSON, com confirmação explícita antes de substituir a base local.
 - arquivo de exemplo com cinco counters comprovados em `examples/oxytocin-import-5-comps.json`.
 
-Os dados ainda não são compartilhados entre dispositivos. Uma evolução natural é substituir o `localStorage` por uma API com banco compartilhado e autenticação real.
+Enquanto a configuração do Supabase não estiver preenchida, os dados continuam somente no `localStorage` do navegador.
+
+## Supabase
+
+A primeira migration e o seed oficial estão em:
+
+- `supabase/migrations/20261027020000_initial_schema.sql`
+- `supabase/seed.sql`
+
+O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente as próprias estratégias. As cinco comps oficiais do seed são protegidas.
+
+No navegador deve ser usada somente a chave pública `publishable`, nunca uma chave `secret` ou a antiga `service_role`. O formato esperado está em `dist/supabase-config.example.js`.
+
+### Configuração inicial
+
+1. No painel do Supabase, abra **Authentication → Providers → Anonymous Sign-Ins** e habilite o login anônimo.
+2. Abra o **SQL Editor** e execute `supabase/migrations/20261027020000_initial_schema.sql`.
+3. Ainda no **SQL Editor**, execute `supabase/seed.sql` para cadastrar as cinco comps iniciais. O seed é idempotente e pode ser executado novamente sem duplicá-las.
+4. Copie `dist/supabase-config.example.js` para `dist/supabase-config.js` e preencha a URL e a chave `publishable` do projeto.
+5. Inicie o servidor local e acesse `http://localhost:4173`.
+
+```bash
+cp dist/supabase-config.example.js dist/supabase-config.js
+python3 -m http.server 4173 --directory dist
+```
+
+O arquivo `dist/supabase-config.js` é ignorado pelo Git. Em um novo computador, ele precisa ser criado novamente.
 
 ## Dados
 

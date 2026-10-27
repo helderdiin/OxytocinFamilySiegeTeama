@@ -47,7 +47,7 @@
           <span><strong>Oxytocin</strong><small>Siege teams</small></span>
         </a>
         <nav class="top-actions" aria-label="Ações da conta">
-          <span class="sync-chip" title="Os dados desta POC ficam neste navegador"><i></i> Salvo neste dispositivo</span>
+          <span class="sync-chip" id="syncChip" title="Origem dos dados"><i></i> <span id="syncLabel">Conectando...</span></span>
           <div class="user-menu">
             <span class="avatar" id="avatar">H</span>
             <span class="user-label"><small>Jogando como</small><strong id="currentUser">Helder</strong></span>
@@ -103,7 +103,7 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span>POC v0.4 · dados locais</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">POC v0.5 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
@@ -177,17 +177,20 @@
         <h2 id="importConfirmTitle">Substituir estratégias locais?</h2>
         <p id="importWarningText">A importação substitui toda a base salva neste navegador. Esta ação não pode ser desfeita.</p>
         <div class="import-comparison" aria-label="Resumo da substituição">
-          <div><small>BASE ATUAL</small><strong id="currentImportCount">0</strong><span>estratégias serão removidas</span></div>
-          <span class="import-arrow" aria-hidden="true">→</span>
+          <div><small>BASE ATUAL</small><strong id="currentImportCount">0</strong><span id="currentImportDescription">estratégias serão removidas</span></div>
+          <span class="import-arrow" id="importArrow" aria-hidden="true">→</span>
           <div><small>NOVO ARQUIVO</small><strong id="newImportCount">0</strong><span>estratégias serão importadas</span></div>
         </div>
-        <p class="confirm-note"><strong>Quer guardar a base atual?</strong> Cancele e use “Exportar” antes de importar o novo arquivo.</p>
+        <p class="confirm-note" id="importConfirmNote"><strong>Quer guardar a base atual?</strong> Cancele e use “Exportar” antes de importar o novo arquivo.</p>
         <div class="dialog-actions"><button class="button button-ghost" id="cancelImportButton" type="button">Cancelar</button><button class="button button-danger" id="confirmImportButton" type="button">Substituir e importar</button></div>
       </div>
     </dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./supabase-config.js"></script>
+    <script src="./supabase-store.js"></script>
     <script src="./app.js"></script>
   </body>
 </html>
