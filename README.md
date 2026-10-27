@@ -51,6 +51,15 @@ python3 -m http.server 4173 --directory dist
 
 O arquivo `dist/supabase-config.js` é ignorado pelo Git. Em um novo computador, ele precisa ser criado novamente.
 
+## Deploy na Vercel
+
+O projeto usa um build mínimo que gera `dist/supabase-config.js` a partir de duas variáveis públicas configuradas na Vercel:
+
+- `SUPABASE_URL`
+- `SUPABASE_PUBLISHABLE_KEY`
+
+O diretório publicado é `dist`. Com a integração Git conectada, pushes na branch `main` atualizam a produção automaticamente.
+
 ## Dados
 
 O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHelper`. Estratégias persistem somente os IDs internos dos monstros:
