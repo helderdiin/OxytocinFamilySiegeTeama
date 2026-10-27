@@ -196,16 +196,17 @@ function openMonsterPicker(button) {
 function renderMonsterOptions() {
   const query = normalize($("#monsterSearch").value);
   const selectedIds = new Set(selection[pickerSlot?.side] || []);
-  const visible = monsters.filter((monster) => {
+  const matching = monsters.filter((monster) => {
     const names = [monster.id, monster.name, monster.canonicalName, monster.externalIds?.com2us, monster.externalIds?.swarfarm, ...(monster.aliases || [])].join(" ");
     return normalize(names).includes(query) && (activeElement === "all" || monster.element === activeElement) && !selectedIds.has(monster.id);
   });
+  const visible = matching.slice(0, 80);
   $("#monsterOptions").innerHTML = visible.length ? visible.map((monster) => `
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
       <span class="option-copy"><strong>${escapeHtml(monster.name)}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
       <span class="add-label">Adicionar ＋</span>
-    </button>`).join("") : '<div class="no-options">Nenhum monstro encontrado.</div>';
+    </button>`).join("") + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") : '<div class="no-options">Nenhum monstro encontrado.</div>';
 }
 
 function selectMonster(id) {
@@ -347,7 +348,14 @@ async function init() {
     const catalog = await response.json();
     monsters = catalog.monsters;
     monsterById = new Map(monsters.map((monster) => [monster.id, monster]));
-    monsterByName = new Map(monsters.flatMap((monster) => [monster.name, monster.canonicalName, ...(monster.aliases || [])].map((name) => [normalize(name), monster])));
+    monsterByName = new Map(monsters.map((monster) => [normalize(monster.name), monster]));
+    for (const monster of monsters) {
+      for (const name of [monster.canonicalName, ...(monster.aliases || [])]) {
+        const key = normalize(name);
+        const current = monsterByName.get(key);
+        if (!current || (monster.gameData.awakenLevel === 1 && current.gameData.awakenLevel !== 1)) monsterByName.set(key, monster);
+      }
+    }
     strategies = migrateStrategies(readStoredStrategies());
     saveStrategies();
     if (currentUser) showApp();

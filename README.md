@@ -41,3 +41,13 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 ```
 
 O valor `"*"` representa qualquer terceiro monstro na defesa; as condições e exceções devem ser registradas em `notes`.
+
+## Sincronização do catálogo
+
+O catálogo é gerado a partir da API pública do SWARFARM e mantém somente monstros obtíveis e despertados, incluindo segundas evoluções. As imagens são baixadas para o próprio site, portanto a aplicação não consulta serviços externos durante o uso.
+
+```bash
+node scripts/sync-monsters.mjs
+```
+
+O sincronizador preserva IDs internos existentes, adiciona novas unidades por `externalIds.com2us`, evita duplicações e grava a data da sincronização em `metadata.synchronizedAt`.
