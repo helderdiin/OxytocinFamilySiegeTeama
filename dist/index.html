@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a1014" />
+    <meta
+      name="description"
+      content="Biblioteca interna de ataques da guilda Oxytocin para o Siege do Summoners War."
+    />
+    <title>Oxytocin Siege Teams</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <section class="login-screen" id="loginScreen" aria-labelledby="loginTitle">
+      <div class="login-card">
+        <div class="brand-mark" aria-hidden="true">O<span>₂</span></div>
+        <p class="eyebrow">GUILDA OXYTOCIN · SIEGE</p>
+        <h1 id="loginTitle">Entre no nosso<br /><span>war room.</span></h1>
+        <p class="login-copy">
+          Consulte composições testadas e compartilhe os ataques que funcionam contra cada defesa.
+        </p>
+        <form id="loginForm" class="login-form">
+          <label for="playerName">Seu nome no jogo</label>
+          <div class="input-action">
+            <input id="playerName" name="playerName" autocomplete="nickname" maxlength="24" placeholder="Ex.: Helder" required />
+            <button type="submit" class="button button-primary">Entrar <span>→</span></button>
+          </div>
+          <p class="helper">Sem senha nesta POC. Use seu nick para identificar suas sugestões.</p>
+        </form>
+      </div>
+    </section>
+
+    <div class="app-shell" id="appShell" hidden>
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Oxytocin Siege Teams">
+          <span class="brand-symbol">O<span>₂</span></span>
+          <span><strong>Oxytocin</strong><small>Siege teams</small></span>
+        </a>
+        <nav class="top-actions" aria-label="Ações da conta">
+          <span class="sync-chip" title="Os dados desta POC ficam neste navegador"><i></i> Salvo neste dispositivo</span>
+          <div class="user-menu">
+            <span class="avatar" id="avatar">H</span>
+            <span class="user-label"><small>Jogando como</small><strong id="currentUser">Helder</strong></span>
+          </div>
+          <button class="icon-button" id="logoutButton" type="button" aria-label="Trocar jogador" title="Trocar jogador">↪</button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <p class="eyebrow">BASE DE ESTRATÉGIAS</p>
+            <h1>O counter certo.<br /><span>Antes da batalha.</span></h1>
+            <p>Encontre ataques que a guilda já testou contra as defesas que aparecem no Siege.</p>
+          </div>
+          <button class="button button-primary button-large" id="openFormButton" type="button"><span>＋</span> Adicionar ataque</button>
+        </section>
+
+        <section class="stats" aria-label="Resumo das estratégias">
+          <article><small>ATAQUES SALVOS</small><strong id="totalStrategies">0</strong><span class="stat-icon">⚔</span></article>
+          <article><small>DEFESAS MAPEADAS</small><strong id="totalDefenses">0</strong><span class="stat-icon">⬡</span></article>
+          <article><small>COLABORADORES</small><strong id="totalPlayers">0</strong><span class="stat-icon">♟</span></article>
+        </section>
+
+        <section class="library" aria-labelledby="libraryTitle">
+          <div class="section-heading">
+            <div><p class="eyebrow">ARSENAL DA GUILDA</p><h2 id="libraryTitle">Ataques cadastrados</h2></div>
+            <div class="data-actions">
+              <button class="text-button" id="exportButton" type="button">Exportar</button>
+              <label class="text-button" for="importInput">Importar</label>
+              <input id="importInput" type="file" accept="application/json" hidden />
+            </div>
+          </div>
+
+          <div class="filters">
+            <label class="search-field">
+              <span>⌕</span>
+              <input id="searchInput" type="search" placeholder="Buscar monstro, defesa ou jogador..." />
+            </label>
+            <div class="filter-tabs" role="group" aria-label="Filtrar ataques">
+              <button class="active" data-filter="all" type="button">Todos</button>
+              <button data-filter="mine" type="button">Meus ataques</button>
+            </div>
+          </div>
+
+          <div class="strategy-list" id="strategyList"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <span>⌁</span><h3>Nenhum ataque encontrado</h3><p>Cadastre a primeira estratégia ou ajuste sua busca.</p>
+            <button class="button button-secondary" id="emptyAddButton" type="button">Adicionar ataque</button>
+          </div>
+        </section>
+      </main>
+
+      <footer><span>Oxytocin Family · Summoners War</span><span>POC v0.1 · dados locais</span></footer>
+    </div>
+
+    <dialog id="strategyDialog">
+      <div class="dialog-header">
+        <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Informe os dois times de três monstros.</p></div>
+        <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">×</button>
+      </div>
+      <form id="strategyForm">
+        <fieldset>
+          <legend><span class="legend-icon attack">⚔</span><span><strong>Seu ataque</strong><small>O time que vence essa defesa</small></span></legend>
+          <div class="monster-grid">
+            <label>Monstro 1<input name="attack1" list="monsterNames" placeholder="Ex.: Copper" maxlength="32" required /></label>
+            <label>Monstro 2<input name="attack2" list="monsterNames" placeholder="Ex.: Bulldozer" maxlength="32" required /></label>
+            <label>Monstro 3<input name="attack3" list="monsterNames" placeholder="Ex.: Imesety" maxlength="32" required /></label>
+          </div>
+        </fieldset>
+        <div class="versus-divider"><span>VS</span></div>
+        <fieldset>
+          <legend><span class="legend-icon defense">⬡</span><span><strong>Defesa inimiga</strong><small>O time que esse ataque enfrenta</small></span></legend>
+          <div class="monster-grid">
+            <label>Monstro 1<input name="defense1" list="monsterNames" placeholder="Ex.: Khmun" maxlength="32" required /></label>
+            <label>Monstro 2<input name="defense2" list="monsterNames" placeholder="Ex.: Vigor" maxlength="32" required /></label>
+            <label>Monstro 3<input name="defense3" list="monsterNames" placeholder="Ex.: Skogul" maxlength="32" required /></label>
+          </div>
+        </fieldset>
+        <label class="notes-field">Observações <span>(opcional)</span><textarea name="notes" maxlength="180" rows="3" placeholder="Runas, ordem de turnos ou algum cuidado importante..."></textarea></label>
+        <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" type="submit">Salvar estratégia</button></div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <datalist id="monsterNames">
+      <option value="Adriana"></option><option value="Byungchul"></option><option value="Carcano"></option>
+      <option value="Chandra"></option><option value="Copper"></option><option value="Covenant"></option>
+      <option value="Bulldozer"></option><option value="Feng Yan"></option><option value="Galleon"></option>
+      <option value="Imesety"></option><option value="Iunu"></option><option value="Khmun"></option>
+      <option value="Kinki"></option><option value="Loren"></option><option value="Lushen"></option>
+      <option value="Mihyang"></option><option value="Mimirr"></option><option value="Nana"></option>
+      <option value="Odin"></option><option value="Racuni"></option><option value="Riley"></option>
+      <option value="Seara"></option><option value="Skogul"></option><option value="Sonia"></option>
+      <option value="Tesarion"></option><option value="Theo"></option><option value="Triana"></option>
+      <option value="Vigor"></option><option value="Woosa"></option><option value="Zerath"></option>
+    </datalist>
+    <script src="./app.js"></script>
+  </body>
+</html>
