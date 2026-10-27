@@ -106,46 +106,53 @@
 
     <dialog id="strategyDialog">
       <div class="dialog-header">
-        <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Informe os dois times de três monstros.</p></div>
+        <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Informe o ataque e os dois monstros fixos da defesa.</p></div>
         <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">×</button>
       </div>
       <form id="strategyForm">
         <fieldset>
           <legend><span class="legend-icon attack">⚔</span><span><strong>Seu ataque</strong><small>O time que vence essa defesa</small></span></legend>
           <div class="monster-grid">
-            <label>Monstro 1<input name="attack1" list="monsterNames" placeholder="Ex.: Copper" maxlength="32" required /></label>
-            <label>Monstro 2<input name="attack2" list="monsterNames" placeholder="Ex.: Bulldozer" maxlength="32" required /></label>
-            <label>Monstro 3<input name="attack3" list="monsterNames" placeholder="Ex.: Imesety" maxlength="32" required /></label>
+            <label>Monstro 1<button class="monster-select" data-slot="attack-0" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 2<button class="monster-select" data-slot="attack-1" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 3<button class="monster-select" data-slot="attack-2" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
           </div>
         </fieldset>
         <div class="versus-divider"><span>VS</span></div>
         <fieldset>
-          <legend><span class="legend-icon defense">⬡</span><span><strong>Defesa inimiga</strong><small>O time que esse ataque enfrenta</small></span></legend>
+          <legend><span class="legend-icon defense">⬡</span><span><strong>Defesa inimiga</strong><small>Dois monstros fixos + qualquer terceiro</small></span></legend>
           <div class="monster-grid">
-            <label>Monstro 1<input name="defense1" list="monsterNames" placeholder="Ex.: Khmun" maxlength="32" required /></label>
-            <label>Monstro 2<input name="defense2" list="monsterNames" placeholder="Ex.: Vigor" maxlength="32" required /></label>
-            <label>Monstro 3<input name="defense3" list="monsterNames" placeholder="Ex.: Skogul" maxlength="32" required /></label>
+            <label>Monstro 1<button class="monster-select" data-slot="defense-0" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 2<button class="monster-select" data-slot="defense-1" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 3<button class="monster-select wildcard-select" type="button" disabled><span class="wildcard-avatar">X</span><span><strong>Qualquer monstro</strong><small>Explique abaixo</small></span></button></label>
           </div>
         </fieldset>
-        <label class="notes-field">Observações <span>(opcional)</span><textarea name="notes" maxlength="180" rows="3" placeholder="Runas, ordem de turnos ou algum cuidado importante..."></textarea></label>
+        <label class="notes-field">Observações <span>(recomendado para explicar o X)</span><textarea name="notes" maxlength="320" rows="3" placeholder="Explique quais terceiros funcionam, exceções, runas ou ordem de turnos..."></textarea></label>
         <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" type="submit">Salvar estratégia</button></div>
       </form>
     </dialog>
 
+    <dialog id="monsterDialog" class="monster-dialog">
+      <div class="dialog-header">
+        <div><p class="eyebrow">CATÁLOGO DE MONSTROS</p><h2 id="pickerTitle">Selecionar monstro</h2><p>Escolha pelo nome, elemento ou ID.</p></div>
+        <button class="close-button" id="closeMonsterDialog" type="button" aria-label="Fechar catálogo">×</button>
+      </div>
+      <div class="picker-body">
+        <label class="search-field picker-search"><span>⌕</span><input id="monsterSearch" type="search" autocomplete="off" placeholder="Buscar por nome ou ID..." /></label>
+        <div class="element-filters" id="elementFilters" role="group" aria-label="Filtrar por elemento">
+          <button class="active" data-element="all" type="button">Todos</button>
+          <button data-element="water" type="button">Água</button>
+          <button data-element="fire" type="button">Fogo</button>
+          <button data-element="wind" type="button">Vento</button>
+          <button data-element="light" type="button">Luz</button>
+          <button data-element="dark" type="button">Trevas</button>
+        </div>
+        <div class="monster-options" id="monsterOptions"></div>
+      </div>
+    </dialog>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <datalist id="monsterNames">
-      <option value="Adriana"></option><option value="Byungchul"></option><option value="Carcano"></option>
-      <option value="Chandra"></option><option value="Copper"></option><option value="Covenant"></option>
-      <option value="Bulldozer"></option><option value="Feng Yan"></option><option value="Galleon"></option>
-      <option value="Imesety"></option><option value="Iunu"></option><option value="Khmun"></option>
-      <option value="Kinki"></option><option value="Loren"></option><option value="Lushen"></option>
-      <option value="Mihyang"></option><option value="Mimirr"></option><option value="Nana"></option>
-      <option value="Odin"></option><option value="Racuni"></option><option value="Riley"></option>
-      <option value="Seara"></option><option value="Skogul"></option><option value="Sonia"></option>
-      <option value="Tesarion"></option><option value="Theo"></option><option value="Triana"></option>
-      <option value="Vigor"></option><option value="Woosa"></option><option value="Zerath"></option>
-    </datalist>
     <script src="./app.js"></script>
   </body>
 </html>

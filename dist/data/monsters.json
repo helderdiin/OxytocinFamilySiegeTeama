@@ -1,0 +1,3552 @@
+{
+  "schemaVersion": 2,
+  "metadata": {
+    "identityProvider": "swarfarm",
+    "synchronizedAt": "2026-10-07T16:39:39.225Z",
+    "remoteRecordCount": 3089
+  },
+  "monsters": [
+    {
+      "id": "7r1x",
+      "name": "7R1X",
+      "canonicalName": "7R1X",
+      "element": "fire",
+      "image": "assets/monsters/7r1x.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 30012,
+        "swarfarm": 2399
+      },
+      "familyId": 30000,
+      "skillGroupId": 30000,
+      "bestiarySlug": "30002-fire-hacker",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "adriana",
+      "name": "Adriana",
+      "canonicalName": "Adriana",
+      "element": "water",
+      "image": "assets/monsters/adriana.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 26811,
+        "swarfarm": 2021
+      },
+      "familyId": 26800,
+      "skillGroupId": 26300,
+      "bestiarySlug": "26801-water-pudding-princess-adriana",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "alice",
+      "name": "Alice",
+      "canonicalName": "Alice",
+      "element": "fire",
+      "image": "assets/monsters/alice.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 26912,
+        "swarfarm": 2032
+      },
+      "familyId": 26900,
+      "skillGroupId": 26400,
+      "bestiarySlug": "26902-fire-macaron-guard",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "amber",
+      "name": "Amber",
+      "canonicalName": "Amber",
+      "element": "water",
+      "image": "assets/monsters/amber.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 26111,
+        "swarfarm": 1967
+      },
+      "familyId": 26100,
+      "skillGroupId": 26100,
+      "bestiarySlug": "26101-water-battle-angel",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "lucia",
+      "name": "Lucia",
+      "canonicalName": "Lucia",
+      "element": "fire",
+      "image": "assets/monsters/lucia.png",
+      "aliases": [
+        "Pudim de fogo",
+        "Fire Pudding Princess"
+      ],
+      "externalIds": {
+        "com2us": 26812,
+        "swarfarm": 2022
+      },
+      "familyId": 26800,
+      "skillGroupId": 26300,
+      "bestiarySlug": "26802-fire-pudding-princess",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "angela",
+      "name": "Angela",
+      "canonicalName": "Angela",
+      "element": "wind",
+      "image": "assets/monsters/angela.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 26813,
+        "swarfarm": 2023
+      },
+      "familyId": 26800,
+      "skillGroupId": 26300,
+      "bestiarySlug": "26803-wind-pudding-princess",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "ashour",
+      "name": "Ashour",
+      "canonicalName": "Ashour",
+      "element": "fire",
+      "image": "assets/monsters/ashour.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 28012,
+        "swarfarm": 2173
+      },
+      "familyId": 28000,
+      "skillGroupId": 27500,
+      "bestiarySlug": "28002-fire-desert-warrior",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "astar",
+      "name": "Astar",
+      "canonicalName": "Astar",
+      "element": "fire",
+      "image": "assets/monsters/astar.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19812,
+        "swarfarm": 852
+      },
+      "familyId": 19800,
+      "skillGroupId": 19800,
+      "bestiarySlug": "19802-fire-magic-knight-astar",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "bael",
+      "name": "Bael",
+      "canonicalName": "Bael",
+      "element": "fire",
+      "image": "assets/monsters/bael.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23112,
+        "swarfarm": 1309
+      },
+      "familyId": 23100,
+      "skillGroupId": 23100,
+      "bestiarySlug": "23102-fire-demon-bael",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "baleygr",
+      "name": "Baleygr",
+      "canonicalName": "Baleygr",
+      "element": "fire",
+      "image": "assets/monsters/baleygr.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 22612,
+        "swarfarm": 1249
+      },
+      "familyId": 22600,
+      "skillGroupId": 22600,
+      "bestiarySlug": "22602-fire-lightning-emperor-baleygr",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "bastet",
+      "name": "Bastet",
+      "canonicalName": "Bastet",
+      "element": "water",
+      "image": "assets/monsters/bastet.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20511,
+        "swarfarm": 943
+      },
+      "familyId": 20500,
+      "skillGroupId": 20500,
+      "bestiarySlug": "20501-water-desert-queen-bastet",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "belial",
+      "name": "Belial",
+      "canonicalName": "Belial",
+      "element": "water",
+      "image": "assets/monsters/belial.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23111,
+        "swarfarm": 1308
+      },
+      "familyId": 23100,
+      "skillGroupId": 23100,
+      "bestiarySlug": "23101-water-demon-belial",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "bernard",
+      "name": "Bernard",
+      "canonicalName": "Bernard",
+      "element": "wind",
+      "image": "assets/monsters/bernard.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 11533,
+        "swarfarm": 1579
+      },
+      "familyId": 11500,
+      "skillGroupId": 11510,
+      "bestiarySlug": "11503-wind-griffon-bernard",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 11513,
+            "swarfarmId": 368,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "11503-wind-griffon-bernard"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "byungchul",
+      "name": "Byungchul",
+      "canonicalName": "Byungchul",
+      "element": "wind",
+      "image": "assets/monsters/byungchul.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 28913,
+        "swarfarm": 2322
+      },
+      "familyId": 28900,
+      "skillGroupId": 28900,
+      "bestiarySlug": "28903-wind-dokkaebi-lord-byungchul",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "camilla",
+      "name": "Camilla",
+      "canonicalName": "Camilla",
+      "element": "water",
+      "image": "assets/monsters/camilla.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 13811,
+        "swarfarm": 653
+      },
+      "familyId": 13800,
+      "skillGroupId": 13800,
+      "bestiarySlug": "13801-water-valkyrja-camilla",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "carcano",
+      "name": "Carcano",
+      "canonicalName": "Carcano",
+      "element": "fire",
+      "image": "assets/monsters/carcano.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 22712,
+        "swarfarm": 1259
+      },
+      "familyId": 22700,
+      "skillGroupId": 22700,
+      "bestiarySlug": "22702-fire-sniper-mki-carcano",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "cayde",
+      "name": "Cayde",
+      "canonicalName": "Cayde",
+      "element": "dark",
+      "image": "assets/monsters/cayde.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 24815,
+        "swarfarm": 1703
+      },
+      "familyId": 24800,
+      "skillGroupId": 24300,
+      "bestiarySlug": "24805-dark-poison-master-cayde",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "chandra",
+      "name": "Chandra",
+      "canonicalName": "Chandra",
+      "element": "water",
+      "image": "assets/monsters/chandra.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 17411,
+        "swarfarm": 629
+      },
+      "familyId": 17400,
+      "skillGroupId": 17400,
+      "bestiarySlug": "17401-water-beast-monk-chandra",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "chasun",
+      "name": "Chasun",
+      "canonicalName": "Chasun",
+      "element": "wind",
+      "image": "assets/monsters/chasun.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18313,
+        "swarfarm": 546
+      },
+      "familyId": 18300,
+      "skillGroupId": 18300,
+      "bestiarySlug": "18303-wind-sky-dancer-chasun",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "cichlid",
+      "name": "Cichlid",
+      "canonicalName": "Cichlid",
+      "element": "wind",
+      "image": "assets/monsters/cichlid.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19613,
+        "swarfarm": 837
+      },
+      "familyId": 19600,
+      "skillGroupId": 19600,
+      "bestiarySlug": "19603-wind-mermaid-cichlid",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "chilling",
+      "name": "Chilling",
+      "canonicalName": "Chilling",
+      "element": "water",
+      "image": "assets/monsters/chilling.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20711,
+        "swarfarm": 958
+      },
+      "familyId": 20700,
+      "skillGroupId": 20700,
+      "bestiarySlug": "20701-water-jack-o-lantern-chilling",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "chiwu",
+      "name": "Chiwu",
+      "canonicalName": "Chiwu",
+      "element": "fire",
+      "image": "assets/monsters/chiwu.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18612,
+        "swarfarm": 290
+      },
+      "familyId": 18600,
+      "skillGroupId": 18600,
+      "bestiarySlug": "18602-fire-pioneer-chiwu",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "chloe",
+      "name": "Chloe",
+      "canonicalName": "Chloe",
+      "element": "fire",
+      "image": "assets/monsters/chloe.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 15312,
+        "swarfarm": 234
+      },
+      "familyId": 15300,
+      "skillGroupId": 15300,
+      "bestiarySlug": "15302-fire-epikion-priest-chloe",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "conrad",
+      "name": "Conrad",
+      "canonicalName": "Conrad",
+      "element": "light",
+      "image": "assets/monsters/conrad.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16214,
+        "swarfarm": 659
+      },
+      "familyId": 16200,
+      "skillGroupId": 16200,
+      "bestiarySlug": "16204-light-death-knight-conrad",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "craka",
+      "name": "Craka",
+      "canonicalName": "Craka",
+      "element": "dark",
+      "image": "assets/monsters/craka.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 17915,
+        "swarfarm": 772
+      },
+      "familyId": 17900,
+      "skillGroupId": 17900,
+      "bestiarySlug": "17905-dark-hell-lady-craka",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "daphnis",
+      "name": "Daphnis",
+      "canonicalName": "Daphnis",
+      "element": "fire",
+      "image": "assets/monsters/daphnis.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21112,
+        "swarfarm": 994
+      },
+      "familyId": 21100,
+      "skillGroupId": 21100,
+      "bestiarySlug": "21102-fire-fairy-king-daphnis",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "dark-homunculus",
+      "name": "Dark Homunculus",
+      "canonicalName": "Homunculus",
+      "element": "dark",
+      "image": "assets/monsters/dark-homunculus.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 1000215,
+        "swarfarm": 1051
+      },
+      "familyId": 1000200,
+      "skillGroupId": 1000200,
+      "bestiarySlug": "1000205-dark-homunculussupport-homunculussupport",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 1000205,
+            "swarfarmId": 1049,
+            "awakenLevel": 0,
+            "obtainable": true,
+            "bestiarySlug": "1000205-dark-homunculussupport-homunculussupport"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "curated_alias_and_element"
+      }
+    },
+    {
+      "id": "deborah",
+      "name": "Deborah",
+      "canonicalName": "Deborah",
+      "element": "dark",
+      "image": "assets/monsters/deborah.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25815,
+        "swarfarm": 1900
+      },
+      "familyId": 25800,
+      "skillGroupId": 25800,
+      "bestiarySlug": "25805-dark-rune-blacksmith-deborah",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "delphoi",
+      "name": "Delphoi",
+      "canonicalName": "Delphoi",
+      "element": "wind",
+      "image": "assets/monsters/delphoi.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 11613,
+        "swarfarm": 555
+      },
+      "familyId": 11600,
+      "skillGroupId": 11600,
+      "bestiarySlug": "11603-wind-undine-delphoi",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "dover",
+      "name": "Dover",
+      "canonicalName": "Dover",
+      "element": "light",
+      "image": "assets/monsters/dover.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18114,
+        "swarfarm": 665
+      },
+      "familyId": 18100,
+      "skillGroupId": 18100,
+      "bestiarySlug": "18104-light-kobold-bomber-dover",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "elucia",
+      "name": "Elucia",
+      "canonicalName": "Elucia",
+      "element": "water",
+      "image": "assets/monsters/elucia.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 10131,
+        "swarfarm": 1281
+      },
+      "familyId": 10100,
+      "skillGroupId": 10110,
+      "bestiarySlug": "10101-water-fairy-elucia",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 10111,
+            "swarfarmId": 312,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "10101-water-fairy-elucia"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "eshir",
+      "name": "Eshir",
+      "canonicalName": "Eshir",
+      "element": "light",
+      "image": "assets/monsters/eshir.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14034,
+        "swarfarm": 1326
+      },
+      "familyId": 14000,
+      "skillGroupId": 14010,
+      "bestiarySlug": "14004-light-werewolf-eshir",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 14014,
+            "swarfarmId": 458,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "14004-light-werewolf-eshir"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "feng-yan",
+      "name": "Feng Yan",
+      "canonicalName": "Feng Yan",
+      "element": "wind",
+      "image": "assets/monsters/feng-yan.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21213,
+        "swarfarm": 1000
+      },
+      "familyId": 21200,
+      "skillGroupId": 21200,
+      "bestiarySlug": "21203-wind-panda-warrior-feng-yan",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "fiona",
+      "name": "Fiona",
+      "canonicalName": "Fiona",
+      "element": "dark",
+      "image": "assets/monsters/fiona.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 29715,
+        "swarfarm": 2432
+      },
+      "familyId": 29700,
+      "skillGroupId": 29300,
+      "bestiarySlug": "29705-dark-magic-order-swordsinger",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "fire-aragorn",
+      "name": "Fire Aragorn",
+      "canonicalName": "Aragorn",
+      "element": "fire",
+      "image": "assets/monsters/aragorn-fire.png",
+      "aliases": [
+        "Night Fang"
+      ],
+      "externalIds": {
+        "com2us": 34612,
+        "swarfarm": 2899
+      },
+      "familyId": 34600,
+      "skillGroupId": 34600,
+      "bestiarySlug": "34612-fire-aragorn",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "fran",
+      "name": "Fran",
+      "canonicalName": "Fran",
+      "element": "light",
+      "image": "assets/monsters/fran.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19114,
+        "swarfarm": 418
+      },
+      "familyId": 19100,
+      "skillGroupId": 10100,
+      "bestiarySlug": "19104-light-fairy-queen-fran",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "hwa",
+      "name": "Hwa",
+      "canonicalName": "Hwa",
+      "element": "fire",
+      "image": "assets/monsters/hwa.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 15512,
+        "swarfarm": 252
+      },
+      "familyId": 15500,
+      "skillGroupId": 15500,
+      "bestiarySlug": "15502-fire-rakshasa-hwa",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "morris",
+      "name": "Morris",
+      "canonicalName": "Morris",
+      "element": "wind",
+      "image": "assets/monsters/morris.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21313,
+        "swarfarm": 1020
+      },
+      "familyId": 21300,
+      "skillGroupId": 21300,
+      "bestiarySlug": "21303-wind-dice-magician-morris",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "molly",
+      "name": "Molly",
+      "canonicalName": "Molly",
+      "element": "light",
+      "image": "assets/monsters/molly.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19614,
+        "swarfarm": 838
+      },
+      "familyId": 19600,
+      "skillGroupId": 19600,
+      "bestiarySlug": "19604-light-mermaid-molly",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "guillaume",
+      "name": "Guillaume",
+      "canonicalName": "Guillaume",
+      "element": "dark",
+      "image": "assets/monsters/guillaume.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14115,
+        "swarfarm": 745
+      },
+      "familyId": 14100,
+      "skillGroupId": 14100,
+      "bestiarySlug": "14105-dark-phantom-thief-guillaume",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "gapsoo",
+      "name": "Gapsoo",
+      "canonicalName": "Gapsoo",
+      "element": "dark",
+      "image": "assets/monsters/gapsoo.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 28915,
+        "swarfarm": 2324
+      },
+      "familyId": 28900,
+      "skillGroupId": 28900,
+      "bestiarySlug": "28905-dark-dokkaebi-lord-gapsoo",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "galleon",
+      "name": "Galleon",
+      "canonicalName": "Galleon",
+      "element": "water",
+      "image": "assets/monsters/galleon.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19411,
+        "swarfarm": 825
+      },
+      "familyId": 19400,
+      "skillGroupId": 19400,
+      "bestiarySlug": "19401-water-pirate-captain-galleon",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "canonicalName": "Gemini",
+      "element": "light",
+      "image": "assets/monsters/gemini.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18014,
+        "swarfarm": 657
+      },
+      "familyId": 18000,
+      "skillGroupId": 18000,
+      "bestiarySlug": "18004-light-brownie-magician-gemini",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "gideon",
+      "name": "Gideon",
+      "canonicalName": "Gideon",
+      "element": "water",
+      "image": "assets/monsters/gideon.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 32311,
+        "swarfarm": 2727
+      },
+      "familyId": 32300,
+      "skillGroupId": 32300,
+      "bestiarySlug": "32301-water-beetle-guardian",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "gyomei-himejima",
+      "name": "Gyomei Himejima",
+      "canonicalName": "Gyomei Himejima",
+      "element": "wind",
+      "image": "assets/monsters/gyomei.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 31713,
+        "swarfarm": 2634
+      },
+      "familyId": 31700,
+      "skillGroupId": 31700,
+      "bestiarySlug": "31713-wind-gyomei-himejima",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "harmonia",
+      "name": "Harmonia",
+      "canonicalName": "Harmonia",
+      "element": "fire",
+      "image": "assets/monsters/harmonia.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21412,
+        "swarfarm": 1029
+      },
+      "familyId": 21400,
+      "skillGroupId": 21400,
+      "bestiarySlug": "21402-fire-harp-magician-harmonia",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "helena",
+      "name": "Helena",
+      "canonicalName": "Helena",
+      "element": "fire",
+      "image": "assets/monsters/helena.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21512,
+        "swarfarm": 1039
+      },
+      "familyId": 21500,
+      "skillGroupId": 21500,
+      "bestiarySlug": "21502-fire-unicorn-helena",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "hwadam",
+      "name": "Hwadam",
+      "canonicalName": "Hwadam",
+      "element": "light",
+      "image": "assets/monsters/hwadam.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18414,
+        "swarfarm": 691
+      },
+      "familyId": 18400,
+      "skillGroupId": 18400,
+      "bestiarySlug": "18404-light-taoist-hwadam",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "hyanes",
+      "name": "Hyanes",
+      "canonicalName": "Hyanes",
+      "element": "dark",
+      "image": "assets/monsters/hyanes.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 22115,
+        "swarfarm": 1198
+      },
+      "familyId": 22100,
+      "skillGroupId": 22100,
+      "bestiarySlug": "22105-dark-dryad-hyanes",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "icaru",
+      "name": "Icaru",
+      "canonicalName": "Icaru",
+      "element": "water",
+      "image": "assets/monsters/icaru.png",
+      "aliases": [
+        "Icaru 2A"
+      ],
+      "externalIds": {
+        "com2us": 11031,
+        "swarfarm": 1296
+      },
+      "familyId": 11000,
+      "skillGroupId": 11010,
+      "bestiarySlug": "11001-water-inugami-icaru",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 11011,
+            "swarfarmId": 328,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "11001-water-inugami-icaru"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "iris",
+      "name": "Iris",
+      "canonicalName": "Iris",
+      "element": "light",
+      "image": "assets/monsters/iris.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19814,
+        "swarfarm": 858
+      },
+      "familyId": 19800,
+      "skillGroupId": 19800,
+      "bestiarySlug": "19804-light-magic-knight-iris",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "iunu",
+      "name": "Iunu",
+      "canonicalName": "Iunu",
+      "element": "wind",
+      "image": "assets/monsters/iunu.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20413,
+        "swarfarm": 922
+      },
+      "familyId": 20400,
+      "skillGroupId": 20400,
+      "bestiarySlug": "20403-wind-anubis-iunu",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "jaara",
+      "name": "Jaara",
+      "canonicalName": "Jaara",
+      "element": "dark",
+      "image": "assets/monsters/jaara.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14515,
+        "swarfarm": 784
+      },
+      "familyId": 14500,
+      "skillGroupId": 14500,
+      "bestiarySlug": "14505-dark-phoenix-jaara",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "jeanne",
+      "name": "Jeanne",
+      "canonicalName": "Jeanne",
+      "element": "light",
+      "image": "assets/monsters/jeanne.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21814,
+        "swarfarm": 1166
+      },
+      "familyId": 21800,
+      "skillGroupId": 21800,
+      "bestiarySlug": "21804-light-paladin-jeanne",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "jeogun",
+      "name": "Jeogun",
+      "canonicalName": "Jeogun",
+      "element": "fire",
+      "image": "assets/monsters/jeogun.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23712,
+        "swarfarm": 1603
+      },
+      "familyId": 23700,
+      "skillGroupId": 23700,
+      "bestiarySlug": "23702-fire-art-master-jeogun",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "julie",
+      "name": "Julie",
+      "canonicalName": "Julie",
+      "element": "water",
+      "image": "assets/monsters/julie.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 13911,
+        "swarfarm": 607
+      },
+      "familyId": 13900,
+      "skillGroupId": 13900,
+      "bestiarySlug": "13901-water-pierret-julie",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "juno",
+      "name": "Juno",
+      "canonicalName": "Juno",
+      "element": "fire",
+      "image": "assets/monsters/juno.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 15712,
+        "swarfarm": 286
+      },
+      "familyId": 15700,
+      "skillGroupId": 15700,
+      "bestiarySlug": "15702-fire-oracle-juno",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "kahli",
+      "name": "Kahli",
+      "canonicalName": "Kahli",
+      "element": "fire",
+      "image": "assets/monsters/kahli.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 12032,
+        "swarfarm": 1818
+      },
+      "familyId": 12000,
+      "skillGroupId": 12010,
+      "bestiarySlug": "12002-fire-high-elemental-kahli",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 12012,
+            "swarfarmId": 194,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "12002-fire-high-elemental-kahli"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "kaki",
+      "name": "Kaki",
+      "canonicalName": "Kaki",
+      "element": "fire",
+      "image": "assets/monsters/kaki.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25112,
+        "swarfarm": 1813
+      },
+      "familyId": 25100,
+      "skillGroupId": 25100,
+      "bestiarySlug": "25102-fire-onimusha-kaki",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "khmun",
+      "name": "Khmun",
+      "canonicalName": "Khmun",
+      "element": "fire",
+      "image": "assets/monsters/khmun.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20412,
+        "swarfarm": 924
+      },
+      "familyId": 20400,
+      "skillGroupId": 20400,
+      "bestiarySlug": "20402-fire-anubis-khmun",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "kiara",
+      "name": "Kiara",
+      "canonicalName": "Kiara",
+      "element": "dark",
+      "image": "assets/monsters/kiara.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 28115,
+        "swarfarm": 2186
+      },
+      "familyId": 28100,
+      "skillGroupId": 27600,
+      "bestiarySlug": "28105-dark-gladiatrix",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "kinki",
+      "name": "Kinki",
+      "canonicalName": "Kinki",
+      "element": "light",
+      "image": "assets/monsters/kinki.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25114,
+        "swarfarm": 1815
+      },
+      "familyId": 25100,
+      "skillGroupId": 25100,
+      "bestiarySlug": "25104-light-onimusha-kinki",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "laika",
+      "name": "Laika",
+      "canonicalName": "Laika",
+      "element": "fire",
+      "image": "assets/monsters/laika.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16612,
+        "swarfarm": 276
+      },
+      "familyId": 16600,
+      "skillGroupId": 16600,
+      "bestiarySlug": "16602-fire-dragon-knight-laika",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "lamiella",
+      "name": "Lamiella",
+      "canonicalName": "Lamiella",
+      "element": "water",
+      "image": "assets/monsters/lamiella.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 31311,
+        "swarfarm": 2616
+      },
+      "familyId": 31300,
+      "skillGroupId": 31300,
+      "bestiarySlug": "31301-water-specter-princess",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "legolas-wind",
+      "name": "Legolas (Wind)",
+      "canonicalName": "Legolas (Wind)",
+      "element": "wind",
+      "image": "assets/monsters/legolas-wind.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 34713,
+        "swarfarm": 2910
+      },
+      "familyId": 34700,
+      "skillGroupId": 34700,
+      "bestiarySlug": "34713-wind-legolas",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "curated_alias_and_element"
+      }
+    },
+    {
+      "id": "leah",
+      "name": "Leah",
+      "canonicalName": "Leah",
+      "element": "light",
+      "image": "assets/monsters/leah.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 24914,
+        "swarfarm": 1712
+      },
+      "familyId": 24900,
+      "skillGroupId": 24400,
+      "bestiarySlug": "24904-light-blade-dancer-leah",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "leo",
+      "name": "Leo",
+      "canonicalName": "Leo",
+      "element": "wind",
+      "image": "assets/monsters/leo.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16613,
+        "swarfarm": 567
+      },
+      "familyId": 16600,
+      "skillGroupId": 16600,
+      "bestiarySlug": "16603-wind-dragon-knight-leo",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "liesel",
+      "name": "Liesel",
+      "canonicalName": "Liesel",
+      "element": "water",
+      "image": "assets/monsters/liesel.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14711,
+        "swarfarm": 625
+      },
+      "familyId": 14700,
+      "skillGroupId": 14700,
+      "bestiarySlug": "14701-water-vampire-liesel",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "liu-mei",
+      "name": "Liu Mei",
+      "canonicalName": "Liu Mei",
+      "element": "light",
+      "image": "assets/monsters/liu-mei.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 17314,
+        "swarfarm": 667
+      },
+      "familyId": 17300,
+      "skillGroupId": 17300,
+      "bestiarySlug": "17304-light-kung-fu-girl-liu-mei",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "loren",
+      "name": "Loren",
+      "canonicalName": "Loren",
+      "element": "light",
+      "image": "assets/monsters/loren.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19314,
+        "swarfarm": 410
+      },
+      "familyId": 19300,
+      "skillGroupId": 19300,
+      "bestiarySlug": "19304-light-cow-girl-loren",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "lucas",
+      "name": "Lucas",
+      "canonicalName": "Lucas",
+      "element": "light",
+      "image": "assets/monsters/lucas.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20014,
+        "swarfarm": 900
+      },
+      "familyId": 20000,
+      "skillGroupId": 20000,
+      "bestiarySlug": "20004-light-neostone-fighter-lucas",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "louise",
+      "name": "Louise",
+      "canonicalName": "Louise",
+      "element": "wind",
+      "image": "assets/monsters/louise.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21813,
+        "swarfarm": 1165
+      },
+      "familyId": 21800,
+      "skillGroupId": 21800,
+      "bestiarySlug": "21803-wind-paladin-louise",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "lulu-and-friends",
+      "name": "Lulu e suas Amigas",
+      "canonicalName": "Lulu and Friends",
+      "element": "water",
+      "image": "assets/monsters/lulu-and-friends.png",
+      "aliases": [
+        "Lulu and Friends",
+        "Lulu 2A"
+      ],
+      "externalIds": {
+        "com2us": 13231,
+        "swarfarm": 1756
+      },
+      "familyId": 13200,
+      "skillGroupId": 13210,
+      "bestiarySlug": "13201-water-howl-lulu",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 13211,
+            "swarfarmId": 62,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "13201-water-howl-lulu"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "lushen",
+      "name": "Lushen",
+      "canonicalName": "Lushen",
+      "element": "wind",
+      "image": "assets/monsters/lushen.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 13413,
+        "swarfarm": 526
+      },
+      "familyId": 13400,
+      "skillGroupId": 13400,
+      "bestiarySlug": "13403-wind-joker-lushen",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "masha",
+      "name": "Masha",
+      "canonicalName": "Masha",
+      "element": "fire",
+      "image": "assets/monsters/masha.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23512,
+        "swarfarm": 1340
+      },
+      "familyId": 23500,
+      "skillGroupId": 23500,
+      "bestiarySlug": "23502-fire-beast-rider-masha",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "mihyang",
+      "name": "Mihyang",
+      "canonicalName": "Mihyang",
+      "element": "water",
+      "image": "assets/monsters/mihyang.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18311,
+        "swarfarm": 613
+      },
+      "familyId": 18300,
+      "skillGroupId": 18300,
+      "bestiarySlug": "18301-water-sky-dancer-mihyang",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "miles",
+      "name": "Miles",
+      "canonicalName": "Miles",
+      "element": "water",
+      "image": "assets/monsters/miles.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25311,
+        "swarfarm": 1852
+      },
+      "familyId": 25300,
+      "skillGroupId": 25300,
+      "bestiarySlug": "25301-water-sky-surfer",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "mimirr",
+      "name": "Mimirr",
+      "canonicalName": "Mimirr",
+      "element": "light",
+      "image": "assets/monsters/mimirr.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18814,
+        "swarfarm": 655
+      },
+      "familyId": 18800,
+      "skillGroupId": 18800,
+      "bestiarySlug": "18804-light-barbaric-king-mimirr",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "miriam",
+      "name": "Miriam",
+      "canonicalName": "Miriam",
+      "element": "fire",
+      "image": "assets/monsters/miriam.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25812,
+        "swarfarm": 1897
+      },
+      "familyId": 25800,
+      "skillGroupId": 25800,
+      "bestiarySlug": "25802-fire-rune-blacksmith-miriam",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "moore",
+      "name": "Moore",
+      "canonicalName": "Moore",
+      "element": "water",
+      "image": "assets/monsters/moore.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 24511,
+        "swarfarm": 1677
+      },
+      "familyId": 24500,
+      "skillGroupId": 24000,
+      "bestiarySlug": "24501-water-striker-moore",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "mork",
+      "name": "Mork",
+      "canonicalName": "Mork",
+      "element": "water",
+      "image": "assets/monsters/mork.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 31411,
+        "swarfarm": 2626
+      },
+      "familyId": 31400,
+      "skillGroupId": 31400,
+      "bestiarySlug": "31401-water-tomb-warden",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "nana",
+      "name": "Nana",
+      "canonicalName": "Nana",
+      "element": "water",
+      "image": "assets/monsters/nana.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25211,
+        "swarfarm": 1842
+      },
+      "familyId": 25200,
+      "skillGroupId": 25200,
+      "bestiarySlug": "25201-water-mage",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "narsha",
+      "name": "Narsha",
+      "canonicalName": "Narsha",
+      "element": "light",
+      "image": "assets/monsters/narsha.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23514,
+        "swarfarm": 1342
+      },
+      "familyId": 23500,
+      "skillGroupId": 23500,
+      "bestiarySlug": "23504-light-beast-rider-narsha",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "nickel",
+      "name": "Nickel",
+      "canonicalName": "Nickel",
+      "element": "water",
+      "image": "assets/monsters/nickel.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16531,
+        "swarfarm": 2245
+      },
+      "familyId": 16500,
+      "skillGroupId": 16510,
+      "bestiarySlug": "16501-water-living-armor-nickel",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 16511,
+            "swarfarmId": 330,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "16501-water-living-armor-nickel"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "nora",
+      "name": "Nora",
+      "canonicalName": "Nora",
+      "element": "fire",
+      "image": "assets/monsters/nora.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25612,
+        "swarfarm": 1877
+      },
+      "familyId": 25600,
+      "skillGroupId": 25600,
+      "bestiarySlug": "25602-fire-totemist-nora",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "nyx",
+      "name": "Nyx",
+      "canonicalName": "Nyx",
+      "element": "dark",
+      "image": "assets/monsters/nyx.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21115,
+        "swarfarm": 990
+      },
+      "familyId": 21100,
+      "skillGroupId": 21100,
+      "bestiarySlug": "21105-dark-fairy-king-nyx",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "odin",
+      "name": "Odin",
+      "canonicalName": "Odin",
+      "element": "wind",
+      "image": "assets/monsters/odin.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 22613,
+        "swarfarm": 1250
+      },
+      "familyId": 22600,
+      "skillGroupId": 22600,
+      "bestiarySlug": "22603-wind-lightning-emperor-odin",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "onyx",
+      "name": "Onyx",
+      "canonicalName": "Onyx",
+      "element": "dark",
+      "image": "assets/monsters/onyx.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23315,
+        "swarfarm": 1322
+      },
+      "familyId": 23300,
+      "skillGroupId": 23300,
+      "bestiarySlug": "23305-dark-gargoyle-onyx",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "ophilia",
+      "name": "Ophilia",
+      "canonicalName": "Ophilia",
+      "element": "fire",
+      "image": "assets/monsters/ophilia.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21812,
+        "swarfarm": 1164
+      },
+      "familyId": 21800,
+      "skillGroupId": 21800,
+      "bestiarySlug": "21802-fire-paladin-ophilia",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "orion",
+      "name": "Orion",
+      "canonicalName": "Orion",
+      "element": "water",
+      "image": "assets/monsters/orion.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18011,
+        "swarfarm": 589
+      },
+      "familyId": 18000,
+      "skillGroupId": 18000,
+      "bestiarySlug": "18001-water-brownie-magician-orion",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "orochi",
+      "name": "Orochi",
+      "canonicalName": "Orochi",
+      "element": "wind",
+      "image": "assets/monsters/orochi.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 13513,
+        "swarfarm": 536
+      },
+      "familyId": 13500,
+      "skillGroupId": 13500,
+      "bestiarySlug": "13503-wind-ninja-orochi",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "perna",
+      "name": "Perna",
+      "canonicalName": "Perna",
+      "element": "fire",
+      "image": "assets/monsters/perna.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14512,
+        "swarfarm": 288
+      },
+      "familyId": 14500,
+      "skillGroupId": 14500,
+      "bestiarySlug": "14502-fire-phoenix-perna",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "qebehsenuef",
+      "name": "Qebehsenuef",
+      "canonicalName": "Qebehsenuef",
+      "element": "water",
+      "image": "assets/monsters/qebehsenuef.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20611,
+        "swarfarm": 933
+      },
+      "familyId": 20600,
+      "skillGroupId": 20600,
+      "bestiarySlug": "20601-water-horus-qebehsenuef",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "racuni",
+      "name": "Racuni",
+      "canonicalName": "Racuni",
+      "element": "fire",
+      "image": "assets/monsters/racuni.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21012,
+        "swarfarm": 984
+      },
+      "familyId": 21000,
+      "skillGroupId": 21000,
+      "bestiarySlug": "21002-fire-harg-racuni",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "rakan",
+      "name": "Rakan",
+      "canonicalName": "Rakan",
+      "element": "fire",
+      "image": "assets/monsters/rakan.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14612,
+        "swarfarm": 272
+      },
+      "familyId": 14600,
+      "skillGroupId": 14600,
+      "bestiarySlug": "14602-fire-chimera-rakan",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "raoq",
+      "name": "Raoq",
+      "canonicalName": "Raoq",
+      "element": "fire",
+      "image": "assets/monsters/raoq.png",
+      "aliases": [
+        "Raoq 2A"
+      ],
+      "externalIds": {
+        "com2us": 11032,
+        "swarfarm": 1297
+      },
+      "familyId": 11000,
+      "skillGroupId": 11010,
+      "bestiarySlug": "11002-fire-inugami-raoq",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 11012,
+            "swarfarmId": 200,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "11002-fire-inugami-raoq"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "rica",
+      "name": "Rica",
+      "canonicalName": "Rica",
+      "element": "fire",
+      "image": "assets/monsters/rica.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16112,
+        "swarfarm": 284
+      },
+      "familyId": 16100,
+      "skillGroupId": 16100,
+      "bestiarySlug": "16102-fire-occult-girl-rica",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "rigna",
+      "name": "Rigna",
+      "canonicalName": "Rigna",
+      "element": "water",
+      "image": "assets/monsters/rigna.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 29711,
+        "swarfarm": 2428
+      },
+      "familyId": 29700,
+      "skillGroupId": 29300,
+      "bestiarySlug": "29701-water-magic-order-swordsinger",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "rina",
+      "name": "Rina",
+      "canonicalName": "Rina",
+      "element": "water",
+      "image": "assets/monsters/rina.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 15311,
+        "swarfarm": 310
+      },
+      "familyId": 15300,
+      "skillGroupId": 15300,
+      "bestiarySlug": "15301-water-epikion-priest-rina",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "riley",
+      "name": "Riley",
+      "canonicalName": "Riley",
+      "element": "wind",
+      "image": "assets/monsters/riley.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25613,
+        "swarfarm": 1878
+      },
+      "familyId": 25600,
+      "skillGroupId": 25600,
+      "bestiarySlug": "25603-wind-totemist-riley",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "ritesh",
+      "name": "Ritesh",
+      "canonicalName": "Ritesh",
+      "element": "wind",
+      "image": "assets/monsters/ritesh.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 17413,
+        "swarfarm": 561
+      },
+      "familyId": 17400,
+      "skillGroupId": 17400,
+      "bestiarySlug": "17403-wind-beast-monk-ritesh",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "robo-f29",
+      "name": "ROBO-F29",
+      "canonicalName": "ROBO-F29",
+      "element": "dark",
+      "image": "assets/monsters/robo-f29.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25415,
+        "swarfarm": 1866
+      },
+      "familyId": 25400,
+      "skillGroupId": 25400,
+      "bestiarySlug": "25405-dark-robo",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "robo-g92",
+      "name": "ROBO-G92",
+      "canonicalName": "ROBO-G92",
+      "element": "wind",
+      "image": "assets/monsters/robo-g92.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25413,
+        "swarfarm": 1864
+      },
+      "familyId": 25400,
+      "skillGroupId": 25400,
+      "bestiarySlug": "25403-wind-robo",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "robo-r40",
+      "name": "ROBO-R40",
+      "canonicalName": "ROBO-R40",
+      "element": "water",
+      "image": "assets/monsters/robo-r40.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25411,
+        "swarfarm": 1862
+      },
+      "familyId": 25400,
+      "skillGroupId": 25400,
+      "bestiarySlug": "25401-water-robo-robo-r40",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "roid",
+      "name": "Roid",
+      "canonicalName": "Roid",
+      "element": "wind",
+      "image": "assets/monsters/roid.png",
+      "aliases": [
+        "Roid 2A"
+      ],
+      "externalIds": {
+        "com2us": 15233,
+        "swarfarm": 1903
+      },
+      "familyId": 15200,
+      "skillGroupId": 15210,
+      "bestiarySlug": "15203-wind-vagabond-roid",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 15213,
+            "swarfarmId": 110,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "15203-wind-vagabond-roid"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "sabrina",
+      "name": "Sabrina",
+      "canonicalName": "Sabrina",
+      "element": "water",
+      "image": "assets/monsters/sabrina.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 22011,
+        "swarfarm": 1184
+      },
+      "familyId": 22000,
+      "skillGroupId": 22000,
+      "bestiarySlug": "22001-water-boomerang-warrior-sabrina",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "sath",
+      "name": "Sath",
+      "canonicalName": "Sath",
+      "element": "fire",
+      "image": "assets/monsters/sath.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16032,
+        "swarfarm": 1762
+      },
+      "familyId": 16000,
+      "skillGroupId": 16010,
+      "bestiarySlug": "16002-fire-grim-reaper-sath",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 16012,
+            "swarfarmId": 190,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "16002-fire-grim-reaper-sath"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "savannah",
+      "name": "Savannah",
+      "canonicalName": "Savannah",
+      "element": "wind",
+      "image": "assets/monsters/savannah.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 23513,
+        "swarfarm": 1341
+      },
+      "familyId": 23500,
+      "skillGroupId": 23500,
+      "bestiarySlug": "23503-wind-beast-rider-savannah",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "seara",
+      "name": "Seara",
+      "canonicalName": "Seara",
+      "element": "wind",
+      "image": "assets/monsters/seara.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 15713,
+        "swarfarm": 577
+      },
+      "familyId": 15700,
+      "skillGroupId": 15700,
+      "bestiarySlug": "15703-wind-oracle-seara",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "shaina",
+      "name": "Shaina",
+      "canonicalName": "Shaina",
+      "element": "fire",
+      "image": "assets/monsters/shaina.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21912,
+        "swarfarm": 1175
+      },
+      "familyId": 21900,
+      "skillGroupId": 21900,
+      "bestiarySlug": "21902-fire-chakram-dancer-shaina",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "shihwa",
+      "name": "Shihwa",
+      "canonicalName": "Shihwa",
+      "element": "fire",
+      "image": "assets/monsters/shihwa.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 11212,
+        "swarfarm": 244
+      },
+      "familyId": 11200,
+      "skillGroupId": 11200,
+      "bestiarySlug": "11202-fire-nine-tailed-fox-shihwa",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "skogul",
+      "name": "Skogul",
+      "canonicalName": "Skogul",
+      "element": "wind",
+      "image": "assets/monsters/skogul.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 22413,
+        "swarfarm": 1236
+      },
+      "familyId": 22400,
+      "skillGroupId": 22400,
+      "bestiarySlug": "22403-wind-giant-warrior-skogul",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "susano",
+      "name": "Susano",
+      "canonicalName": "Susano",
+      "element": "water",
+      "image": "assets/monsters/susano.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 13511,
+        "swarfarm": 603
+      },
+      "familyId": 13500,
+      "skillGroupId": 13500,
+      "bestiarySlug": "13501-water-ninja-susano",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "talc",
+      "name": "Talc",
+      "canonicalName": "Talc",
+      "element": "water",
+      "image": "assets/monsters/talc.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19011,
+        "swarfarm": 298
+      },
+      "familyId": 19000,
+      "skillGroupId": 19000,
+      "bestiarySlug": "19001-water-battle-mammoth-talc",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "tarnisha",
+      "name": "Tarnisha",
+      "canonicalName": "Tarnisha",
+      "element": "fire",
+      "image": "assets/monsters/tarnisha.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 29812,
+        "swarfarm": 2439
+      },
+      "familyId": 29800,
+      "skillGroupId": 29400,
+      "bestiarySlug": "29802-fire-magic-order-enchantress-tarnisha",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "tarq",
+      "name": "Tarq",
+      "canonicalName": "Tarq",
+      "element": "water",
+      "image": "assets/monsters/tarq.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 10631,
+        "swarfarm": 2932
+      },
+      "familyId": 10600,
+      "skillGroupId": 10610,
+      "bestiarySlug": "10601-water-hellhound-tarq",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 10611,
+            "swarfarmId": 60,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "10601-water-hellhound-tarq"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "theomars",
+      "name": "Theomars",
+      "canonicalName": "Theomars",
+      "element": "water",
+      "image": "assets/monsters/theomars.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19211,
+        "swarfarm": 639
+      },
+      "familyId": 19200,
+      "skillGroupId": 19200,
+      "bestiarySlug": "19201-water-ifrit-theomars",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "thrain",
+      "name": "Thrain",
+      "canonicalName": "Thrain",
+      "element": "dark",
+      "image": "assets/monsters/thrain.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16035,
+        "swarfarm": 1765
+      },
+      "familyId": 16000,
+      "skillGroupId": 16010,
+      "bestiarySlug": "16005-dark-grim-reaper-thrain",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 16015,
+            "swarfarmId": 482,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "16005-dark-grim-reaper-thrain"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "trevor",
+      "name": "Trevor",
+      "canonicalName": "Trevor",
+      "element": "fire",
+      "image": "assets/monsters/trevor.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20012,
+        "swarfarm": 894
+      },
+      "familyId": 20000,
+      "skillGroupId": 20000,
+      "bestiarySlug": "20002-fire-neostone-fighter-trevor",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "triana",
+      "name": "Triana",
+      "canonicalName": "Triana",
+      "element": "wind",
+      "image": "assets/monsters/triana.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 21413,
+        "swarfarm": 1030
+      },
+      "familyId": 21400,
+      "skillGroupId": 21400,
+      "bestiarySlug": "21403-wind-harp-magician-triana",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "triton",
+      "name": "Triton",
+      "canonicalName": "Triton",
+      "element": "wind",
+      "image": "assets/monsters/triton.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19713,
+        "swarfarm": 847
+      },
+      "familyId": 19700,
+      "skillGroupId": 19700,
+      "bestiarySlug": "19703-wind-sea-emperor-triton",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "tyron",
+      "name": "Tyron",
+      "canonicalName": "Tyron",
+      "element": "water",
+      "image": "assets/monsters/tyron.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 11811,
+        "swarfarm": 617
+      },
+      "familyId": 11800,
+      "skillGroupId": 11800,
+      "bestiarySlug": "11801-water-sylph-tyron",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "vanessa",
+      "name": "Vanessa",
+      "canonicalName": "Vanessa",
+      "element": "fire",
+      "image": "assets/monsters/vanessa.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 13812,
+        "swarfarm": 294
+      },
+      "familyId": 13800,
+      "skillGroupId": 13800,
+      "bestiarySlug": "13802-fire-valkyrja-vanessa",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "veromos",
+      "name": "Veromos",
+      "canonicalName": "Veromos",
+      "element": "dark",
+      "image": "assets/monsters/veromos.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 19215,
+        "swarfarm": 774
+      },
+      "familyId": 19200,
+      "skillGroupId": 19200,
+      "bestiarySlug": "19205-dark-ifrit-veromos",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "vigor",
+      "name": "Vigor",
+      "canonicalName": "Vigor",
+      "element": "water",
+      "image": "assets/monsters/vigor.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 14031,
+        "swarfarm": 1323
+      },
+      "familyId": 14000,
+      "skillGroupId": 14010,
+      "bestiarySlug": "14001-water-werewolf-vigor",
+      "gameData": {
+        "awakenLevel": 2,
+        "obtainable": true,
+        "relatedForms": [
+          {
+            "com2usId": 14011,
+            "swarfarmId": 348,
+            "awakenLevel": 1,
+            "obtainable": true,
+            "bestiarySlug": "14001-water-werewolf-vigor"
+          }
+        ]
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "water-gandalf",
+      "name": "Water Gandalf",
+      "canonicalName": "Gandalf",
+      "element": "water",
+      "image": "assets/monsters/gandalf-water.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 34411,
+        "swarfarm": 2887
+      },
+      "familyId": 34400,
+      "skillGroupId": 34400,
+      "bestiarySlug": "34411-water-gandalf",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "water-nezuko",
+      "name": "Water Nezuko",
+      "canonicalName": "Nezuko",
+      "element": "water",
+      "image": "assets/monsters/nezuko-water.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 31911,
+        "swarfarm": 2650
+      },
+      "familyId": 31900,
+      "skillGroupId": 31900,
+      "bestiarySlug": "31911-water-nezuko-kamado",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "curated_alias_and_element"
+      }
+    },
+    {
+      "id": "wind-nezuko",
+      "name": "Wind Nezuko",
+      "canonicalName": "Nezuko",
+      "element": "wind",
+      "image": "assets/monsters/nezuko-wind.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 31913,
+        "swarfarm": 2652
+      },
+      "familyId": 31900,
+      "skillGroupId": 31900,
+      "bestiarySlug": "31913-wind-nezuko-kamado",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "curated_alias_and_element"
+      }
+    },
+    {
+      "id": "windy",
+      "name": "Windy",
+      "canonicalName": "Windy",
+      "element": "wind",
+      "image": "assets/monsters/windy.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 20713,
+        "swarfarm": 960
+      },
+      "familyId": 20700,
+      "skillGroupId": 20700,
+      "bestiarySlug": "20703-wind-jack-o-lantern-windy",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "woosa",
+      "name": "Woosa",
+      "canonicalName": "Woosa",
+      "element": "water",
+      "image": "assets/monsters/woosa.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 18611,
+        "swarfarm": 649
+      },
+      "familyId": 18600,
+      "skillGroupId": 18600,
+      "bestiarySlug": "18601-water-pioneer-woosa",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "xing-zhe",
+      "name": "Xing Zhe",
+      "canonicalName": "Xing Zhe",
+      "element": "wind",
+      "image": "assets/monsters/xing-zhe.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 16813,
+        "swarfarm": 573
+      },
+      "familyId": 16800,
+      "skillGroupId": 16800,
+      "bestiarySlug": "16803-wind-monkey-king-xing-zhe",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "zen",
+      "name": "Zen",
+      "canonicalName": "Zen",
+      "element": "wind",
+      "image": "assets/monsters/zen.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 25913,
+        "swarfarm": 1949
+      },
+      "familyId": 25900,
+      "skillGroupId": 25900,
+      "bestiarySlug": "25903-wind-shadowcaster-zen",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "name_and_element"
+      }
+    },
+    {
+      "id": "zenitsu",
+      "name": "Zenitsu",
+      "canonicalName": "Zenitsu",
+      "element": "water",
+      "image": "assets/monsters/zenitsu.png",
+      "aliases": [],
+      "externalIds": {
+        "com2us": 32211,
+        "swarfarm": 2675
+      },
+      "familyId": 32200,
+      "skillGroupId": 32200,
+      "bestiarySlug": "32211-water-zenitsu-agatsuma",
+      "gameData": {
+        "awakenLevel": 1,
+        "obtainable": true,
+        "relatedForms": []
+      },
+      "identitySource": {
+        "providerId": "swarfarm",
+        "matchedBy": "curated_alias_and_element"
+      }
+    },
+    {
+      "id": "mei-hou-wang",
+      "name": "Mei Hou Wang",
+      "canonicalName": "Mei Hou Wang",
+      "element": "fire",
+      "image": "assets/monsters/mei-hou-wang.png",
+      "aliases": ["MHW", "Macaco de fogo"],
+      "externalIds": { "com2us": 16812, "swarfarm": 282 },
+      "familyId": 16800,
+      "skillGroupId": 16800,
+      "bestiarySlug": "16802-fire-monkey-king-mei-hou-wang",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "velajuel",
+      "name": "Velajuel",
+      "canonicalName": "Velajuel",
+      "element": "fire",
+      "image": "assets/monsters/velajuel.png",
+      "aliases": [],
+      "externalIds": { "com2us": 17012, "swarfarm": 268 },
+      "familyId": 17000,
+      "skillGroupId": 17000,
+      "bestiarySlug": "17002-fire-archangel-velajuel",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "aaliyah",
+      "name": "Aaliyah",
+      "canonicalName": "Aaliyah",
+      "element": "water",
+      "image": "assets/monsters/aaliyah.png",
+      "aliases": ["Aalyiah", "Riley de água", "Water Riley"],
+      "externalIds": { "com2us": 25611, "swarfarm": 1876 },
+      "familyId": 25600,
+      "skillGroupId": 25600,
+      "bestiarySlug": "25601-water-totemist-aaliyah",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "curated_alias_and_element" }
+    },
+    {
+      "id": "platy",
+      "name": "Platy",
+      "canonicalName": "Platy",
+      "element": "fire",
+      "image": "assets/monsters/platy.png",
+      "aliases": [],
+      "externalIds": { "com2us": 19612, "swarfarm": 835 },
+      "familyId": 19600,
+      "skillGroupId": 19600,
+      "bestiarySlug": "19602-fire-mermaid-platy",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "michelle",
+      "name": "Michelle",
+      "canonicalName": "Michelle",
+      "element": "wind",
+      "image": "assets/monsters/michelle.png",
+      "aliases": [],
+      "externalIds": { "com2us": 15313, "swarfarm": 364 },
+      "familyId": 15300,
+      "skillGroupId": 15300,
+      "bestiarySlug": "15303-wind-epikion-priest-michelle",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "briand",
+      "name": "Briand",
+      "canonicalName": "Briand",
+      "element": "wind",
+      "image": "assets/monsters/briand.png",
+      "aliases": [],
+      "externalIds": { "com2us": 16213, "swarfarm": 524 },
+      "familyId": 16200,
+      "skillGroupId": 16200,
+      "bestiarySlug": "16203-wind-death-knight-briand",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "tetra",
+      "name": "Tetra",
+      "canonicalName": "Tetra",
+      "element": "water",
+      "image": "assets/monsters/tetra.png",
+      "aliases": [],
+      "externalIds": { "com2us": 19611, "swarfarm": 836 },
+      "familyId": 19600,
+      "skillGroupId": 19600,
+      "bestiarySlug": "19601-water-mermaid-tetra",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "kunite",
+      "name": "Kunite",
+      "canonicalName": "Kunite",
+      "element": "fire",
+      "image": "assets/monsters/kunite.png",
+      "aliases": [],
+      "externalIds": { "com2us": 23312, "swarfarm": 1319 },
+      "familyId": 23300,
+      "skillGroupId": 23300,
+      "bestiarySlug": "23302-fire-gargoyle-kunite",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "driana",
+      "name": "Driana",
+      "canonicalName": "Driana",
+      "element": "wind",
+      "image": "assets/monsters/driana.png",
+      "aliases": [],
+      "externalIds": { "com2us": 34213, "swarfarm": 2874 },
+      "familyId": 34200,
+      "skillGroupId": 34200,
+      "bestiarySlug": "34203-wind-justice-driana",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "ren",
+      "name": "Ren",
+      "canonicalName": "Ren",
+      "element": "fire",
+      "image": "assets/monsters/ren.png",
+      "aliases": [],
+      "externalIds": { "com2us": 25912, "swarfarm": 1948 },
+      "familyId": 25900,
+      "skillGroupId": 25900,
+      "bestiarySlug": "25902-fire-shadowcaster-ren",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "rex",
+      "name": "Rex",
+      "canonicalName": "Rex",
+      "element": "fire",
+      "image": "assets/monsters/rex.png",
+      "aliases": [],
+      "externalIds": { "com2us": 31412, "swarfarm": 2627 },
+      "familyId": 31400,
+      "skillGroupId": 31400,
+      "bestiarySlug": "31402-fire-tomb-warden-rex",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "shumar",
+      "name": "Shumar",
+      "canonicalName": "Shumar",
+      "element": "dark",
+      "image": "assets/monsters/shumar.png",
+      "aliases": [],
+      "externalIds": { "com2us": 10615, "swarfarm": 488 },
+      "familyId": 10600,
+      "skillGroupId": 10600,
+      "bestiarySlug": "10605-dark-hellhound-shumar",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "ubel-dark",
+      "name": "Übel",
+      "canonicalName": "Übel",
+      "element": "dark",
+      "image": "assets/monsters/ubel-dark.png",
+      "aliases": ["Ubel", "Dark Ubel", "Übel Dark"],
+      "externalIds": { "com2us": 36015, "swarfarm": 3067 },
+      "familyId": 36000,
+      "skillGroupId": 36000,
+      "bestiarySlug": "36015-dark-ubel",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "curated_alias_and_element" }
+    },
+    {
+      "id": "reno",
+      "name": "Reno",
+      "canonicalName": "Reno",
+      "element": "water",
+      "image": "assets/monsters/reno.png",
+      "aliases": ["Morris de água", "Water Morris"],
+      "externalIds": { "com2us": 21311, "swarfarm": 1019 },
+      "familyId": 21300,
+      "skillGroupId": 21300,
+      "bestiarySlug": "21301-water-dice-magician-reno",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "curated_alias_and_element" }
+    },
+    {
+      "id": "sylvia",
+      "name": "Sylvia",
+      "canonicalName": "Sylvia",
+      "element": "dark",
+      "image": "assets/monsters/sylvia.png",
+      "aliases": [],
+      "externalIds": { "com2us": 20115, "swarfarm": 882 },
+      "familyId": 20100,
+      "skillGroupId": 20100,
+      "bestiarySlug": "20105-dark-neostone-agent-sylvia",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "name_and_element" }
+    },
+    {
+      "id": "wind-zenitsu",
+      "name": "Zenitsu Agatsuma",
+      "canonicalName": "Zenitsu Agatsuma",
+      "element": "wind",
+      "image": "assets/monsters/wind-zenitsu.png",
+      "aliases": ["Wind Zenitsu", "Zenitsu Wind"],
+      "externalIds": { "com2us": 32213, "swarfarm": 2677 },
+      "familyId": 32200,
+      "skillGroupId": 32200,
+      "bestiarySlug": "32213-wind-zenitsu-agatsuma",
+      "gameData": { "awakenLevel": 1, "obtainable": true, "relatedForms": [] },
+      "identitySource": { "providerId": "swarfarm", "matchedBy": "curated_alias_and_element" }
+    }
+  ]
+}

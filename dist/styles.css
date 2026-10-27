@@ -93,8 +93,18 @@ main { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
 .strategy-card:hover { border-color: #3c4a50; transform: translateY(-1px); }
 .team-label { display: block; margin-bottom: 11px; color: var(--muted); font-size: 9px; letter-spacing: .14em; }
 .team-label.attack-label { color: var(--green); }
-.monsters { display: flex; flex-wrap: wrap; gap: 7px; }
-.monster { padding: 7px 10px; border: 1px solid var(--line); border-radius: 7px; background: #0b1317; font-size: 13px; font-weight: 600; }
+.monsters { display: flex; flex-wrap: wrap; gap: 8px; }
+.monster { padding: 6px 9px 6px 6px; border: 1px solid var(--line); border-radius: 9px; background: #0b1317; font-size: 11px; font-weight: 600; }
+.monster-with-image { display: inline-flex; align-items: center; gap: 7px; }
+.monster-image { width: 34px; height: 34px; flex: 0 0 34px; object-fit: cover; border: 2px solid #526067; border-radius: 8px; background: #172229; }
+.monster-image.water, .picker-avatar.water, .select-avatar.water { border-color: #4a9ee8; }
+.monster-image.fire, .picker-avatar.fire, .select-avatar.fire { border-color: #df6254; }
+.monster-image.wind, .picker-avatar.wind, .select-avatar.wind { border-color: #b7cf54; }
+.monster-image.light, .picker-avatar.light, .select-avatar.light { border-color: #eadba4; }
+.monster-image.dark, .picker-avatar.dark, .select-avatar.dark { border-color: #9868b6; }
+.fallback-avatar, .wildcard-avatar { display: grid; place-items: center; color: var(--muted); font-size: 11px; }
+.wildcard-chip { border-style: dashed; color: var(--muted); }
+.wildcard-chip .wildcard-avatar { color: var(--green); border-color: #567127; font-weight: 800; }
 .attack-team .monster { border-color: #344329; background: #111c13; }
 .vs { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); color: #627075; font: 700 10px "Space Grotesk"; }
 .strategy-meta { padding-left: 20px; border-left: 1px solid var(--line); }
@@ -126,13 +136,38 @@ legend small { margin-top: 2px; color: var(--muted); font-size: 10px; }
 .legend-icon.defense { background: rgba(255,107,95,.1); color: var(--red); }
 .monster-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .monster-grid label, .notes-field { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
-.monster-grid input { margin-top: 6px; color: var(--text); text-transform: none; letter-spacing: 0; }
+.monster-select { width: 100%; min-height: 72px; display: flex; align-items: center; gap: 10px; margin-top: 6px; padding: 9px; color: var(--muted); text-align: left; text-transform: none; letter-spacing: 0; border: 1px dashed #35434a; border-radius: 10px; background: #0b1317; }
+.monster-select:not(:disabled):hover { border-color: var(--green-dark); color: var(--text); }
+.monster-select.selected { color: var(--text); border-style: solid; border-color: #3a494f; }
+.monster-select strong, .monster-select small { display: block; }
+.monster-select strong { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.monster-select small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+.select-plus { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: var(--surface-2); color: var(--green); font-size: 20px; }
+.select-avatar { width: 50px; height: 50px; flex: 0 0 50px; object-fit: cover; border: 2px solid #526067; border-radius: 9px; }
+.wildcard-select { opacity: 1; border-style: dashed; }
+.wildcard-select .wildcard-avatar { width: 48px; height: 48px; flex: 0 0 48px; border: 1px dashed #567127; border-radius: 9px; background: rgba(184,242,56,.06); color: var(--green); font: 700 18px "Space Grotesk"; }
 .versus-divider { display: flex; align-items: center; gap: 12px; margin: 19px 0; color: #5a686d; font: 700 10px "Space Grotesk"; }
 .versus-divider::before, .versus-divider::after { content: ""; height: 1px; flex: 1; background: var(--line); }
 .notes-field { display: block; margin-top: 22px; }
 .notes-field span { color: #576469; }
 .notes-field textarea { margin-top: 6px; color: var(--text); text-transform: none; letter-spacing: 0; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.monster-dialog { width: min(680px, calc(100% - 32px)); }
+.picker-body { padding: 22px 30px 28px; }
+.picker-search { width: 100%; }
+.element-filters { display: flex; flex-wrap: wrap; gap: 7px; margin: 14px 0 18px; }
+.element-filters button { min-height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 99px; background: transparent; color: var(--muted); font-size: 11px; }
+.element-filters button:hover, .element-filters button.active { border-color: #637a36; background: rgba(184,242,56,.08); color: var(--green); }
+.monster-options { max-height: min(440px, 52vh); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; overflow-y: auto; padding-right: 5px; }
+.monster-option { min-width: 0; display: flex; align-items: center; gap: 11px; padding: 9px; border: 1px solid var(--line); border-radius: 11px; background: #0b1317; text-align: left; }
+.monster-option:hover { border-color: #526067; background: #131f24; }
+.picker-avatar { width: 48px; height: 48px; flex: 0 0 48px; object-fit: cover; border: 2px solid #526067; border-radius: 9px; background: var(--surface-2); }
+.option-copy { min-width: 0; flex: 1; }
+.option-copy strong, .option-copy small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.option-copy strong { font-size: 13px; }
+.option-copy small { margin-top: 3px; color: var(--muted); font-size: 9px; }
+.add-label { color: var(--green); font-size: 9px; }
+.no-options { grid-column: 1 / -1; padding: 50px 16px; text-align: center; color: var(--muted); font-size: 13px; }
 .toast { position: fixed; left: 50%; bottom: 28px; z-index: 30; padding: 12px 18px; border: 1px solid #3b4a50; border-radius: 10px; background: #172229; color: var(--text); font-size: 13px; box-shadow: 0 14px 45px rgba(0,0,0,.35); opacity: 0; pointer-events: none; transform: translate(-50%, 16px); transition: .25s; }
 .toast.visible { opacity: 1; transform: translate(-50%, 0); }
 
@@ -162,6 +197,8 @@ legend small { margin-top: 2px; color: var(--muted); font-size: 10px; }
   .strategy-meta { grid-column: auto; }
   .monster-grid { grid-template-columns: 1fr; }
   .dialog-header, #strategyForm { padding-left: 20px; padding-right: 20px; }
+  .picker-body { padding-left: 20px; padding-right: 20px; }
+  .monster-options { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 5px; }
 }
 

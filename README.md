@@ -15,10 +15,29 @@ Abra `http://localhost:4173`.
 ## Escopo da POC
 
 - identificação por nick, sem senha;
-- cadastro de ataque e defesa com três monstros cada;
+- catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens;
+- cadastro de ataque com três monstros e defesa com dois monstros fixos + um slot coringa `X`;
 - observações opcionais;
 - busca, filtro de autoria e exclusão dos próprios registros;
 - persistência no `localStorage` do navegador;
 - exportação e importação manual em JSON.
 
 Os dados ainda não são compartilhados entre dispositivos. Uma evolução natural é substituir o `localStorage` por uma API com banco compartilhado e autenticação real.
+
+## Dados
+
+O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHelper`. Estratégias persistem somente os IDs internos dos monstros:
+
+```json
+{
+  "schemaVersion": 2,
+  "strategies": [
+    {
+      "attack": ["skogul", "chloe", "kahli"],
+      "defense": ["conrad", "robo-r40", "*"]
+    }
+  ]
+}
+```
+
+O valor `"*"` representa qualquer terceiro monstro na defesa; as condições e exceções devem ser registradas em `notes`.
