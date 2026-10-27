@@ -153,7 +153,7 @@ function migrateStrategies(records) {
 
 function toMonsterId(value) {
   if (!value || value === "*") return value;
-  if (monsterById.has(value)) return value;
+  if (monsterById.has(value)) return monsterById.get(value).id;
   return monsterByName.get(normalize(value))?.id || value;
 }
 
@@ -167,7 +167,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.5 · Supabase" : "POC v0.5 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.6 · Supabase" : "POC v0.6 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -192,6 +192,47 @@ function escapeHtml(value) {
 
 function normalize(value) {
   return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function monsterAwakenLevel(monster) {
+  return Number(monster.gameData?.awakenLevel || 0);
+}
+
+function monsterBaseName(monster) {
+  return String(monster.canonicalName || monster.name || "").replace(/\s+2A$/i, "").trim();
+}
+
+function monsterVariantKey(monster) {
+  return `${normalize(monsterBaseName(monster))}|${monster.element}`;
+}
+
+function displayMonsterName(monster) {
+  const name = String(monster.name || monster.canonicalName || monster.id).replace(/\s+2A$/i, "").trim();
+  return monsterAwakenLevel(monster) === 2 ? `${name} 2A` : name;
+}
+
+function prepareMonsterCatalog(records) {
+  const preferredByVariant = new Map();
+
+  for (const monster of records) {
+    const key = monsterVariantKey(monster);
+    const current = preferredByVariant.get(key);
+    if (!current || monsterAwakenLevel(monster) > monsterAwakenLevel(current)) preferredByVariant.set(key, monster);
+  }
+
+  const preferred = [...preferredByVariant.values()];
+  const byId = new Map();
+  const byName = new Map();
+
+  for (const monster of records) {
+    const selected = preferredByVariant.get(monsterVariantKey(monster));
+    byId.set(monster.id, selected);
+    for (const name of [monster.name, monster.canonicalName, displayMonsterName(monster), ...(monster.aliases || [])]) {
+      if (name) byName.set(normalize(name), selected);
+    }
+  }
+
+  return { preferred, byId, byName };
 }
 
 function getMonster(id) {
@@ -268,11 +309,12 @@ function detailSection(title, content, className) {
 function monsterChip(id) {
   const monster = getMonster(id);
   if (id === "*") return `<span class="monster monster-with-image wildcard-chip" title="Qualquer terceiro monstro"><span class="monster-image wildcard-avatar">X</span><span>Qualquer um</span></span>`;
+  const displayName = displayMonsterName(monster);
   const image = monster.image
     ? `<img class="monster-image ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />`
-    : `<span class="monster-image fallback-avatar">${escapeHtml(monster.name.slice(0, 2).toUpperCase())}</span>`;
+    : `<span class="monster-image fallback-avatar">${escapeHtml(displayName.slice(0, 2).toUpperCase())}</span>`;
   const externalId = monster.externalIds?.com2us ? ` · ID ${monster.externalIds.com2us}` : "";
-  return `<span class="monster monster-with-image" title="${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(monster.name)}</span></span>`;
+  return `<span class="monster monster-with-image" title="${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(displayName)}</span></span>`;
 }
 
 function openStrategyDialog() {
@@ -318,7 +360,7 @@ function renderMonsterOptions() {
   $("#monsterOptions").innerHTML = visible.length ? visible.map((monster) => `
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
-      <span class="option-copy"><strong>${escapeHtml(monster.name)}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
+      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
       <span class="add-label">Adicionar ＋</span>
     </button>`).join("") + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") : '<div class="no-options">Nenhum monstro encontrado.</div>';
 }
@@ -328,7 +370,7 @@ function selectMonster(id) {
   const monster = getMonster(id);
   selection[pickerSlot.side][pickerSlot.index] = id;
   pickerSlot.button.classList.add("selected");
-  pickerSlot.button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span><strong>${escapeHtml(monster.name)}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small></span>`;
+  pickerSlot.button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small></span>`;
   monsterDialog.close();
 }
 
@@ -573,16 +615,10 @@ async function init() {
     const response = await fetch("./data/monsters.json");
     if (!response.ok) throw new Error("Catálogo indisponível");
     const catalog = await response.json();
-    monsters = catalog.monsters;
-    monsterById = new Map(monsters.map((monster) => [monster.id, monster]));
-    monsterByName = new Map(monsters.map((monster) => [normalize(monster.name), monster]));
-    for (const monster of monsters) {
-      for (const name of [monster.canonicalName, ...(monster.aliases || [])]) {
-        const key = normalize(name);
-        const current = monsterByName.get(key);
-        if (!current || (monster.gameData.awakenLevel === 1 && current.gameData.awakenLevel !== 1)) monsterByName.set(key, monster);
-      }
-    }
+    const preparedCatalog = prepareMonsterCatalog(catalog.monsters);
+    monsters = preparedCatalog.preferred;
+    monsterById = preparedCatalog.byId;
+    monsterByName = preparedCatalog.byName;
     updateStorageUi(cloudEnabled ? "cloud" : "local");
     if (cloudEnabled) {
       strategies = [];

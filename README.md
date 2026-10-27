@@ -15,7 +15,7 @@ Abra `http://localhost:4173`.
 ## Escopo da POC
 
 - identificação por nick, sem senha;
-- catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens;
+- catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
 - cadastro de ataque com três monstros e defesa com dois monstros fixos + um slot coringa `X`;
 - observações opcionais;
 - busca por texto, filtros de segurança/status e exclusão dos próprios registros;
