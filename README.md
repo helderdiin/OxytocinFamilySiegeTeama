@@ -27,6 +27,7 @@ Abra `http://localhost:4173`.
 - busca por monstros do counter ou da defesa, conteúdo textual e filtros de segurança/status;
 - compartilhamento de uma composição por link, abrindo o card correspondente já expandido;
 - comentários colaborativos por ataque, com reação opcional `+1` ou `-1` vinculada ao comentário;
+- edição colaborativa de qualquer counter, preservando o autor original e registrando editor e horário no histórico;
 - estratégias podem ser mantidas no banco como inativas sem aparecer na UI;
 - persistência compartilhada no Supabase, com fallback local para desenvolvimento sem configuração remota;
 
@@ -45,9 +46,17 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261028000000_strategy_build_recommendations.sql`
 - `supabase/migrations/20261028010000_strategy_youtube_video.sql`
 - `supabase/migrations/20261028020000_windy_alternative_for_gyomei.sql`
+- `supabase/migrations/20261028030000_strategy_reference_image.sql`
+- `supabase/migrations/20261028040000_eladriel_leo_chow_builds.sql`
+- `supabase/migrations/20261028050000_eladriel_leo_chow_reference_image.sql`
+- `supabase/migrations/20261028060000_juno_lucia_cayde_builds.sql`
+- `supabase/migrations/20261028070000_existing_counter_artifacts.sql`
+- `supabase/migrations/20261028080000_platy_shihwa_elucia_builds.sql`
+- `supabase/migrations/20261028090000_collaborative_strategy_edits.sql`
+- `supabase/migrations/20261028100000_juno_and_platy_reference_images.sql`
 - `supabase/seed.sql`
 
-O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler os dados; cada sessão pode alterar ou excluir somente os próprios counters. As sete entradas oficiais do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
+O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem criar, comentar e editar qualquer counter. O autor original e o dono do registro são preservados; cada edição grava somente editor e horário em `strategy_edits`, sem armazenar o conteúdo anterior. A exclusão continua restrita ao criador de counters não oficiais, e entradas do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
 
 No navegador deve ser usada somente a chave pública `publishable`, nunca uma chave `secret` ou a antiga `service_role`. O formato esperado está em `dist/supabase-config.example.js`.
 
@@ -81,7 +90,7 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 
 ```json
 {
-  "schemaVersion": 9,
+  "schemaVersion": 10,
   "strategies": [
     {
       "defenseId": "defense-fingerprint-or-uuid",

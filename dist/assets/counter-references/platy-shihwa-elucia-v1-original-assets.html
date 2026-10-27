@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1536, initial-scale=1">
+  <title>Counter Platy + Shihwa + Elucia 2A</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #101d20; --surface: #192c30; --surface-deep: #142529; --line: #3f5b61;
+      --text: #f2efe7; --muted: #a6b5b7; --copper: #3a2b27; --aqua: #83b8aa;
+      --aqua-deep: #203a36; --blue: #86b8cd; --amber: #deb05d;
+      --fire: #e26750; --water: #55a7db; --wind: #c2d65f;
+    }
+    html, body { width: 1536px; height: 1024px; margin: 0; overflow: hidden; }
+    body {
+      padding: 22px 26px 20px; color: var(--text); background: var(--bg);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased;
+    }
+    .canvas { height: 100%; display: grid; grid-template-rows: 86px 190px 220px 1fr; gap: 12px; }
+    .header { display: grid; grid-template-columns: 185px minmax(0, 1fr) auto; align-items: center; gap: 22px; padding: 0 18px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 13px; color: #fff8ef; background: #b86749; font-size: 25px; font-weight: 800; letter-spacing: -.05em; }
+    .brand-copy strong, .brand-copy span { display: block; }
+    .brand-copy strong { font-size: 16px; }
+    .brand-copy span { margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .17em; }
+    h1 { margin: 0; font-size: 44px; line-height: 1; letter-spacing: -.035em; }
+    .header-badges { display: flex; gap: 10px; }
+    .badge { min-height: 43px; display: flex; align-items: center; padding: 0 17px; border: 1px solid; border-radius: 9px; font-size: 14px; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
+    .badge.safe { color: #b9dace; border-color: #5f8e82; background: #203a36; }
+    .badge.proven { color: #b5d6e4; border-color: #517b8c; background: #203642; }
+
+    .team-panel { display: grid; grid-template-columns: 190px minmax(0, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 12px 30px rgba(3,12,14,.2); }
+    .team-panel.defense { border-color: #7b5046; }
+    .team-panel.attack { border-color: #547a71; }
+    .team-intro { display: flex; flex-direction: column; justify-content: center; padding: 24px; border-right: 1px solid var(--line); }
+    .defense .team-intro { background: var(--copper); border-color: #7b5046; }
+    .attack .team-intro { background: var(--aqua-deep); border-color: #547a71; }
+    .team-intro span { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .defense .team-intro span { color: #e3a189; }
+    .attack .team-intro span { color: #a8d0c4; }
+    .team-intro h2 { margin: 8px 0 0; font-size: 31px; letter-spacing: -.025em; }
+    .team-intro p { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+    .slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+    .slot { min-width: 0; display: grid; align-items: center; justify-content: center; padding: 14px 20px; border-left: 1px solid var(--line); }
+    .slot:first-child { border-left: 0; }
+    .slot-label { display: block; margin-bottom: 8px; color: var(--muted); text-align: center; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .monster { min-width: 0; display: flex; align-items: center; gap: 10px; }
+    .portrait-wrap { position: relative; flex: 0 0 auto; }
+    .portrait { width: 92px; height: 92px; display: block; object-fit: cover; border: 3px solid; border-radius: 13px; background: #243a3f; box-shadow: 0 8px 18px rgba(2,10,12,.3); }
+    .defense .portrait { width: 82px; height: 82px; }
+    .portrait.fire { border-color: var(--fire); } .portrait.water { border-color: var(--water); } .portrait.wind { border-color: var(--wind); }
+    .element-dot { position: absolute; right: -4px; bottom: -4px; min-width: 30px; height: 24px; display: grid; place-items: center; padding: 0 6px; border: 2px solid var(--surface); border-radius: 999px; color: #152124; font-size: 8px; font-weight: 900; }
+    .element-dot.fire { background: var(--fire); } .element-dot.water { background: var(--water); } .element-dot.wind { background: var(--wind); }
+    .monster-copy { min-width: 0; max-width: 150px; }
+    .monster-copy strong, .monster-copy span { display: block; }
+    .monster-copy strong { font-size: 18px; line-height: 1.08; }
+    .monster-copy span { margin-top: 5px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .attack .portrait { width: 108px; height: 108px; }
+    .attack .monster-copy strong { font-size: 20px; }
+    .attack .slot { padding-block: 15px; }
+
+    .bottom { min-height: 0; display: grid; grid-template-columns: .93fr 1.07fr; gap: 12px; }
+    .info-panel { min-height: 0; display: flex; flex-direction: column; padding: 17px 19px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .panel-title { display: flex; align-items: center; gap: 11px; margin: 0 0 12px; font-size: 23px; letter-spacing: -.02em; }
+    .panel-title i { width: 11px; height: 11px; border-radius: 3px; background: var(--blue); }
+    .quick-list { display: grid; gap: 8px; }
+    .quick-item { display: grid; grid-template-columns: 142px minmax(0, 1fr); gap: 12px; padding: 9px 12px; border-radius: 10px; background: var(--surface-deep); }
+    .quick-item span { padding-top: 2px; color: var(--blue); font-size: 9px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .quick-item p { margin: 0; color: #dfe6e2; font-size: 11px; line-height: 1.32; }
+    .quick-item.risk { background: #302825; }
+    .quick-item.risk span { color: #e49a7c; }
+    .evidence-row { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 8px; }
+    .mini-note { min-height: 65px; display: flex; flex-direction: column; justify-content: center; padding: 9px 12px; border: 1px solid #49666d; border-radius: 10px; background: #17292d; }
+    .mini-note.caution { border-color: #6b6243; background: #29281f; }
+    .mini-note strong { color: var(--blue); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .mini-note.caution strong { color: var(--amber); }
+    .mini-note span { margin-top: 4px; color: #d5ddda; font-size: 9.5px; line-height: 1.28; }
+
+    .build-list { display: grid; gap: 8px; }
+    .build { min-height: 84px; display: grid; grid-template-columns: 64px 144px minmax(0, 1fr); align-items: center; gap: 11px; padding: 8px 12px; border: 1px solid #36565d; border-radius: 10px; background: var(--surface-deep); }
+    .build img { width: 62px; height: 62px; object-fit: cover; border: 2px solid; border-radius: 10px; }
+    .build img.fire { border-color: var(--fire); } .build img.water { border-color: var(--water); }
+    .build-name strong, .build-name small { display: block; }
+    .build-name strong { font-size: 15px; }
+    .build-name small { margin-top: 5px; color: var(--muted); font-size: 8.5px; font-weight: 700; text-transform: uppercase; }
+    .build-data { min-width: 0; }
+    .build-data span, .build-data em { display: block; font-style: normal; }
+    .build-data span { color: #e7ebe5; font-size: 12px; font-weight: 700; line-height: 1.25; }
+    .build-data em { margin-top: 5px; color: #bed0cd; font-size: 10.5px; line-height: 1.3; }
+    .artifact-note { margin: 8px 0 0; padding: 8px 11px; color: #c7d5d1; border-radius: 8px; background: #17272a; font-size: 9.5px; line-height: 1.3; }
+    .artifact-note strong { color: var(--aqua); }
+    .author { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 8px; color: var(--muted); border-top: 1px solid var(--line); font-size: 11px; }
+    .author strong { color: var(--text); font-size: 13px; }
+    .author span:last-child { color: #7f9699; }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <header class="header">
+      <div class="brand"><div class="logo">O₂</div><div class="brand-copy"><strong>Oxytocin</strong><span>SIEGE TEAMS</span></div></div>
+      <h1>Counter de Siege</h1>
+      <div class="header-badges"><span class="badge safe">Seguro</span><span class="badge proven">Testado e comprovado</span></div>
+    </header>
+
+    <section class="team-panel defense">
+      <div class="team-intro"><span>Time inimigo</span><h2>Defesa</h2><p>Controle Trevor e remova as fontes de variação antes de finalizá-lo.</p></div>
+      <div class="slots">
+        <div class="slot"><div><span class="slot-label">Slot 1</span><div class="monster"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/morris.png" alt="Morris"><b class="element-dot wind">WIND</b></div><div class="monster-copy"><strong>Morris</strong><span>Vento</span></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 2</span><div class="monster"><div class="portrait-wrap"><img class="portrait water" src="../monsters/orion.png" alt="Orion"><b class="element-dot water">WATER</b></div><div class="monster-copy"><strong>Orion</strong><span>Água</span></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 3</span><div class="monster"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/trevor.png" alt="Trevor"><b class="element-dot fire">FIRE</b></div><div class="monster-copy"><strong>Trevor</strong><span>Fogo</span></div></div></div></div>
+      </div>
+    </section>
+
+    <section class="team-panel attack">
+      <div class="team-intro"><span>Seu ataque</span><h2>Counter</h2><p>Controle contínuo · sustain duplo · Trevor por último.</p></div>
+      <div class="slots">
+        <div class="slot"><div><span class="slot-label">Slot 1 · Líder</span><div class="monster"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/platy.png" alt="Platy"><b class="element-dot fire">FIRE</b></div><div class="monster-copy"><strong>Platy (L)</strong><span>Fogo</span></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 2</span><div class="monster"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/shihwa.png" alt="Shihwa"><b class="element-dot fire">FIRE</b></div><div class="monster-copy"><strong>Shihwa</strong><span>Fogo</span></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 3</span><div class="monster"><div class="portrait-wrap"><img class="portrait water" src="../monsters/unit_icon_0051_0_0.png" alt="Elucia 2A"><b class="element-dot water">WATER</b></div><div class="monster-copy"><strong>Elucia 2A</strong><span>Água</span></div></div></div></div>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <article class="info-panel">
+        <h2 class="panel-title"><i></i>Como usar</h2>
+        <div class="quick-list">
+          <div class="quick-item"><span>Ordem de turno</span><p>Platy → Shihwa → Elucia 2A como referência. Platy pressiona Orion com a S3; Shihwa coloca Trevor para dormir e ganha o turno extra; Elucia mantém Trevor controlado ou guarda a S2 para limpar e recuperar.</p></div>
+          <div class="quick-item"><span>Prioridade de alvo</span><p>Orion → Morris → Trevor. Remova Orion para reduzir strip, DEF Break e a variação da abertura; depois elimine Morris para impedir sustain e revive. Trevor morre por último.</p></div>
+          <div class="quick-item risk"><span>Risco crítico</span><p>Não use se Shihwa e Elucia não tiverem velocidade e durabilidade para manter Trevor travado. Procs de Orion ou Morris, uma falha de controle ou Trevor saindo do sono abaixo de 30% podem virar a luta.</p></div>
+        </div>
+        <div class="evidence-row">
+          <div class="mini-note"><strong>Evidência</strong><span>Comprovado pela guilda. O núcleo Platy + Shihwa, o controle do Trevor e a ordem Orion → Morris → Trevor também aparecem em base comunitária.</span></div>
+          <div class="mini-note caution"><strong>Sem substituição comprovada</strong><span>Iona e Betta aparecem com o núcleo Platy + Shihwa, mas não são equivalentes à Elucia 2A sem teste.</span></div>
+        </div>
+      </article>
+
+      <article class="info-panel">
+        <h2 class="panel-title"><i></i>Build mínima recomendada</h2>
+        <div class="build-list">
+          <div class="build"><img class="fire" src="../monsters/platy.png" alt="Platy"><div class="build-name"><strong>Platy</strong><small>Tick 5 · ref. +149 SPD</small></div><div class="build-data"><span>Violent / Will · SPD / HP% / RES%</span><em>≥ +30k HP · ≥ +700 DEF · 100% RES · ≥ 45% ACC</em></div></div>
+          <div class="build"><img class="fire" src="../monsters/shihwa.png" alt="Shihwa"><div class="build-name"><strong>Shihwa</strong><small>Tick 5 · ref. +144 SPD</small></div><div class="build-data"><span>Violent / Destroy · SPD / CR% / HP%</span><em>≥ +20k HP · ≥ +1k ATK · ≥ +700 DEF · ≥ 45% ACC</em></div></div>
+          <div class="build"><img class="water" src="../monsters/unit_icon_0051_0_0.png" alt="Elucia 2A"><div class="build-name"><strong>Elucia 2A</strong><small>Tick 5 · ref. +141 SPD</small></div><div class="build-data"><span>Violent / Will · SPD / HP% / HP%</span><em>≥ +25k HP · ≥ +500 ATK · ≥ +700 DEF · ≥ 70% RES</em></div></div>
+        </div>
+        <p class="artifact-note"><strong>Artefatos:</strong> Platy — redução de dano de Água / recuperação da S2; Shihwa — redução de dano de Água / dano da S3; Elucia 2A — redução de dano de Água / recuperação da S2.</p>
+        <div class="author"><span>Autor: <strong>Mittus</strong></span><span>Oxytocin Family · referência da guilda</span></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

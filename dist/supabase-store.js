@@ -28,6 +28,7 @@
       isSeed: row.is_seed,
       isActive: row.is_active !== false,
       createdAt: row.created_at,
+      updatedAt: row.updated_at,
     };
   }
 
@@ -61,6 +62,16 @@
     };
   }
 
+  function editFromDatabase(row) {
+    return {
+      id: row.id,
+      strategyId: row.strategy_id,
+      editorId: row.editor_id,
+      editor: row.editor_name,
+      editedAt: row.edited_at,
+    };
+  }
+
   async function ensureUser(nick) {
     assertConfigured();
     let { data: sessionData, error: sessionError } = await client.auth.getSession();
@@ -86,7 +97,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategies")
-      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
+      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data.map(fromDatabase);
@@ -107,10 +118,47 @@
     const { data, error } = await client
       .from("strategies")
       .insert(toDatabase(strategy, userId, nick, defenseId))
-      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
+      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
       .single();
     if (error) throw error;
     return fromDatabase(data);
+  }
+
+  async function listStrategyEdits() {
+    assertConfigured();
+    const { data, error } = await client
+      .from("strategy_edits")
+      .select("id, strategy_id, editor_id, editor_name, edited_at")
+      .order("edited_at", { ascending: true });
+    if (error) throw error;
+    return data.map(editFromDatabase);
+  }
+
+  async function updateStrategy(strategy, expectedUpdatedAt) {
+    assertConfigured();
+    const { data, error } = await client.rpc("update_strategy_collaboratively", {
+      p_strategy_id: strategy.id,
+      p_expected_updated_at: expectedUpdatedAt || null,
+      p_attack: strategy.attack,
+      p_attack_alternatives: strategy.attackAlternatives,
+      p_defense: strategy.defense,
+      p_defense_alternatives: strategy.defenseAlternatives,
+      p_safety: strategy.safety,
+      p_validation_status: strategy.status,
+      p_sections: strategy.sections,
+    });
+    if (error) {
+      if (error.code === "40001" || error.message?.includes("strategy_conflict")) {
+        const conflict = new Error("strategy_conflict");
+        conflict.code = "STRATEGY_CONFLICT";
+        throw conflict;
+      }
+      throw error;
+    }
+    return {
+      strategy: fromDatabase(data.strategy),
+      edit: editFromDatabase(data.edit),
+    };
   }
 
   async function listComments() {
@@ -152,6 +200,8 @@
     ensureUser,
     listStrategies,
     createStrategy,
+    listStrategyEdits,
+    updateStrategy,
     listComments,
     createComment,
     deleteStrategy,

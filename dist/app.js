@@ -3,7 +3,6 @@ const STORAGE_KEYS = {
   strategies: "oxytocin-siege-strategies",
 };
 const MAX_SLOT_ALTERNATIVES = 4;
-const READ_ONLY_MODE = true;
 
 const seedStrategies = [
   {
@@ -94,6 +93,13 @@ const seedStrategies = [
           spd: 40,
           res: 85,
           acc: 25,
+          artifacts: "Redução de dano de Fogo / recuperação da S2",
+        },
+        {
+          monsterId: "briand",
+          slot: 0,
+          isAlternative: true,
+          artifacts: "Redução de dano de Fogo / precisão da S2",
         },
         {
           monsterId: "leo",
@@ -106,6 +112,7 @@ const seedStrategies = [
           cr: 85,
           cd: 150,
           acc: 25,
+          artifacts: "Redução de dano de Fogo / dano crítico da S2",
         },
         {
           monsterId: "chow",
@@ -117,6 +124,7 @@ const seedStrategies = [
           def: 550,
           cr: 85,
           cd: 150,
+          artifacts: "Redução de dano de Vento / dano crítico da S2",
         },
       ],
       turnOrder: "Sem ordem rígida por causa da passiva do Leo. Priorize a recuperação com Eladriel ou Briand, use Leo para controlar o ritmo e deixe Chow converter a vantagem em abates.",
@@ -137,7 +145,52 @@ const seedStrategies = [
     status: "proven",
     sections: {
       gamePlan: "Use a lead de 24% SPD da Platy para entrar no ciclo com segurança. Shihwa e Elucia 2A alternam sono e congelamento sobre Trevor, enquanto Platy sustenta o time com cura, aumento de ATB, strip, controle de cooldown e revive. Com Trevor fora da rotação, elimine Orion e depois Morris antes de finalizar Trevor.",
-      idealStats: "Platy e Elucia 2A com bastante HP e DEF; Violent/Will funciona bem nas duas, e Swift/Will é uma alternativa para Elucia. Platy precisa de boa RES e ACC suficiente para strip, stun e aumento de cooldown. Shihwa pode usar Violent/Destroy, equilibrando dano, durabilidade e ACC para sustentar o controle. Não copie valores fixos de SPD: o trio precisa sobreviver à abertura e ciclar sem deixar Trevor agir livre.",
+      idealStats: "Use a lead de 24% SPD da Platy e mantenha o trio no tick 5, na ordem Platy → Shihwa → Elucia 2A. Os valores da tabela são pisos de referência para este matchup: Platy e Elucia precisam sobreviver à abertura e Shihwa não pode sacrificar toda a durabilidade para causar dano.",
+      referenceImage: {
+        path: "assets/counter-references/platy-shihwa-elucia-v1-original-assets.png",
+        alt: "Counter de Platy, Shihwa e Elucia 2A contra Morris, Orion e Trevor",
+        width: 1536,
+        height: 1024,
+        version: 1,
+      },
+      builds: [
+        {
+          monsterId: "platy",
+          slot: 0,
+          isAlternative: false,
+          runes: "Violent / Will · SPD / HP% / RES%",
+          speedTune: "Tick 5 · referência +149 SPD",
+          hp: 30000,
+          def: 700,
+          res: 100,
+          acc: 45,
+          artifacts: "Redução de dano de Água / recuperação da S2",
+        },
+        {
+          monsterId: "shihwa",
+          slot: 1,
+          isAlternative: false,
+          runes: "Violent / Destroy · SPD / CR% / HP%",
+          speedTune: "Tick 5 · referência +144 SPD",
+          hp: 20000,
+          atk: 1000,
+          def: 700,
+          acc: 45,
+          artifacts: "Redução de dano de Água / dano da S3",
+        },
+        {
+          monsterId: "elucia",
+          slot: 2,
+          isAlternative: false,
+          runes: "Violent / Will · SPD / HP% / HP%",
+          speedTune: "Tick 5 · referência +141 SPD",
+          hp: 25000,
+          atk: 500,
+          def: 700,
+          res: 70,
+          artifacts: "Redução de dano de Água / recuperação da S2",
+        },
+      ],
       turnOrder: "Platy → Shihwa → Elucia 2A como referência. Platy pressiona Orion com a S3 quando possível; Shihwa coloca Trevor para dormir e ganha o turno extra; Elucia mantém Trevor dormindo ou congelado, ou guarda a S2 para limpar e recuperar o aliado afetado pelo Orion. Mais importante que uma sequência rígida é nunca liberar Trevor.",
       targetPriority: "Orion → Morris → Trevor. Remover Orion reduz strip, DEF Break e a variação da abertura; depois elimine Morris para impedir sustain e revive. Trevor fica controlado e morre por último, evitando ativar cedo o pico da passiva e o contra-ataque da S2.",
       thirdVariations: "Registro validado especificamente contra Morris + Orion + Trevor em torre Nat4. O plano depende de Trevor ser a ameaça mantida sob controle; não extrapole automaticamente para uma defesa com imunidade, cleanse ou passivas anti-controle.",
@@ -184,6 +237,7 @@ const sectionDefinitions = [
 
 const buildStatDefinitions = [
   { key: "runes", label: "Runas", kind: "text", placeholder: "Violent / Will", maxLength: 80 },
+  { key: "speedTune", label: "Ajuste de SPD", kind: "text", placeholder: "Tick 5 / sem prioridade", maxLength: 80 },
   { key: "hp", label: "HP", hint: "bônus", kind: "bonus", step: 100, max: 200000 },
   { key: "atk", label: "ATK", hint: "bônus", kind: "bonus", step: 50, max: 10000 },
   { key: "def", label: "DEF", hint: "bônus", kind: "bonus", step: 50, max: 10000 },
@@ -192,6 +246,7 @@ const buildStatDefinitions = [
   { key: "cd", label: "CD", hint: "total", kind: "percent", step: 1, max: 400 },
   { key: "res", label: "RES", hint: "total", kind: "percent", step: 1, max: 100 },
   { key: "acc", label: "ACC", hint: "total", kind: "percent", step: 1, max: 100 },
+  { key: "artifacts", label: "Artefatos", kind: "text", placeholder: "Redução de dano / recuperação da S2", maxLength: 180 },
 ];
 
 let currentUser = localStorage.getItem(STORAGE_KEYS.user) || "";
@@ -207,6 +262,7 @@ let pickerSlot = null;
 let selection = emptySelection();
 let buildDraft = new Map();
 let dialogDefenseId = null;
+let editingStrategyId = null;
 const initialQuery = new URLSearchParams(window.location.search);
 let sharedStrategyId = initialQuery.get("strategy");
 let selectedDefenseId = initialQuery.get("defense");
@@ -220,16 +276,12 @@ const monsterDialog = $("#monsterDialog");
 const database = window.oxytocinDb;
 const cloudEnabled = Boolean(database?.isConfigured());
 
-function configureReadOnlyMode() {
-  const readOnlyChip = $("#readOnlyModeChip");
-  if (readOnlyChip) readOnlyChip.hidden = !READ_ONLY_MODE;
-
+function configureCollaborativeMode() {
   [$("#openFormButton"), $("#emptyAddButton")].forEach((button) => {
     if (!button) return;
-    button.disabled = READ_ONLY_MODE;
-    button.setAttribute("aria-disabled", String(READ_ONLY_MODE));
-    if (READ_ONLY_MODE) button.title = "Cadastro temporariamente desativado. A guilda está avaliando a experiência em modo somente leitura.";
-    else button.removeAttribute("title");
+    button.disabled = false;
+    button.removeAttribute("aria-disabled");
+    button.removeAttribute("title");
   });
 }
 
@@ -260,6 +312,7 @@ function migrateStrategies(records) {
       safety: safetyNames[strategy.safety] ? strategy.safety : "situational",
       status: statusNames[strategy.status] ? strategy.status : "needs_testing",
       comments: Array.isArray(strategy.comments) ? strategy.comments.map(normalizeComment) : [],
+      edits: Array.isArray(strategy.edits) ? strategy.edits.map(normalizeStrategyEdit) : [],
       sections: {
         gamePlan: strategy.sections?.gamePlan || notes || "",
         idealStats: strategy.sections?.idealStats || "",
@@ -377,6 +430,16 @@ function normalizeComment(comment) {
   };
 }
 
+function normalizeStrategyEdit(edit) {
+  return {
+    id: edit?.id || (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`),
+    strategyId: edit?.strategyId || edit?.strategy_id || "",
+    editorId: edit?.editorId || edit?.editor_id || null,
+    editor: String(edit?.editor || edit?.editor_name || "Membro da guilda"),
+    editedAt: edit?.editedAt || edit?.edited_at || new Date().toISOString(),
+  };
+}
+
 function toMonsterId(value) {
   if (!value || value === "*") return value;
   if (monsterById.has(value)) return monsterById.get(value).id;
@@ -385,7 +448,7 @@ function toMonsterId(value) {
 
 function saveStrategies() {
   if (cloudEnabled) return;
-  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 9, strategies }));
+  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 10, strategies }));
 }
 
 function updateStorageUi(mode) {
@@ -393,20 +456,30 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.22 · Supabase" : "v0.22 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.23 · Supabase" : "v0.23 · dados locais";
 }
 
 async function connectCloudUser() {
   currentUserId = await database.ensureUser(currentUser);
-  const [strategyRows, comments] = await Promise.all([database.listStrategies(), database.listComments()]);
+  const [strategyRows, comments, edits] = await Promise.all([
+    database.listStrategies(),
+    database.listComments(),
+    database.listStrategyEdits(),
+  ]);
   const commentsByStrategy = new Map();
   comments.forEach((comment) => {
     if (!commentsByStrategy.has(comment.strategyId)) commentsByStrategy.set(comment.strategyId, []);
     commentsByStrategy.get(comment.strategyId).push(normalizeComment(comment));
   });
+  const editsByStrategy = new Map();
+  edits.forEach((edit) => {
+    if (!editsByStrategy.has(edit.strategyId)) editsByStrategy.set(edit.strategyId, []);
+    editsByStrategy.get(edit.strategyId).push(normalizeStrategyEdit(edit));
+  });
   strategies = migrateStrategies(strategyRows).map((strategy) => ({
     ...strategy,
     comments: commentsByStrategy.get(strategy.id) || [],
+    edits: editsByStrategy.get(strategy.id) || [],
   }));
 }
 
@@ -427,6 +500,8 @@ function icon(name, className = "") {
     plus: '<path d="M12 5v14M5 12h14" />',
     close: '<path d="M18 6 6 18M6 6l12 12" />',
     trash: '<path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v5M14 11v5" />',
+    edit: '<path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />',
+    history: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5M12 7v5l3 2" />',
     lock: '<rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />',
     comment: '<path d="M21 12a8 8 0 0 1-8 8H6l-4 2 1.5-5A8.5 8.5 0 1 1 21 12Z" />',
     thumbsUp: '<path d="M7 10v10H3V10h4Zm0 9c2.5 1.3 5.1 2 7.8 2H17a3 3 0 0 0 2.9-2.3l1-4A3 3 0 0 0 18 11h-4l.7-3.3A3.1 3.1 0 0 0 11.6 4L7 10v9Z" />',
@@ -626,14 +701,11 @@ function defenseCatalogCard(group, index) {
 function defenseCounterList(group) {
   const count = group.strategies.length;
   const countLabel = `${count} ${count === 1 ? "counter disponível" : "counters disponíveis"}`;
-  const disabledAttribute = READ_ONLY_MODE
-    ? ' disabled aria-disabled="true" title="Cadastro temporariamente desativado no modo somente leitura."'
-    : "";
   return `
     <section class="defense-counter-section" aria-labelledby="counter-heading">
       <header class="defense-counter-heading">
         <div><h2 id="counter-heading">Counters possíveis <span>${count}</span></h2><p>Compare rapidamente segurança, risco e ordem de turno antes de abrir o guia completo.</p></div>
-        <button class="add-counter-button" data-add-counter-defense-id="${escapeHtml(group.id)}" type="button"${disabledAttribute}>${icon("plus")}<span>Adicionar outro counter</span></button>
+        <button class="add-counter-button" data-add-counter-defense-id="${escapeHtml(group.id)}" type="button">${icon("plus")}<span>Adicionar outro counter</span></button>
       </header>
       <div class="counter-stack detail-counter-stack" aria-label="${countLabel}">
         ${group.strategies.map((strategy, index) => strategyCard(strategy, index + 1)).join("")}
@@ -701,9 +773,6 @@ function groupStrategiesByDefense(records) {
 function defenseGroupCard(group) {
   const count = group.strategies.length;
   const countLabel = `${count} ${count === 1 ? "counter disponível" : "counters disponíveis"}`;
-  const disabledAttribute = READ_ONLY_MODE
-    ? ' disabled aria-disabled="true" title="Cadastro temporariamente desativado no modo somente leitura."'
-    : "";
   return `
     <section class="defense-group" data-defense-id="${escapeHtml(group.id)}">
       <header class="defense-group-header">
@@ -713,7 +782,7 @@ function defenseGroupCard(group) {
         </div>
         <div class="defense-group-actions">
           <span class="counter-count">${countLabel}</span>
-          <button class="add-counter-button" data-add-counter-defense-id="${escapeHtml(group.id)}" type="button"${disabledAttribute}>${icon("plus")}<span>Adicionar outro counter</span></button>
+          <button class="add-counter-button" data-add-counter-defense-id="${escapeHtml(group.id)}" type="button">${icon("plus")}<span>Adicionar outro counter</span></button>
         </div>
       </header>
       <div class="counter-stack" aria-label="${countLabel}">
@@ -724,7 +793,7 @@ function defenseGroupCard(group) {
 
 function strategyCard(strategy, counterIndex) {
   const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(strategy.createdAt));
-  const canDelete = !READ_ONLY_MODE && (cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser);
+  const canDelete = cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser;
   const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
   const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
   const flexibleDefense = strategy.defense[2] === "*";
@@ -777,16 +846,37 @@ function strategyCard(strategy, counterIndex) {
         <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className, key)).join("")}</div>
         ${strategyVideo(strategy)}
         ${strategyReferenceImage(strategy)}
+        ${strategyEditHistory(strategy)}
         ${strategyFeedback(strategy, comments, positiveCount, negativeCount)}
         <div class="card-footer">
           <span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>
           <div class="card-actions">
+            <button class="edit-button" data-edit-id="${escapeHtml(strategy.id)}" type="button">${icon("edit")}<span>Editar counter</span></button>
             <button class="share-button" data-share-id="${escapeHtml(strategy.id)}" type="button">${icon("link")}<span>Copiar link</span></button>
             ${canDelete ? `<button class="delete-button" data-delete-id="${escapeHtml(strategy.id)}" type="button">${icon("trash")}<span>Excluir</span></button>` : ""}
           </div>
         </div>
       </div>
     </details>`;
+}
+
+function strategyEditHistory(strategy) {
+  const edits = [...(strategy.edits || [])].sort((left, right) => new Date(right.editedAt) - new Date(left.editedAt));
+  if (!edits.length) return "";
+  return `
+    <section class="strategy-edit-history" aria-labelledby="edit-history-${escapeHtml(strategy.id)}">
+      <div class="edit-history-heading">${icon("history")}<h4 id="edit-history-${escapeHtml(strategy.id)}">Histórico de colaboração</h4></div>
+      <ol>${edits.map((edit) => {
+        const date = new Intl.DateTimeFormat("pt-BR", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }).format(new Date(edit.editedAt));
+        return `<li><strong>${escapeHtml(edit.editor)}</strong> editou em <time datetime="${escapeHtml(edit.editedAt)}">${date}</time></li>`;
+      }).join("")}</ol>
+    </section>`;
 }
 
 function strategyReferenceImage(strategy) {
@@ -829,14 +919,13 @@ function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
   const strategyId = escapeHtml(strategy.id);
   const commentsMarkup = comments.length
     ? comments.map(commentItem).join("")
-    : `<div class="feedback-empty">${icon("comment")}<p><strong>Ainda não há feedback.</strong><span>${READ_ONLY_MODE ? "Os comentários serão liberados depois desta primeira avaliação da guilda." : "Se você testar esta composição, conte para a guilda como foi."}</span></p></div>`;
-  const disabledAttribute = READ_ONLY_MODE ? " disabled aria-disabled=\"true\"" : "";
+    : `<div class="feedback-empty">${icon("comment")}<p><strong>Ainda não há feedback.</strong><span>Se você testar esta composição, conte para a guilda como foi.</span></p></div>`;
   return `
     <section class="feedback-section" aria-labelledby="feedback-title-${strategyId}">
       <div class="feedback-heading">
         <div>
           <h4 id="feedback-title-${strategyId}">Feedback da guilda</h4>
-          <p>${READ_ONLY_MODE ? "Comentários e reações serão liberados após esta primeira avaliação." : "O +1 ou −1 é opcional e sempre acompanha um comentário."}</p>
+          <p>O +1 ou −1 é opcional e sempre acompanha um comentário.</p>
         </div>
         <div class="feedback-totals" aria-label="${positiveCount} feedbacks positivos e ${negativeCount} feedbacks negativos">
           <span class="feedback-total positive">${icon("thumbsUp")}<strong>${positiveCount}</strong></span>
@@ -844,12 +933,11 @@ function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
         </div>
       </div>
       <div class="comment-list" aria-label="Comentários da guilda">${commentsMarkup}</div>
-      <form class="comment-form${READ_ONLY_MODE ? " is-read-only" : ""}" data-comment-form data-strategy-id="${strategyId}">
-        ${READ_ONLY_MODE ? `<div class="feedback-readonly-notice">${icon("lock")}<span><strong>Modo somente leitura</strong>Você pode consultar o histórico, mas novos comentários estão temporariamente desativados.</span></div>` : ""}
+      <form class="comment-form" data-comment-form data-strategy-id="${strategyId}">
         <div class="comment-field-heading"><label for="comment-${strategyId}">Adicionar feedback</label><span data-comment-counter>0/500</span></div>
-        <textarea id="comment-${strategyId}" name="body" rows="3" minlength="1" maxlength="500" required placeholder="${READ_ONLY_MODE ? "Comentários disponíveis em breve." : "Conte o que aconteceu na luta, o que funcionou ou qual foi o risco real."}"${disabledAttribute}></textarea>
+        <textarea id="comment-${strategyId}" name="body" rows="3" minlength="1" maxlength="500" required placeholder="Conte o que aconteceu na luta, o que funcionou ou qual foi o risco real."></textarea>
         <div class="comment-form-footer">
-          <fieldset class="reaction-picker"${READ_ONLY_MODE ? " disabled" : ""}>
+          <fieldset class="reaction-picker">
             <legend>Resultado <span>opcional</span></legend>
             <div class="reaction-options">
               <label class="reaction-choice neutral"><input type="radio" name="reaction" value="" checked><span>Só comentar</span></label>
@@ -857,7 +945,7 @@ function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
               <label class="reaction-choice negative"><input type="radio" name="reaction" value="-1"><span>${icon("thumbsDown")} −1 Não funcionou</span></label>
             </div>
           </fieldset>
-          <button class="button button-primary comment-submit" type="submit"${disabledAttribute}>Publicar feedback</button>
+          <button class="button button-primary comment-submit" type="submit">Publicar feedback</button>
         </div>
       </form>
     </section>`;
@@ -1027,6 +1115,8 @@ function collectBuildRecommendations() {
 }
 
 function openStrategyDialog(defenseStrategy = null) {
+  editingStrategyId = null;
+  $("#strategyForm").reset();
   resetSelection();
   dialogDefenseId = defenseStrategy?.defenseId || null;
   if (defenseStrategy) {
@@ -1038,11 +1128,38 @@ function openStrategyDialog(defenseStrategy = null) {
   strategyDialog.showModal();
 }
 
+function openEditStrategyDialog(strategy) {
+  editingStrategyId = strategy.id;
+  dialogDefenseId = null;
+  const form = $("#strategyForm");
+  form.reset();
+  selection = {
+    attack: [...strategy.attack],
+    defense: [...strategy.defense],
+    attackAlternatives: strategy.attackAlternatives.map((slot) => [...slot]),
+    defenseAlternatives: strategy.defenseAlternatives.map((slot) => [...slot]),
+  };
+  buildDraft = new Map(
+    normalizeBuildRecommendations(strategy.sections?.builds, strategy.attack, strategy.attackAlternatives)
+      .map((build) => [build.monsterId, { ...build }])
+  );
+  ["attack", "defense"].forEach((side) => [0, 1, 2].forEach((index) => renderSelectionSlot(side, index)));
+  renderBuildRecommendationsEditor();
+  form.elements.safety.value = strategy.safety;
+  form.elements.status.value = strategy.status;
+  ["gamePlan", "idealStats", "turnOrder", "targetPriority", "thirdVariations", "risks", "substitutions", "evidence", "videoUrl"].forEach((name) => {
+    form.elements[name].value = strategy.sections?.[name] || "";
+  });
+  updateStrategyDialogMode();
+  strategyDialog.showModal();
+}
+
 function closeStrategyDialog() {
   if (monsterDialog.open) monsterDialog.close();
   strategyDialog.close();
   $("#strategyForm").reset();
   dialogDefenseId = null;
+  editingStrategyId = null;
   resetSelection();
   updateStrategyDialogMode();
 }
@@ -1055,12 +1172,16 @@ function resetSelection() {
 }
 
 function updateStrategyDialogMode() {
+  const isEditing = Boolean(editingStrategyId);
   const isAddingCounter = Boolean(dialogDefenseId);
-  $("#strategyDialogTitle").textContent = isAddingCounter ? "Adicionar outro counter" : "Adicionar counter";
-  $("#strategyDialogCopy").textContent = isAddingCounter
+  $("#strategyDialogEyebrow").textContent = isEditing ? "EDIÇÃO COLABORATIVA" : "NOVO COUNTER";
+  $("#strategyDialogTitle").textContent = isEditing ? "Editar counter" : isAddingCounter ? "Adicionar outro counter" : "Adicionar counter";
+  $("#strategyDialogCopy").textContent = isEditing
+    ? "Atualize a composição ou o plano. O autor original será preservado e sua edição ficará registrada."
+    : isAddingCounter
     ? "A defesa e suas alternativas já estão vinculadas. Monte uma estratégia completamente nova para enfrentá-la."
     : "Escolha a defesa, monte o ataque e registre como pilotar esta opção.";
-  $("#saveStrategyButton").textContent = "Salvar counter";
+  $("#saveStrategyButton").textContent = isEditing ? "Salvar alterações" : "Salvar counter";
   $("#defenseLockedNotice").hidden = !isAddingCounter;
   $("#defenseFieldset").classList.toggle("is-locked", isAddingCounter);
   document.querySelectorAll('.monster-select[data-slot^="defense-"]').forEach((button) => {
@@ -1322,9 +1443,9 @@ $("#logoutButton").addEventListener("click", () => {
   $("#playerName").focus();
 });
 
-configureReadOnlyMode();
+configureCollaborativeMode();
 [$("#openFormButton"), $("#emptyAddButton")].forEach((button) => {
-  if (!READ_ONLY_MODE) button.addEventListener("click", () => openStrategyDialog());
+  button.addEventListener("click", () => openStrategyDialog());
 });
 [$("#closeDialogButton"), $("#cancelDialogButton")].forEach((button) => button.addEventListener("click", closeStrategyDialog));
 $("#closeMonsterDialog").addEventListener("click", () => monsterDialog.close());
@@ -1384,10 +1505,6 @@ function selectionValidationError(side) {
 
 $("#strategyForm").addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (READ_ONLY_MODE) {
-    showToast("O cadastro de ataques está temporariamente desativado.");
-    return;
-  }
   const validationError = selectionValidationError("attack") || selectionValidationError("defense");
   if (validationError) {
     showToast(validationError);
@@ -1401,19 +1518,32 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     event.currentTarget.elements.videoUrl.focus();
     return;
   }
+  const existingStrategy = editingStrategyId
+    ? strategies.find((item) => item.id === editingStrategyId)
+    : null;
+  if (editingStrategyId && !existingStrategy) {
+    showToast("Este counter não está mais disponível. Atualize a página e tente novamente.");
+    return;
+  }
+  const wasEditing = Boolean(existingStrategy);
   const wasAddingCounter = Boolean(dialogDefenseId);
+  const now = new Date().toISOString();
   const strategy = {
-    id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
-    defenseId: dialogDefenseId || (cloudEnabled ? null : `local:${compositionFingerprint(selection.defense, selection.defenseAlternatives)}`),
-    player: currentUser,
+    ...(existingStrategy || {}),
+    id: existingStrategy?.id || (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`),
+    defenseId: wasEditing
+      ? (cloudEnabled ? null : `local:${compositionFingerprint(selection.defense, selection.defenseAlternatives)}`)
+      : dialogDefenseId || (cloudEnabled ? null : `local:${compositionFingerprint(selection.defense, selection.defenseAlternatives)}`),
+    player: existingStrategy?.player || currentUser,
     attack: [...selection.attack],
     defense: [...selection.defense],
     attackAlternatives: selection.attackAlternatives.map((slot) => [...slot]),
     defenseAlternatives: selection.defenseAlternatives.map((slot) => [...slot]),
     safety: data.get("safety"),
     status: data.get("status"),
-    comments: [],
+    comments: existingStrategy?.comments || [],
     sections: {
+      ...(existingStrategy?.sections || {}),
       gamePlan: data.get("gamePlan").trim(),
       idealStats: data.get("idealStats").trim(),
       builds: collectBuildRecommendations(),
@@ -1425,26 +1555,64 @@ $("#strategyForm").addEventListener("submit", async (event) => {
       substitutions: data.get("substitutions").trim(),
       evidence: data.get("evidence").trim(),
     },
-    createdAt: new Date().toISOString(),
+    createdAt: existingStrategy?.createdAt || now,
+    updatedAt: now,
   };
   const submitButton = event.currentTarget.querySelector("button[type='submit']");
   submitButton.disabled = true;
   submitButton.textContent = "Salvando...";
   try {
-    if (cloudEnabled) strategies.unshift(await database.createStrategy(strategy, currentUserId, currentUser));
-    else {
+    if (wasEditing && cloudEnabled) {
+      const result = await database.updateStrategy(strategy, existingStrategy.updatedAt);
+      const savedStrategy = {
+        ...existingStrategy,
+        ...result.strategy,
+        comments: existingStrategy.comments || [],
+        edits: [...(existingStrategy.edits || []), normalizeStrategyEdit(result.edit)],
+      };
+      strategies = strategies.map((item) => item.id === savedStrategy.id ? savedStrategy : item);
+    } else if (wasEditing) {
+      const edit = normalizeStrategyEdit({
+        strategyId: strategy.id,
+        editorId: currentUserId,
+        editor: currentUser,
+        editedAt: now,
+      });
+      strategy.edits = [...(existingStrategy.edits || []), edit];
+      strategies = strategies.map((item) => item.id === strategy.id ? strategy : item);
+      saveStrategies();
+    } else if (cloudEnabled) {
+      strategies.unshift(await database.createStrategy(strategy, currentUserId, currentUser));
+    } else {
       strategies.unshift(strategy);
       saveStrategies();
     }
     render();
+    const savedId = strategy.id;
     closeStrategyDialog();
-    showToast(wasAddingCounter ? "Novo counter adicionado à defesa." : "Counter adicionado ao arsenal.");
+    if (wasEditing) {
+      const updatedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === savedId);
+      if (updatedCard) updatedCard.open = true;
+      showToast("Alterações salvas. A edição foi registrada no histórico.");
+    } else {
+      showToast(wasAddingCounter ? "Novo counter adicionado à defesa." : "Counter adicionado ao arsenal.");
+    }
   } catch (error) {
     console.error(error);
-    showToast("Não foi possível salvar a estratégia.");
+    if (error.code === "STRATEGY_CONFLICT") {
+      try {
+        await connectCloudUser();
+        render();
+      } catch (refreshError) {
+        console.error(refreshError);
+      }
+      showToast("Outra pessoa editou este counter. Suas mudanças foram preservadas; feche e reabra para revisar, ou salve novamente para sobrescrever.");
+    } else {
+      showToast(wasEditing ? "Não foi possível salvar as alterações." : "Não foi possível salvar a estratégia.");
+    }
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = "Salvar counter";
+    submitButton.textContent = wasEditing ? "Salvar alterações" : "Salvar counter";
   }
 });
 
@@ -1459,10 +1627,6 @@ $("#strategyList").addEventListener("submit", async (event) => {
   const form = event.target.closest("[data-comment-form]");
   if (!form) return;
   event.preventDefault();
-  if (READ_ONLY_MODE) {
-    showToast("Os comentários estão temporariamente desativados.");
-    return;
-  }
   const strategy = strategies.find((item) => item.id === form.dataset.strategyId);
   if (!strategy) return;
   const data = new FormData(form);
@@ -1507,13 +1671,23 @@ $("#strategyList").addEventListener("click", async (event) => {
 
   const addCounterButton = event.target.closest("[data-add-counter-defense-id]");
   if (addCounterButton) {
-    if (READ_ONLY_MODE) return;
     const defenseStrategy = strategies.find((item) => item.defenseId === addCounterButton.dataset.addCounterDefenseId);
     if (!defenseStrategy) {
       showToast("Não foi possível localizar esta defesa.");
       return;
     }
     openStrategyDialog(defenseStrategy);
+    return;
+  }
+
+  const editButton = event.target.closest("[data-edit-id]");
+  if (editButton) {
+    const strategy = strategies.find((item) => item.id === editButton.dataset.editId);
+    if (!strategy) {
+      showToast("Não foi possível localizar este counter.");
+      return;
+    }
+    openEditStrategyDialog(strategy);
     return;
   }
 
@@ -1532,7 +1706,6 @@ $("#strategyList").addEventListener("click", async (event) => {
   const deleteButton = event.target.closest("[data-delete-id]");
   const id = deleteButton?.dataset.deleteId;
   if (!id) return;
-  if (READ_ONLY_MODE) return;
   const strategy = strategies.find((item) => item.id === id);
   const canDelete = cloudEnabled ? strategy?.ownerId === currentUserId && !strategy?.isSeed : strategy?.player === currentUser;
   if (!strategy || !canDelete || !window.confirm("Excluir esta estratégia?")) return;

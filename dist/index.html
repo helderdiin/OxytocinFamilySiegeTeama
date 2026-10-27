@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=0.22" />
+    <link rel="stylesheet" href="./styles.css?v=0.23" />
   </head>
   <body>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -58,12 +58,12 @@
         </a>
         <nav class="top-actions" aria-label="Ações da conta">
           <span class="sync-chip" id="syncChip" title="Origem dos dados"><i></i> <span id="syncLabel">Conectando...</span></span>
-          <span class="readonly-mode-chip" id="readOnlyModeChip" hidden>Somente leitura</span>
+          <span class="collaboration-mode-chip" title="Todos os membros podem criar, comentar e editar counters">Edição colaborativa</span>
           <div class="user-menu">
             <span class="avatar" id="avatar">H</span>
             <span class="user-label"><small>Jogando como</small><strong id="currentUser">Helder</strong></span>
           </div>
-          <button class="button button-secondary top-add-button" id="openFormButton" type="button" aria-label="Novo ataque — temporariamente desativado">
+          <button class="button button-secondary top-add-button" id="openFormButton" type="button" aria-label="Cadastrar novo ataque">
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
             <span>Novo ataque</span>
           </button>
@@ -131,12 +131,12 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.22 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.23 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
       <div class="dialog-header">
-        <div><p class="eyebrow">NOVO COUNTER</p><h2 id="strategyDialogTitle">Adicionar counter</h2><p id="strategyDialogCopy">Escolha a defesa, monte o ataque e registre como pilotar esta opção.</p></div>
+        <div><p class="eyebrow" id="strategyDialogEyebrow">NOVO COUNTER</p><h2 id="strategyDialogTitle">Adicionar counter</h2><p id="strategyDialogCopy">Escolha a defesa, monte o ataque e registre como pilotar esta opção.</p></div>
         <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></svg>
         </button>
@@ -216,7 +216,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
-    <script src="./supabase-store.js?v=0.22"></script>
-    <script src="./app.js?v=0.22"></script>
+    <script src="./supabase-store.js?v=0.23"></script>
+    <script src="./app.js?v=0.23"></script>
   </body>
 </html>

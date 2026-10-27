@@ -26,7 +26,50 @@ values
     'proven',
     jsonb_build_object(
       'gamePlan', 'Cayde desvia bombas e ataques individuais, Lucia sustenta o time e reduz pela metade os efeitos de redução de ATB, enquanto Juno limpa debuffs e vence a luta longa.',
-      'idealStats', 'Cayde extremamente tanky. Lucia com bastante HP, DEF e RES para manter cura e escudo. Juno em Violent/Destroy ou Revenge/Destroy.',
+      'idealStats', 'Juno e Lucia devem alcançar o tick 5 de SPD. Juno precisa de pelo menos 50% ACC total. Lucia precisa de pelo menos 50% RES total. Cayde não depende de SPD; qualquer ACC adicional é bem-vinda para aumentar a consistência da S2.',
+      'referenceImage', jsonb_build_object(
+        'path', 'assets/counter-references/juno-lucia-cayde-v1-original-assets.png',
+        'alt', 'Counter de Juno, Lucia e Cayde contra Seara, ROBO-F29 ou Lionel e qualquer terceiro',
+        'width', 1536,
+        'height', 1024,
+        'version', 1
+      ),
+      'builds', jsonb_build_array(
+        jsonb_build_object(
+          'monsterId', 'juno',
+          'slot', 0,
+          'isAlternative', false,
+          'runes', 'Violent / Destroy',
+          'speedTune', 'Tick 5',
+          'hp', 30000,
+          'atk', 700,
+          'def', 600,
+          'acc', 50,
+          'artifacts', 'Redução de dano / dano adicional'
+        ),
+        jsonb_build_object(
+          'monsterId', 'lucia',
+          'slot', 1,
+          'isAlternative', false,
+          'runes', 'Violent / Will',
+          'speedTune', 'Tick 5',
+          'hp', 30000,
+          'def', 600,
+          'res', 50,
+          'artifacts', 'Redução de dano / recuperação da S2'
+        ),
+        jsonb_build_object(
+          'monsterId', 'cayde',
+          'slot', 2,
+          'isAlternative', false,
+          'runes', 'Sem set obrigatório',
+          'speedTune', 'SPD não é prioridade',
+          'hp', 38000,
+          'def', 800,
+          'res', 50,
+          'artifacts', 'Redução de dano / precisão da S2'
+        )
+      ),
       'turnOrder', 'Lucia → Juno → Cayde.',
       'targetPriority', 'Eliminar primeiro o maior DPS, depois a segunda ameaça e deixar Seara por último enquanto ela gastar bombas no Cayde.',
       'thirdVariations', 'Comprovado contra Seara + ROBO-F29 + Dover. Também venceu a variante Seara + Lionel + Light White Tiger Blade Master.',
@@ -66,7 +109,8 @@ values
           'isAlternative', false,
           'runes', 'Revenge / Revenge / Will',
           'hp', 32000,
-          'def', 500
+          'def', 500,
+          'artifacts', 'Redução de dano de Água / recuperação da S3'
         ),
         jsonb_build_object(
           'monsterId', 'racuni',
@@ -74,7 +118,8 @@ values
           'isAlternative', false,
           'runes', 'Violent / Nemesis',
           'hp', 30000,
-          'def', 600
+          'def', 600,
+          'artifacts', 'Redução de dano de Água / recuperação da S3'
         ),
         jsonb_build_object(
           'monsterId', 'gyomei-himejima',
@@ -82,7 +127,14 @@ values
           'isAlternative', false,
           'runes', 'Violent / Seal',
           'hp', 30000,
-          'def', 1200
+          'def', 1200,
+          'artifacts', 'Redução de dano de Fogo / precisão da S2'
+        ),
+        jsonb_build_object(
+          'monsterId', 'windy',
+          'slot', 2,
+          'isAlternative', true,
+          'artifacts', 'Redução de dano de Fogo / dano adicional por DEF'
         )
       ),
       'turnOrder', 'Fire Aragorn → Racuni → Gyomei Himejima.',
@@ -198,7 +250,14 @@ values
           'def', 850,
           'spd', 40,
           'res', 85,
-          'acc', 25
+          'acc', 25,
+          'artifacts', 'Redução de dano de Fogo / recuperação da S2'
+        ),
+        jsonb_build_object(
+          'monsterId', 'briand',
+          'slot', 0,
+          'isAlternative', true,
+          'artifacts', 'Redução de dano de Fogo / precisão da S2'
         ),
         jsonb_build_object(
           'monsterId', 'leo',
@@ -210,7 +269,8 @@ values
           'def', 450,
           'cr', 85,
           'cd', 150,
-          'acc', 25
+          'acc', 25,
+          'artifacts', 'Redução de dano de Fogo / dano crítico da S2'
         ),
         jsonb_build_object(
           'monsterId', 'chow',
@@ -221,7 +281,8 @@ values
           'atk', 700,
           'def', 550,
           'cr', 85,
-          'cd', 150
+          'cd', 150,
+          'artifacts', 'Redução de dano de Vento / dano crítico da S2'
         )
       ),
       'turnOrder', 'Sem ordem rígida por causa da passiva do Leo. Priorize a recuperação com Eladriel ou Briand, use Leo para controlar o ritmo e deixe Chow converter a vantagem em abates.',
@@ -247,7 +308,52 @@ values
     'proven',
     jsonb_build_object(
       'gamePlan', 'Use a lead de 24% SPD da Platy para entrar no ciclo com segurança. Shihwa e Elucia 2A alternam sono e congelamento sobre Trevor, enquanto Platy sustenta o time com cura, aumento de ATB, strip, controle de cooldown e revive. Com Trevor fora da rotação, elimine Orion e depois Morris antes de finalizar Trevor.',
-      'idealStats', 'Platy e Elucia 2A com bastante HP e DEF; Violent/Will funciona bem nas duas, e Swift/Will é uma alternativa para Elucia. Platy precisa de boa RES e ACC suficiente para strip, stun e aumento de cooldown. Shihwa pode usar Violent/Destroy, equilibrando dano, durabilidade e ACC para sustentar o controle. Não copie valores fixos de SPD: o trio precisa sobreviver à abertura e ciclar sem deixar Trevor agir livre.',
+      'idealStats', 'Use a lead de 24% SPD da Platy e mantenha o trio no tick 5, na ordem Platy → Shihwa → Elucia 2A. Os valores da tabela são pisos de referência para este matchup: Platy e Elucia precisam sobreviver à abertura e Shihwa não pode sacrificar toda a durabilidade para causar dano.',
+      'referenceImage', jsonb_build_object(
+        'path', 'assets/counter-references/platy-shihwa-elucia-v1-original-assets.png',
+        'alt', 'Counter de Platy, Shihwa e Elucia 2A contra Morris, Orion e Trevor',
+        'width', 1536,
+        'height', 1024,
+        'version', 1
+      ),
+      'builds', jsonb_build_array(
+        jsonb_build_object(
+          'monsterId', 'platy',
+          'slot', 0,
+          'isAlternative', false,
+          'runes', 'Violent / Will · SPD / HP% / RES%',
+          'speedTune', 'Tick 5 · referência +149 SPD',
+          'hp', 30000,
+          'def', 700,
+          'res', 100,
+          'acc', 45,
+          'artifacts', 'Redução de dano de Água / recuperação da S2'
+        ),
+        jsonb_build_object(
+          'monsterId', 'shihwa',
+          'slot', 1,
+          'isAlternative', false,
+          'runes', 'Violent / Destroy · SPD / CR% / HP%',
+          'speedTune', 'Tick 5 · referência +144 SPD',
+          'hp', 20000,
+          'atk', 1000,
+          'def', 700,
+          'acc', 45,
+          'artifacts', 'Redução de dano de Água / dano da S3'
+        ),
+        jsonb_build_object(
+          'monsterId', 'elucia',
+          'slot', 2,
+          'isAlternative', false,
+          'runes', 'Violent / Will · SPD / HP% / HP%',
+          'speedTune', 'Tick 5 · referência +141 SPD',
+          'hp', 25000,
+          'atk', 500,
+          'def', 700,
+          'res', 70,
+          'artifacts', 'Redução de dano de Água / recuperação da S2'
+        )
+      ),
       'turnOrder', 'Platy → Shihwa → Elucia 2A como referência. Platy pressiona Orion com a S3 quando possível; Shihwa coloca Trevor para dormir e ganha o turno extra; Elucia mantém Trevor dormindo ou congelado, ou guarda a S2 para limpar e recuperar o aliado afetado pelo Orion. Mais importante que uma sequência rígida é nunca liberar Trevor.',
       'targetPriority', 'Orion → Morris → Trevor. Remover Orion reduz strip, DEF Break e a variação da abertura; depois elimine Morris para impedir sustain e revive. Trevor fica controlado e morre por último, evitando ativar cedo o pico da passiva e o contra-ataque da S2.',
       'thirdVariations', 'Registro validado especificamente contra Morris + Orion + Trevor em torre Nat4. O plano depende de Trevor ser a ameaça mantida sob controle; não extrapole automaticamente para uma defesa com imunidade, cleanse ou passivas anti-controle.',
