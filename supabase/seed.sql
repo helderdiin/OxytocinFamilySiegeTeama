@@ -180,7 +180,50 @@ values
     'proven',
     jsonb_build_object(
       'gamePlan', 'Leo limita a velocidade da luta para retirar a vantagem da abertura inimiga. Eladriel ou Briand mantém o time de pé e recupera uma peça abatida, enquanto Chow sustenta o dano até desmontar a defesa.',
-      'idealStats', 'O reviver precisa de bastante HP, DEF e RES para sobreviver ao primeiro ciclo. Leo deve ser montado como bruiser resistente, e Chow precisa equilibrar dano e sustain para conduzir a luta longa.',
+      'idealStats', 'Use a lead de HP do Eladriel. Os valores da tabela são um piso para este matchup. Priorize artefato de dano recebido de Fogo no Eladriel e no Leo; no Chow, dano recebido de Vento. CD da S2 é valioso nos dois Dragon Knights, e recuperação da S2 ajuda o Eladriel.',
+      'referenceImage', jsonb_build_object(
+        'path', 'assets/counter-references/eladriel-leo-chow-v1-original-assets.png',
+        'alt', 'Counter de Eladriel ou Briand, Leo e Chow contra Sylvia ou Moore, Daphnis e Zenitsu Agatsuma ou Savannah',
+        'width', 1536,
+        'height', 1024,
+        'version', 1
+      ),
+      'builds', jsonb_build_array(
+        jsonb_build_object(
+          'monsterId', 'eladriel',
+          'slot', 0,
+          'isAlternative', false,
+          'runes', 'Violent / Will · HP% / HP% / RES%',
+          'hp', 28000,
+          'def', 850,
+          'spd', 40,
+          'res', 85,
+          'acc', 25
+        ),
+        jsonb_build_object(
+          'monsterId', 'leo',
+          'slot', 1,
+          'isAlternative', false,
+          'runes', 'Vampire / Destroy · ATK% / CD% / HP%',
+          'hp', 18000,
+          'atk', 700,
+          'def', 450,
+          'cr', 85,
+          'cd', 150,
+          'acc', 25
+        ),
+        jsonb_build_object(
+          'monsterId', 'chow',
+          'slot', 2,
+          'isAlternative', false,
+          'runes', 'Violent / Destroy · ATK% / CD% / HP%',
+          'hp', 20000,
+          'atk', 700,
+          'def', 550,
+          'cr', 85,
+          'cd', 150
+        )
+      ),
       'turnOrder', 'Sem ordem rígida por causa da passiva do Leo. Priorize a recuperação com Eladriel ou Briand, use Leo para controlar o ritmo e deixe Chow converter a vantagem em abates.',
       'targetPriority', 'Daphnis primeiro para remover a maior ameaça de explosão. Depois elimine Zenitsu ou Savannah e deixe Sylvia ou Moore por último quando a luta estiver estabilizada.',
       'thirdVariations', 'Pensado para Sylvia ou Moore + Daphnis + Wind Zenitsu ou Savannah. Confirme o terceiro defensor antes de escolher a variação do reviver.',
