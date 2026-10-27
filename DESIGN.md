@@ -205,6 +205,8 @@ The desktop workspace uses a centered content rail capped at 1200px with 24px si
 
 Within a strategy, defense and attack occupy balanced columns around a narrow directional arrow. The decision strip follows immediately in three columns—fit, risk, and turn order—before any expanded documentation. Cards use roughly 18–20px internal padding, while nested decision and detail cells tighten to 14–18px.
 
+Each team is organized into three stable slots. A slot may contain one primary monster plus compact alternatives connected by the word “ou”; alternatives stay visually subordinate to the primary while remaining identifiable by portrait and name. On medium-width screens, defense and attack stack earlier so multi-option slots never compress monster names into unreadable fragments.
+
 At 900px, decision cells stack vertically and filters wrap. At 620px, the content rail narrows to 14px side clearance, the top bar becomes 66px high, the defense search becomes a 56px sticky control, matchups become a single vertical sequence, monster teams become a three-column grid, and forms collapse to one column. Interactive targets remain at least 44px wherever primary interaction occurs.
 
 **The Defense Leads Rule.** Enemy composition appears before the proposed attack in reading order, visual emphasis, and mobile stacking.

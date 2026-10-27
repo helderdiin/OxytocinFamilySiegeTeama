@@ -2,6 +2,8 @@ const STORAGE_KEYS = {
   user: "oxytocin-siege-user",
   strategies: "oxytocin-siege-strategies",
 };
+const MAX_SLOT_ALTERNATIVES = 4;
+const READ_ONLY_MODE = true;
 
 const seedStrategies = [
   {
@@ -106,7 +108,7 @@ let monsters = [];
 let monsterById = new Map();
 let monsterByName = new Map();
 let pickerSlot = null;
-let selection = { attack: [null, null, "*"], defense: [null, null, "*"] };
+let selection = emptySelection();
 const sharedStrategyId = new URLSearchParams(window.location.search).get("strategy");
 let sharedStrategyOpened = false;
 
@@ -117,6 +119,19 @@ const strategyDialog = $("#strategyDialog");
 const monsterDialog = $("#monsterDialog");
 const database = window.oxytocinDb;
 const cloudEnabled = Boolean(database?.isConfigured());
+
+function configureReadOnlyMode() {
+  const readOnlyChip = $("#readOnlyModeChip");
+  if (readOnlyChip) readOnlyChip.hidden = !READ_ONLY_MODE;
+
+  [$("#openFormButton"), $("#emptyAddButton")].forEach((button) => {
+    if (!button) return;
+    button.disabled = READ_ONLY_MODE;
+    button.setAttribute("aria-disabled", String(READ_ONLY_MODE));
+    if (READ_ONLY_MODE) button.title = "Cadastro temporariamente desativado. A guilda está avaliando a experiência em modo somente leitura.";
+    else button.removeAttribute("title");
+  });
+}
 
 function readStoredStrategies() {
   try {
@@ -131,12 +146,17 @@ function readStoredStrategies() {
 function migrateStrategies(records) {
   return records.map((strategy) => {
     const { notes, ...rest } = strategy;
+    const attack = [toMonsterId(strategy.attack[0]), toMonsterId(strategy.attack[1]), toMonsterId(strategy.attack[2] || "*")];
+    const defense = [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), toMonsterId(strategy.defense[2] || "*")];
     return {
       ...rest,
-      attack: [toMonsterId(strategy.attack[0]), toMonsterId(strategy.attack[1]), toMonsterId(strategy.attack[2] || "*")],
-      defense: [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), toMonsterId(strategy.defense[2] || "*")],
+      attack,
+      defense,
+      attackAlternatives: normalizeSlotAlternatives(strategy.attackAlternatives || strategy.attack_alternatives, attack),
+      defenseAlternatives: normalizeSlotAlternatives(strategy.defenseAlternatives || strategy.defense_alternatives, defense),
       safety: safetyNames[strategy.safety] ? strategy.safety : "situational",
       status: statusNames[strategy.status] ? strategy.status : "needs_testing",
+      comments: Array.isArray(strategy.comments) ? strategy.comments.map(normalizeComment) : [],
       sections: {
         gamePlan: strategy.sections?.gamePlan || notes || "",
         idealStats: strategy.sections?.idealStats || "",
@@ -151,6 +171,48 @@ function migrateStrategies(records) {
   });
 }
 
+function emptySelection() {
+  return {
+    attack: [null, null, "*"],
+    defense: [null, null, "*"],
+    attackAlternatives: [[], [], []],
+    defenseAlternatives: [[], [], []],
+  };
+}
+
+function normalizeSlotAlternatives(value, primaryIds) {
+  const slots = Array.isArray(value) ? value : [[], [], []];
+  const seen = new Set(primaryIds.filter((id) => id && id !== "*"));
+  return [0, 1, 2].map((slotIndex) => {
+    if (!primaryIds[slotIndex] || primaryIds[slotIndex] === "*") return [];
+    const normalized = [];
+    const options = Array.isArray(slots[slotIndex]) ? slots[slotIndex] : [];
+    options.forEach((value) => {
+      const id = toMonsterId(value);
+      if (!id || id === "*" || seen.has(id) || normalized.length >= MAX_SLOT_ALTERNATIVES) return;
+      seen.add(id);
+      normalized.push(id);
+    });
+    return normalized;
+  });
+}
+
+function alternativeKey(side) {
+  return `${side}Alternatives`;
+}
+
+function normalizeComment(comment) {
+  return {
+    id: comment?.id || (crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`),
+    strategyId: comment?.strategyId || comment?.strategy_id || "",
+    authorId: comment?.authorId || comment?.author_id || null,
+    author: String(comment?.author || comment?.author_name || "Membro da guilda"),
+    body: String(comment?.body || "").trim(),
+    reaction: comment?.reaction === 1 || comment?.reaction === -1 ? comment.reaction : null,
+    createdAt: comment?.createdAt || comment?.created_at || new Date().toISOString(),
+  };
+}
+
 function toMonsterId(value) {
   if (!value || value === "*") return value;
   if (monsterById.has(value)) return monsterById.get(value).id;
@@ -159,7 +221,7 @@ function toMonsterId(value) {
 
 function saveStrategies() {
   if (cloudEnabled) return;
-  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 3, strategies }));
+  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 5, strategies }));
 }
 
 function updateStorageUi(mode) {
@@ -167,12 +229,21 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.13 · Supabase" : "POC v0.13 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.17 · Supabase" : "POC v0.17 · dados locais";
 }
 
 async function connectCloudUser() {
   currentUserId = await database.ensureUser(currentUser);
-  strategies = migrateStrategies(await database.listStrategies());
+  const [strategyRows, comments] = await Promise.all([database.listStrategies(), database.listComments()]);
+  const commentsByStrategy = new Map();
+  comments.forEach((comment) => {
+    if (!commentsByStrategy.has(comment.strategyId)) commentsByStrategy.set(comment.strategyId, []);
+    commentsByStrategy.get(comment.strategyId).push(normalizeComment(comment));
+  });
+  strategies = migrateStrategies(strategyRows).map((strategy) => ({
+    ...strategy,
+    comments: commentsByStrategy.get(strategy.id) || [],
+  }));
 }
 
 function escapeHtml(value) {
@@ -190,7 +261,12 @@ function icon(name, className = "") {
     chevron: '<path d="m9 18 6-6-6-6" />',
     link: '<path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15" /><path d="M14 11a5 5 0 0 0-7.54-.54l-2 2a5 5 0 0 0 7.07 7.07l1.14-1.14" />',
     plus: '<path d="M12 5v14M5 12h14" />',
+    close: '<path d="M18 6 6 18M6 6l12 12" />',
     trash: '<path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v5M14 11v5" />',
+    lock: '<rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />',
+    comment: '<path d="M21 12a8 8 0 0 1-8 8H6l-4 2 1.5-5A8.5 8.5 0 1 1 21 12Z" />',
+    thumbsUp: '<path d="M7 10v10H3V10h4Zm0 9c2.5 1.3 5.1 2 7.8 2H17a3 3 0 0 0 2.9-2.3l1-4A3 3 0 0 0 18 11h-4l.7-3.3A3.1 3.1 0 0 0 11.6 4L7 10v9Z" />',
+    thumbsDown: '<path d="M17 14V4h4v10h-4Zm0-9c-2.5-1.3-5.1-2-7.8-2H7a3 3 0 0 0-2.9 2.3l-1 4A3 3 0 0 0 6 13h4l-.7 3.3a3.1 3.1 0 0 0 3.1 3.7l4.6-6V5Z" />',
   };
   return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[name] || ""}</svg>`;
 }
@@ -202,6 +278,10 @@ function compactText(value, fallback, maxLength = 150) {
 
 function normalize(value) {
   return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function searchTokens(value) {
+  return normalize(value).match(/[a-z0-9]+/g) || [];
 }
 
 function monsterAwakenLevel(monster) {
@@ -259,8 +339,8 @@ function showApp() {
 }
 
 function render() {
-  const defenseTokens = normalize($("#searchInput")?.value || "").split(/\s+/).filter(Boolean);
-  const detailTokens = normalize($("#detailSearchInput")?.value || "").split(/\s+/).filter(Boolean);
+  const monsterTokens = searchTokens($("#searchInput")?.value || "");
+  const detailTokens = searchTokens($("#detailSearchInput")?.value || "");
   const activeStrategies = strategies.filter((strategy) => strategy.isActive !== false);
   const visible = activeStrategies.filter((strategy) => {
     const matchesSafety = activeSafety === "all" || strategy.safety === activeSafety;
@@ -273,12 +353,17 @@ function render() {
       const monster = getMonster(id);
       return [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
     });
+    const alternativeText = [...(strategy.attackAlternatives || []).flat(), ...(strategy.defenseAlternatives || []).flat()].map((id) => {
+      const monster = getMonster(id);
+      return [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
+    });
     const sectionText = Object.values(strategy.sections || {});
-    const defenseHaystack = normalize(defenseText.join(" "));
-    const detailHaystack = normalize([...attackText, strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText].join(" "));
-    const matchesDefense = defenseTokens.every((token) => defenseHaystack.includes(token));
+    const feedbackText = (strategy.comments || []).flatMap((comment) => [comment.author, comment.body]);
+    const monsterHaystack = normalize([...defenseText, ...attackText, ...alternativeText].join(" "));
+    const detailHaystack = normalize([strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText, ...feedbackText].join(" "));
+    const matchesMonsters = monsterTokens.every((token) => monsterHaystack.includes(token));
     const matchesDetails = detailTokens.every((token) => detailHaystack.includes(token));
-    return matchesSafety && matchesStatus && matchesDefense && matchesDetails;
+    return matchesSafety && matchesStatus && matchesMonsters && matchesDetails;
   });
 
   $("#totalStrategies").textContent = activeStrategies.length;
@@ -301,7 +386,7 @@ function render() {
 
 function strategyCard(strategy) {
   const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(strategy.createdAt));
-  const canDelete = cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser;
+  const canDelete = !READ_ONLY_MODE && (cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser);
   const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
   const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
   const flexibleDefense = strategy.defense[2] === "*";
@@ -311,6 +396,11 @@ function strategyCard(strategy) {
   );
   const risk = compactText(strategy.sections?.risks, "Nenhum risco específico foi informado.");
   const turnOrder = compactText(strategy.sections?.turnOrder, "Ordem de turno ainda não informada.");
+  const comments = [...(strategy.comments || [])].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  const positiveCount = comments.filter((comment) => comment.reaction === 1).length;
+  const negativeCount = comments.filter((comment) => comment.reaction === -1).length;
+  const commentCount = comments.length;
+  const commentLabel = `${commentCount} ${commentCount === 1 ? "comentário" : "comentários"}`;
   return `
     <details class="strategy-card" data-strategy-id="${escapeHtml(strategy.id)}">
       <summary class="strategy-summary">
@@ -324,12 +414,12 @@ function strategyCard(strategy) {
         <div class="matchup">
           <div class="team defense-team">
             <span class="team-label">Defesa encontrada</span>
-            <div class="monsters">${strategy.defense.map((id) => monsterChip(id, "defense")).join("")}</div>
+            <div class="monsters">${teamComposition(strategy, "defense")}</div>
           </div>
           <span class="matchup-arrow" aria-hidden="true">${icon("arrow")}</span>
           <div class="team attack-team">
             <span class="team-label">Counter recomendado</span>
-            <div class="monsters">${strategy.attack.map((id) => monsterChip(id, "attack")).join("")}</div>
+            <div class="monsters">${teamComposition(strategy, "attack")}</div>
           </div>
         </div>
         <div class="decision-strip">
@@ -337,11 +427,20 @@ function strategyCard(strategy) {
           <article class="decision-item risk-signal"><span>Risco crítico</span><p>${escapeHtml(risk)}</p></article>
           <article class="decision-item turn-signal"><span>Ordem de turno</span><p>${escapeHtml(turnOrder)}</p></article>
         </div>
-        <span class="open-hint"><span>Ver plano completo, builds e alvos</span>${icon("chevron", "expand-icon")}</span>
+        <span class="open-hint">
+          <span>Ver plano completo, builds e feedback</span>
+          <span class="open-hint-meta">
+            ${positiveCount ? `<span class="compact-reaction positive">+${positiveCount}</span>` : ""}
+            ${negativeCount ? `<span class="compact-reaction negative">−${negativeCount}</span>` : ""}
+            <span class="compact-comment-count">${icon("comment")} ${commentLabel}</span>
+            ${icon("chevron", "expand-icon")}
+          </span>
+        </span>
       </summary>
       <div class="strategy-details">
         <div class="playbook-heading"><p class="eyebrow">GUIA DE EXECUÇÃO</p><h3>Como montar e pilotar</h3></div>
         <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className, key)).join("")}</div>
+        ${strategyFeedback(strategy, comments, positiveCount, negativeCount)}
         <div class="card-footer">
           <span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>
           <div class="card-actions">
@@ -353,12 +452,81 @@ function strategyCard(strategy) {
     </details>`;
 }
 
+function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
+  const strategyId = escapeHtml(strategy.id);
+  const commentsMarkup = comments.length
+    ? comments.map(commentItem).join("")
+    : `<div class="feedback-empty">${icon("comment")}<p><strong>Ainda não há feedback.</strong><span>${READ_ONLY_MODE ? "Os comentários serão liberados depois desta primeira avaliação da guilda." : "Se você testar esta composição, conte para a guilda como foi."}</span></p></div>`;
+  const disabledAttribute = READ_ONLY_MODE ? " disabled aria-disabled=\"true\"" : "";
+  return `
+    <section class="feedback-section" aria-labelledby="feedback-title-${strategyId}">
+      <div class="feedback-heading">
+        <div>
+          <h4 id="feedback-title-${strategyId}">Feedback da guilda</h4>
+          <p>${READ_ONLY_MODE ? "Comentários e reações serão liberados após esta primeira avaliação." : "O +1 ou −1 é opcional e sempre acompanha um comentário."}</p>
+        </div>
+        <div class="feedback-totals" aria-label="${positiveCount} feedbacks positivos e ${negativeCount} feedbacks negativos">
+          <span class="feedback-total positive">${icon("thumbsUp")}<strong>${positiveCount}</strong></span>
+          <span class="feedback-total negative">${icon("thumbsDown")}<strong>${negativeCount}</strong></span>
+        </div>
+      </div>
+      <div class="comment-list" aria-label="Comentários da guilda">${commentsMarkup}</div>
+      <form class="comment-form${READ_ONLY_MODE ? " is-read-only" : ""}" data-comment-form data-strategy-id="${strategyId}">
+        ${READ_ONLY_MODE ? `<div class="feedback-readonly-notice">${icon("lock")}<span><strong>Modo somente leitura</strong>Você pode consultar o histórico, mas novos comentários estão temporariamente desativados.</span></div>` : ""}
+        <div class="comment-field-heading"><label for="comment-${strategyId}">Adicionar feedback</label><span data-comment-counter>0/500</span></div>
+        <textarea id="comment-${strategyId}" name="body" rows="3" minlength="1" maxlength="500" required placeholder="${READ_ONLY_MODE ? "Comentários disponíveis em breve." : "Conte o que aconteceu na luta, o que funcionou ou qual foi o risco real."}"${disabledAttribute}></textarea>
+        <div class="comment-form-footer">
+          <fieldset class="reaction-picker"${READ_ONLY_MODE ? " disabled" : ""}>
+            <legend>Resultado <span>opcional</span></legend>
+            <div class="reaction-options">
+              <label class="reaction-choice neutral"><input type="radio" name="reaction" value="" checked><span>Só comentar</span></label>
+              <label class="reaction-choice positive"><input type="radio" name="reaction" value="1"><span>${icon("thumbsUp")} +1 Funcionou</span></label>
+              <label class="reaction-choice negative"><input type="radio" name="reaction" value="-1"><span>${icon("thumbsDown")} −1 Não funcionou</span></label>
+            </div>
+          </fieldset>
+          <button class="button button-primary comment-submit" type="submit"${disabledAttribute}>Publicar feedback</button>
+        </div>
+      </form>
+    </section>`;
+}
+
+function commentItem(comment) {
+  const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(comment.createdAt));
+  const reaction = comment.reaction === 1
+    ? `<span class="comment-reaction positive">${icon("thumbsUp")} +1 Funcionou</span>`
+    : comment.reaction === -1
+      ? `<span class="comment-reaction negative">${icon("thumbsDown")} −1 Não funcionou</span>`
+      : "";
+  return `
+    <article class="comment-item">
+      <span class="comment-avatar" aria-hidden="true">${escapeHtml(comment.author.charAt(0).toUpperCase() || "?")}</span>
+      <div class="comment-content">
+        <div class="comment-meta"><strong>${escapeHtml(comment.author)}</strong><time datetime="${escapeHtml(comment.createdAt)}">${date}</time>${reaction}</div>
+        <p>${escapeHtml(comment.body)}</p>
+      </div>
+    </article>`;
+}
+
 function detailSection(title, content, className, key) {
   const hasContent = Boolean(content?.trim());
   return `<section class="detail-section ${className} section-${key}${hasContent ? "" : " empty"}"><h4>${escapeHtml(title)}</h4><p>${hasContent ? escapeHtml(content) : "Não informado."}</p></section>`;
 }
 
-function monsterChip(id, side) {
+function teamComposition(strategy, side) {
+  const alternatives = strategy[alternativeKey(side)] || [[], [], []];
+  return strategy[side].map((id, index) => compositionSlot(id, alternatives[index] || [], side, index)).join("");
+}
+
+function compositionSlot(primaryId, alternatives, side, index) {
+  const names = [primaryId, ...alternatives].map((id) => displayMonsterName(getMonster(id)));
+  return `
+    <div class="composition-slot${alternatives.length ? " has-alternatives" : ""}" aria-label="Slot ${index + 1}: ${escapeHtml(names.join(" ou "))}">
+      ${monsterChip(primaryId, side)}
+      ${alternatives.map((id) => `<div class="alternative-row"><span>ou</span>${monsterChip(id, side, true)}</div>`).join("")}
+    </div>`;
+}
+
+function monsterChip(id, side, isAlternative = false) {
   const monster = getMonster(id);
   if (id === "*") {
     const label = side === "attack" ? "Sem terceiro" : "Qualquer um";
@@ -370,7 +538,7 @@ function monsterChip(id, side) {
     ? `<img class="monster-image ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />`
     : `<span class="monster-image fallback-avatar">${escapeHtml(displayName.slice(0, 2).toUpperCase())}</span>`;
   const externalId = monster.externalIds?.com2us ? ` · ID ${monster.externalIds.com2us}` : "";
-  return `<span class="monster monster-with-image" title="${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(displayName)}</span></span>`;
+  return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(displayName)}</span></span>`;
 }
 
 function openStrategyDialog() {
@@ -386,14 +554,8 @@ function closeStrategyDialog() {
 }
 
 function resetSelection() {
-  selection = { attack: [null, null, "*"], defense: [null, null, "*"] };
-  document.querySelectorAll(".monster-select[data-slot]").forEach((button) => {
-    if (button.dataset.optional === "true") renderOptionalWildcard(button);
-    else {
-      button.className = "monster-select";
-      button.innerHTML = `<span class="select-plus">${icon("plus")}</span><span>Selecionar</span>`;
-    }
-  });
+  selection = emptySelection();
+  ["attack", "defense"].forEach((side) => [0, 1, 2].forEach((index) => renderSelectionSlot(side, index)));
 }
 
 function renderOptionalWildcard(button) {
@@ -403,14 +565,59 @@ function renderOptionalWildcard(button) {
   button.innerHTML = `<span class="wildcard-avatar">X</span><span><strong>${isAttack ? "Sem terceiro" : "Qualquer monstro"}</strong><small>${isAttack ? "Selecione se quiser usar" : "Selecione se for específico"}</small></span>`;
 }
 
-function openMonsterPicker(button) {
-  const [side, index] = button.dataset.slot.split("-");
-  pickerSlot = { side, index: Number(index), button };
+function renderSelectionSlot(side, index) {
+  const button = document.querySelector(`.monster-select[data-slot="${side}-${index}"]`);
+  const selectedId = selection[side][index];
+  if (!button) return;
+  if (selectedId === "*") renderOptionalWildcard(button);
+  else if (!selectedId) {
+    button.className = "monster-select";
+    button.innerHTML = `<span class="select-plus">${icon("plus")}</span><span>Selecionar</span>`;
+  } else {
+    const monster = getMonster(selectedId);
+    button.className = "monster-select selected";
+    button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small></span>`;
+  }
+  renderSelectedAlternatives(side, index);
+}
+
+function renderSelectedAlternatives(side, index) {
+  const container = document.querySelector(`[data-alternatives-for="${side}-${index}"]`);
+  if (!container) return;
+  const primaryId = selection[side][index];
+  const alternatives = selection[alternativeKey(side)][index];
+  if (!primaryId || primaryId === "*") {
+    container.innerHTML = "";
+    return;
+  }
+  const chips = alternatives.map((id) => {
+    const monster = getMonster(id);
+    return `
+      <span class="selected-alternative">
+        <img class="alternative-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" />
+        <span title="${escapeHtml(displayMonsterName(monster))}">${escapeHtml(displayMonsterName(monster))}</span>
+        <button type="button" data-remove-alternative data-side="${side}" data-index="${index}" data-monster-id="${escapeHtml(id)}" aria-label="Remover ${escapeHtml(displayMonsterName(monster))}">${icon("close")}</button>
+      </span>`;
+  }).join("");
+  const addButton = alternatives.length < MAX_SLOT_ALTERNATIVES
+    ? `<button class="add-alternative" type="button" data-add-alternative data-side="${side}" data-index="${index}">${icon("plus")}<span>${alternatives.length ? "Outra opção" : "Alternativa"}</span></button>`
+    : `<span class="alternative-limit">Limite de ${MAX_SLOT_ALTERNATIVES}</span>`;
+  container.innerHTML = chips + addButton;
+}
+
+function openMonsterPicker({ side, index, mode = "primary", button = null }) {
+  pickerSlot = { side, index: Number(index), mode, button };
   activeElement = "all";
   $("#monsterSearch").value = "";
   document.querySelectorAll("[data-element]").forEach((item) => item.classList.toggle("active", item.dataset.element === "all"));
-  const optional = Number(index) === 2 ? " (opcional)" : "";
-  $("#pickerTitle").textContent = side === "attack" ? `Ataque · monstro ${Number(index) + 1}${optional}` : `Defesa · monstro ${Number(index) + 1}${optional}`;
+  const optional = Number(index) === 2 && mode === "primary" ? " (opcional)" : "";
+  const sideLabel = side === "attack" ? "Ataque" : "Defesa";
+  $("#pickerTitle").textContent = mode === "alternative"
+    ? `${sideLabel} · alternativa do slot ${Number(index) + 1}`
+    : `${sideLabel} · monstro ${Number(index) + 1}${optional}`;
+  $("#pickerHelp").textContent = mode === "alternative"
+    ? "Escolha outro monstro que possa cumprir este mesmo papel."
+    : "Escolha pelo nome, elemento ou ID.";
   renderMonsterOptions();
   monsterDialog.showModal();
   setTimeout(() => $("#monsterSearch").focus(), 40);
@@ -418,13 +625,16 @@ function openMonsterPicker(button) {
 
 function renderMonsterOptions() {
   const query = normalize($("#monsterSearch").value);
-  const selectedIds = new Set(selection[pickerSlot?.side] || []);
+  const selectedIds = new Set([
+    ...(selection[pickerSlot?.side] || []),
+    ...(selection[alternativeKey(pickerSlot?.side)] || []).flat(),
+  ]);
   const matching = monsters.filter((monster) => {
     const names = [monster.id, monster.name, monster.canonicalName, monster.externalIds?.com2us, monster.externalIds?.swarfarm, ...(monster.aliases || [])].join(" ");
     return normalize(names).includes(query) && (activeElement === "all" || monster.element === activeElement) && !selectedIds.has(monster.id);
   });
   const visible = matching.slice(0, 80);
-  const isOptionalSlot = pickerSlot?.index === 2;
+  const isOptionalSlot = pickerSlot?.index === 2 && pickerSlot?.mode === "primary";
   const optionalSearchText = pickerSlot?.side === "attack" ? "Sem terceiro opcional" : "Qualquer monstro opcional";
   const wildcardMatches = isOptionalSlot && activeElement === "all" && normalize(optionalSearchText).includes(query);
   const wildcardOption = wildcardMatches ? `
@@ -437,7 +647,7 @@ function renderMonsterOptions() {
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
       <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
-      <span class="add-label">Adicionar</span>
+      <span class="add-label">${pickerSlot?.mode === "alternative" ? "Usar como opção" : "Adicionar"}</span>
     </button>`).join("");
   $("#monsterOptions").innerHTML = wildcardOption + monsterOptions + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") || '<div class="no-options">Nenhum monstro encontrado.</div>';
 }
@@ -446,14 +656,20 @@ function selectMonster(id) {
   if (!pickerSlot) return;
   if (id === "*") {
     selection[pickerSlot.side][pickerSlot.index] = "*";
-    renderOptionalWildcard(pickerSlot.button);
+    selection[alternativeKey(pickerSlot.side)][pickerSlot.index] = [];
+    renderSelectionSlot(pickerSlot.side, pickerSlot.index);
     monsterDialog.close();
     return;
   }
-  const monster = getMonster(id);
-  selection[pickerSlot.side][pickerSlot.index] = id;
-  pickerSlot.button.classList.add("selected");
-  pickerSlot.button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small></span>`;
+  if (pickerSlot.mode === "alternative") {
+    const options = selection[alternativeKey(pickerSlot.side)][pickerSlot.index];
+    if (options.length >= MAX_SLOT_ALTERNATIVES) {
+      showToast(`Cada slot aceita até ${MAX_SLOT_ALTERNATIVES} alternativas.`);
+      return;
+    }
+    options.push(id);
+  } else selection[pickerSlot.side][pickerSlot.index] = id;
+  renderSelectionSlot(pickerSlot.side, pickerSlot.index);
   monsterDialog.close();
 }
 
@@ -522,10 +738,30 @@ $("#logoutButton").addEventListener("click", () => {
   $("#playerName").focus();
 });
 
-[$("#openFormButton"), $("#emptyAddButton")].forEach((button) => button.addEventListener("click", openStrategyDialog));
+configureReadOnlyMode();
+[$("#openFormButton"), $("#emptyAddButton")].forEach((button) => {
+  if (!READ_ONLY_MODE) button.addEventListener("click", openStrategyDialog);
+});
 [$("#closeDialogButton"), $("#cancelDialogButton")].forEach((button) => button.addEventListener("click", closeStrategyDialog));
 $("#closeMonsterDialog").addEventListener("click", () => monsterDialog.close());
-document.querySelectorAll(".monster-select[data-slot]").forEach((button) => button.addEventListener("click", () => openMonsterPicker(button)));
+document.querySelectorAll(".monster-select[data-slot]").forEach((button) => button.addEventListener("click", () => {
+  const [side, index] = button.dataset.slot.split("-");
+  openMonsterPicker({ side, index: Number(index), button });
+}));
+
+$("#strategyForm").addEventListener("click", (event) => {
+  const addButton = event.target.closest("[data-add-alternative]");
+  if (addButton) {
+    openMonsterPicker({ side: addButton.dataset.side, index: Number(addButton.dataset.index), mode: "alternative" });
+    return;
+  }
+  const removeButton = event.target.closest("[data-remove-alternative]");
+  if (!removeButton) return;
+  const side = removeButton.dataset.side;
+  const index = Number(removeButton.dataset.index);
+  selection[alternativeKey(side)][index] = selection[alternativeKey(side)][index].filter((id) => id !== removeButton.dataset.monsterId);
+  renderSelectionSlot(side, index);
+});
 
 strategyDialog.addEventListener("click", (event) => {
   if (event.target === strategyDialog) closeStrategyDialog();
@@ -547,10 +783,30 @@ $("#monsterOptions").addEventListener("click", (event) => {
   if (button) selectMonster(button.dataset.monsterId);
 });
 
+function selectionValidationError(side) {
+  const label = side === "attack" ? "ataque" : "defesa";
+  const primaryIds = selection[side];
+  const alternatives = selection[alternativeKey(side)];
+  if (primaryIds.slice(0, 2).some((id) => !id || id === "*")) return `Selecione pelo menos 2 monstros no ${label}.`;
+  const allIds = primaryIds.filter((id) => id && id !== "*");
+  for (let index = 0; index < 3; index += 1) {
+    if ((!primaryIds[index] || primaryIds[index] === "*") && alternatives[index].length) return `O slot ${index + 1} do ${label} precisa de um monstro principal.`;
+    if (alternatives[index].length > MAX_SLOT_ALTERNATIVES) return `O slot ${index + 1} do ${label} excedeu o limite de alternativas.`;
+    allIds.push(...alternatives[index]);
+  }
+  if (new Set(allIds).size !== allIds.length) return `Um mesmo monstro não pode ocupar dois slots do ${label}.`;
+  return "";
+}
+
 $("#strategyForm").addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (selection.attack.slice(0, 2).some((id) => !id) || selection.defense.slice(0, 2).some((id) => !id)) {
-    showToast("Selecione pelo menos 2 monstros no ataque e 2 na defesa.");
+  if (READ_ONLY_MODE) {
+    showToast("O cadastro de ataques está temporariamente desativado.");
+    return;
+  }
+  const validationError = selectionValidationError("attack") || selectionValidationError("defense");
+  if (validationError) {
+    showToast(validationError);
     return;
   }
   const data = new FormData(event.currentTarget);
@@ -559,8 +815,11 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     player: currentUser,
     attack: [...selection.attack],
     defense: [...selection.defense],
+    attackAlternatives: selection.attackAlternatives.map((slot) => [...slot]),
+    defenseAlternatives: selection.defenseAlternatives.map((slot) => [...slot]),
     safety: data.get("safety"),
     status: data.get("status"),
+    comments: [],
     sections: {
       gamePlan: data.get("gamePlan").trim(),
       idealStats: data.get("idealStats").trim(),
@@ -594,6 +853,60 @@ $("#strategyForm").addEventListener("submit", async (event) => {
   }
 });
 
+$("#strategyList").addEventListener("input", (event) => {
+  const textarea = event.target.closest(".comment-form textarea");
+  if (!textarea) return;
+  const counter = textarea.closest(".comment-form")?.querySelector("[data-comment-counter]");
+  if (counter) counter.textContent = `${textarea.value.length}/500`;
+});
+
+$("#strategyList").addEventListener("submit", async (event) => {
+  const form = event.target.closest("[data-comment-form]");
+  if (!form) return;
+  event.preventDefault();
+  if (READ_ONLY_MODE) {
+    showToast("Os comentários estão temporariamente desativados.");
+    return;
+  }
+  const strategy = strategies.find((item) => item.id === form.dataset.strategyId);
+  if (!strategy) return;
+  const data = new FormData(form);
+  const body = String(data.get("body") || "").trim();
+  if (!body) {
+    showToast("Escreva um comentário antes de publicar.");
+    return;
+  }
+  const rawReaction = data.get("reaction");
+  const comment = {
+    id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
+    strategyId: strategy.id,
+    authorId: currentUserId,
+    author: currentUser,
+    body,
+    reaction: rawReaction === "1" ? 1 : rawReaction === "-1" ? -1 : null,
+    createdAt: new Date().toISOString(),
+  };
+  const submitButton = form.querySelector("button[type='submit']");
+  submitButton.disabled = true;
+  submitButton.textContent = "Publicando...";
+  try {
+    const savedComment = cloudEnabled
+      ? await database.createComment(comment, currentUserId, currentUser)
+      : comment;
+    strategy.comments = [...(strategy.comments || []), normalizeComment(savedComment)];
+    saveStrategies();
+    render();
+    const updatedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === strategy.id);
+    if (updatedCard) updatedCard.open = true;
+    showToast(comment.reaction ? "Feedback e reação publicados." : "Comentário publicado.");
+  } catch (error) {
+    console.error(error);
+    submitButton.disabled = false;
+    submitButton.textContent = "Publicar feedback";
+    showToast("Não foi possível publicar. Tente novamente.");
+  }
+});
+
 $("#strategyList").addEventListener("click", async (event) => {
   const shareButton = event.target.closest("[data-share-id]");
   if (shareButton) {
@@ -610,6 +923,7 @@ $("#strategyList").addEventListener("click", async (event) => {
   const deleteButton = event.target.closest("[data-delete-id]");
   const id = deleteButton?.dataset.deleteId;
   if (!id) return;
+  if (READ_ONLY_MODE) return;
   const strategy = strategies.find((item) => item.id === id);
   const canDelete = cloudEnabled ? strategy?.ownerId === currentUserId && !strategy?.isSeed : strategy?.player === currentUser;
   if (!strategy || !canDelete || !window.confirm("Excluir esta estratégia?")) return;

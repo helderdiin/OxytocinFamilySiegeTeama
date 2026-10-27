@@ -27,9 +27,11 @@ Given an enemy defense, find a relevant counter and understand, at a glance:
 - Shared strategies stored in Supabase.
 - Search and filters for safety and validation status.
 - Two required monsters and an optional third monster on both attack and defense.
+- Up to four alternative monsters can be attached to each occupied attack or defense slot without duplicating a strategy.
 - Monster catalog with images, external IDs, elements, aliases, and preferred 2A variants.
 - Structured strategy guidance: game plan, recommended stats/builds, turn order, target priority, third-slot variations, risks, substitutions, and battle evidence.
 - Expandable strategy records and direct share links.
+- Collaborative comments with an optional +1 or -1 result attached to each feedback entry.
 - Inactive strategies remain stored but are hidden from the member-facing UI.
 
 ## Product positioning

@@ -18,8 +18,11 @@
       player: row.player_name,
       attack: row.attack,
       defense: row.defense,
+      attackAlternatives: row.attack_alternatives || [[], [], []],
+      defenseAlternatives: row.defense_alternatives || [[], [], []],
       safety: row.safety,
       status: row.validation_status,
+      comments: [],
       sections: row.sections || {},
       isSeed: row.is_seed,
       isActive: row.is_active !== false,
@@ -33,12 +36,26 @@
       player_name: nick,
       attack: strategy.attack,
       defense: strategy.defense,
+      attack_alternatives: strategy.attackAlternatives,
+      defense_alternatives: strategy.defenseAlternatives,
       safety: strategy.safety,
       validation_status: strategy.status,
       sections: strategy.sections,
       is_seed: false,
       is_active: true,
       created_at: strategy.createdAt || new Date().toISOString(),
+    };
+  }
+
+  function commentFromDatabase(row) {
+    return {
+      id: row.id,
+      strategyId: row.strategy_id,
+      authorId: row.author_id,
+      author: row.author_name,
+      body: row.body,
+      reaction: row.reaction === 1 || row.reaction === -1 ? row.reaction : null,
+      createdAt: row.created_at,
     };
   }
 
@@ -67,7 +84,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategies")
-      .select("id, owner_id, player_name, attack, defense, safety, validation_status, sections, is_seed, is_active, created_at")
+      .select("id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data.map(fromDatabase);
@@ -78,10 +95,38 @@
     const { data, error } = await client
       .from("strategies")
       .insert(toDatabase(strategy, userId, nick))
-      .select("id, owner_id, player_name, attack, defense, safety, validation_status, sections, is_seed, is_active, created_at")
+      .select("id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
       .single();
     if (error) throw error;
     return fromDatabase(data);
+  }
+
+  async function listComments() {
+    assertConfigured();
+    const { data, error } = await client
+      .from("strategy_comments")
+      .select("id, strategy_id, author_id, author_name, body, reaction, created_at")
+      .order("created_at", { ascending: true });
+    if (error) throw error;
+    return data.map(commentFromDatabase);
+  }
+
+  async function createComment(comment, userId, nick) {
+    assertConfigured();
+    const { data, error } = await client
+      .from("strategy_comments")
+      .insert({
+        strategy_id: comment.strategyId,
+        author_id: userId,
+        author_name: nick,
+        body: comment.body,
+        reaction: comment.reaction,
+        created_at: comment.createdAt || new Date().toISOString(),
+      })
+      .select("id, strategy_id, author_id, author_name, body, reaction, created_at")
+      .single();
+    if (error) throw error;
+    return commentFromDatabase(data);
   }
 
   async function deleteStrategy(id, userId) {
@@ -95,6 +140,8 @@
     ensureUser,
     listStrategies,
     createStrategy,
+    listComments,
+    createComment,
     deleteStrategy,
   };
 })();

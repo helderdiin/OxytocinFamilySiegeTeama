@@ -18,8 +18,10 @@ Abra `http://localhost:4173`.
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
 - cadastro exige pelo menos dois monstros no ataque e dois na defesa; o terceiro slot de cada lado é opcional e usa o coringa `X` quando não informado;
 - observações opcionais;
+- alternativas por slot no ataque e na defesa, sem duplicar a estratégia;
 - busca por texto, filtros de segurança/status e exclusão dos próprios registros;
 - compartilhamento de uma composição por link, abrindo o card correspondente já expandido;
+- comentários colaborativos por ataque, com reação opcional `+1` ou `-1` vinculada ao comentário;
 - estratégias podem ser mantidas no banco como inativas sem aparecer na UI;
 - persistência no `localStorage` do navegador;
 
@@ -32,6 +34,8 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261027020000_initial_schema.sql`
 - `supabase/migrations/20261027130000_optional_third_slots.sql`
 - `supabase/migrations/20261027160000_strategy_activation.sql`
+- `supabase/migrations/20261027180000_strategy_comments.sql`
+- `supabase/migrations/20261027210000_strategy_slot_alternatives.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente as próprias estratégias. As cinco comps oficiais do seed são protegidas.
@@ -68,11 +72,13 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 
 ```json
 {
-  "schemaVersion": 3,
+  "schemaVersion": 5,
   "strategies": [
     {
       "attack": ["skogul", "chloe", "kahli"],
       "defense": ["conrad", "robo-r40", "*"],
+      "attackAlternatives": [[], [], ["covenant"]],
+      "defenseAlternatives": [[], [], []],
       "safety": "safe",
       "status": "proven",
       "sections": {
