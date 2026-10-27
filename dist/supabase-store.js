@@ -82,13 +82,6 @@
     return fromDatabase(data);
   }
 
-  async function importStrategies(records, userId, nick) {
-    assertConfigured();
-    const rows = records.map((strategy) => toDatabase({ ...strategy, createdAt: new Date().toISOString() }, userId, nick));
-    const { error } = await client.from("strategies").insert(rows);
-    if (error) throw error;
-  }
-
   async function deleteStrategy(id, userId) {
     assertConfigured();
     const { error } = await client.from("strategies").delete().eq("id", id).eq("owner_id", userId);
@@ -100,7 +93,6 @@
     ensureUser,
     listStrategies,
     createStrategy,
-    importStrategies,
     deleteStrategy,
   };
 })();

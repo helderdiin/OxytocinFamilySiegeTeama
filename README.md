@@ -20,8 +20,6 @@ Abra `http://localhost:4173`.
 - observações opcionais;
 - busca por texto, filtros de segurança/status e exclusão dos próprios registros;
 - persistência no `localStorage` do navegador;
-- exportação e importação manual em JSON, com confirmação explícita antes de substituir a base local.
-- arquivo de exemplo com cinco counters comprovados em `examples/oxytocin-import-5-comps.json`.
 
 Enquanto a configuração do Supabase não estiver preenchida, os dados continuam somente no `localStorage` do navegador.
 

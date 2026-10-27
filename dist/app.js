@@ -101,7 +101,6 @@ let activeSafety = "all";
 let activeStatus = "all";
 let activeElement = "all";
 let strategies = [];
-let pendingImport = null;
 let currentUserId = null;
 let monsters = [];
 let monsterById = new Map();
@@ -114,7 +113,6 @@ const loginScreen = $("#loginScreen");
 const appShell = $("#appShell");
 const strategyDialog = $("#strategyDialog");
 const monsterDialog = $("#monsterDialog");
-const importConfirmDialog = $("#importConfirmDialog");
 const database = window.oxytocinDb;
 const cloudEnabled = Boolean(database?.isConfigured());
 
@@ -167,18 +165,12 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.7 · Supabase" : "POC v0.7 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.8 · Supabase" : "POC v0.8 · dados locais";
 }
 
 async function connectCloudUser() {
   currentUserId = await database.ensureUser(currentUser);
   strategies = migrateStrategies(await database.listStrategies());
-}
-
-async function refreshCloudStrategies() {
-  if (!cloudEnabled) return;
-  strategies = migrateStrategies(await database.listStrategies());
-  render();
 }
 
 function escapeHtml(value) {
@@ -521,93 +513,6 @@ $("#clearFiltersButton").addEventListener("click", () => {
   $("#safetyFilter").value = "all";
   $("#statusFilter").value = "all";
   render();
-});
-
-$("#exportButton").addEventListener("click", () => {
-  const payload = { schemaVersion: 3, exportedAt: new Date().toISOString(), strategies };
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = `oxytocin-siege-${new Date().toISOString().slice(0, 10)}.json`;
-  link.click();
-  URL.revokeObjectURL(link.href);
-  showToast("Arquivo exportado.");
-});
-
-$("#importInput").addEventListener("change", async (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
-  try {
-    const parsed = JSON.parse(await file.text());
-    const imported = Array.isArray(parsed) ? parsed : parsed.strategies;
-    const valid = Array.isArray(imported) && imported.every((item) =>
-      typeof item.player === "string" && Array.isArray(item.attack) && item.attack.length === 3 && Array.isArray(item.defense) && item.defense.length >= 2
-    );
-    if (!valid) throw new Error("Formato inválido");
-    pendingImport = migrateStrategies(imported).map((item) => ({ ...item, id: item.id || `${Date.now()}-${Math.random()}` }));
-    $("#currentImportCount").textContent = strategies.length;
-    $("#newImportCount").textContent = pendingImport.length;
-    if (cloudEnabled) {
-      $("#importConfirmTitle").textContent = "Adicionar estratégias à base?";
-      $("#importWarningText").textContent = "As estratégias do arquivo serão adicionadas à base compartilhada. Nenhuma composição existente será removida.";
-      $("#currentImportDescription").textContent = "estratégias existentes serão mantidas";
-      $("#importArrow").textContent = "+";
-      $("#importConfirmNote").innerHTML = "<strong>Base compartilhada:</strong> as novas estratégias ficarão vinculadas ao seu usuário atual.";
-      $("#confirmImportButton").textContent = "Adicionar à base";
-    } else {
-      $("#importConfirmTitle").textContent = "Substituir estratégias locais?";
-      $("#importWarningText").textContent = "A importação substitui toda a base salva neste navegador. Esta ação não pode ser desfeita.";
-      $("#currentImportDescription").textContent = "estratégias serão removidas";
-      $("#importArrow").textContent = "→";
-      $("#importConfirmNote").innerHTML = "<strong>Quer guardar a base atual?</strong> Cancele e use “Exportar” antes de importar o novo arquivo.";
-      $("#confirmImportButton").textContent = "Substituir e importar";
-    }
-    importConfirmDialog.showModal();
-  } catch {
-    showToast("Não foi possível importar esse arquivo.");
-  } finally {
-    event.target.value = "";
-  }
-});
-
-function cancelImport() {
-  pendingImport = null;
-  importConfirmDialog.close();
-}
-
-$("#cancelImportButton").addEventListener("click", cancelImport);
-$("#confirmImportButton").addEventListener("click", async () => {
-  if (!pendingImport) return;
-  const records = pendingImport;
-  const button = $("#confirmImportButton");
-  button.disabled = true;
-  button.textContent = cloudEnabled ? "Adicionando..." : "Importando...";
-  try {
-    if (cloudEnabled) {
-      await database.importStrategies(records, currentUserId, currentUser);
-      await refreshCloudStrategies();
-    } else {
-      strategies = records;
-      saveStrategies();
-      render();
-    }
-    pendingImport = null;
-    importConfirmDialog.close();
-    showToast(cloudEnabled ? "Estratégias adicionadas à base compartilhada." : "Base substituída e estratégias importadas.");
-  } catch (error) {
-    console.error(error);
-    showToast("Não foi possível importar as estratégias.");
-  } finally {
-    button.disabled = false;
-    button.textContent = cloudEnabled ? "Adicionar à base" : "Substituir e importar";
-  }
-});
-importConfirmDialog.addEventListener("click", (event) => {
-  if (event.target === importConfirmDialog) cancelImport();
-});
-importConfirmDialog.addEventListener("cancel", (event) => {
-  event.preventDefault();
-  cancelImport();
 });
 
 async function init() {
