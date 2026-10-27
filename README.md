@@ -18,9 +18,10 @@ Abra `http://localhost:4173`.
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens;
 - cadastro de ataque com três monstros e defesa com dois monstros fixos + um slot coringa `X`;
 - observações opcionais;
-- busca, filtro de autoria e exclusão dos próprios registros;
+- busca por texto, filtros de segurança/status e exclusão dos próprios registros;
 - persistência no `localStorage` do navegador;
-- exportação e importação manual em JSON.
+- exportação e importação manual em JSON, com confirmação explícita antes de substituir a base local.
+- arquivo de exemplo com cinco counters comprovados em `examples/oxytocin-import-5-comps.json`.
 
 Os dados ainda não são compartilhados entre dispositivos. Uma evolução natural é substituir o `localStorage` por uma API com banco compartilhado e autenticação real.
 

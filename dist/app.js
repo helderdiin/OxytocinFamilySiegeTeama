@@ -97,11 +97,11 @@ const sectionDefinitions = [
 ];
 
 let currentUser = localStorage.getItem(STORAGE_KEYS.user) || "";
-let activeFilter = "all";
 let activeSafety = "all";
 let activeStatus = "all";
 let activeElement = "all";
 let strategies = [];
+let pendingImport = null;
 let monsters = [];
 let monsterById = new Map();
 let monsterByName = new Map();
@@ -113,6 +113,7 @@ const loginScreen = $("#loginScreen");
 const appShell = $("#appShell");
 const strategyDialog = $("#strategyDialog");
 const monsterDialog = $("#monsterDialog");
+const importConfirmDialog = $("#importConfirmDialog");
 
 function readStoredStrategies() {
   try {
@@ -186,7 +187,6 @@ function showApp() {
 function render() {
   const query = normalize($("#searchInput")?.value || "");
   const visible = strategies.filter((strategy) => {
-    const matchesOwner = activeFilter !== "mine" || strategy.player === currentUser;
     const matchesSafety = activeSafety === "all" || strategy.safety === activeSafety;
     const matchesStatus = activeStatus === "all" || strategy.status === activeStatus;
     const monsterText = [...strategy.attack, ...strategy.defense].map((id) => {
@@ -195,7 +195,7 @@ function render() {
     });
     const sectionText = Object.values(strategy.sections || {});
     const haystack = normalize([...monsterText, strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText].join(" "));
-    return matchesOwner && matchesSafety && matchesStatus && haystack.includes(query);
+    return matchesSafety && matchesStatus && haystack.includes(query);
   });
 
   $("#totalStrategies").textContent = strategies.length;
@@ -412,21 +412,12 @@ $("#statusFilter").addEventListener("change", (event) => {
   render();
 });
 $("#clearFiltersButton").addEventListener("click", () => {
-  activeFilter = "all";
   activeSafety = "all";
   activeStatus = "all";
   $("#searchInput").value = "";
   $("#safetyFilter").value = "all";
   $("#statusFilter").value = "all";
-  document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("active", item.dataset.filter === "all"));
   render();
-});
-document.querySelectorAll("[data-filter]").forEach((button) => {
-  button.addEventListener("click", () => {
-    activeFilter = button.dataset.filter;
-    document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("active", item === button));
-    render();
-  });
 });
 
 $("#exportButton").addEventListener("click", () => {
@@ -450,15 +441,38 @@ $("#importInput").addEventListener("change", async (event) => {
       typeof item.player === "string" && Array.isArray(item.attack) && item.attack.length === 3 && Array.isArray(item.defense) && item.defense.length >= 2
     );
     if (!valid) throw new Error("Formato inválido");
-    strategies = migrateStrategies(imported).map((item) => ({ ...item, id: item.id || `${Date.now()}-${Math.random()}` }));
-    saveStrategies();
-    render();
-    showToast("Estratégias importadas com sucesso.");
+    pendingImport = migrateStrategies(imported).map((item) => ({ ...item, id: item.id || `${Date.now()}-${Math.random()}` }));
+    $("#currentImportCount").textContent = strategies.length;
+    $("#newImportCount").textContent = pendingImport.length;
+    importConfirmDialog.showModal();
   } catch {
     showToast("Não foi possível importar esse arquivo.");
   } finally {
     event.target.value = "";
   }
+});
+
+function cancelImport() {
+  pendingImport = null;
+  importConfirmDialog.close();
+}
+
+$("#cancelImportButton").addEventListener("click", cancelImport);
+$("#confirmImportButton").addEventListener("click", () => {
+  if (!pendingImport) return;
+  strategies = pendingImport;
+  pendingImport = null;
+  saveStrategies();
+  render();
+  importConfirmDialog.close();
+  showToast("Base substituída e estratégias importadas.");
+});
+importConfirmDialog.addEventListener("click", (event) => {
+  if (event.target === importConfirmDialog) cancelImport();
+});
+importConfirmDialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  cancelImport();
 });
 
 async function init() {

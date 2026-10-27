@@ -87,10 +87,6 @@
               <span>⌕</span>
               <input id="searchInput" type="search" placeholder="Buscar monstro, jogador, estratégia, risco ou status..." />
             </label>
-            <div class="filter-tabs" role="group" aria-label="Filtrar ataques">
-              <button class="active" data-filter="all" type="button">Todos</button>
-              <button data-filter="mine" type="button">Meus ataques</button>
-            </div>
           </div>
           <div class="advanced-filters">
             <label>Segurança<select id="safetyFilter"><option value="all">Todos os níveis</option><option value="very_safe">Muito seguro</option><option value="safe">Seguro</option><option value="situational">Situacional</option><option value="experimental">Experimental</option></select></label>
@@ -107,7 +103,7 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span>POC v0.3 · dados locais</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span>POC v0.4 · dados locais</span></footer>
     </div>
 
     <dialog id="strategyDialog">
@@ -171,6 +167,22 @@
           <button data-element="dark" type="button">Trevas</button>
         </div>
         <div class="monster-options" id="monsterOptions"></div>
+      </div>
+    </dialog>
+
+    <dialog id="importConfirmDialog" class="confirm-dialog" aria-labelledby="importConfirmTitle" aria-describedby="importWarningText">
+      <div class="confirm-dialog-body">
+        <span class="confirm-icon" aria-hidden="true">!</span>
+        <p class="eyebrow">CONFIRMAR IMPORTAÇÃO</p>
+        <h2 id="importConfirmTitle">Substituir estratégias locais?</h2>
+        <p id="importWarningText">A importação substitui toda a base salva neste navegador. Esta ação não pode ser desfeita.</p>
+        <div class="import-comparison" aria-label="Resumo da substituição">
+          <div><small>BASE ATUAL</small><strong id="currentImportCount">0</strong><span>estratégias serão removidas</span></div>
+          <span class="import-arrow" aria-hidden="true">→</span>
+          <div><small>NOVO ARQUIVO</small><strong id="newImportCount">0</strong><span>estratégias serão importadas</span></div>
+        </div>
+        <p class="confirm-note"><strong>Quer guardar a base atual?</strong> Cancele e use “Exportar” antes de importar o novo arquivo.</p>
+        <div class="dialog-actions"><button class="button button-ghost" id="cancelImportButton" type="button">Cancelar</button><button class="button button-danger" id="confirmImportButton" type="button">Substituir e importar</button></div>
       </div>
     </dialog>
 
