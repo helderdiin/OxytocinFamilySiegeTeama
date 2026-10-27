@@ -98,30 +98,30 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">POC v0.8 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">POC v0.10 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
       <div class="dialog-header">
-        <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Informe o ataque e os dois monstros fixos da defesa.</p></div>
+        <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Informe pelo menos dois monstros de cada lado. O terceiro slot é opcional.</p></div>
         <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">×</button>
       </div>
       <form id="strategyForm">
         <fieldset>
-          <legend><span class="legend-icon attack">⚔</span><span><strong>Seu ataque</strong><small>O time que vence essa defesa</small></span></legend>
+          <legend><span class="legend-icon attack">⚔</span><span><strong>Seu ataque</strong><small>Dois monstros obrigatórios + terceiro opcional</small></span></legend>
           <div class="monster-grid">
             <label>Monstro 1<button class="monster-select" data-slot="attack-0" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
             <label>Monstro 2<button class="monster-select" data-slot="attack-1" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
-            <label>Monstro 3<button class="monster-select" data-slot="attack-2" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
+            <label>Monstro 3 · opcional<button class="monster-select wildcard-select" data-slot="attack-2" data-optional="true" type="button"><span class="wildcard-avatar">X</span><span><strong>Sem terceiro</strong><small>Selecione se quiser usar</small></span></button></label>
           </div>
         </fieldset>
         <div class="versus-divider"><span>VS</span></div>
         <fieldset>
-          <legend><span class="legend-icon defense">⬡</span><span><strong>Defesa inimiga</strong><small>Dois monstros fixos + qualquer terceiro</small></span></legend>
+          <legend><span class="legend-icon defense">⬡</span><span><strong>Defesa inimiga</strong><small>Dois monstros obrigatórios + terceiro opcional</small></span></legend>
           <div class="monster-grid">
             <label>Monstro 1<button class="monster-select" data-slot="defense-0" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
             <label>Monstro 2<button class="monster-select" data-slot="defense-1" type="button"><span class="select-plus">＋</span><span>Selecionar</span></button></label>
-            <label>Monstro 3<button class="monster-select wildcard-select" type="button" disabled><span class="wildcard-avatar">X</span><span><strong>Qualquer monstro</strong><small>Explique abaixo</small></span></button></label>
+            <label>Monstro 3 · opcional<button class="monster-select wildcard-select" data-slot="defense-2" data-optional="true" type="button"><span class="wildcard-avatar">X</span><span><strong>Qualquer monstro</strong><small>Selecione se for específico</small></span></button></label>
           </div>
         </fieldset>
         <div class="versus-divider"><span>ESTRATÉGIA</span></div>
@@ -170,6 +170,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
     <script src="./supabase-store.js"></script>
-    <script src="./app.js?v=0.8"></script>
+    <script src="./app.js?v=0.10"></script>
   </body>
 </html>

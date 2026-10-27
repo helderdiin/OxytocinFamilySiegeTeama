@@ -106,7 +106,9 @@ let monsters = [];
 let monsterById = new Map();
 let monsterByName = new Map();
 let pickerSlot = null;
-let selection = { attack: [null, null, null], defense: [null, null, "*"] };
+let selection = { attack: [null, null, "*"], defense: [null, null, "*"] };
+const sharedStrategyId = new URLSearchParams(window.location.search).get("strategy");
+let sharedStrategyOpened = false;
 
 const $ = (selector) => document.querySelector(selector);
 const loginScreen = $("#loginScreen");
@@ -131,8 +133,8 @@ function migrateStrategies(records) {
     const { notes, ...rest } = strategy;
     return {
       ...rest,
-      attack: strategy.attack.slice(0, 3).map(toMonsterId),
-      defense: [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), "*"],
+      attack: [toMonsterId(strategy.attack[0]), toMonsterId(strategy.attack[1]), toMonsterId(strategy.attack[2] || "*")],
+      defense: [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), toMonsterId(strategy.defense[2] || "*")],
       safety: safetyNames[strategy.safety] ? strategy.safety : "situational",
       status: statusNames[strategy.status] ? strategy.status : "needs_testing",
       sections: {
@@ -165,7 +167,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.8 · Supabase" : "POC v0.8 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.10 · Supabase" : "POC v0.10 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -260,6 +262,16 @@ function render() {
   $("#strategyList").innerHTML = visible.map(strategyCard).join("");
   $("#emptyState").hidden = visible.length > 0;
   $("#resultCount").textContent = `${visible.length} ${visible.length === 1 ? "estratégia" : "estratégias"}`;
+
+  if (sharedStrategyId && !sharedStrategyOpened) {
+    const sharedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === sharedStrategyId);
+    if (sharedCard) {
+      sharedStrategyOpened = true;
+      sharedCard.open = true;
+      sharedCard.classList.add("shared-strategy");
+      requestAnimationFrame(() => sharedCard.scrollIntoView({ behavior: "smooth", block: "center" }));
+    }
+  }
 }
 
 function strategyCard(strategy) {
@@ -268,16 +280,16 @@ function strategyCard(strategy) {
   const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
   const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
   return `
-    <details class="strategy-card">
+    <details class="strategy-card" data-strategy-id="${escapeHtml(strategy.id)}">
       <summary class="strategy-summary">
         <div class="team attack-team">
           <span class="team-label attack-label">⚔ ATAQUE</span>
-          <div class="monsters">${strategy.attack.map(monsterChip).join("")}</div>
+          <div class="monsters">${strategy.attack.map((id) => monsterChip(id, "attack")).join("")}</div>
         </div>
         <span class="vs">VS</span>
         <div class="team">
           <span class="team-label">⬡ DEFESA</span>
-          <div class="monsters">${strategy.defense.map(monsterChip).join("")}</div>
+          <div class="monsters">${strategy.defense.map((id) => monsterChip(id, "defense")).join("")}</div>
         </div>
         <div class="strategy-meta">
           <div class="strategy-badges"><span class="strategy-badge ${safetyClass}">${safetyNames[strategy.safety]}</span><span class="strategy-badge ${statusClass}">${statusNames[strategy.status]}</span></div>
@@ -288,7 +300,13 @@ function strategyCard(strategy) {
       </summary>
       <div class="strategy-details">
         <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className)).join("")}</div>
-        <div class="card-footer"><span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>${canDelete ? `<div class="card-actions"><button class="delete-button" data-delete-id="${strategy.id}" type="button">Excluir estratégia</button></div>` : ""}</div>
+        <div class="card-footer">
+          <span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>
+          <div class="card-actions">
+            <button class="share-button" data-share-id="${escapeHtml(strategy.id)}" type="button">Copiar link</button>
+            ${canDelete ? `<button class="delete-button" data-delete-id="${escapeHtml(strategy.id)}" type="button">Excluir estratégia</button>` : ""}
+          </div>
+        </div>
       </div>
     </details>`;
 }
@@ -298,9 +316,13 @@ function detailSection(title, content, className) {
   return `<section class="detail-section ${className}${hasContent ? "" : " empty"}"><h4>${escapeHtml(title)}</h4><p>${hasContent ? escapeHtml(content) : "Não informado."}</p></section>`;
 }
 
-function monsterChip(id) {
+function monsterChip(id, side) {
   const monster = getMonster(id);
-  if (id === "*") return `<span class="monster monster-with-image wildcard-chip" title="Qualquer terceiro monstro"><span class="monster-image wildcard-avatar">X</span><span>Qualquer um</span></span>`;
+  if (id === "*") {
+    const label = side === "attack" ? "Sem terceiro" : "Qualquer um";
+    const title = side === "attack" ? "Ataque utiliza apenas dois monstros" : "Qualquer terceiro monstro";
+    return `<span class="monster monster-with-image wildcard-chip" title="${title}"><span class="monster-image wildcard-avatar">X</span><span>${label}</span></span>`;
+  }
   const displayName = displayMonsterName(monster);
   const image = monster.image
     ? `<img class="monster-image ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />`
@@ -322,11 +344,21 @@ function closeStrategyDialog() {
 }
 
 function resetSelection() {
-  selection = { attack: [null, null, null], defense: [null, null, "*"] };
+  selection = { attack: [null, null, "*"], defense: [null, null, "*"] };
   document.querySelectorAll(".monster-select[data-slot]").forEach((button) => {
-    button.className = "monster-select";
-    button.innerHTML = '<span class="select-plus">＋</span><span>Selecionar</span>';
+    if (button.dataset.optional === "true") renderOptionalWildcard(button);
+    else {
+      button.className = "monster-select";
+      button.innerHTML = '<span class="select-plus">＋</span><span>Selecionar</span>';
+    }
   });
+}
+
+function renderOptionalWildcard(button) {
+  const [side] = button.dataset.slot.split("-");
+  const isAttack = side === "attack";
+  button.className = "monster-select wildcard-select";
+  button.innerHTML = `<span class="wildcard-avatar">X</span><span><strong>${isAttack ? "Sem terceiro" : "Qualquer monstro"}</strong><small>${isAttack ? "Selecione se quiser usar" : "Selecione se for específico"}</small></span>`;
 }
 
 function openMonsterPicker(button) {
@@ -335,7 +367,8 @@ function openMonsterPicker(button) {
   activeElement = "all";
   $("#monsterSearch").value = "";
   document.querySelectorAll("[data-element]").forEach((item) => item.classList.toggle("active", item.dataset.element === "all"));
-  $("#pickerTitle").textContent = side === "attack" ? `Ataque · monstro ${Number(index) + 1}` : `Defesa · monstro ${Number(index) + 1}`;
+  const optional = Number(index) === 2 ? " (opcional)" : "";
+  $("#pickerTitle").textContent = side === "attack" ? `Ataque · monstro ${Number(index) + 1}${optional}` : `Defesa · monstro ${Number(index) + 1}${optional}`;
   renderMonsterOptions();
   monsterDialog.showModal();
   setTimeout(() => $("#monsterSearch").focus(), 40);
@@ -349,16 +382,32 @@ function renderMonsterOptions() {
     return normalize(names).includes(query) && (activeElement === "all" || monster.element === activeElement) && !selectedIds.has(monster.id);
   });
   const visible = matching.slice(0, 80);
-  $("#monsterOptions").innerHTML = visible.length ? visible.map((monster) => `
+  const isOptionalSlot = pickerSlot?.index === 2;
+  const optionalSearchText = pickerSlot?.side === "attack" ? "Sem terceiro opcional" : "Qualquer monstro opcional";
+  const wildcardMatches = isOptionalSlot && activeElement === "all" && normalize(optionalSearchText).includes(query);
+  const wildcardOption = wildcardMatches ? `
+    <button class="monster-option wildcard-option" data-monster-id="*" type="button">
+      <span class="picker-avatar wildcard-avatar">X</span>
+      <span class="option-copy"><strong>${pickerSlot.side === "attack" ? "Sem terceiro" : "Qualquer monstro"}</strong><small>${pickerSlot.side === "attack" ? "Usar somente dois atacantes" : "Deixar o terceiro defensor em aberto"}</small></span>
+      <span class="add-label">Usar X</span>
+    </button>` : "";
+  const monsterOptions = visible.map((monster) => `
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
       <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
       <span class="add-label">Adicionar ＋</span>
-    </button>`).join("") + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") : '<div class="no-options">Nenhum monstro encontrado.</div>';
+    </button>`).join("");
+  $("#monsterOptions").innerHTML = wildcardOption + monsterOptions + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") || '<div class="no-options">Nenhum monstro encontrado.</div>';
 }
 
 function selectMonster(id) {
   if (!pickerSlot) return;
+  if (id === "*") {
+    selection[pickerSlot.side][pickerSlot.index] = "*";
+    renderOptionalWildcard(pickerSlot.button);
+    monsterDialog.close();
+    return;
+  }
   const monster = getMonster(id);
   selection[pickerSlot.side][pickerSlot.index] = id;
   pickerSlot.button.classList.add("selected");
@@ -373,6 +422,30 @@ function showToast(message) {
   toast.classList.add("visible");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove("visible"), 2600);
+}
+
+function strategyShareUrl(id) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("strategy", id);
+  url.hash = "";
+  return url.toString();
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand("copy");
+    textarea.remove();
+    if (!copied) throw new Error("Clipboard indisponível");
+  }
 }
 
 $("#loginForm").addEventListener("submit", async (event) => {
@@ -434,8 +507,8 @@ $("#monsterOptions").addEventListener("click", (event) => {
 
 $("#strategyForm").addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (selection.attack.some((id) => !id) || selection.defense.slice(0, 2).some((id) => !id)) {
-    showToast("Selecione os cinco monstros antes de salvar.");
+  if (selection.attack.slice(0, 2).some((id) => !id) || selection.defense.slice(0, 2).some((id) => !id)) {
+    showToast("Selecione pelo menos 2 monstros no ataque e 2 na defesa.");
     return;
   }
   const data = new FormData(event.currentTarget);
@@ -480,7 +553,20 @@ $("#strategyForm").addEventListener("submit", async (event) => {
 });
 
 $("#strategyList").addEventListener("click", async (event) => {
-  const id = event.target.dataset.deleteId;
+  const shareButton = event.target.closest("[data-share-id]");
+  if (shareButton) {
+    try {
+      await copyText(strategyShareUrl(shareButton.dataset.shareId));
+      showToast("Link da estratégia copiado.");
+    } catch (error) {
+      console.error(error);
+      showToast("Não foi possível copiar o link.");
+    }
+    return;
+  }
+
+  const deleteButton = event.target.closest("[data-delete-id]");
+  const id = deleteButton?.dataset.deleteId;
   if (!id) return;
   const strategy = strategies.find((item) => item.id === id);
   const canDelete = cloudEnabled ? strategy?.ownerId === currentUserId && !strategy?.isSeed : strategy?.player === currentUser;

@@ -1,6 +1,6 @@
 # Oxytocin Siege Teams
 
-POC interna da guilda Oxytocin para registrar e consultar ataques de três monstros contra defesas de três monstros no Siege de Summoners War: Sky Arena.
+POC interna da guilda Oxytocin para registrar e consultar ataques contra defesas no Siege de Summoners War: Sky Arena.
 
 ## Como executar
 
@@ -16,9 +16,10 @@ Abra `http://localhost:4173`.
 
 - identificação por nick, sem senha;
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
-- cadastro de ataque com três monstros e defesa com dois monstros fixos + um slot coringa `X`;
+- cadastro exige pelo menos dois monstros no ataque e dois na defesa; o terceiro slot de cada lado é opcional e usa o coringa `X` quando não informado;
 - observações opcionais;
 - busca por texto, filtros de segurança/status e exclusão dos próprios registros;
+- compartilhamento de uma composição por link, abrindo o card correspondente já expandido;
 - persistência no `localStorage` do navegador;
 
 Enquanto a configuração do Supabase não estiver preenchida, os dados continuam somente no `localStorage` do navegador.
@@ -28,6 +29,7 @@ Enquanto a configuração do Supabase não estiver preenchida, os dados continua
 A primeira migration e o seed oficial estão em:
 
 - `supabase/migrations/20261027020000_initial_schema.sql`
+- `supabase/migrations/20261027130000_optional_third_slots.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente as próprias estratégias. As cinco comps oficiais do seed são protegidas.
@@ -77,7 +79,7 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 }
 ```
 
-O valor `"*"` representa qualquer terceiro monstro na defesa; as condições, exceções e instruções ficam organizadas no objeto `sections`.
+O valor `"*"` representa a ausência do terceiro atacante ou qualquer terceiro monstro na defesa; as condições, exceções e instruções ficam organizadas no objeto `sections`.
 
 ## Sincronização do catálogo
 

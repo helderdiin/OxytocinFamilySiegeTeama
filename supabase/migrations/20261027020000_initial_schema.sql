@@ -12,8 +12,18 @@ create table public.strategies (
   source_key text unique,
   owner_id uuid references public.profiles(id) on delete set null,
   player_name text not null check (char_length(trim(player_name)) between 2 and 64),
-  attack text[] not null check (cardinality(attack) = 3),
-  defense text[] not null check (cardinality(defense) = 3 and defense[3] = '*'),
+  attack text[] not null constraint strategies_attack_composition_check check (
+    cardinality(attack) = 3
+    and attack[1] is not null and btrim(attack[1]) <> '' and attack[1] <> '*'
+    and attack[2] is not null and btrim(attack[2]) <> '' and attack[2] <> '*'
+    and attack[3] is not null and btrim(attack[3]) <> ''
+  ),
+  defense text[] not null constraint strategies_defense_composition_check check (
+    cardinality(defense) = 3
+    and defense[1] is not null and btrim(defense[1]) <> '' and defense[1] <> '*'
+    and defense[2] is not null and btrim(defense[2]) <> '' and defense[2] <> '*'
+    and defense[3] is not null and btrim(defense[3]) <> ''
+  ),
   safety text not null check (safety in ('very_safe', 'safe', 'situational', 'experimental')),
   validation_status text not null check (validation_status in ('proven', 'recommended', 'needs_testing')),
   sections jsonb not null default '{}'::jsonb check (jsonb_typeof(sections) = 'object'),
