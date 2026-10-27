@@ -18,7 +18,9 @@ Abra `http://localhost:4173`.
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
 - defesas são registros compartilhados e cada uma pode reunir vários counters independentes;
 - cadastro exige pelo menos dois monstros no counter e dois na defesa; o terceiro slot de cada lado é opcional e usa o coringa `X` quando não informado;
-- plano de jogo, builds, ordem de turno, prioridades, variações, riscos, substituições e evidências ficam estruturados por counter;
+- plano de jogo, ordem de turno, prioridades, variações, riscos, substituições e evidências ficam estruturados por counter;
+- builds recomendadas podem ser informadas por monstro em uma tabela opcional, incluindo runas e metas mínimas de status para titulares e alternativas;
+- cada counter pode incluir um vídeo opcional do YouTube, exibido dentro do próprio guia;
 - alternativas por slot no counter e na defesa, sem duplicar registros;
 - um novo counter pode partir de uma defesa existente, mantendo a composição inimiga bloqueada e preenchendo somente a nova proposta;
 - busca por monstros do counter ou da defesa, conteúdo textual e filtros de segurança/status;
@@ -39,9 +41,12 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261027180000_strategy_comments.sql`
 - `supabase/migrations/20261027210000_strategy_slot_alternatives.sql`
 - `supabase/migrations/20261027230000_defenses_and_multiple_counters.sql`
+- `supabase/migrations/20261028000000_strategy_build_recommendations.sql`
+- `supabase/migrations/20261028010000_strategy_youtube_video.sql`
+- `supabase/migrations/20261028020000_windy_alternative_for_gyomei.sql`
 - `supabase/seed.sql`
 
-O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente os próprios counters. As seis entradas oficiais do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
+O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente os próprios counters. As sete entradas oficiais do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
 
 No navegador deve ser usada somente a chave pública `publishable`, nunca uma chave `secret` ou a antiga `service_role`. O formato esperado está em `dist/supabase-config.example.js`.
 
@@ -49,7 +54,7 @@ No navegador deve ser usada somente a chave pública `publishable`, nunca uma ch
 
 1. No painel do Supabase, abra **Authentication → Providers → Anonymous Sign-Ins** e habilite o login anônimo.
 2. Abra o **SQL Editor** e execute, em ordem, os arquivos de `supabase/migrations`.
-3. Ainda no **SQL Editor**, execute `supabase/seed.sql` para cadastrar as seis comps iniciais. O seed é idempotente e pode ser executado novamente sem duplicá-las.
+3. Ainda no **SQL Editor**, execute `supabase/seed.sql` para cadastrar as sete comps iniciais. O seed é idempotente e pode ser executado novamente sem duplicá-las.
 4. Copie `dist/supabase-config.example.js` para `dist/supabase-config.js` e preencha a URL e a chave `publishable` do projeto.
 5. Inicie o servidor local e acesse `http://localhost:4173`.
 
@@ -75,7 +80,7 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 
 ```json
 {
-  "schemaVersion": 6,
+  "schemaVersion": 8,
   "strategies": [
     {
       "defenseId": "defense-fingerprint-or-uuid",
@@ -87,7 +92,18 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
       "status": "proven",
       "sections": {
         "gamePlan": "Preparar o Skogul e eliminar a maior ameaça.",
+        "videoUrl": "https://youtu.be/4i-BoXLldhc",
         "idealStats": "Chloe deve abrir o time.",
+        "builds": [
+          {
+            "monsterId": "skogul",
+            "slot": 0,
+            "isAlternative": false,
+            "runes": "Vampire / Will",
+            "hp": 30000,
+            "def": 800
+          }
+        ],
         "turnOrder": "Chloe → Kahli → Skogul.",
         "targetPriority": "Eliminar primeiro quem remove buffs.",
         "thirdVariations": "Funciona com terceiros sem sustain pesado.",

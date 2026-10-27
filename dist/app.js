@@ -85,6 +85,25 @@ const seedStrategies = [
     },
     createdAt: "2026-10-27T14:00:00.000Z",
   },
+  {
+    id: "seed-5",
+    player: "Mittus",
+    attack: ["platy", "shihwa", "elucia"],
+    defense: ["morris", "orion", "trevor"],
+    safety: "safe",
+    status: "proven",
+    sections: {
+      gamePlan: "Use a lead de 24% SPD da Platy para entrar no ciclo com segurança. Shihwa e Elucia 2A alternam sono e congelamento sobre Trevor, enquanto Platy sustenta o time com cura, aumento de ATB, strip, controle de cooldown e revive. Com Trevor fora da rotação, elimine Orion e depois Morris antes de finalizar Trevor.",
+      idealStats: "Platy e Elucia 2A com bastante HP e DEF; Violent/Will funciona bem nas duas, e Swift/Will é uma alternativa para Elucia. Platy precisa de boa RES e ACC suficiente para strip, stun e aumento de cooldown. Shihwa pode usar Violent/Destroy, equilibrando dano, durabilidade e ACC para sustentar o controle. Não copie valores fixos de SPD: o trio precisa sobreviver à abertura e ciclar sem deixar Trevor agir livre.",
+      turnOrder: "Platy → Shihwa → Elucia 2A como referência. Platy pressiona Orion com a S3 quando possível; Shihwa coloca Trevor para dormir e ganha o turno extra; Elucia mantém Trevor dormindo ou congelado, ou guarda a S2 para limpar e recuperar o aliado afetado pelo Orion. Mais importante que uma sequência rígida é nunca liberar Trevor.",
+      targetPriority: "Orion → Morris → Trevor. Remover Orion reduz strip, DEF Break e a variação da abertura; depois elimine Morris para impedir sustain e revive. Trevor fica controlado e morre por último, evitando ativar cedo o pico da passiva e o contra-ataque da S2.",
+      thirdVariations: "Registro validado especificamente contra Morris + Orion + Trevor em torre Nat4. O plano depende de Trevor ser a ameaça mantida sob controle; não extrapole automaticamente para uma defesa com imunidade, cleanse ou passivas anti-controle.",
+      risks: "Não use se Shihwa e Elucia não tiverem velocidade e durabilidade para manter Trevor travado. Procs Violent de Orion ou Morris, uma falha de controle, imunidade inesperada ou Trevor saindo do sono já abaixo de 30% podem disparar a S2 e o contra-ataque e virar a luta. Evite dano incidental em Trevor enquanto ele estiver dormindo e não o deixe com pouca vida antes de Orion e Morris morrerem.",
+      substitutions: "Sem substituição comprovada nesta variação. Há registros do núcleo Platy + Shihwa com Iona ou Betta, mas a troca muda sustain, controle e recuperação; não trate essas opções como equivalentes à Elucia 2A sem testar.",
+      evidence: "Comprovado pela guilda. Uma base comunitária documenta a mesma defesa e confirma o núcleo Platy + Shihwa, o controle do Trevor e a ordem Orion → Morris → Trevor; bases de Siege G3 também registram Shihwa + Elucia 2A juntas em ataques.",
+    },
+    createdAt: "2026-10-27T15:00:00.000Z",
+  },
 ];
 
 const elementNames = {
@@ -111,13 +130,25 @@ const statusNames = {
 
 const sectionDefinitions = [
   ["gamePlan", "Plano de jogo", "primary"],
-  ["idealStats", "Status e builds recomendadas", ""],
+  ["idealStats", "Observações de build", ""],
   ["turnOrder", "Ordem de turno", ""],
   ["targetPriority", "Prioridade de alvo", ""],
   ["thirdVariations", "Variações do terceiro monstro", ""],
   ["risks", "Riscos — nunca use contra", "warning"],
   ["substitutions", "Substituições possíveis", ""],
   ["evidence", "Experiência comprovada", ""],
+];
+
+const buildStatDefinitions = [
+  { key: "runes", label: "Runas", kind: "text", placeholder: "Violent / Will", maxLength: 80 },
+  { key: "hp", label: "HP", hint: "bônus", kind: "bonus", step: 100, max: 200000 },
+  { key: "atk", label: "ATK", hint: "bônus", kind: "bonus", step: 50, max: 10000 },
+  { key: "def", label: "DEF", hint: "bônus", kind: "bonus", step: 50, max: 10000 },
+  { key: "spd", label: "SPD", hint: "bônus", kind: "bonus", step: 1, max: 1000 },
+  { key: "cr", label: "CR", hint: "total", kind: "percent", step: 1, max: 100 },
+  { key: "cd", label: "CD", hint: "total", kind: "percent", step: 1, max: 400 },
+  { key: "res", label: "RES", hint: "total", kind: "percent", step: 1, max: 100 },
+  { key: "acc", label: "ACC", hint: "total", kind: "percent", step: 1, max: 100 },
 ];
 
 let currentUser = localStorage.getItem(STORAGE_KEYS.user) || "";
@@ -131,8 +162,11 @@ let monsterById = new Map();
 let monsterByName = new Map();
 let pickerSlot = null;
 let selection = emptySelection();
+let buildDraft = new Map();
 let dialogDefenseId = null;
-const sharedStrategyId = new URLSearchParams(window.location.search).get("strategy");
+const initialQuery = new URLSearchParams(window.location.search);
+let sharedStrategyId = initialQuery.get("strategy");
+let selectedDefenseId = initialQuery.get("defense");
 let sharedStrategyOpened = false;
 
 const $ = (selector) => document.querySelector(selector);
@@ -186,6 +220,8 @@ function migrateStrategies(records) {
       sections: {
         gamePlan: strategy.sections?.gamePlan || notes || "",
         idealStats: strategy.sections?.idealStats || "",
+        builds: normalizeBuildRecommendations(strategy.sections?.builds, attack, attackAlternatives),
+        videoUrl: normalizeYouTubeUrl(strategy.sections?.videoUrl),
         turnOrder: strategy.sections?.turnOrder || "",
         targetPriority: strategy.sections?.targetPriority || "",
         thirdVariations: strategy.sections?.thirdVariations || "",
@@ -230,6 +266,45 @@ function normalizeSlotAlternatives(value, primaryIds) {
   });
 }
 
+function attackMonsterReferences(attack, alternatives = [[], [], []]) {
+  return [0, 1, 2].flatMap((slot) => {
+    const primaryId = attack[slot];
+    if (!primaryId || primaryId === "*") return [];
+    return [
+      { monsterId: primaryId, slot, isAlternative: false },
+      ...(alternatives[slot] || []).map((monsterId) => ({ monsterId, slot, isAlternative: true })),
+    ];
+  });
+}
+
+function sanitizeBuildValue(value, definition) {
+  if (definition.kind === "text") return String(value || "").trim().slice(0, definition.maxLength);
+  if (value === "" || value === null || value === undefined) return null;
+  const number = Number(value);
+  if (!Number.isFinite(number) || number < 0) return null;
+  return Math.min(Math.round(number), definition.max);
+}
+
+function buildHasContent(build) {
+  return buildStatDefinitions.some((definition) => {
+    const value = build?.[definition.key];
+    return definition.kind === "text" ? Boolean(String(value || "").trim()) : Number.isFinite(value);
+  });
+}
+
+function normalizeBuildRecommendations(value, attack, alternatives) {
+  const source = Array.isArray(value) ? value : [];
+  const sourceByMonster = new Map(source.map((build) => [String(build?.monsterId || build?.monster_id || ""), build]));
+  return attackMonsterReferences(attack, alternatives).map((reference) => {
+    const raw = sourceByMonster.get(reference.monsterId) || {};
+    const normalized = { ...reference };
+    buildStatDefinitions.forEach((definition) => {
+      normalized[definition.key] = sanitizeBuildValue(raw[definition.key], definition);
+    });
+    return normalized;
+  }).filter(buildHasContent);
+}
+
 function alternativeKey(side) {
   return `${side}Alternatives`;
 }
@@ -254,7 +329,7 @@ function toMonsterId(value) {
 
 function saveStrategies() {
   if (cloudEnabled) return;
-  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 6, strategies }));
+  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 8, strategies }));
 }
 
 function updateStorageUi(mode) {
@@ -262,7 +337,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.18 · Supabase" : "v0.18 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.21 · Supabase" : "v0.21 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -300,6 +375,7 @@ function icon(name, className = "") {
     comment: '<path d="M21 12a8 8 0 0 1-8 8H6l-4 2 1.5-5A8.5 8.5 0 1 1 21 12Z" />',
     thumbsUp: '<path d="M7 10v10H3V10h4Zm0 9c2.5 1.3 5.1 2 7.8 2H17a3 3 0 0 0 2.9-2.3l1-4A3 3 0 0 0 18 11h-4l.7-3.3A3.1 3.1 0 0 0 11.6 4L7 10v9Z" />',
     thumbsDown: '<path d="M17 14V4h4v10h-4Zm0-9c-2.5-1.3-5.1-2-7.8-2H7a3 3 0 0 0-2.9 2.3l-1 4A3 3 0 0 0 6 13h4l-.7 3.3a3.1 3.1 0 0 0 3.1 3.7l4.6-6V5Z" />',
+    play: '<path d="m9 7 8 5-8 5V7Z" /><circle cx="12" cy="12" r="9" />',
   };
   return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[name] || ""}</svg>`;
 }
@@ -315,6 +391,31 @@ function normalize(value) {
 
 function searchTokens(value) {
   return normalize(value).match(/[a-z0-9]+/g) || [];
+}
+
+function youtubeVideoId(value) {
+  const candidate = String(value || "").trim();
+  if (!candidate) return "";
+  try {
+    const url = new URL(candidate);
+    const host = url.hostname.toLowerCase().replace(/^www\./, "").replace(/^m\./, "");
+    let videoId = "";
+    if (host === "youtu.be") videoId = url.pathname.split("/").filter(Boolean)[0] || "";
+    else if (["youtube.com", "youtube-nocookie.com"].includes(host)) {
+      const parts = url.pathname.split("/").filter(Boolean);
+      videoId = url.pathname === "/watch"
+        ? url.searchParams.get("v") || ""
+        : ["embed", "shorts", "live"].includes(parts[0]) ? parts[1] || "" : "";
+    }
+    return /^[A-Za-z0-9_-]{11}$/.test(videoId) ? videoId : "";
+  } catch {
+    return "";
+  }
+}
+
+function normalizeYouTubeUrl(value) {
+  const videoId = youtubeVideoId(value);
+  return videoId ? `https://youtu.be/${videoId}` : "";
 }
 
 function monsterAwakenLevel(monster) {
@@ -390,7 +491,11 @@ function render() {
       const monster = getMonster(id);
       return [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
     });
-    const sectionText = Object.values(strategy.sections || {});
+    const sectionText = Object.entries(strategy.sections || {}).flatMap(([key, value]) => (
+      key === "builds" && Array.isArray(value)
+        ? value.flatMap((build) => [displayMonsterName(getMonster(build.monsterId)), ...Object.values(build)])
+        : [value]
+    ));
     const feedbackText = (strategy.comments || []).flatMap((comment) => [comment.author, comment.body]);
     const monsterHaystack = normalize([...defenseText, ...attackText, ...alternativeText].join(" "));
     const detailHaystack = normalize([strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText, ...feedbackText].join(" "));
@@ -401,14 +506,33 @@ function render() {
   const allGroups = groupStrategiesByDefense(activeStrategies);
   const visibleGroups = groupStrategiesByDefense(visibleStrategies);
 
+  if (!selectedDefenseId && sharedStrategyId) {
+    selectedDefenseId = activeStrategies.find((strategy) => strategy.id === sharedStrategyId)?.defenseId || null;
+  }
+  const selectedGroup = allGroups.find((group) => group.id === selectedDefenseId);
+  const isDefenseView = Boolean(selectedGroup);
+
   $("#totalStrategies").textContent = activeStrategies.length;
   $("#totalDefenses").textContent = allGroups.length;
   $("#totalPlayers").textContent = new Set(activeStrategies.map((item) => normalize(item.player))).size;
-  $("#strategyList").innerHTML = visibleGroups.map(defenseGroupCard).join("");
-  $("#emptyState").hidden = visibleGroups.length > 0;
-  const counterLabel = `${visibleStrategies.length} ${visibleStrategies.length === 1 ? "counter" : "counters"}`;
-  const defenseLabel = `${visibleGroups.length} ${visibleGroups.length === 1 ? "defesa" : "defesas"}`;
-  $("#resultCount").textContent = `${defenseLabel} · ${counterLabel}`;
+  $("#catalogView").hidden = isDefenseView;
+  $("#resultsHeading").hidden = isDefenseView;
+  $("#defenseViewIntro").hidden = !isDefenseView;
+  $("#strategyList").classList.toggle("is-catalog", !isDefenseView);
+  $("#strategyList").classList.toggle("is-defense-detail", isDefenseView);
+
+  if (isDefenseView) {
+    $("#defenseViewIntro").innerHTML = defenseDossier(selectedGroup);
+    $("#strategyList").innerHTML = defenseCounterList(selectedGroup);
+    $("#emptyState").hidden = true;
+  } else {
+    $("#defenseViewIntro").innerHTML = "";
+    $("#strategyList").innerHTML = visibleGroups.map(defenseCatalogCard).join("");
+    $("#emptyState").hidden = visibleGroups.length > 0;
+    const counterLabel = `${visibleStrategies.length} ${visibleStrategies.length === 1 ? "counter" : "counters"}`;
+    const defenseLabel = `${visibleGroups.length} ${visibleGroups.length === 1 ? "defesa" : "defesas"}`;
+    $("#resultCount").textContent = `${defenseLabel} · ${counterLabel}`;
+  }
 
   if (sharedStrategyId && !sharedStrategyOpened) {
     const sharedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === sharedStrategyId);
@@ -419,6 +543,84 @@ function render() {
       requestAnimationFrame(() => sharedCard.scrollIntoView({ behavior: "smooth", block: "center" }));
     }
   }
+}
+
+function defenseCatalogCard(group, index) {
+  const count = group.strategies.length;
+  const provenCount = group.strategies.filter((strategy) => strategy.status === "proven").length;
+  const bestStrategy = group.strategies[0];
+  const title = defenseDisplayTitle(group.defense);
+  return `
+    <button class="defense-catalog-card" data-open-defense-id="${escapeHtml(group.id)}" type="button" aria-label="Abrir defesa ${escapeHtml(title)}">
+      <span class="defense-card-topline">
+        <span class="defense-type">Defesa da Siege</span>
+        <span class="defense-number">${String(index + 1).padStart(2, "0")}</span>
+      </span>
+      <span class="defense-card-team defense-team"><span class="monsters">${teamComposition(group.defense, "defense")}</span></span>
+      <span class="defense-card-title">${escapeHtml(title)}</span>
+      <span class="defense-card-footer">
+        <span><strong>${count}</strong> ${count === 1 ? "counter" : "counters"}</span>
+        <span>${provenCount ? `${provenCount} ${provenCount === 1 ? "testado" : "testados"}` : statusNames[bestStrategy.status]}</span>
+        <span class="defense-card-action">Abrir dossiê ${icon("arrow")}</span>
+      </span>
+    </button>`;
+}
+
+function defenseCounterList(group) {
+  const count = group.strategies.length;
+  const countLabel = `${count} ${count === 1 ? "counter disponível" : "counters disponíveis"}`;
+  const disabledAttribute = READ_ONLY_MODE
+    ? ' disabled aria-disabled="true" title="Cadastro temporariamente desativado no modo somente leitura."'
+    : "";
+  return `
+    <section class="defense-counter-section" aria-labelledby="counter-heading">
+      <header class="defense-counter-heading">
+        <div><h2 id="counter-heading">Counters possíveis <span>${count}</span></h2><p>Compare rapidamente segurança, risco e ordem de turno antes de abrir o guia completo.</p></div>
+        <button class="add-counter-button" data-add-counter-defense-id="${escapeHtml(group.id)}" type="button"${disabledAttribute}>${icon("plus")}<span>Adicionar outro counter</span></button>
+      </header>
+      <div class="counter-stack detail-counter-stack" aria-label="${countLabel}">
+        ${group.strategies.map((strategy, index) => strategyCard(strategy, index + 1)).join("")}
+      </div>
+    </section>`;
+}
+
+function defenseDossier(group) {
+  const count = group.strategies.length;
+  const provenCount = group.strategies.filter((strategy) => strategy.status === "proven").length;
+  const title = defenseDisplayTitle(group.defense);
+  return `
+    <section class="defense-detail-shell" aria-labelledby="defenseTitle">
+      <nav class="defense-detail-actions" aria-label="Navegação da defesa">
+        <button class="back-to-catalog" data-back-catalog type="button">${icon("arrow")}<span>Todas as defesas</span></button>
+        <button class="copy-defense-link" data-copy-defense-id="${escapeHtml(group.id)}" type="button">${icon("link")}<span>Copiar link</span></button>
+      </nav>
+      <article class="defense-dossier">
+        <div class="defense-dossier-copy">
+          <span class="defense-type">Dossiê da defesa</span>
+          <h1 id="defenseTitle">${escapeHtml(title)}</h1>
+          <p>Confira as opções já testadas pela guilda e escolha o counter que melhor encaixa nas suas builds disponíveis.</p>
+          <div class="dossier-metrics" aria-label="Resumo da defesa">
+            <span><strong>${count}</strong>${count === 1 ? " counter" : " counters"}</span>
+            <span><strong>${provenCount}</strong>${provenCount === 1 ? " testado" : " testados"}</span>
+            <span><i></i>Base compartilhada</span>
+          </div>
+        </div>
+        <div class="dossier-team defense-team">
+          <span class="team-label">Time inimigo</span>
+          <div class="monsters">${teamComposition(group.defense, "defense")}</div>
+        </div>
+      </article>
+    </section>`;
+}
+
+function defenseDisplayTitle(strategy) {
+  const alternatives = strategy.defenseAlternatives || [[], [], []];
+  return strategy.defense.map((id, index) => {
+    if (id === "*") return "Qualquer terceiro";
+    return [id, ...(alternatives[index] || [])]
+      .map((monsterId) => displayMonsterName(getMonster(monsterId)))
+      .join(" ou ");
+  }).join(" · ");
 }
 
 function groupStrategiesByDefense(records) {
@@ -515,7 +717,9 @@ function strategyCard(strategy, counterIndex) {
       </summary>
       <div class="strategy-details">
         <div class="playbook-heading"><p class="eyebrow">GUIA DE EXECUÇÃO</p><h3>Como montar e pilotar</h3></div>
+        ${buildRecommendationsTable(strategy)}
         <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className, key)).join("")}</div>
+        ${strategyVideo(strategy)}
         ${strategyFeedback(strategy, comments, positiveCount, negativeCount)}
         <div class="card-footer">
           <span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>
@@ -526,6 +730,22 @@ function strategyCard(strategy, counterIndex) {
         </div>
       </div>
     </details>`;
+}
+
+function strategyVideo(strategy) {
+  const videoId = youtubeVideoId(strategy.sections?.videoUrl);
+  if (!videoId) return "";
+  const watchUrl = `https://youtu.be/${videoId}`;
+  return `
+    <section class="strategy-video" aria-labelledby="video-title-${escapeHtml(strategy.id)}">
+      <div class="strategy-video-heading">
+        <div><h4 id="video-title-${escapeHtml(strategy.id)}">Vídeo da luta</h4><p>Veja a execução completa deste counter antes de entrar na batalha.</p></div>
+        <a href="${watchUrl}" target="_blank" rel="noopener noreferrer">${icon("play")}<span>Abrir no YouTube</span></a>
+      </div>
+      <div class="strategy-video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?rel=0" title="Vídeo de demonstração do counter" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </section>`;
 }
 
 function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
@@ -588,6 +808,54 @@ function detailSection(title, content, className, key) {
   return `<section class="detail-section ${className} section-${key}${hasContent ? "" : " empty"}"><h4>${escapeHtml(title)}</h4><p>${hasContent ? escapeHtml(content) : "Não informado."}</p></section>`;
 }
 
+function compactBuildNumber(value) {
+  if (value >= 1000) {
+    const compact = Number((value / 1000).toFixed(value % 1000 === 0 ? 0 : 1));
+    return `${compact.toLocaleString("pt-BR")}k`;
+  }
+  return value.toLocaleString("pt-BR");
+}
+
+function formatBuildValue(build, definition) {
+  const value = build?.[definition.key];
+  if (definition.kind === "text") return value ? escapeHtml(value) : "—";
+  if (!Number.isFinite(value)) return "—";
+  if (definition.kind === "bonus") return `<strong>≥ +${compactBuildNumber(value)}</strong>`;
+  return `<strong>≥ ${value.toLocaleString("pt-BR")}%</strong>`;
+}
+
+function buildRecommendationsTable(strategy) {
+  const populatedBuilds = normalizeBuildRecommendations(strategy.sections?.builds, strategy.attack, strategy.attackAlternatives);
+  if (!populatedBuilds.length) return "";
+  const populatedByMonster = new Map(populatedBuilds.map((build) => [build.monsterId, build]));
+  const builds = attackMonsterReferences(strategy.attack, strategy.attackAlternatives).map((reference) => ({
+    ...reference,
+    ...(populatedByMonster.get(reference.monsterId) || {}),
+  }));
+  const visibleStats = buildStatDefinitions.filter((definition) => builds.some((build) => {
+    const value = build[definition.key];
+    return definition.kind === "text" ? Boolean(value) : Number.isFinite(value);
+  }));
+  if (!visibleStats.length) return "";
+  return `
+    <section class="build-guide" aria-labelledby="build-guide-${escapeHtml(strategy.id)}">
+      <div class="build-guide-heading">
+        <div><h4 id="build-guide-${escapeHtml(strategy.id)}">Build mínima recomendada</h4><p>Valores com + são bônus de runas, artefatos e torres. Percentuais são metas totais.</p></div>
+        <span>Opcional · referência da guilda</span>
+      </div>
+      <div class="build-table-scroll" tabindex="0" aria-label="Tabela de builds recomendadas; role horizontalmente se necessário">
+        <table class="build-table">
+          <caption class="sr-only">Build mínima recomendada para os monstros do counter</caption>
+          <thead><tr><th scope="col">Atributo</th>${builds.map((build) => {
+            const monster = getMonster(build.monsterId);
+            return `<th scope="col"><span class="build-monster-heading"><img class="${escapeHtml(monster.element)}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy"><span><strong>${escapeHtml(displayMonsterName(monster))}</strong>${build.isAlternative ? "<small>Alternativa</small>" : ""}</span></span></th>`;
+          }).join("")}</tr></thead>
+          <tbody>${visibleStats.map((definition) => `<tr><th scope="row"><strong>${definition.label}</strong>${definition.hint ? `<small>${definition.hint}</small>` : ""}</th>${builds.map((build) => `<td>${formatBuildValue(build, definition)}</td>`).join("")}</tr>`).join("")}</tbody>
+        </table>
+      </div>
+    </section>`;
+}
+
 function teamComposition(strategy, side) {
   const alternatives = strategy[alternativeKey(side)] || [[], [], []];
   return strategy[side].map((id, index) => compositionSlot(id, alternatives[index] || [], side, index)).join("");
@@ -617,6 +885,70 @@ function monsterChip(id, side, isAlternative = false) {
   return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(displayName)}</span></span>`;
 }
 
+function captureBuildDraft() {
+  document.querySelectorAll("[data-build-monster-id][data-build-stat]").forEach((input) => {
+    const monsterId = input.dataset.buildMonsterId;
+    const definition = buildStatDefinitions.find((item) => item.key === input.dataset.buildStat);
+    if (!monsterId || !definition) return;
+    const current = buildDraft.get(monsterId) || { monsterId };
+    current[definition.key] = sanitizeBuildValue(input.value, definition);
+    buildDraft.set(monsterId, current);
+  });
+}
+
+function buildEditorInput(reference, definition) {
+  const draft = buildDraft.get(reference.monsterId) || {};
+  const value = draft[definition.key];
+  const monsterName = displayMonsterName(getMonster(reference.monsterId));
+  if (definition.kind === "text") {
+    return `<input type="text" maxlength="${definition.maxLength}" value="${escapeHtml(value || "")}" placeholder="${definition.placeholder}" data-build-monster-id="${escapeHtml(reference.monsterId)}" data-build-stat="${definition.key}" aria-label="${definition.label} de ${escapeHtml(monsterName)}">`;
+  }
+  const suffix = definition.kind === "percent" ? "%" : "+";
+  return `<label class="build-number-input"><span aria-hidden="true">${suffix}</span><input type="number" min="0" max="${definition.max}" step="${definition.step}" value="${Number.isFinite(value) ? value : ""}" inputmode="numeric" placeholder="—" data-build-monster-id="${escapeHtml(reference.monsterId)}" data-build-stat="${definition.key}" aria-label="${definition.label} ${definition.hint || ""} de ${escapeHtml(monsterName)}"></label>`;
+}
+
+function renderBuildRecommendationsEditor() {
+  const editor = $("#buildRecommendationsEditor");
+  if (!editor) return;
+  captureBuildDraft();
+  const references = attackMonsterReferences(selection.attack, selection.attackAlternatives);
+  const selectedIds = new Set(references.map((reference) => reference.monsterId));
+  [...buildDraft.keys()].forEach((monsterId) => {
+    if (!selectedIds.has(monsterId)) buildDraft.delete(monsterId);
+  });
+  references.forEach((reference) => {
+    buildDraft.set(reference.monsterId, { ...buildDraft.get(reference.monsterId), ...reference });
+  });
+  if (!references.length) {
+    editor.innerHTML = `<div class="build-editor-empty">Selecione os monstros do ataque para liberar a tabela de builds.</div>`;
+    return;
+  }
+  editor.innerHTML = `
+    <div class="build-table-scroll build-table-editor" tabindex="0" aria-label="Tabela opcional para cadastrar as builds dos monstros; role horizontalmente se necessário">
+      <table class="build-table">
+        <caption class="sr-only">Cadastro de builds mínimas recomendadas</caption>
+        <thead><tr><th scope="col">Atributo</th>${references.map((reference) => {
+          const monster = getMonster(reference.monsterId);
+          return `<th scope="col"><span class="build-monster-heading"><img class="${escapeHtml(monster.element)}" src="./${escapeHtml(monster.image)}" alt=""><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>Slot ${reference.slot + 1}${reference.isAlternative ? " · alternativa" : ""}</small></span></span></th>`;
+        }).join("")}</tr></thead>
+        <tbody>${buildStatDefinitions.map((definition) => `<tr><th scope="row"><strong>${definition.label}</strong>${definition.hint ? `<small>${definition.hint}</small>` : ""}</th>${references.map((reference) => `<td>${buildEditorInput(reference, definition)}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table>
+    </div>`;
+}
+
+function collectBuildRecommendations() {
+  captureBuildDraft();
+  return attackMonsterReferences(selection.attack, selection.attackAlternatives).map((reference) => {
+    const draft = buildDraft.get(reference.monsterId) || {};
+    const compact = { ...reference };
+    buildStatDefinitions.forEach((definition) => {
+      const value = sanitizeBuildValue(draft[definition.key], definition);
+      if (definition.kind === "text" ? Boolean(value) : Number.isFinite(value)) compact[definition.key] = value;
+    });
+    return compact;
+  }).filter(buildHasContent);
+}
+
 function openStrategyDialog(defenseStrategy = null) {
   resetSelection();
   dialogDefenseId = defenseStrategy?.defenseId || null;
@@ -640,7 +972,9 @@ function closeStrategyDialog() {
 
 function resetSelection() {
   selection = emptySelection();
+  buildDraft = new Map();
   ["attack", "defense"].forEach((side) => [0, 1, 2].forEach((index) => renderSelectionSlot(side, index)));
+  renderBuildRecommendationsEditor();
 }
 
 function updateStrategyDialogMode() {
@@ -683,6 +1017,7 @@ function renderSelectionSlot(side, index) {
     button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small></span>`;
   }
   renderSelectedAlternatives(side, index);
+  if (side === "attack") renderBuildRecommendationsEditor();
 }
 
 function renderSelectedAlternatives(side, index) {
@@ -791,9 +1126,74 @@ function showToast(message) {
 
 function strategyShareUrl(id) {
   const url = new URL(window.location.href);
+  const strategy = strategies.find((item) => item.id === id);
+  if (strategy?.defenseId) url.searchParams.set("defense", strategy.defenseId);
   url.searchParams.set("strategy", id);
   url.hash = "";
   return url.toString();
+}
+
+function defenseShareUrl(id) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("defense", id);
+  url.searchParams.delete("strategy");
+  url.hash = "";
+  return url.toString();
+}
+
+function openDefenseView(id, { pushState = true } = {}) {
+  selectedDefenseId = id;
+  sharedStrategyId = null;
+  sharedStrategyOpened = false;
+  if (pushState) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("defense", id);
+    url.searchParams.delete("strategy");
+    window.history.pushState({}, "", url);
+  }
+  render();
+  window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+}
+
+function openDefenseCatalog({ pushState = true } = {}) {
+  selectedDefenseId = null;
+  sharedStrategyId = null;
+  sharedStrategyOpened = false;
+  if (pushState) {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("defense");
+    url.searchParams.delete("strategy");
+    window.history.pushState({}, "", url);
+  }
+  render();
+  window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+}
+
+async function handleDefenseNavigation(event) {
+  const defenseCard = event.target.closest("[data-open-defense-id]");
+  if (defenseCard) {
+    openDefenseView(defenseCard.dataset.openDefenseId);
+    return true;
+  }
+
+  if (event.target.closest("[data-back-catalog]")) {
+    openDefenseCatalog();
+    return true;
+  }
+
+  const copyButton = event.target.closest("[data-copy-defense-id]");
+  if (copyButton) {
+    try {
+      await copyText(defenseShareUrl(copyButton.dataset.copyDefenseId));
+      showToast("Link da defesa copiado.");
+    } catch (error) {
+      console.error(error);
+      showToast("Não foi possível copiar o link.");
+    }
+    return true;
+  }
+
+  return false;
 }
 
 async function copyText(text) {
@@ -818,7 +1218,6 @@ $("#loginForm").addEventListener("submit", async (event) => {
   const nextUser = new FormData(event.currentTarget).get("playerName").trim();
   if (!nextUser) return;
   const submitButton = event.currentTarget.querySelector("button[type='submit']");
-  const wasAddingCounter = Boolean(dialogDefenseId);
   submitButton.disabled = true;
   submitButton.textContent = cloudEnabled ? "Conectando..." : "Entrando...";
   try {
@@ -918,6 +1317,14 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     return;
   }
   const data = new FormData(event.currentTarget);
+  const rawVideoUrl = data.get("videoUrl").trim();
+  const videoUrl = normalizeYouTubeUrl(rawVideoUrl);
+  if (rawVideoUrl && !videoUrl) {
+    showToast("Use um link válido do YouTube, como youtu.be ou youtube.com.");
+    event.currentTarget.elements.videoUrl.focus();
+    return;
+  }
+  const wasAddingCounter = Boolean(dialogDefenseId);
   const strategy = {
     id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
     defenseId: dialogDefenseId || (cloudEnabled ? null : `local:${compositionFingerprint(selection.defense, selection.defenseAlternatives)}`),
@@ -932,6 +1339,8 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     sections: {
       gamePlan: data.get("gamePlan").trim(),
       idealStats: data.get("idealStats").trim(),
+      builds: collectBuildRecommendations(),
+      videoUrl,
       turnOrder: data.get("turnOrder").trim(),
       targetPriority: data.get("targetPriority").trim(),
       thirdVariations: data.get("thirdVariations").trim(),
@@ -1017,6 +1426,8 @@ $("#strategyList").addEventListener("submit", async (event) => {
 });
 
 $("#strategyList").addEventListener("click", async (event) => {
+  if (await handleDefenseNavigation(event)) return;
+
   const addCounterButton = event.target.closest("[data-add-counter-defense-id]");
   if (addCounterButton) {
     if (READ_ONLY_MODE) return;
@@ -1058,6 +1469,21 @@ $("#strategyList").addEventListener("click", async (event) => {
     console.error(error);
     showToast("Não foi possível excluir a estratégia.");
   }
+});
+
+$("#defenseViewIntro").addEventListener("click", handleDefenseNavigation);
+
+$(".brand").addEventListener("click", (event) => {
+  event.preventDefault();
+  openDefenseCatalog();
+});
+
+window.addEventListener("popstate", () => {
+  const query = new URLSearchParams(window.location.search);
+  selectedDefenseId = query.get("defense");
+  sharedStrategyId = query.get("strategy");
+  sharedStrategyOpened = false;
+  render();
 });
 
 $("#searchInput").addEventListener("input", render);

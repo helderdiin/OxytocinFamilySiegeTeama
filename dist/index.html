@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=0.18" />
+    <link rel="stylesheet" href="./styles.css?v=0.21" />
   </head>
   <body>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -74,6 +74,7 @@
       </header>
 
       <main>
+        <div id="catalogView">
         <section class="command-center" aria-labelledby="libraryTitle">
           <div class="command-intro">
             <div>
@@ -108,9 +109,12 @@
             </label>
             <button class="clear-filters" id="clearFiltersButton" type="button">Limpar</button>
           </div>
+        </div>
+
+        <div id="defenseViewIntro" hidden></div>
 
         <section class="library" aria-labelledby="resultsTitle">
-          <div class="results-heading">
+          <div class="results-heading" id="resultsHeading">
             <div>
               <p class="eyebrow">COUNTERS ENCONTRADOS</p>
               <h2 id="resultsTitle">Escolha com confiança</h2>
@@ -127,7 +131,7 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.18 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.21 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
@@ -164,15 +168,24 @@
             <label>Status da estratégia<small>Qual é o nível de validação?</small><select name="status" required><option value="proven">Testada</option><option value="recommended">Recomendada pela guilda</option><option value="needs_testing" selected>Ainda precisa de testes</option></select></label>
           </div>
         </fieldset>
+        <fieldset class="build-recommendations-fieldset">
+          <legend><span class="legend-icon build"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19h16M6 16V9M11 16V5M16 16v-4M21 16V7" /></svg></span><span><strong>Builds recomendadas</strong><small>Opcional · registre os mínimos para cada monstro do counter</small></span></legend>
+          <div class="build-editor-copy">
+            <p>Use bônus para HP, ATK, DEF e SPD. CR, CD, RES e ACC são valores totais desejados.</p>
+            <span>Ex.: Gyomei com +30.000 HP e +1.200 DEF.</span>
+          </div>
+          <div class="build-editor" id="buildRecommendationsEditor" aria-live="polite"></div>
+          <label class="strategy-field build-notes-field"><strong>Observações de build</strong><small>Use para artefatos, prioridades, speed tuning ou condições que não cabem na tabela.</small><textarea name="idealStats" maxlength="700" rows="3" placeholder="Ex.: chegar a 100% RES contando a lead do Aragorn; priorizar redução de dano de Fogo nos artefatos..."></textarea></label>
+        </fieldset>
         <div class="strategy-fields">
           <label class="strategy-field"><strong>Plano de jogo</strong><small>Explique como a composição funciona e qual é sua condição de vitória.</small><textarea name="gamePlan" maxlength="700" rows="4" required placeholder="Ex.: controlar a abertura, eliminar a maior ameaça e estabilizar com sustain..."></textarea></label>
-          <label class="strategy-field"><strong>Status e builds recomendadas</strong><small>Velocidades, HP, DEF, precisão, resistência e conjuntos de runas importantes.</small><textarea name="idealStats" maxlength="700" rows="3" placeholder="Ex.: Orion +170 SPD em Will; Perna com 85% CR e dano suficiente..."></textarea></label>
           <label class="strategy-field"><strong>Ordem de turno</strong><small>Registre a sequência dos monstros e habilidades na abertura.</small><textarea name="turnOrder" maxlength="500" rows="3" placeholder="Ex.: Orion S3 → Seara S2 → Perna foca o alvo principal..."></textarea></label>
           <label class="strategy-field"><strong>Prioridade de alvo</strong><small>Quem eliminar primeiro, quem deixar por último e quando trocar o foco.</small><textarea name="targetPriority" maxlength="500" rows="3" placeholder="Ex.: eliminar o reviver primeiro; não bater no tanque até remover o suporte..."></textarea></label>
           <label class="strategy-field"><strong>Variações do terceiro monstro</strong><small>Explique quais opções funcionam no slot X e quais mudam o matchup.</small><textarea name="thirdVariations" maxlength="700" rows="3" placeholder="Ex.: funciona com qualquer bruiser sem cleanse; evite terceiros com revive..."></textarea></label>
           <label class="strategy-field warning-field"><strong>Riscos — nunca use contra</strong><small>Liste counters, passivas e condições que fazem esse ataque falhar.</small><textarea name="risks" maxlength="700" rows="3" placeholder="Ex.: nunca usar contra anti-crítico, cleanse forte ou ameaça que ignore DEF..."></textarea></label>
           <label class="strategy-field"><strong>Substituições possíveis</strong><small>Quem pode substituir um atacante e quais ajustes essa troca exige.</small><textarea name="substitutions" maxlength="600" rows="3" placeholder="Ex.: Nickel pode substituir Talc contra ameaça Wind, mantendo a mesma ordem..."></textarea></label>
           <label class="strategy-field"><strong>Experiência comprovada</strong><small>Informe onde foi testado, vitórias, derrotas e observações de batalha.</small><textarea name="evidence" maxlength="700" rows="3" placeholder="Ex.: 4 vitórias em Siege G2; uma derrota quando a defesa ganhou a disputa de velocidade..."></textarea></label>
+          <label class="strategy-field video-url-field"><strong>Vídeo da luta</strong><small>Opcional · cole um link do YouTube para a guilda assistir à execução dentro do guia.</small><input name="videoUrl" type="url" inputmode="url" maxlength="200" autocomplete="url" placeholder="https://youtu.be/ID_DO_VIDEO" /></label>
         </div>
         <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" id="saveStrategyButton" type="submit">Salvar counter</button></div>
       </form>
@@ -203,7 +216,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
-    <script src="./supabase-store.js?v=0.18"></script>
-    <script src="./app.js?v=0.18"></script>
+    <script src="./supabase-store.js?v=0.21"></script>
+    <script src="./app.js?v=0.21"></script>
   </body>
 </html>

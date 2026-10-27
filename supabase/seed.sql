@@ -43,7 +43,7 @@ values
     null,
     'LETHALX',
     array['fire-aragorn', 'racuni', 'gyomei-himejima'],
-    '[[], [], []]'::jsonb,
+    '[[], [], ["windy"]]'::jsonb,
     array['sylvia', 'daphnis', 'wind-zenitsu'],
     '[["moore"], [], ["savannah"]]'::jsonb,
     'very_safe',
@@ -51,11 +51,38 @@ values
     jsonb_build_object(
       'gamePlan', 'Counter seguro de turn 2: usar a lead de RES do Aragorn, sobreviver à abertura com o cleanse e ciclo do Racuni e desmontar a defesa metodicamente com Gyomei.',
       'idealStats', 'O time foi montado para chegar a 100% RES contando a lead de 48% do Aragorn.',
+      'videoUrl', 'https://youtu.be/4i-BoXLldhc',
+      'builds', jsonb_build_array(
+        jsonb_build_object(
+          'monsterId', 'fire-aragorn',
+          'slot', 0,
+          'isAlternative', false,
+          'runes', 'Revenge / Revenge / Will',
+          'hp', 32000,
+          'def', 500
+        ),
+        jsonb_build_object(
+          'monsterId', 'racuni',
+          'slot', 1,
+          'isAlternative', false,
+          'runes', 'Violent / Nemesis',
+          'hp', 30000,
+          'def', 600
+        ),
+        jsonb_build_object(
+          'monsterId', 'gyomei-himejima',
+          'slot', 2,
+          'isAlternative', false,
+          'runes', 'Violent / Seal',
+          'hp', 30000,
+          'def', 1200
+        )
+      ),
       'turnOrder', 'Fire Aragorn → Racuni → Gyomei Himejima.',
       'targetPriority', 'Wind Zenitsu primeiro, Daphnis depois e Sylvia ou Moore por último conforme o dano oferecido.',
       'thirdVariations', 'Vitória confirmada contra Sylvia + Daphnis + Wind Zenitsu. O conceito também foi criado para Moore + Daphnis + Zenitsu.',
       'risks', 'A proposta é sobreviver à abertura, não disputar um cleave. Confirme que as builds alcançam a resistência e a durabilidade esperadas.',
-      'substitutions', 'Sem substituições comprovadas; lead de RES, cleanse e tanque Wind formam o núcleo do counter.',
+      'substitutions', 'Windy pode ocupar o slot do Gyomei Himejima somente quando o Gyomei não estiver disponível. É uma alternativa de disponibilidade, não a opção principal do counter.',
       'evidence', 'Muito seguro + comprovado. Vitória confirmada em Siege G2 contra Sylvia + Daphnis + Wind Zenitsu.'
     ),
     true,
@@ -157,6 +184,30 @@ values
     true,
     true,
     '2026-10-27T14:00:00.000Z'
+  ),
+  (
+    'guild:mittus-platy-shihwa-elucia-vs-morris-orion-trevor',
+    null,
+    'Mittus',
+    array['platy', 'shihwa', 'elucia'],
+    '[[], [], []]'::jsonb,
+    array['morris', 'orion', 'trevor'],
+    '[[], [], []]'::jsonb,
+    'safe',
+    'proven',
+    jsonb_build_object(
+      'gamePlan', 'Use a lead de 24% SPD da Platy para entrar no ciclo com segurança. Shihwa e Elucia 2A alternam sono e congelamento sobre Trevor, enquanto Platy sustenta o time com cura, aumento de ATB, strip, controle de cooldown e revive. Com Trevor fora da rotação, elimine Orion e depois Morris antes de finalizar Trevor.',
+      'idealStats', 'Platy e Elucia 2A com bastante HP e DEF; Violent/Will funciona bem nas duas, e Swift/Will é uma alternativa para Elucia. Platy precisa de boa RES e ACC suficiente para strip, stun e aumento de cooldown. Shihwa pode usar Violent/Destroy, equilibrando dano, durabilidade e ACC para sustentar o controle. Não copie valores fixos de SPD: o trio precisa sobreviver à abertura e ciclar sem deixar Trevor agir livre.',
+      'turnOrder', 'Platy → Shihwa → Elucia 2A como referência. Platy pressiona Orion com a S3 quando possível; Shihwa coloca Trevor para dormir e ganha o turno extra; Elucia mantém Trevor dormindo ou congelado, ou guarda a S2 para limpar e recuperar o aliado afetado pelo Orion. Mais importante que uma sequência rígida é nunca liberar Trevor.',
+      'targetPriority', 'Orion → Morris → Trevor. Remover Orion reduz strip, DEF Break e a variação da abertura; depois elimine Morris para impedir sustain e revive. Trevor fica controlado e morre por último, evitando ativar cedo o pico da passiva e o contra-ataque da S2.',
+      'thirdVariations', 'Registro validado especificamente contra Morris + Orion + Trevor em torre Nat4. O plano depende de Trevor ser a ameaça mantida sob controle; não extrapole automaticamente para uma defesa com imunidade, cleanse ou passivas anti-controle.',
+      'risks', 'Não use se Shihwa e Elucia não tiverem velocidade e durabilidade para manter Trevor travado. Procs Violent de Orion ou Morris, uma falha de controle, imunidade inesperada ou Trevor saindo do sono já abaixo de 30% podem disparar a S2 e o contra-ataque e virar a luta. Evite dano incidental em Trevor enquanto ele estiver dormindo e não o deixe com pouca vida antes de Orion e Morris morrerem.',
+      'substitutions', 'Sem substituição comprovada nesta variação. Há registros do núcleo Platy + Shihwa com Iona ou Betta, mas a troca muda sustain, controle e recuperação; não trate essas opções como equivalentes à Elucia 2A sem testar.',
+      'evidence', 'Comprovado pela guilda. Uma base comunitária documenta a mesma defesa e confirma o núcleo Platy + Shihwa, o controle do Trevor e a ordem Orion → Morris → Trevor; bases de Siege G3 também registram Shihwa + Elucia 2A juntas em ataques.'
+    ),
+    true,
+    true,
+    '2026-10-27T15:00:00.000Z'
   )
 on conflict (source_key) do update
 set
