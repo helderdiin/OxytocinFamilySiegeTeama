@@ -222,6 +222,7 @@ function migrateStrategies(records) {
         idealStats: strategy.sections?.idealStats || "",
         builds: normalizeBuildRecommendations(strategy.sections?.builds, attack, attackAlternatives),
         videoUrl: normalizeYouTubeUrl(strategy.sections?.videoUrl),
+        referenceImage: normalizeReferenceImage(strategy.sections?.referenceImage),
         turnOrder: strategy.sections?.turnOrder || "",
         targetPriority: strategy.sections?.targetPriority || "",
         thirdVariations: strategy.sections?.thirdVariations || "",
@@ -231,6 +232,18 @@ function migrateStrategies(records) {
       },
     };
   });
+}
+
+function normalizeReferenceImage(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const path = typeof value.path === "string" ? value.path.trim() : "";
+  const alt = typeof value.alt === "string" ? value.alt.trim() : "";
+  const version = Number(value.version);
+  if (!/^assets\/counter-references\/[a-z0-9][a-z0-9-]*\.png$/.test(path)) return null;
+  if (!alt || alt.length > 240) return null;
+  if (Number(value.width) !== 1536 || Number(value.height) !== 1024) return null;
+  if (!Number.isInteger(version) || version < 1) return null;
+  return { path, alt, width: 1536, height: 1024, version };
 }
 
 function compositionFingerprint(primaryIds, alternatives = [[], [], []]) {
@@ -329,15 +342,15 @@ function toMonsterId(value) {
 
 function saveStrategies() {
   if (cloudEnabled) return;
-  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 8, strategies }));
+  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 9, strategies }));
 }
 
 function updateStorageUi(mode) {
   const chip = $("#syncChip");
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
-  $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.21 · Supabase" : "v0.21 · dados locais";
+  $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.22 · Supabase" : "v0.22 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -376,6 +389,7 @@ function icon(name, className = "") {
     thumbsUp: '<path d="M7 10v10H3V10h4Zm0 9c2.5 1.3 5.1 2 7.8 2H17a3 3 0 0 0 2.9-2.3l1-4A3 3 0 0 0 18 11h-4l.7-3.3A3.1 3.1 0 0 0 11.6 4L7 10v9Z" />',
     thumbsDown: '<path d="M17 14V4h4v10h-4Zm0-9c-2.5-1.3-5.1-2-7.8-2H7a3 3 0 0 0-2.9 2.3l-1 4A3 3 0 0 0 6 13h4l-.7 3.3a3.1 3.1 0 0 0 3.1 3.7l4.6-6V5Z" />',
     play: '<path d="m9 7 8 5-8 5V7Z" /><circle cx="12" cy="12" r="9" />',
+    external: '<path d="M14 4h6v6M20 4l-9 9" /><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6" />',
   };
   return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[name] || ""}</svg>`;
 }
@@ -602,7 +616,6 @@ function defenseDossier(group) {
           <div class="dossier-metrics" aria-label="Resumo da defesa">
             <span><strong>${count}</strong>${count === 1 ? " counter" : " counters"}</span>
             <span><strong>${provenCount}</strong>${provenCount === 1 ? " testado" : " testados"}</span>
-            <span><i></i>Base compartilhada</span>
           </div>
         </div>
         <div class="dossier-team defense-team">
@@ -706,7 +719,7 @@ function strategyCard(strategy, counterIndex) {
           <article class="decision-item turn-signal"><span>Ordem de turno</span><p>${escapeHtml(turnOrder)}</p></article>
         </div>
         <span class="open-hint">
-          <span>Ver plano completo, builds e feedback</span>
+          <span>Ver plano completo</span>
           <span class="open-hint-meta">
             ${positiveCount ? `<span class="compact-reaction positive">+${positiveCount}</span>` : ""}
             ${negativeCount ? `<span class="compact-reaction negative">−${negativeCount}</span>` : ""}
@@ -720,6 +733,7 @@ function strategyCard(strategy, counterIndex) {
         ${buildRecommendationsTable(strategy)}
         <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className, key)).join("")}</div>
         ${strategyVideo(strategy)}
+        ${strategyReferenceImage(strategy)}
         ${strategyFeedback(strategy, comments, positiveCount, negativeCount)}
         <div class="card-footer">
           <span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>
@@ -730,6 +744,26 @@ function strategyCard(strategy, counterIndex) {
         </div>
       </div>
     </details>`;
+}
+
+function strategyReferenceImage(strategy) {
+  const reference = normalizeReferenceImage(strategy.sections?.referenceImage);
+  if (!reference) return "";
+  const strategyId = escapeHtml(strategy.id);
+  const imageUrl = `./${escapeHtml(reference.path)}?v=${reference.version}`;
+  return `
+    <section class="strategy-reference" aria-labelledby="reference-title-${strategyId}">
+      <div class="strategy-reference-heading">
+        <div><h4 id="reference-title-${strategyId}">Guia visual do counter</h4><p>Resumo tático para revisar composição, execução e builds antes do ataque.</p></div>
+        <a href="${imageUrl}" target="_blank" rel="noopener noreferrer">${icon("external")}<span>Abrir em tamanho completo</span></a>
+      </div>
+      <figure class="strategy-reference-figure">
+        <a href="${imageUrl}" target="_blank" rel="noopener noreferrer" aria-label="Abrir guia visual em tamanho completo">
+          <img src="${imageUrl}" alt="${escapeHtml(reference.alt)}" width="${reference.width}" height="${reference.height}" loading="lazy" decoding="async" />
+        </a>
+        <figcaption>Referência rápida da guilda · ${reference.width} × ${reference.height} px</figcaption>
+      </figure>
+    </section>`;
 }
 
 function strategyVideo(strategy) {

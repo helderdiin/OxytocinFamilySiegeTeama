@@ -21,6 +21,7 @@ Abra `http://localhost:4173`.
 - plano de jogo, ordem de turno, prioridades, variações, riscos, substituições e evidências ficam estruturados por counter;
 - builds recomendadas podem ser informadas por monstro em uma tabela opcional, incluindo runas e metas mínimas de status para titulares e alternativas;
 - cada counter pode incluir um vídeo opcional do YouTube, exibido dentro do próprio guia;
+- cada counter pode incluir uma imagem de referência opcional, versionada no projeto e exibida abaixo do vídeo;
 - alternativas por slot no counter e na defesa, sem duplicar registros;
 - um novo counter pode partir de uma defesa existente, mantendo a composição inimiga bloqueada e preenchendo somente a nova proposta;
 - busca por monstros do counter ou da defesa, conteúdo textual e filtros de segurança/status;
@@ -46,7 +47,7 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261028020000_windy_alternative_for_gyomei.sql`
 - `supabase/seed.sql`
 
-O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler a base compartilhada; cada sessão pode alterar ou excluir somente os próprios counters. As sete entradas oficiais do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
+O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem ler os dados; cada sessão pode alterar ou excluir somente os próprios counters. As sete entradas oficiais do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
 
 No navegador deve ser usada somente a chave pública `publishable`, nunca uma chave `secret` ou a antiga `service_role`. O formato esperado está em `dist/supabase-config.example.js`.
 
@@ -80,7 +81,7 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 
 ```json
 {
-  "schemaVersion": 8,
+  "schemaVersion": 9,
   "strategies": [
     {
       "defenseId": "defense-fingerprint-or-uuid",
@@ -93,6 +94,13 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
       "sections": {
         "gamePlan": "Preparar o Skogul e eliminar a maior ameaça.",
         "videoUrl": "https://youtu.be/4i-BoXLldhc",
+        "referenceImage": {
+          "path": "assets/counter-references/fire-aragorn-racuni-gyomei-v3-original-assets.png",
+          "alt": "Guia visual do counter",
+          "width": 1536,
+          "height": 1024,
+          "version": 1
+        },
         "idealStats": "Chloe deve abrir o time.",
         "builds": [
           {

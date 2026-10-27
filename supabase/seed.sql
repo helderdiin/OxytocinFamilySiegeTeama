@@ -52,6 +52,13 @@ values
       'gamePlan', 'Counter seguro de turn 2: usar a lead de RES do Aragorn, sobreviver à abertura com o cleanse e ciclo do Racuni e desmontar a defesa metodicamente com Gyomei.',
       'idealStats', 'O time foi montado para chegar a 100% RES contando a lead de 48% do Aragorn.',
       'videoUrl', 'https://youtu.be/4i-BoXLldhc',
+      'referenceImage', jsonb_build_object(
+        'path', 'assets/counter-references/fire-aragorn-racuni-gyomei-v3-original-assets.png',
+        'alt', 'Counter de Fire Aragorn, Racuni e Gyomei Himejima contra Sylvia ou Moore, Daphnis e Zenitsu Agatsuma ou Savannah',
+        'width', 1536,
+        'height', 1024,
+        'version', 1
+      ),
       'builds', jsonb_build_array(
         jsonb_build_object(
           'monsterId', 'fire-aragorn',

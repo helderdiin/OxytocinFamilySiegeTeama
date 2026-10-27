@@ -19,7 +19,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--bg); color: var(--text); font-family: "DM Sans", sans-serif; }
+body { margin: 0; min-width: 0; min-height: 100vh; background: var(--bg); color: var(--text); font-family: "DM Sans", sans-serif; }
 button, input, textarea, select { font: inherit; }
 button, label[for] { cursor: pointer; }
 button { color: inherit; }
@@ -488,6 +488,11 @@ legend small, .monster-grid label, .select-grid label > small, .strategy-field s
   .share-button, .delete-button { border-color: #456168; }
 }
 
+@media (max-width: 360px) {
+  .topbar { padding-inline: 10px; }
+  .readonly-mode-chip { display: none; }
+}
+
 /* Collaborative strategy feedback */
 .open-hint-meta, .compact-comment-count, .feedback-totals, .feedback-total, .comment-meta, .comment-reaction, .reaction-choice > span { display: inline-flex; align-items: center; }
 .open-hint-meta { min-width: 0; justify-content: flex-end; gap: 8px; }
@@ -564,9 +569,10 @@ legend small, .monster-grid label, .select-grid label > small, .strategy-field s
 .comment-form.is-read-only .comment-submit:disabled { cursor: not-allowed; opacity: 1; }
 
 @media (max-width: 620px) {
-  .open-hint { align-items: flex-start; flex-direction: column; gap: 9px; }
-  .open-hint-meta { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
-  .open-hint-meta .expand-icon { margin-left: auto; }
+  .open-hint { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding-block: 8px; line-height: 1.35; }
+  .open-hint > span:first-child { min-width: 0; }
+  .open-hint-meta { width: auto; justify-content: flex-end; flex-wrap: nowrap; }
+  .open-hint-meta .expand-icon { margin-left: 2px; }
   .feedback-section { margin-top: 22px; padding-top: 20px; }
   .feedback-heading { gap: 14px; }
   .feedback-heading h4 { font-size: 18px; }
@@ -753,8 +759,11 @@ main { width: min(1180px, calc(100% - 48px)); }
 .defense-counter-heading h2 { margin: 0; color: #f3f0e8; font: 600 25px/1.2 "Space Grotesk", sans-serif; letter-spacing: -.025em; }
 .defense-counter-heading h2 span { display: inline-grid; min-width: 26px; height: 26px; place-items: center; margin-left: 5px; color: #d6a46b; border: 1px solid #735943; border-radius: 6px; background: #302a24; font: 700 12px "DM Sans", sans-serif; vertical-align: 3px; }
 .defense-counter-heading p { margin: 7px 0 0; color: #9dacaf; font-size: 12px; }
-.detail-counter-stack { overflow: hidden; border: 1px solid #40595f; border-radius: 14px; background: #192b2f; box-shadow: 0 10px 28px rgba(4,13,15,.16); }
-.detail-counter-stack .strategy-card:hover, .detail-counter-stack .strategy-card[open] { background: #1d3236; }
+.detail-counter-stack { gap: 16px; }
+.detail-counter-stack .strategy-card { border: 1px solid #40595f; border-radius: 14px; background: #192b2f; box-shadow: 0 10px 28px rgba(4,13,15,.16); }
+.detail-counter-stack .strategy-card + .strategy-card { border-top-color: #40595f; }
+.detail-counter-stack .strategy-card:hover { border-color: #58747a; background: #1d3236; box-shadow: 0 14px 34px rgba(4,13,15,.2); }
+.detail-counter-stack .strategy-card[open] { border-color: #58747a; background: #1d3236; box-shadow: 0 16px 38px rgba(4,13,15,.22); }
 .detail-counter-stack .counter-composition .monster-image { width: 48px; height: 48px; flex-basis: 48px; }
 .detail-counter-stack .strategy-summary { padding-inline: 22px; }
 .detail-counter-stack .strategy-details { padding-inline: 22px; }
@@ -785,6 +794,7 @@ main { width: min(1180px, calc(100% - 48px)); }
   .dossier-team .monster-image { width: 60px; height: 60px; flex-basis: 60px; }
   .defense-counter-heading { align-items: stretch; flex-direction: column; gap: 14px; }
   .defense-counter-heading .add-counter-button { width: 100%; }
+  .detail-counter-stack { gap: 12px; }
   .detail-counter-stack .strategy-summary, .detail-counter-stack .strategy-details { padding-inline: 14px; }
 }
 
@@ -865,6 +875,19 @@ main { width: min(1180px, calc(100% - 48px)); }
 .strategy-video-frame { overflow: hidden; aspect-ratio: 16 / 9; border: 1px solid #40595f; border-radius: 12px; background: #091013; }
 .strategy-video-frame iframe { width: 100%; height: 100%; display: block; border: 0; }
 
+.strategy-reference { margin-top: 22px; }
+.strategy-reference-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 11px; }
+.strategy-reference-heading h4 { margin: 0; color: #f3f0e8; font: 600 17px "Space Grotesk", sans-serif; letter-spacing: -.02em; }
+.strategy-reference-heading p { max-width: 68ch; margin: 5px 0 0; color: #9dacaf; font-size: 12px; line-height: 1.5; }
+.strategy-reference-heading a { min-height: 44px; display: inline-flex; flex: 0 0 auto; align-items: center; gap: 7px; padding: 0 11px; color: #a6c6d5; border: 1px solid #4f7180; border-radius: 8px; background: #223a44; font-size: 12px; font-weight: 700; text-decoration: none; transition: color .16s, border-color .16s, background .16s; }
+.strategy-reference-heading a:hover { color: #d9edf5; border-color: #7193a1; background: #294650; }
+.strategy-reference-heading a:focus-visible, .strategy-reference-figure > a:focus-visible { outline: 3px solid rgba(212,123,88,.24); outline-offset: 3px; }
+.strategy-reference-heading a svg { width: 17px; height: 17px; }
+.strategy-reference-figure { overflow: hidden; margin: 0; border: 1px solid #40595f; border-radius: 12px; background: #101d20; }
+.strategy-reference-figure > a { display: block; background: #101d20; }
+.strategy-reference-figure img { width: 100%; height: auto; display: block; aspect-ratio: 3 / 2; object-fit: contain; }
+.strategy-reference-figure figcaption { padding: 10px 13px; color: #8fa1a3; border-top: 1px solid #365158; background: #192b2f; font-size: 11px; line-height: 1.4; }
+
 @media (max-width: 680px) {
   .build-recommendations-fieldset { padding: 14px; }
   .build-editor-copy, .build-guide-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
@@ -875,4 +898,8 @@ main { width: min(1180px, calc(100% - 48px)); }
   .build-table thead th:first-child, .build-table tbody th { min-width: 92px; width: 92px; }
   .strategy-video-heading { align-items: flex-start; flex-direction: column; gap: 9px; }
   .strategy-video-heading a { width: 100%; justify-content: center; }
+  .strategy-reference-heading { align-items: flex-start; flex-direction: column; gap: 9px; }
+  .strategy-reference-heading a { width: 100%; justify-content: center; }
+  .strategy-reference-figure { margin-inline: -1px; border-radius: 10px; }
+  .strategy-reference-figure figcaption { padding-inline: 11px; }
 }

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1536, initial-scale=1">
+  <title>Counter Fire Aragorn + Racuni + Gyomei</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #101d20;
+      --surface: #192c30;
+      --surface-raised: #20383d;
+      --surface-deep: #142529;
+      --line: #3f5b61;
+      --text: #f2efe7;
+      --muted: #a6b5b7;
+      --copper: #d47b58;
+      --copper-deep: #3a2b27;
+      --aqua: #83b8aa;
+      --aqua-deep: #203a36;
+      --blue: #86b8cd;
+      --amber: #deb05d;
+      --fire: #e26750;
+      --water: #55a7db;
+      --wind: #c2d65f;
+      --dark: #a779bb;
+    }
+    html, body { width: 1536px; height: 1024px; margin: 0; overflow: hidden; }
+    body {
+      padding: 22px 26px 20px;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .canvas { height: 100%; display: grid; grid-template-rows: 86px 190px 220px 1fr; gap: 12px; }
+    .header { display: grid; grid-template-columns: 185px minmax(0, 1fr) auto; align-items: center; gap: 22px; padding: 0 18px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 13px; color: #fff8ef; background: #b86749; font-size: 25px; font-weight: 800; letter-spacing: -.05em; }
+    .brand-copy strong, .brand-copy span { display: block; }
+    .brand-copy strong { font-size: 16px; letter-spacing: .01em; }
+    .brand-copy span { margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .17em; }
+    h1 { margin: 0; font-size: 44px; line-height: 1; letter-spacing: -.035em; }
+    .header-badges { display: flex; gap: 10px; }
+    .badge { min-height: 43px; display: flex; align-items: center; padding: 0 17px; border: 1px solid; border-radius: 9px; font-size: 14px; font-weight: 800; letter-spacing: .035em; text-transform: uppercase; }
+    .badge.safe { color: #b9dace; border-color: #5f8e82; background: #203a36; }
+    .badge.proven { color: #b5d6e4; border-color: #517b8c; background: #203642; }
+
+    .team-panel { display: grid; grid-template-columns: 190px minmax(0, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: 0 12px 30px rgba(3,12,14,.2); }
+    .team-panel.defense { border-color: #7b5046; }
+    .team-panel.attack { border-color: #547a71; }
+    .team-intro { display: flex; flex-direction: column; justify-content: center; padding: 24px; border-right: 1px solid var(--line); }
+    .defense .team-intro { background: var(--copper-deep); border-color: #7b5046; }
+    .attack .team-intro { background: var(--aqua-deep); border-color: #547a71; }
+    .team-intro span { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .defense .team-intro span { color: #e3a189; }
+    .attack .team-intro span { color: #a8d0c4; }
+    .team-intro h2 { margin: 8px 0 0; font-size: 31px; letter-spacing: -.025em; }
+    .team-intro p { margin: 10px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+    .slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+    .slot { min-width: 0; display: grid; align-items: center; justify-content: center; padding: 14px 20px; border-left: 1px solid var(--line); }
+    .slot:first-child { border-left: 0; }
+    .slot-label { display: block; margin-bottom: 8px; color: var(--muted); text-align: center; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .slot-options { display: flex; align-items: center; justify-content: center; gap: 11px; }
+    .or { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+    .monster { min-width: 0; display: flex; align-items: center; gap: 11px; }
+    .portrait-wrap { position: relative; flex: 0 0 auto; }
+    .portrait { width: 92px; height: 92px; display: block; object-fit: cover; border: 3px solid; border-radius: 13px; background: #243a3f; box-shadow: 0 8px 18px rgba(2,10,12,.3); }
+    .defense .portrait { width: 82px; height: 82px; }
+    .defense .slot-options { gap: 8px; }
+    .defense .monster { gap: 8px; }
+    .defense .monster-copy { max-width: 128px; }
+    .portrait.fire { border-color: var(--fire); }
+    .portrait.water { border-color: var(--water); }
+    .portrait.wind { border-color: var(--wind); }
+    .portrait.dark { border-color: var(--dark); }
+    .element-dot { position: absolute; right: -4px; bottom: -4px; min-width: 30px; height: 24px; display: grid; place-items: center; padding: 0 6px; border: 2px solid var(--surface); border-radius: 999px; color: #152124; font-size: 8px; font-weight: 900; }
+    .element-dot.fire { background: var(--fire); }
+    .element-dot.water { background: var(--water); }
+    .element-dot.wind { background: var(--wind); }
+    .element-dot.dark { color: #fff; background: var(--dark); }
+    .monster-copy { min-width: 0; max-width: 150px; }
+    .monster-copy strong, .monster-copy span { display: block; }
+    .monster-copy strong { font-size: 17px; line-height: 1.08; }
+    .monster-copy span { margin-top: 5px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .attack .portrait { width: 108px; height: 108px; }
+    .attack .monster-copy strong { font-size: 20px; }
+    .attack .slot { padding-block: 15px; }
+    .substitute { margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .substitute .portrait { width: 43px; height: 43px; border-width: 2px; border-radius: 8px; }
+    .substitute .element-dot { display: none; }
+    .substitute strong { font-size: 11px; }
+    .substitute span { font-size: 8px; }
+    .substitute .or { color: var(--amber); }
+
+    .bottom { min-height: 0; display: grid; grid-template-columns: .93fr 1.07fr; gap: 12px; }
+    .info-panel { min-height: 0; display: flex; flex-direction: column; padding: 18px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .panel-title { display: flex; align-items: center; gap: 11px; margin: 0 0 13px; font-size: 24px; letter-spacing: -.02em; }
+    .panel-title i { width: 11px; height: 11px; border-radius: 3px; background: var(--blue); }
+    .quick-list { display: grid; gap: 9px; }
+    .quick-item { display: grid; grid-template-columns: 154px minmax(0, 1fr); gap: 14px; padding: 12px 13px; border-radius: 10px; background: var(--surface-deep); }
+    .quick-item span { padding-top: 2px; color: var(--blue); font-size: 10px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .quick-item p { margin: 0; color: #dfe6e2; font-size: 13px; line-height: 1.42; }
+    .quick-item.risk { background: #302825; }
+    .quick-item.risk span { color: #e49a7c; }
+    .evidence-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: auto; padding-top: 9px; }
+    .mini-note { min-height: 61px; display: flex; flex-direction: column; justify-content: center; padding: 10px 13px; border: 1px solid #49666d; border-radius: 10px; background: #17292d; }
+    .mini-note strong { color: var(--blue); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+    .mini-note span { margin-top: 5px; color: #d5ddda; font-size: 11px; line-height: 1.35; }
+    .mini-note.alt strong { color: var(--amber); }
+    .mini-note.alt { border-color: #6f603d; background: #2c2a23; }
+
+    .build-list { display: grid; gap: 9px; }
+    .build { min-height: 82px; display: grid; grid-template-columns: 64px 175px minmax(0, 1fr); align-items: center; gap: 12px; padding: 8px 13px; border: 1px solid #36565d; border-radius: 10px; background: var(--surface-deep); }
+    .build img { width: 62px; height: 62px; object-fit: cover; border: 2px solid; border-radius: 10px; }
+    .build img.fire { border-color: var(--fire); }
+    .build img.wind { border-color: var(--wind); }
+    .build strong { font-size: 15px; }
+    .build-data { min-width: 0; }
+    .build-data span, .build-data em { display: block; font-style: normal; }
+    .build-data span { color: #e7ebe5; font-size: 13px; font-weight: 700; }
+    .build-data em { margin-top: 5px; color: #bed0cd; font-size: 12px; }
+    .author { margin-top: auto; display: flex; align-items: center; justify-content: space-between; padding-top: 11px; color: var(--muted); border-top: 1px solid var(--line); font-size: 11px; }
+    .author strong { color: var(--text); font-size: 13px; }
+    .author span:last-child { color: #7f9699; }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <header class="header">
+      <div class="brand"><div class="logo">O₂</div><div class="brand-copy"><strong>Oxytocin</strong><span>SIEGE TEAMS</span></div></div>
+      <h1>Counter de Siege</h1>
+      <div class="header-badges"><span class="badge safe">Muito seguro</span><span class="badge proven">Testado · Siege G2</span></div>
+    </header>
+
+    <section class="team-panel defense">
+      <div class="team-intro"><span>Time inimigo</span><h2>Defesa</h2><p>Confirme os três slots antes de escolher o counter.</p></div>
+      <div class="slots">
+        <div class="slot"><div><span class="slot-label">Slot 1</span><div class="slot-options">
+          <div class="monster"><div class="portrait-wrap"><img class="portrait dark" src="../monsters/sylvia.png"><b class="element-dot dark">DARK</b></div><div class="monster-copy"><strong>Sylvia</strong><span>Escuridão</span></div></div>
+          <span class="or">OU</span>
+          <div class="monster"><div class="portrait-wrap"><img class="portrait water" src="../monsters/moore.png"><b class="element-dot water">WATER</b></div><div class="monster-copy"><strong>Moore</strong><span>Água</span></div></div>
+        </div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 2</span><div class="slot-options"><div class="monster"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/daphnis.png"><b class="element-dot fire">FIRE</b></div><div class="monster-copy"><strong>Daphnis</strong><span>Fogo</span></div></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 3</span><div class="slot-options">
+          <div class="monster"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/wind-zenitsu.png"><b class="element-dot wind">WIND</b></div><div class="monster-copy"><strong>Zenitsu Agatsuma</strong><span>Vento</span></div></div>
+          <span class="or">OU</span>
+          <div class="monster"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/savannah.png"><b class="element-dot wind">WIND</b></div><div class="monster-copy"><strong>Savannah</strong><span>Vento</span></div></div>
+        </div></div></div>
+      </div>
+    </section>
+
+    <section class="team-panel attack">
+      <div class="team-intro"><span>Seu ataque</span><h2>Counter</h2><p>Turn 2 · sobreviva à abertura e controle a luta.</p></div>
+      <div class="slots">
+        <div class="slot"><div><span class="slot-label">Slot 1 · Líder</span><div class="slot-options"><div class="monster"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/aragorn-fire.png"><b class="element-dot fire">FIRE</b></div><div class="monster-copy"><strong>Fire Aragorn (L)</strong><span>Fogo</span></div></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 2</span><div class="slot-options"><div class="monster"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/racuni.png"><b class="element-dot fire">FIRE</b></div><div class="monster-copy"><strong>Racuni</strong><span>Fogo</span></div></div></div></div></div>
+        <div class="slot"><div><span class="slot-label">Slot 3</span><div class="slot-options"><div class="monster"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/gyomei.png"><b class="element-dot wind">WIND</b></div><div class="monster-copy"><strong>Gyomei Himejima</strong><span>Vento</span></div></div></div><div class="substitute"><span class="or">OU, SE INDISPONÍVEL</span><div class="monster"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/windy.png"></div><div class="monster-copy"><strong>Windy</strong><span>Vento</span></div></div></div></div></div>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <article class="info-panel">
+        <h2 class="panel-title"><i></i>Como usar</h2>
+        <div class="quick-list">
+          <div class="quick-item"><span>Ordem de turno</span><p>Fire Aragorn → Racuni → Gyomei Himejima</p></div>
+          <div class="quick-item"><span>Prioridade de alvo</span><p>Wind Zenitsu primeiro, Daphnis depois e Sylvia ou Moore por último.</p></div>
+          <div class="quick-item risk"><span>Risco crítico</span><p>Sobreviva à abertura. Confirme 100% RES com a liderança de 48% do Aragorn e a durabilidade mínima indicada.</p></div>
+        </div>
+        <div class="evidence-row">
+          <div class="mini-note"><strong>Evidência</strong><span>Vitória confirmada contra Sylvia + Daphnis + Wind Zenitsu.</span></div>
+          <div class="mini-note alt"><strong>Substituição</strong><span>Windy somente quando Gyomei Himejima não estiver disponível.</span></div>
+        </div>
+      </article>
+
+      <article class="info-panel">
+        <h2 class="panel-title"><i></i>Build mínima recomendada</h2>
+        <div class="build-list">
+          <div class="build"><img class="fire" src="../monsters/aragorn-fire.png"><strong>Fire Aragorn</strong><div class="build-data"><span>Revenge / Revenge / Will</span><em>≥ +32k HP · ≥ +500 DEF</em></div></div>
+          <div class="build"><img class="fire" src="../monsters/racuni.png"><strong>Racuni</strong><div class="build-data"><span>Violent / Nemesis</span><em>≥ +30k HP · ≥ +600 DEF</em></div></div>
+          <div class="build"><img class="wind" src="../monsters/gyomei.png"><strong>Gyomei Himejima</strong><div class="build-data"><span>Violent / Seal</span><em>≥ +30k HP · ≥ +1,2k DEF</em></div></div>
+        </div>
+        <div class="author"><span>Autor: <strong>LETHALX</strong></span><span>Oxytocin Family · referência da guilda</span></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
