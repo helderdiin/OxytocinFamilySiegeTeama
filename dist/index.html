@@ -85,12 +85,18 @@
           <div class="filters">
             <label class="search-field">
               <span>⌕</span>
-              <input id="searchInput" type="search" placeholder="Buscar monstro, defesa ou jogador..." />
+              <input id="searchInput" type="search" placeholder="Buscar monstro, jogador, estratégia, risco ou status..." />
             </label>
             <div class="filter-tabs" role="group" aria-label="Filtrar ataques">
               <button class="active" data-filter="all" type="button">Todos</button>
               <button data-filter="mine" type="button">Meus ataques</button>
             </div>
+          </div>
+          <div class="advanced-filters">
+            <label>Segurança<select id="safetyFilter"><option value="all">Todos os níveis</option><option value="very_safe">Muito seguro</option><option value="safe">Seguro</option><option value="situational">Situacional</option><option value="experimental">Experimental</option></select></label>
+            <label>Status<select id="statusFilter"><option value="all">Todos os status</option><option value="proven">Testada</option><option value="recommended">Recomendada</option><option value="needs_testing">Precisa de testes</option></select></label>
+            <button class="clear-filters" id="clearFiltersButton" type="button">Limpar filtros</button>
+            <span class="result-count" id="resultCount">0 estratégias</span>
           </div>
 
           <div class="strategy-list" id="strategyList"></div>
@@ -101,7 +107,7 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span>POC v0.1 · dados locais</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span>POC v0.3 · dados locais</span></footer>
     </div>
 
     <dialog id="strategyDialog">
@@ -127,7 +133,24 @@
             <label>Monstro 3<button class="monster-select wildcard-select" type="button" disabled><span class="wildcard-avatar">X</span><span><strong>Qualquer monstro</strong><small>Explique abaixo</small></span></button></label>
           </div>
         </fieldset>
-        <label class="notes-field">Observações <span>(recomendado para explicar o X)</span><textarea name="notes" maxlength="320" rows="3" placeholder="Explique quais terceiros funcionam, exceções, runas ou ordem de turnos..."></textarea></label>
+        <div class="versus-divider"><span>ESTRATÉGIA</span></div>
+        <fieldset class="classification-fields">
+          <legend><span class="legend-icon strategy">◎</span><span><strong>Classificação</strong><small>Ajuda a guilda a escolher o ataque certo</small></span></legend>
+          <div class="select-grid">
+            <label>Nível de segurança<small>Quão confiável é a composição?</small><select name="safety" required><option value="very_safe">Muito seguro</option><option value="safe">Seguro</option><option value="situational" selected>Situacional</option><option value="experimental">Experimental</option></select></label>
+            <label>Status da estratégia<small>Qual é o nível de validação?</small><select name="status" required><option value="proven">Testada</option><option value="recommended">Recomendada pela guilda</option><option value="needs_testing" selected>Ainda precisa de testes</option></select></label>
+          </div>
+        </fieldset>
+        <div class="strategy-fields">
+          <label class="strategy-field"><strong>Plano de jogo</strong><small>Explique como a composição funciona e qual é sua condição de vitória.</small><textarea name="gamePlan" maxlength="700" rows="4" required placeholder="Ex.: controlar a abertura, eliminar a maior ameaça e estabilizar com sustain..."></textarea></label>
+          <label class="strategy-field"><strong>Status e builds recomendadas</strong><small>Velocidades, HP, DEF, precisão, resistência e conjuntos de runas importantes.</small><textarea name="idealStats" maxlength="700" rows="3" placeholder="Ex.: Orion +170 SPD em Will; Perna com 85% CR e dano suficiente..."></textarea></label>
+          <label class="strategy-field"><strong>Ordem de turno</strong><small>Registre a sequência dos monstros e habilidades na abertura.</small><textarea name="turnOrder" maxlength="500" rows="3" placeholder="Ex.: Orion S3 → Seara S2 → Perna foca o alvo principal..."></textarea></label>
+          <label class="strategy-field"><strong>Prioridade de alvo</strong><small>Quem eliminar primeiro, quem deixar por último e quando trocar o foco.</small><textarea name="targetPriority" maxlength="500" rows="3" placeholder="Ex.: eliminar o reviver primeiro; não bater no tanque até remover o suporte..."></textarea></label>
+          <label class="strategy-field"><strong>Variações do terceiro monstro</strong><small>Explique quais opções funcionam no slot X e quais mudam o matchup.</small><textarea name="thirdVariations" maxlength="700" rows="3" placeholder="Ex.: funciona com qualquer bruiser sem cleanse; evite terceiros com revive..."></textarea></label>
+          <label class="strategy-field warning-field"><strong>Riscos — nunca use contra</strong><small>Liste counters, passivas e condições que fazem esse ataque falhar.</small><textarea name="risks" maxlength="700" rows="3" placeholder="Ex.: nunca usar contra anti-crítico, cleanse forte ou ameaça que ignore DEF..."></textarea></label>
+          <label class="strategy-field"><strong>Substituições possíveis</strong><small>Quem pode substituir um atacante e quais ajustes essa troca exige.</small><textarea name="substitutions" maxlength="600" rows="3" placeholder="Ex.: Nickel pode substituir Talc contra ameaça Wind, mantendo a mesma ordem..."></textarea></label>
+          <label class="strategy-field"><strong>Experiência comprovada</strong><small>Informe onde foi testado, vitórias, derrotas e observações de batalha.</small><textarea name="evidence" maxlength="700" rows="3" placeholder="Ex.: 4 vitórias em Siege G2; uma derrota quando a defesa ganhou a disputa de velocidade..."></textarea></label>
+        </div>
         <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" type="submit">Salvar estratégia</button></div>
       </form>
     </dialog>

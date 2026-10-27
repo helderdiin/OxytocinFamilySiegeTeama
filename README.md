@@ -30,17 +30,29 @@ O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHel
 
 ```json
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "strategies": [
     {
       "attack": ["skogul", "chloe", "kahli"],
-      "defense": ["conrad", "robo-r40", "*"]
+      "defense": ["conrad", "robo-r40", "*"],
+      "safety": "safe",
+      "status": "proven",
+      "sections": {
+        "gamePlan": "Preparar o Skogul e eliminar a maior ameaça.",
+        "idealStats": "Chloe deve abrir o time.",
+        "turnOrder": "Chloe → Kahli → Skogul.",
+        "targetPriority": "Eliminar primeiro quem remove buffs.",
+        "thirdVariations": "Funciona com terceiros sem sustain pesado.",
+        "risks": "Nunca usar contra strip consistente e anti-crítico.",
+        "substitutions": "A Kahli pode variar por outro nuker.",
+        "evidence": "Vitória confirmada em Siege."
+      }
     }
   ]
 }
 ```
 
-O valor `"*"` representa qualquer terceiro monstro na defesa; as condições e exceções devem ser registradas em `notes`.
+O valor `"*"` representa qualquer terceiro monstro na defesa; as condições, exceções e instruções ficam organizadas no objeto `sections`.
 
 ## Sincronização do catálogo
 

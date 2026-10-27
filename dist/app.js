@@ -9,7 +9,18 @@ const seedStrategies = [
     player: "MestreOx",
     attack: ["skogul", "chloe", "kahli"],
     defense: ["conrad", "robo-r40", "*"],
-    notes: "Bom contra Conrad + ROBO-R40 + vários terceiros. Evitar Hyanes + Vigor + Kinki.",
+    safety: "safe",
+    status: "proven",
+    sections: {
+      gamePlan: "Usar a proteção da Chloe para preparar o Skogul e eliminar a principal ameaça com a Kahli enquanto a pedra cai.",
+      idealStats: "Chloe deve abrir o time. Kahli precisa de dano suficiente para finalizar o alvo prioritário.",
+      turnOrder: "Chloe → Kahli → Skogul.",
+      targetPriority: "Eliminar primeiro o monstro que ameaça remover a proteção ou controlar o Skogul.",
+      thirdVariations: "Bom contra Conrad + ROBO-R40 + vários terceiros sem sustain pesado.",
+      risks: "Nunca usar contra Hyanes + Vigor + Kinki ou contra strip consistente com anti-crítico.",
+      substitutions: "A Kahli pode variar por outro nuker protegido, desde que mantenha a condição de abate.",
+      evidence: "Vitória confirmada contra Conrad + ROBO-R40 + terceiro neutro.",
+    },
     createdAt: "2026-10-22T18:30:00.000Z",
   },
   {
@@ -17,7 +28,18 @@ const seedStrategies = [
     player: "LunaSW",
     attack: ["ashour", "racuni", "talc"],
     defense: ["miles", "nora", "*"],
-    notes: "O terceiro depende do elemento da ameaça; Nickel pode substituir Talc contra ameaça Wind.",
+    safety: "situational",
+    status: "recommended",
+    sections: {
+      gamePlan: "Direcionar a ameaça principal para o tanque elemental e sustentar a luta com Racuni.",
+      idealStats: "Racuni rápido e resistente; o tanque precisa suportar a pressão prolongada.",
+      turnOrder: "Ashour aplica pressão, Racuni acelera e limpa, Talc absorve o dano.",
+      targetPriority: "Remover primeiro a fonte de dano que não é controlada pelo tanque.",
+      thirdVariations: "O terceiro define qual tanque usar e pode exigir a variante com Nickel.",
+      risks: "Evitar dano que ignore DEF ou ameaças que não possam ser direcionadas ao tanque escolhido.",
+      substitutions: "Nickel pode substituir Talc contra ameaça Wind.",
+      evidence: "A variante com Nickel venceu Tarnisha + Miles + Shahat.",
+    },
     createdAt: "2026-10-24T21:10:00.000Z",
   },
   {
@@ -25,7 +47,18 @@ const seedStrategies = [
     player: "TheoBR",
     attack: ["seara", "orion", "perna"],
     defense: ["chandra", "byungchul", "*"],
-    notes: "Funciona melhor quando o terceiro não traz cleanse forte. Descrever a variação antes de usar.",
+    safety: "experimental",
+    status: "needs_testing",
+    sections: {
+      gamePlan: "Ganhar a abertura com Orion, aplicar bomba com Seara e usar Perna para concluir o abate.",
+      idealStats: "Orion deve ser o mais rápido; Seara joga antes de Perna.",
+      turnOrder: "Orion S3 → Seara S2 → Perna no alvo principal.",
+      targetPriority: "Focar o suporte ou reviver que ficar vulnerável após o strip.",
+      thirdVariations: "Funciona melhor quando o terceiro não traz cleanse forte.",
+      risks: "Evitar defesa muito rápida, anti-bomba ou com cleanse confiável.",
+      substitutions: "Ainda não validado.",
+      evidence: "Precisa de mais testes antes de ser recomendada pela guilda.",
+    },
     createdAt: "2026-10-25T15:45:00.000Z",
   },
 ];
@@ -39,8 +72,34 @@ const elementNames = {
   neutral: "Neutro",
 };
 
+const safetyNames = {
+  very_safe: "Muito seguro",
+  safe: "Seguro",
+  situational: "Situacional",
+  experimental: "Experimental",
+};
+
+const statusNames = {
+  proven: "Testada",
+  recommended: "Recomendada",
+  needs_testing: "Precisa de testes",
+};
+
+const sectionDefinitions = [
+  ["gamePlan", "Plano de jogo", "primary"],
+  ["idealStats", "Status e builds recomendadas", ""],
+  ["turnOrder", "Ordem de turno", ""],
+  ["targetPriority", "Prioridade de alvo", ""],
+  ["thirdVariations", "Variações do terceiro monstro", ""],
+  ["risks", "Riscos — nunca use contra", "warning"],
+  ["substitutions", "Substituições possíveis", ""],
+  ["evidence", "Experiência comprovada", ""],
+];
+
 let currentUser = localStorage.getItem(STORAGE_KEYS.user) || "";
 let activeFilter = "all";
+let activeSafety = "all";
+let activeStatus = "all";
 let activeElement = "all";
 let strategies = [];
 let monsters = [];
@@ -66,11 +125,26 @@ function readStoredStrategies() {
 }
 
 function migrateStrategies(records) {
-  return records.map((strategy) => ({
-    ...strategy,
-    attack: strategy.attack.slice(0, 3).map(toMonsterId),
-    defense: [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), "*"],
-  }));
+  return records.map((strategy) => {
+    const { notes, ...rest } = strategy;
+    return {
+      ...rest,
+      attack: strategy.attack.slice(0, 3).map(toMonsterId),
+      defense: [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), "*"],
+      safety: safetyNames[strategy.safety] ? strategy.safety : "situational",
+      status: statusNames[strategy.status] ? strategy.status : "needs_testing",
+      sections: {
+        gamePlan: strategy.sections?.gamePlan || notes || "",
+        idealStats: strategy.sections?.idealStats || "",
+        turnOrder: strategy.sections?.turnOrder || "",
+        targetPriority: strategy.sections?.targetPriority || "",
+        thirdVariations: strategy.sections?.thirdVariations || "",
+        risks: strategy.sections?.risks || "",
+        substitutions: strategy.sections?.substitutions || "",
+        evidence: strategy.sections?.evidence || "",
+      },
+    };
+  });
 }
 
 function toMonsterId(value) {
@@ -80,7 +154,7 @@ function toMonsterId(value) {
 }
 
 function saveStrategies() {
-  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 2, strategies }));
+  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 3, strategies }));
 }
 
 function escapeHtml(value) {
@@ -113,12 +187,15 @@ function render() {
   const query = normalize($("#searchInput")?.value || "");
   const visible = strategies.filter((strategy) => {
     const matchesOwner = activeFilter !== "mine" || strategy.player === currentUser;
+    const matchesSafety = activeSafety === "all" || strategy.safety === activeSafety;
+    const matchesStatus = activeStatus === "all" || strategy.status === activeStatus;
     const monsterText = [...strategy.attack, ...strategy.defense].map((id) => {
       const monster = getMonster(id);
       return [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
     });
-    const haystack = normalize([...monsterText, strategy.player, strategy.notes || ""].join(" "));
-    return matchesOwner && haystack.includes(query);
+    const sectionText = Object.values(strategy.sections || {});
+    const haystack = normalize([...monsterText, strategy.player, safetyNames[strategy.safety], statusNames[strategy.status], ...sectionText].join(" "));
+    return matchesOwner && matchesSafety && matchesStatus && haystack.includes(query);
   });
 
   $("#totalStrategies").textContent = strategies.length;
@@ -126,29 +203,43 @@ function render() {
   $("#totalPlayers").textContent = new Set(strategies.map((item) => normalize(item.player))).size;
   $("#strategyList").innerHTML = visible.map(strategyCard).join("");
   $("#emptyState").hidden = visible.length > 0;
+  $("#resultCount").textContent = `${visible.length} ${visible.length === 1 ? "estratégia" : "estratégias"}`;
 }
 
 function strategyCard(strategy) {
   const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(strategy.createdAt));
   const canDelete = strategy.player === currentUser;
+  const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
+  const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
   return `
-    <article class="strategy-card">
-      <div class="team attack-team">
-        <span class="team-label attack-label">⚔ ATAQUE</span>
-        <div class="monsters">${strategy.attack.map(monsterChip).join("")}</div>
+    <details class="strategy-card">
+      <summary class="strategy-summary">
+        <div class="team attack-team">
+          <span class="team-label attack-label">⚔ ATAQUE</span>
+          <div class="monsters">${strategy.attack.map(monsterChip).join("")}</div>
+        </div>
+        <span class="vs">VS</span>
+        <div class="team">
+          <span class="team-label">⬡ DEFESA</span>
+          <div class="monsters">${strategy.defense.map(monsterChip).join("")}</div>
+        </div>
+        <div class="strategy-meta">
+          <div class="strategy-badges"><span class="strategy-badge ${safetyClass}">${safetyNames[strategy.safety]}</span><span class="strategy-badge ${statusClass}">${statusNames[strategy.status]}</span></div>
+          <strong>${escapeHtml(strategy.player)}</strong>
+          <time datetime="${strategy.createdAt}">${date}</time>
+        </div>
+        <span class="expand-icon" aria-hidden="true">⌄</span>
+      </summary>
+      <div class="strategy-details">
+        <div class="strategy-overview">${sectionDefinitions.map(([key, title, className]) => detailSection(title, strategy.sections?.[key], className)).join("")}</div>
+        <div class="card-footer"><span>Cadastrado por ${escapeHtml(strategy.player)} em ${date}</span>${canDelete ? `<div class="card-actions"><button class="delete-button" data-delete-id="${strategy.id}" type="button">Excluir estratégia</button></div>` : ""}</div>
       </div>
-      <span class="vs">VS</span>
-      <div class="team">
-        <span class="team-label">⬡ DEFESA</span>
-        <div class="monsters">${strategy.defense.map(monsterChip).join("")}</div>
-      </div>
-      <div class="strategy-meta">
-        <strong>${escapeHtml(strategy.player)}</strong>
-        <time datetime="${strategy.createdAt}">${date}</time>
-        ${strategy.notes ? `<p>${escapeHtml(strategy.notes)}</p>` : ""}
-        ${canDelete ? `<div class="card-actions"><button class="delete-button" data-delete-id="${strategy.id}" type="button">Excluir estratégia</button></div>` : ""}
-      </div>
-    </article>`;
+    </details>`;
+}
+
+function detailSection(title, content, className) {
+  const hasContent = Boolean(content?.trim());
+  return `<section class="detail-section ${className}${hasContent ? "" : " empty"}"><h4>${escapeHtml(title)}</h4><p>${hasContent ? escapeHtml(content) : "Não informado."}</p></section>`;
 }
 
 function monsterChip(id) {
@@ -280,7 +371,18 @@ $("#strategyForm").addEventListener("submit", (event) => {
     player: currentUser,
     attack: [...selection.attack],
     defense: [...selection.defense],
-    notes: data.get("notes").trim(),
+    safety: data.get("safety"),
+    status: data.get("status"),
+    sections: {
+      gamePlan: data.get("gamePlan").trim(),
+      idealStats: data.get("idealStats").trim(),
+      turnOrder: data.get("turnOrder").trim(),
+      targetPriority: data.get("targetPriority").trim(),
+      thirdVariations: data.get("thirdVariations").trim(),
+      risks: data.get("risks").trim(),
+      substitutions: data.get("substitutions").trim(),
+      evidence: data.get("evidence").trim(),
+    },
     createdAt: new Date().toISOString(),
   });
   saveStrategies();
@@ -301,6 +403,24 @@ $("#strategyList").addEventListener("click", (event) => {
 });
 
 $("#searchInput").addEventListener("input", render);
+$("#safetyFilter").addEventListener("change", (event) => {
+  activeSafety = event.target.value;
+  render();
+});
+$("#statusFilter").addEventListener("change", (event) => {
+  activeStatus = event.target.value;
+  render();
+});
+$("#clearFiltersButton").addEventListener("click", () => {
+  activeFilter = "all";
+  activeSafety = "all";
+  activeStatus = "all";
+  $("#searchInput").value = "";
+  $("#safetyFilter").value = "all";
+  $("#statusFilter").value = "all";
+  document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("active", item.dataset.filter === "all"));
+  render();
+});
 document.querySelectorAll("[data-filter]").forEach((button) => {
   button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
@@ -310,7 +430,7 @@ document.querySelectorAll("[data-filter]").forEach((button) => {
 });
 
 $("#exportButton").addEventListener("click", () => {
-  const payload = { schemaVersion: 2, exportedAt: new Date().toISOString(), strategies };
+  const payload = { schemaVersion: 3, exportedAt: new Date().toISOString(), strategies };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
