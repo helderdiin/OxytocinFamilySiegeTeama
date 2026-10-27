@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=0.17" />
+    <link rel="stylesheet" href="./styles.css?v=0.18" />
   </head>
   <body>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -40,7 +40,7 @@
             <input id="playerName" name="playerName" autocomplete="nickname" maxlength="24" placeholder="Ex.: Helder" required />
             <button type="submit" class="button button-primary">Entrar</button>
           </div>
-          <p class="helper">Sem senha nesta POC. Use seu nick para identificar suas sugestões.</p>
+          <p class="helper">Use seu nick para identificar suas contribuições para a guilda.</p>
         </form>
       </div>
     </section>
@@ -127,24 +127,25 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">POC v0.17 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.18 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
       <div class="dialog-header">
-        <div><p class="eyebrow">NOVA ESTRATÉGIA</p><h2>Adicionar ataque</h2><p>Escolha os monstros principais e, se precisar, adicione alternativas no mesmo slot.</p></div>
+        <div><p class="eyebrow">NOVO COUNTER</p><h2 id="strategyDialogTitle">Adicionar counter</h2><p id="strategyDialogCopy">Escolha a defesa, monte o ataque e registre como pilotar esta opção.</p></div>
         <button class="close-button" id="closeDialogButton" type="button" aria-label="Fechar">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></svg>
         </button>
       </div>
       <form id="strategyForm">
-        <fieldset>
+        <fieldset id="defenseFieldset">
           <legend><span class="legend-icon attack"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m14.5 17.5 3-3M4 19l6-6M13 6l5-3 3 3-3 5M5 3l16 16M14 5l5 5M3 21l3-3" /></svg></span><span><strong>Seu ataque</strong><small>Dois monstros principais obrigatórios; cada slot pode ter alternativas</small></span></legend>
           <div class="monster-grid">
             <div class="monster-slot-field"><span class="slot-field-label">Monstro 1</span><button class="monster-select" data-slot="attack-0" type="button"><span class="select-plus"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span><span>Selecionar</span></button><div class="selected-alternatives" data-alternatives-for="attack-0"></div></div>
             <div class="monster-slot-field"><span class="slot-field-label">Monstro 2</span><button class="monster-select" data-slot="attack-1" type="button"><span class="select-plus"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg></span><span>Selecionar</span></button><div class="selected-alternatives" data-alternatives-for="attack-1"></div></div>
             <div class="monster-slot-field"><span class="slot-field-label">Monstro 3 · opcional</span><button class="monster-select wildcard-select" data-slot="attack-2" data-optional="true" type="button"><span class="wildcard-avatar">X</span><span><strong>Sem terceiro</strong><small>Selecione se quiser usar</small></span></button><div class="selected-alternatives" data-alternatives-for="attack-2"></div></div>
           </div>
+          <div class="defense-locked-notice" id="defenseLockedNotice" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" /></svg><span><strong>Defesa já vinculada</strong>Você está adicionando uma nova forma de atacar esta defesa. As informações do counter começam em branco.</span></div>
         </fieldset>
         <div class="versus-divider"><span>VS</span></div>
         <fieldset>
@@ -173,7 +174,7 @@
           <label class="strategy-field"><strong>Substituições possíveis</strong><small>Quem pode substituir um atacante e quais ajustes essa troca exige.</small><textarea name="substitutions" maxlength="600" rows="3" placeholder="Ex.: Nickel pode substituir Talc contra ameaça Wind, mantendo a mesma ordem..."></textarea></label>
           <label class="strategy-field"><strong>Experiência comprovada</strong><small>Informe onde foi testado, vitórias, derrotas e observações de batalha.</small><textarea name="evidence" maxlength="700" rows="3" placeholder="Ex.: 4 vitórias em Siege G2; uma derrota quando a defesa ganhou a disputa de velocidade..."></textarea></label>
         </div>
-        <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" type="submit">Salvar estratégia</button></div>
+        <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" id="saveStrategyButton" type="submit">Salvar counter</button></div>
       </form>
     </dialog>
 
@@ -202,7 +203,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
-    <script src="./supabase-store.js?v=0.17"></script>
-    <script src="./app.js?v=0.17"></script>
+    <script src="./supabase-store.js?v=0.18"></script>
+    <script src="./app.js?v=0.18"></script>
   </body>
 </html>

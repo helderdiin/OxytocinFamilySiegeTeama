@@ -14,6 +14,7 @@
   function fromDatabase(row) {
     return {
       id: row.id,
+      defenseId: row.defense_id,
       ownerId: row.owner_id,
       player: row.player_name,
       attack: row.attack,
@@ -30,8 +31,9 @@
     };
   }
 
-  function toDatabase(strategy, userId, nick) {
+  function toDatabase(strategy, userId, nick, defenseId) {
     return {
+      defense_id: defenseId,
       owner_id: userId,
       player_name: nick,
       attack: strategy.attack,
@@ -84,7 +86,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategies")
-      .select("id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
+      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data.map(fromDatabase);
@@ -92,10 +94,20 @@
 
   async function createStrategy(strategy, userId, nick) {
     assertConfigured();
+    let defenseId = strategy.defenseId;
+    if (!defenseId) {
+      const { data: resolvedId, error: defenseError } = await client.rpc("resolve_defense", {
+        p_monsters: strategy.defense,
+        p_alternatives: strategy.defenseAlternatives,
+      });
+      if (defenseError) throw defenseError;
+      defenseId = resolvedId;
+    }
+
     const { data, error } = await client
       .from("strategies")
-      .insert(toDatabase(strategy, userId, nick))
-      .select("id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
+      .insert(toDatabase(strategy, userId, nick, defenseId))
+      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at")
       .single();
     if (error) throw error;
     return fromDatabase(data);

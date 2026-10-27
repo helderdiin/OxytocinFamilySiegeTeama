@@ -63,6 +63,28 @@ const seedStrategies = [
     },
     createdAt: "2026-10-25T15:45:00.000Z",
   },
+  {
+    id: "seed-4",
+    defenseId: "seed-defense-sylvia-daphnis-zenitsu",
+    player: "KoBrAsw",
+    attack: ["eladriel", "leo", "chow"],
+    defense: ["sylvia", "daphnis", "wind-zenitsu"],
+    attackAlternatives: [["briand"], [], []],
+    defenseAlternatives: [["moore"], [], ["savannah"]],
+    safety: "situational",
+    status: "proven",
+    sections: {
+      gamePlan: "Leo limita a velocidade da luta para retirar a vantagem da abertura inimiga. Eladriel ou Briand mantém o time de pé e recupera uma peça abatida, enquanto Chow sustenta o dano até desmontar a defesa.",
+      idealStats: "O reviver precisa de bastante HP, DEF e RES para sobreviver ao primeiro ciclo. Leo deve ser montado como bruiser resistente, e Chow precisa equilibrar dano e sustain para conduzir a luta longa.",
+      turnOrder: "Sem ordem rígida por causa da passiva do Leo. Priorize a recuperação com Eladriel ou Briand, use Leo para controlar o ritmo e deixe Chow converter a vantagem em abates.",
+      targetPriority: "Daphnis primeiro para remover a maior ameaça de explosão. Depois elimine Zenitsu ou Savannah e deixe Sylvia ou Moore por último quando a luta estiver estabilizada.",
+      thirdVariations: "Pensado para Sylvia ou Moore + Daphnis + Wind Zenitsu ou Savannah. Confirme o terceiro defensor antes de escolher a variação do reviver.",
+      risks: "O plano perde muita segurança se Eladriel ou Briand cair antes de usar o revive. Evite quando o reviver não suportar a abertura ou quando a defesa tiver controle suficiente para impedir a recuperação.",
+      substitutions: "Briand pode ocupar o slot do Eladriel apenas quando o Eladriel não estiver disponível. É uma alternativa de disponibilidade, não uma escolha por status ou build.",
+      evidence: "Testado e comprovado por mais de um membro da guilda. KoBrAsw trouxe o counter a partir da recomendação de um youtuber conhecido.",
+    },
+    createdAt: "2026-10-27T14:00:00.000Z",
+  },
 ];
 
 const elementNames = {
@@ -109,6 +131,7 @@ let monsterById = new Map();
 let monsterByName = new Map();
 let pickerSlot = null;
 let selection = emptySelection();
+let dialogDefenseId = null;
 const sharedStrategyId = new URLSearchParams(window.location.search).get("strategy");
 let sharedStrategyOpened = false;
 
@@ -148,12 +171,15 @@ function migrateStrategies(records) {
     const { notes, ...rest } = strategy;
     const attack = [toMonsterId(strategy.attack[0]), toMonsterId(strategy.attack[1]), toMonsterId(strategy.attack[2] || "*")];
     const defense = [toMonsterId(strategy.defense[0]), toMonsterId(strategy.defense[1]), toMonsterId(strategy.defense[2] || "*")];
+    const attackAlternatives = normalizeSlotAlternatives(strategy.attackAlternatives || strategy.attack_alternatives, attack);
+    const defenseAlternatives = normalizeSlotAlternatives(strategy.defenseAlternatives || strategy.defense_alternatives, defense);
     return {
       ...rest,
+      defenseId: strategy.defenseId || strategy.defense_id || `local:${compositionFingerprint(defense, defenseAlternatives)}`,
       attack,
       defense,
-      attackAlternatives: normalizeSlotAlternatives(strategy.attackAlternatives || strategy.attack_alternatives, attack),
-      defenseAlternatives: normalizeSlotAlternatives(strategy.defenseAlternatives || strategy.defense_alternatives, defense),
+      attackAlternatives,
+      defenseAlternatives,
       safety: safetyNames[strategy.safety] ? strategy.safety : "situational",
       status: statusNames[strategy.status] ? strategy.status : "needs_testing",
       comments: Array.isArray(strategy.comments) ? strategy.comments.map(normalizeComment) : [],
@@ -169,6 +195,13 @@ function migrateStrategies(records) {
       },
     };
   });
+}
+
+function compositionFingerprint(primaryIds, alternatives = [[], [], []]) {
+  return JSON.stringify([0, 1, 2].map((index) => ({
+    primary: primaryIds[index] || "*",
+    alternatives: [...(alternatives[index] || [])].map(toMonsterId).filter(Boolean).sort(),
+  })));
 }
 
 function emptySelection() {
@@ -221,7 +254,7 @@ function toMonsterId(value) {
 
 function saveStrategies() {
   if (cloudEnabled) return;
-  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 5, strategies }));
+  localStorage.setItem(STORAGE_KEYS.strategies, JSON.stringify({ schemaVersion: 6, strategies }));
 }
 
 function updateStorageUi(mode) {
@@ -229,7 +262,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Base compartilhada" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "POC v0.17 · Supabase" : "POC v0.17 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.18 · Supabase" : "v0.18 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -342,7 +375,7 @@ function render() {
   const monsterTokens = searchTokens($("#searchInput")?.value || "");
   const detailTokens = searchTokens($("#detailSearchInput")?.value || "");
   const activeStrategies = strategies.filter((strategy) => strategy.isActive !== false);
-  const visible = activeStrategies.filter((strategy) => {
+  const visibleStrategies = activeStrategies.filter((strategy) => {
     const matchesSafety = activeSafety === "all" || strategy.safety === activeSafety;
     const matchesStatus = activeStatus === "all" || strategy.status === activeStatus;
     const defenseText = strategy.defense.map((id) => {
@@ -365,13 +398,17 @@ function render() {
     const matchesDetails = detailTokens.every((token) => detailHaystack.includes(token));
     return matchesSafety && matchesStatus && matchesMonsters && matchesDetails;
   });
+  const allGroups = groupStrategiesByDefense(activeStrategies);
+  const visibleGroups = groupStrategiesByDefense(visibleStrategies);
 
   $("#totalStrategies").textContent = activeStrategies.length;
-  $("#totalDefenses").textContent = new Set(activeStrategies.map((item) => item.defense.slice(0, 2).sort().join("|"))).size;
+  $("#totalDefenses").textContent = allGroups.length;
   $("#totalPlayers").textContent = new Set(activeStrategies.map((item) => normalize(item.player))).size;
-  $("#strategyList").innerHTML = visible.map(strategyCard).join("");
-  $("#emptyState").hidden = visible.length > 0;
-  $("#resultCount").textContent = `${visible.length} ${visible.length === 1 ? "estratégia" : "estratégias"}`;
+  $("#strategyList").innerHTML = visibleGroups.map(defenseGroupCard).join("");
+  $("#emptyState").hidden = visibleGroups.length > 0;
+  const counterLabel = `${visibleStrategies.length} ${visibleStrategies.length === 1 ? "counter" : "counters"}`;
+  const defenseLabel = `${visibleGroups.length} ${visibleGroups.length === 1 ? "defesa" : "defesas"}`;
+  $("#resultCount").textContent = `${defenseLabel} · ${counterLabel}`;
 
   if (sharedStrategyId && !sharedStrategyOpened) {
     const sharedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === sharedStrategyId);
@@ -384,7 +421,50 @@ function render() {
   }
 }
 
-function strategyCard(strategy) {
+function groupStrategiesByDefense(records) {
+  const groups = new Map();
+  records.forEach((strategy) => {
+    const key = strategy.defenseId || `local:${compositionFingerprint(strategy.defense, strategy.defenseAlternatives)}`;
+    if (!groups.has(key)) groups.set(key, { id: key, defense: strategy, strategies: [] });
+    groups.get(key).strategies.push(strategy);
+  });
+  const statusPriority = { proven: 3, recommended: 2, needs_testing: 1 };
+  const safetyPriority = { very_safe: 4, safe: 3, situational: 2, experimental: 1 };
+  return [...groups.values()].map((group) => ({
+    ...group,
+    strategies: group.strategies.sort((left, right) => {
+      const leftScore = (statusPriority[left.status] || 0) * 10 + (safetyPriority[left.safety] || 0);
+      const rightScore = (statusPriority[right.status] || 0) * 10 + (safetyPriority[right.safety] || 0);
+      return rightScore - leftScore || new Date(right.createdAt) - new Date(left.createdAt);
+    }),
+  }));
+}
+
+function defenseGroupCard(group) {
+  const count = group.strategies.length;
+  const countLabel = `${count} ${count === 1 ? "counter disponível" : "counters disponíveis"}`;
+  const disabledAttribute = READ_ONLY_MODE
+    ? ' disabled aria-disabled="true" title="Cadastro temporariamente desativado no modo somente leitura."'
+    : "";
+  return `
+    <section class="defense-group" data-defense-id="${escapeHtml(group.id)}">
+      <header class="defense-group-header">
+        <div class="team defense-team defense-group-team">
+          <span class="team-label">Defesa encontrada</span>
+          <div class="monsters">${teamComposition(group.defense, "defense")}</div>
+        </div>
+        <div class="defense-group-actions">
+          <span class="counter-count">${countLabel}</span>
+          <button class="add-counter-button" data-add-counter-defense-id="${escapeHtml(group.id)}" type="button"${disabledAttribute}>${icon("plus")}<span>Adicionar outro counter</span></button>
+        </div>
+      </header>
+      <div class="counter-stack" aria-label="${countLabel}">
+        ${group.strategies.map((strategy, index) => strategyCard(strategy, index + 1)).join("")}
+      </div>
+    </section>`;
+}
+
+function strategyCard(strategy, counterIndex) {
   const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(strategy.createdAt));
   const canDelete = !READ_ONLY_MODE && (cloudEnabled ? strategy.ownerId === currentUserId && !strategy.isSeed : strategy.player === currentUser);
   const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
@@ -406,19 +486,15 @@ function strategyCard(strategy) {
       <summary class="strategy-summary">
         <div class="card-topline">
           <div class="strategy-badges">
+            <span class="counter-index">Opção ${counterIndex}</span>
             <span class="strategy-badge ${safetyClass}">${safetyNames[strategy.safety]}</span>
             <span class="strategy-badge ${statusClass}">${statusNames[strategy.status]}</span>
           </div>
           <span class="strategy-source">Por <strong>${escapeHtml(strategy.player)}</strong> · <time datetime="${strategy.createdAt}">${date}</time></span>
         </div>
-        <div class="matchup">
-          <div class="team defense-team">
-            <span class="team-label">Defesa encontrada</span>
-            <div class="monsters">${teamComposition(strategy, "defense")}</div>
-          </div>
-          <span class="matchup-arrow" aria-hidden="true">${icon("arrow")}</span>
+        <div class="counter-composition">
           <div class="team attack-team">
-            <span class="team-label">Counter recomendado</span>
+            <span class="team-label">Counter ${counterIndex}</span>
             <div class="monsters">${teamComposition(strategy, "attack")}</div>
           </div>
         </div>
@@ -541,8 +617,15 @@ function monsterChip(id, side, isAlternative = false) {
   return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(displayName)}</span></span>`;
 }
 
-function openStrategyDialog() {
+function openStrategyDialog(defenseStrategy = null) {
   resetSelection();
+  dialogDefenseId = defenseStrategy?.defenseId || null;
+  if (defenseStrategy) {
+    selection.defense = [...defenseStrategy.defense];
+    selection.defenseAlternatives = defenseStrategy.defenseAlternatives.map((slot) => [...slot]);
+    [0, 1, 2].forEach((index) => renderSelectionSlot("defense", index));
+  }
+  updateStrategyDialogMode();
   strategyDialog.showModal();
 }
 
@@ -550,12 +633,33 @@ function closeStrategyDialog() {
   if (monsterDialog.open) monsterDialog.close();
   strategyDialog.close();
   $("#strategyForm").reset();
+  dialogDefenseId = null;
   resetSelection();
+  updateStrategyDialogMode();
 }
 
 function resetSelection() {
   selection = emptySelection();
   ["attack", "defense"].forEach((side) => [0, 1, 2].forEach((index) => renderSelectionSlot(side, index)));
+}
+
+function updateStrategyDialogMode() {
+  const isAddingCounter = Boolean(dialogDefenseId);
+  $("#strategyDialogTitle").textContent = isAddingCounter ? "Adicionar outro counter" : "Adicionar counter";
+  $("#strategyDialogCopy").textContent = isAddingCounter
+    ? "A defesa e suas alternativas já estão vinculadas. Monte uma estratégia completamente nova para enfrentá-la."
+    : "Escolha a defesa, monte o ataque e registre como pilotar esta opção.";
+  $("#saveStrategyButton").textContent = "Salvar counter";
+  $("#defenseLockedNotice").hidden = !isAddingCounter;
+  $("#defenseFieldset").classList.toggle("is-locked", isAddingCounter);
+  document.querySelectorAll('.monster-select[data-slot^="defense-"]').forEach((button) => {
+    button.disabled = isAddingCounter;
+    button.setAttribute("aria-disabled", String(isAddingCounter));
+  });
+  document.querySelectorAll('[data-alternatives-for^="defense-"] button').forEach((button) => {
+    button.disabled = isAddingCounter;
+    button.setAttribute("aria-disabled", String(isAddingCounter));
+  });
 }
 
 function renderOptionalWildcard(button) {
@@ -590,16 +694,19 @@ function renderSelectedAlternatives(side, index) {
     container.innerHTML = "";
     return;
   }
+  const isLockedDefense = side === "defense" && Boolean(dialogDefenseId);
   const chips = alternatives.map((id) => {
     const monster = getMonster(id);
     return `
       <span class="selected-alternative">
         <img class="alternative-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" />
         <span title="${escapeHtml(displayMonsterName(monster))}">${escapeHtml(displayMonsterName(monster))}</span>
-        <button type="button" data-remove-alternative data-side="${side}" data-index="${index}" data-monster-id="${escapeHtml(id)}" aria-label="Remover ${escapeHtml(displayMonsterName(monster))}">${icon("close")}</button>
+        <button type="button" data-remove-alternative data-side="${side}" data-index="${index}" data-monster-id="${escapeHtml(id)}" aria-label="Remover ${escapeHtml(displayMonsterName(monster))}"${isLockedDefense ? ' disabled aria-disabled="true"' : ""}>${icon("close")}</button>
       </span>`;
   }).join("");
-  const addButton = alternatives.length < MAX_SLOT_ALTERNATIVES
+  const addButton = isLockedDefense
+    ? ""
+    : alternatives.length < MAX_SLOT_ALTERNATIVES
     ? `<button class="add-alternative" type="button" data-add-alternative data-side="${side}" data-index="${index}">${icon("plus")}<span>${alternatives.length ? "Outra opção" : "Alternativa"}</span></button>`
     : `<span class="alternative-limit">Limite de ${MAX_SLOT_ALTERNATIVES}</span>`;
   container.innerHTML = chips + addButton;
@@ -711,6 +818,7 @@ $("#loginForm").addEventListener("submit", async (event) => {
   const nextUser = new FormData(event.currentTarget).get("playerName").trim();
   if (!nextUser) return;
   const submitButton = event.currentTarget.querySelector("button[type='submit']");
+  const wasAddingCounter = Boolean(dialogDefenseId);
   submitButton.disabled = true;
   submitButton.textContent = cloudEnabled ? "Conectando..." : "Entrando...";
   try {
@@ -740,7 +848,7 @@ $("#logoutButton").addEventListener("click", () => {
 
 configureReadOnlyMode();
 [$("#openFormButton"), $("#emptyAddButton")].forEach((button) => {
-  if (!READ_ONLY_MODE) button.addEventListener("click", openStrategyDialog);
+  if (!READ_ONLY_MODE) button.addEventListener("click", () => openStrategyDialog());
 });
 [$("#closeDialogButton"), $("#cancelDialogButton")].forEach((button) => button.addEventListener("click", closeStrategyDialog));
 $("#closeMonsterDialog").addEventListener("click", () => monsterDialog.close());
@@ -812,6 +920,7 @@ $("#strategyForm").addEventListener("submit", async (event) => {
   const data = new FormData(event.currentTarget);
   const strategy = {
     id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
+    defenseId: dialogDefenseId || (cloudEnabled ? null : `local:${compositionFingerprint(selection.defense, selection.defenseAlternatives)}`),
     player: currentUser,
     attack: [...selection.attack],
     defense: [...selection.defense],
@@ -843,13 +952,13 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     }
     render();
     closeStrategyDialog();
-    showToast("Estratégia adicionada ao arsenal.");
+    showToast(wasAddingCounter ? "Novo counter adicionado à defesa." : "Counter adicionado ao arsenal.");
   } catch (error) {
     console.error(error);
     showToast("Não foi possível salvar a estratégia.");
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = "Salvar estratégia";
+    submitButton.textContent = "Salvar counter";
   }
 });
 
@@ -908,6 +1017,18 @@ $("#strategyList").addEventListener("submit", async (event) => {
 });
 
 $("#strategyList").addEventListener("click", async (event) => {
+  const addCounterButton = event.target.closest("[data-add-counter-defense-id]");
+  if (addCounterButton) {
+    if (READ_ONLY_MODE) return;
+    const defenseStrategy = strategies.find((item) => item.defenseId === addCounterButton.dataset.addCounterDefenseId);
+    if (!defenseStrategy) {
+      showToast("Não foi possível localizar esta defesa.");
+      return;
+    }
+    openStrategyDialog(defenseStrategy);
+    return;
+  }
+
   const shareButton = event.target.closest("[data-share-id]");
   if (shareButton) {
     try {

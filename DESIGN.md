@@ -201,15 +201,17 @@ The palette is a low-chroma night environment in which warm copper and cool stat
 
 ## Layout
 
-The desktop workspace uses a centered content rail capped at 1200px with 24px side clearance. A 76px sticky top bar anchors identity and actions; the command center leads with the primary task, followed by a 62px high full-width defense search and a compact filter row. Results use a one-column stack of strategy records with 12px gaps so each matchup reads as a complete decision unit.
+The desktop workspace uses a centered content rail capped at 1200px with 24px side clearance. A 76px sticky top bar anchors identity and actions; the command center leads with the primary task, followed by a 62px high full-width defense search and a compact filter row. Results use a one-column stack of defense groups with 12px gaps. A defense appears once as the stable parent record, followed by one or more independent counter rows.
 
-Within a strategy, defense and attack occupy balanced columns around a narrow directional arrow. The decision strip follows immediately in three columns—fit, risk, and turn order—before any expanded documentation. Cards use roughly 18–20px internal padding, while nested decision and detail cells tighten to 14–18px.
+Within a defense group, the enemy team owns the group header and its counter count. Each counter row leads with the attacking team, author, safety and validation; its decision strip follows immediately in three columns—fit, risk, and turn order—before any expanded documentation. Counter rows are separated by rules rather than nested cards so the hierarchy stays obvious without creating a stack of boxes.
 
 Each team is organized into three stable slots. A slot may contain one primary monster plus compact alternatives connected by the word “ou”; alternatives stay visually subordinate to the primary while remaining identifiable by portrait and name. On medium-width screens, defense and attack stack earlier so multi-option slots never compress monster names into unreadable fragments.
 
 At 900px, decision cells stack vertically and filters wrap. At 620px, the content rail narrows to 14px side clearance, the top bar becomes 66px high, the defense search becomes a 56px sticky control, matchups become a single vertical sequence, monster teams become a three-column grid, and forms collapse to one column. Interactive targets remain at least 44px wherever primary interaction occurs.
 
-**The Defense Leads Rule.** Enemy composition appears before the proposed attack in reading order, visual emphasis, and mobile stacking.
+**The Defense Leads Rule.** Enemy composition appears once before every proposed counter in reading order, visual emphasis, and mobile stacking.
+
+**The One Defense, Many Counters Rule.** Shared enemy composition belongs to the defense group; author, safety, validation, guidance, feedback, sharing and attack alternatives belong to each counter row.
 
 **The Decision Before Documentation Rule.** Fit, risk, and turn order must be visible before builds, substitutions, evidence, or the full game plan.
 

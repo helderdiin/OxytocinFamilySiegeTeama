@@ -624,3 +624,48 @@ legend small, .monster-grid label, .select-grid label > small, .strategy-field s
   .alternative-row > span:first-child { line-height: 1; }
   .alternative-monster .monster-image { width: 32px; height: 32px; flex-basis: 32px; }
 }
+
+/* Defense groups with independent counters */
+.defense-group { overflow: hidden; border: 1px solid #365158; border-radius: 14px; background: #172a2e; box-shadow: 0 9px 26px rgba(4,13,15,.16); }
+.defense-group-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; padding: 20px; border-bottom: 1px solid #456168; background: #1a2e32; }
+.defense-group-team { min-width: 0; }
+.defense-group-team .monsters { max-width: 720px; }
+.defense-group-actions { display: grid; justify-items: end; gap: 9px; }
+.counter-count { color: #a6c6d5; font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.add-counter-button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 13px; color: #cbd5d3; background: #223b40; border: 1px solid #527078; border-radius: 8px; font-size: 10px; font-weight: 700; transition: color .16s, background .16s, border-color .16s; }
+.add-counter-button svg { width: 15px; height: 15px; color: #9bc2b5; }
+.add-counter-button:not(:disabled):hover { color: #fffaf3; background: #2b484e; border-color: #789197; }
+.add-counter-button:focus-visible { outline: 3px solid rgba(212,123,88,.2); outline-offset: 2px; }
+.add-counter-button:disabled { cursor: not-allowed; color: #7c9093; background: #1b3034; border-color: #40595e; }
+.add-counter-button:disabled svg { color: #71878b; }
+.counter-stack { display: grid; }
+.counter-stack .strategy-card { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.counter-stack .strategy-card + .strategy-card { border-top: 1px solid #3b565c; }
+.counter-stack .strategy-card:hover,
+.counter-stack .strategy-card[open] { border-color: #3b565c; background: #1a2e32; }
+.counter-stack .strategy-summary { padding-top: 16px; }
+.counter-index { display: inline-flex; align-items: center; color: #9dacaf; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.counter-composition { padding: 15px 0 18px; }
+.counter-composition .monsters { max-width: 720px; }
+.counter-stack .strategy-details { background: #172a2e; }
+.defense-locked-notice { display: flex; align-items: flex-start; gap: 10px; margin-top: 14px; padding: 12px 13px; color: #aebcbd; border: 1px solid #527078; border-radius: 8px; background: #20383d; font-size: 11px; line-height: 1.45; }
+.defense-locked-notice[hidden] { display: none; }
+.defense-locked-notice svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 1px; color: #91bacb; }
+.defense-locked-notice span,
+.defense-locked-notice strong { display: block; }
+.defense-locked-notice strong { margin-bottom: 2px; color: #e7ebe5; }
+#defenseFieldset.is-locked .monster-select:disabled { cursor: default; color: #d5dcda; background: #1c3135; border-color: #4e696f; opacity: 1; }
+#defenseFieldset.is-locked .selected-alternative button:disabled { cursor: default; color: #667b7e; background: #192c30; }
+
+@media (max-width: 760px) {
+  .defense-group-header { grid-template-columns: 1fr; align-items: stretch; gap: 16px; padding: 16px 14px; }
+  .defense-group-actions { grid-template-columns: 1fr auto; align-items: center; justify-items: start; }
+  .add-counter-button { justify-self: end; }
+  .counter-stack .strategy-summary { padding-inline: 14px; }
+}
+
+@media (max-width: 480px) {
+  .defense-group-actions { grid-template-columns: 1fr; }
+  .add-counter-button { width: 100%; justify-self: stretch; }
+  .counter-composition .monsters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

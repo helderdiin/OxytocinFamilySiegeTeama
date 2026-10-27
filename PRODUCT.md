@@ -10,7 +10,7 @@ The product is used in a time-critical moment: a member sees an enemy base, sear
 
 - Oxytocin Family guild members participating in Siege.
 - Members may use the tool on mobile or desktop while the battle is active.
-- Identification is intentionally lightweight in the POC: the player enters their in-game nickname.
+- Identification is intentionally lightweight for the current guild rollout: the player enters their in-game nickname while the data model remains ready for authenticated ownership later.
 
 ## Core user job
 
@@ -26,8 +26,10 @@ Given an enemy defense, find a relevant counter and understand, at a glance:
 
 - Shared strategies stored in Supabase.
 - Search and filters for safety and validation status.
+- Defenses are shared records that can have several independent counters.
 - Two required monsters and an optional third monster on both attack and defense.
-- Up to four alternative monsters can be attached to each occupied attack or defense slot without duplicating a strategy.
+- Up to four alternative monsters can be attached to each occupied attack or defense slot without duplicating a counter.
+- A new counter can be started from a defense with its monsters and alternatives already linked, while keeping its own plan, builds, risks, author, feedback, and validation status.
 - Monster catalog with images, external IDs, elements, aliases, and preferred 2A variants.
 - Structured strategy guidance: game plan, recommended stats/builds, turn order, target priority, third-slot variations, risks, substitutions, and battle evidence.
 - Expandable strategy records and direct share links.
