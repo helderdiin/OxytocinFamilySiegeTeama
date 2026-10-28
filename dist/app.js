@@ -263,6 +263,7 @@ let selection = emptySelection();
 let buildDraft = new Map();
 let dialogDefenseId = null;
 let editingStrategyId = null;
+let editingCommentId = null;
 let approvedNewDefenseFingerprint = null;
 let pendingDefenseMatches = [];
 const initialQuery = new URLSearchParams(window.location.search);
@@ -479,6 +480,7 @@ function normalizeComment(comment) {
     videoUrl: normalizeYouTubeUrl(comment?.videoUrl || comment?.video_url),
     reaction: comment?.reaction === 1 || comment?.reaction === -1 ? comment.reaction : null,
     createdAt: comment?.createdAt || comment?.created_at || new Date().toISOString(),
+    updatedAt: comment?.updatedAt || comment?.updated_at || null,
   };
 }
 
@@ -508,7 +510,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.26 · Supabase" : "v0.26 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.28 · Supabase" : "v0.28 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -560,6 +562,7 @@ function icon(name, className = "") {
     thumbsDown: '<path d="M17 14V4h4v10h-4Zm0-9c-2.5-1.3-5.1-2-7.8-2H7a3 3 0 0 0-2.9 2.3l-1 4A3 3 0 0 0 6 13h4l-.7 3.3a3.1 3.1 0 0 0 3.1 3.7l4.6-6V5Z" />',
     play: '<path d="m9 7 8 5-8 5V7Z" /><circle cx="12" cy="12" r="9" />',
     external: '<path d="M14 4h6v6M20 4l-9 9" /><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6" />',
+    crown: '<path d="m4 7 4.2 4L12 5l3.8 6L20 7l-1.5 11h-13L4 7Z" /><path d="M6 14h12" />',
   };
   return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[name] || ""}</svg>`;
 }
@@ -617,6 +620,49 @@ function monsterVariantKey(monster) {
 function displayMonsterName(monster) {
   const name = String(monster.name || monster.canonicalName || monster.id).replace(/\s+2A$/i, "").trim();
   return monsterAwakenLevel(monster) === 2 ? `${name} 2A` : name;
+}
+
+function monsterLeaderSkill(monster) {
+  return monster?.gameData?.leaderSkill || null;
+}
+
+function leaderAttributeIcon(skill, className = "") {
+  const paths = {
+    attack: '<path d="m6 18 12-12M14 5l5 5M5 14l5 5M4 20l3-1-2-2-1 3Z" />',
+    speed: '<path d="m13 2-8 12h6l-1 8 9-13h-6V2Z" />',
+    defense: '<path d="M12 3 5 6v5c0 4.6 2.7 8.2 7 10 4.3-1.8 7-5.4 7-10V6l-7-3Z" /><path d="M12 7v10" />',
+    hp: '<path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.2l-1.4-1.4a5.2 5.2 0 1 0-7.4 7.4L12 22l8.8-8.8a5.2 5.2 0 0 0 0-7.4Z" />',
+    "critical-rate": '<circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M12 2v3M22 12h-3M12 22v-3M2 12h3" />',
+    "critical-damage": '<path d="m12 2 2.2 6.3L21 7l-4.2 5 4.2 5-6.8-1.3L12 22l-2.2-6.3L3 17l4.2-5L3 7l6.8 1.3L12 2Z" />',
+    accuracy: '<circle cx="12" cy="12" r="7" /><path d="M12 2v4M22 12h-4M12 22v-4M2 12h4M9 12l2 2 4-5" />',
+    resistance: '<path d="M12 3 5 6v5c0 4.6 2.7 8.2 7 10 4.3-1.8 7-5.4 7-10V6l-7-3Z" /><path d="m8.5 12 2.2 2.2 4.8-4.8" />',
+    generic: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" />',
+  };
+  return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[skill?.icon] || paths.generic}</svg>`;
+}
+
+function leaderSkillDescription(monster) {
+  return monsterLeaderSkill(monster)?.description || `${displayMonsterName(monster)} não possui Leader Skill.`;
+}
+
+function leaderSkillSummary(strategy, side, compact = false) {
+  const primaryId = strategy?.[side]?.[0];
+  if (!primaryId || primaryId === "*") return "";
+  const alternativeIds = strategy?.[alternativeKey(side)]?.[0] || [];
+  const entries = [primaryId, ...alternativeIds].map((id, index) => {
+    const monster = getMonster(id);
+    const skill = monsterLeaderSkill(monster);
+    return `
+      <span class="leader-skill-entry${skill ? "" : " is-empty"}">
+        <span class="leader-skill-icon">${skill ? leaderAttributeIcon(skill) : icon("crown")}</span>
+        <span class="leader-skill-copy"><strong>${index ? "Alternativa · " : ""}${escapeHtml(displayMonsterName(monster))}</strong><span>${escapeHtml(leaderSkillDescription(monster))}</span></span>
+      </span>`;
+  }).join("");
+  return `
+    <span class="leader-skill-strip${compact ? " is-compact" : ""}" aria-label="Leader Skill do slot 1">
+      <span class="leader-skill-label">${icon("crown")}<span>Leader Skill</span></span>
+      <span class="leader-skill-entries">${entries}</span>
+    </span>`;
 }
 
 function prepareMonsterCatalog(records) {
@@ -741,7 +787,7 @@ function defenseCatalogCard(group, index) {
         <span class="defense-type">Defesa da Siege</span>
         <span class="defense-number">${String(index + 1).padStart(2, "0")}</span>
       </span>
-      <span class="defense-card-team defense-team"><span class="monsters">${teamComposition(group.defense, "defense")}</span></span>
+      <span class="defense-card-team defense-team"><span class="monsters">${teamComposition(group.defense, "defense", true)}</span></span>
       <span class="defense-card-title">${escapeHtml(title)}</span>
       <span class="defense-card-footer">
         <span><strong>${count}</strong> ${count === 1 ? "counter" : "counters"}</span>
@@ -1011,6 +1057,9 @@ function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
 
 function commentItem(comment) {
   const date = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(comment.createdAt));
+  const updatedDate = comment.updatedAt
+    ? new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(comment.updatedAt))
+    : "";
   const reaction = comment.reaction === 1
     ? `<span class="comment-reaction positive">${icon("thumbsUp")} +1 Funcionou</span>`
     : comment.reaction === -1
@@ -1020,15 +1069,54 @@ function commentItem(comment) {
   const video = videoId
     ? `<a class="comment-video-link" href="https://youtu.be/${videoId}" target="_blank" rel="noopener noreferrer">${icon("play")}<span><strong>Assistir vídeo do ataque</strong><small>YouTube · abre em uma nova guia</small></span>${icon("external")}</a>`
     : "";
+  const canEdit = cloudEnabled
+    ? Boolean(currentUserId && comment.authorId === currentUserId)
+    : comment.author === currentUser;
+  const isEditing = editingCommentId === comment.id && canEdit;
+  const edited = comment.updatedAt
+    ? `<span class="comment-edited" title="Editado em ${escapeHtml(updatedDate)}">editado</span>`
+    : "";
   return `
-    <article class="comment-item">
+    <article class="comment-item${isEditing ? " is-editing" : ""}" data-comment-id="${escapeHtml(comment.id)}">
       <span class="comment-avatar" aria-hidden="true">${escapeHtml(comment.author.charAt(0).toUpperCase() || "?")}</span>
       <div class="comment-content">
-        <div class="comment-meta"><strong>${escapeHtml(comment.author)}</strong><time datetime="${escapeHtml(comment.createdAt)}">${date}</time>${reaction}</div>
-        <p>${escapeHtml(comment.body)}</p>
-        ${video}
+        <div class="comment-header">
+          <div class="comment-meta"><strong>${escapeHtml(comment.author)}</strong><time datetime="${escapeHtml(comment.createdAt)}">${date}</time>${edited}${reaction}</div>
+          ${canEdit && !isEditing ? `<button class="comment-edit-button" type="button" data-edit-comment-id="${escapeHtml(comment.id)}" aria-label="Editar seu comentário">${icon("edit")}<span>Editar</span></button>` : ""}
+        </div>
+        ${isEditing ? commentEditForm(comment) : `<p>${escapeHtml(comment.body)}</p>${video}`}
       </div>
     </article>`;
+}
+
+function commentEditForm(comment) {
+  const reactionValue = comment.reaction === 1 ? "1" : comment.reaction === -1 ? "-1" : "";
+  return `
+    <form class="comment-edit-form" data-comment-edit-form data-comment-id="${escapeHtml(comment.id)}" data-strategy-id="${escapeHtml(comment.strategyId)}">
+      <div class="comment-edit-field">
+        <label for="edit-comment-${escapeHtml(comment.id)}">Seu comentário</label>
+        <span data-comment-counter>${comment.body.length}/500</span>
+      </div>
+      <textarea id="edit-comment-${escapeHtml(comment.id)}" name="body" rows="4" minlength="1" maxlength="500" required>${escapeHtml(comment.body)}</textarea>
+      <label class="comment-edit-video" for="edit-comment-video-${escapeHtml(comment.id)}">
+        <span>Vídeo do ataque <small>opcional</small></span>
+        <input id="edit-comment-video-${escapeHtml(comment.id)}" name="videoUrl" type="url" inputmode="url" maxlength="200" autocomplete="url" value="${escapeHtml(comment.videoUrl || "")}" placeholder="https://youtu.be/ID_DO_VIDEO" />
+      </label>
+      <div class="comment-edit-footer">
+        <fieldset class="reaction-picker comment-edit-reaction">
+          <legend>Resultado <span>opcional</span></legend>
+          <div class="reaction-options">
+            <label class="reaction-choice neutral"><input type="radio" name="reaction" value=""${reactionValue === "" ? " checked" : ""}><span>Só comentar</span></label>
+            <label class="reaction-choice positive"><input type="radio" name="reaction" value="1"${reactionValue === "1" ? " checked" : ""}><span>${icon("thumbsUp")} +1</span></label>
+            <label class="reaction-choice negative"><input type="radio" name="reaction" value="-1"${reactionValue === "-1" ? " checked" : ""}><span>${icon("thumbsDown")} −1</span></label>
+          </div>
+        </fieldset>
+        <div class="comment-edit-actions">
+          <button class="button button-ghost" type="button" data-cancel-comment-edit>Cancelar</button>
+          <button class="button button-primary" type="submit">Salvar edição</button>
+        </div>
+      </div>
+    </form>`;
 }
 
 function detailSection(title, content, className, key) {
@@ -1084,9 +1172,10 @@ function buildRecommendationsTable(strategy) {
     </section>`;
 }
 
-function teamComposition(strategy, side) {
+function teamComposition(strategy, side, compactLeader = false) {
   const alternatives = strategy[alternativeKey(side)] || [[], [], []];
-  return strategy[side].map((id, index) => compositionSlot(id, alternatives[index] || [], side, index)).join("");
+  const slots = strategy[side].map((id, index) => compositionSlot(id, alternatives[index] || [], side, index)).join("");
+  return `${slots}${leaderSkillSummary(strategy, side, compactLeader)}`;
 }
 
 function clearDefenseMatchReview({ resetApproval = true } = {}) {
@@ -1153,7 +1242,7 @@ function renderDefenseMatchReview(matches) {
           <strong>Defesa existente</strong>
           <span>${escapeHtml(relationLabel)}</span>
         </div>
-        <div class="defense-match-team defense-team"><span class="monsters">${teamComposition(candidate, "defense")}</span></div>
+        <div class="defense-match-team defense-team"><span class="monsters">${teamComposition(candidate, "defense", true)}</span></div>
         <button class="button button-secondary" type="button" data-use-defense-id="${escapeHtml(candidate.id)}">Usar esta defesa</button>
       </article>`;
   }).join("");
@@ -1171,14 +1260,15 @@ function renderDefenseMatchReview(matches) {
 
 function compositionSlot(primaryId, alternatives, side, index) {
   const names = [primaryId, ...alternatives].map((id) => displayMonsterName(getMonster(id)));
+  const isLeader = index === 0;
   return `
-    <div class="composition-slot${alternatives.length ? " has-alternatives" : ""}" aria-label="Slot ${index + 1}: ${escapeHtml(names.join(" ou "))}">
-      ${monsterChip(primaryId, side)}
-      ${alternatives.map((id) => `<div class="alternative-row"><span>ou</span>${monsterChip(id, side, true)}</div>`).join("")}
+    <div class="composition-slot${alternatives.length ? " has-alternatives" : ""}${isLeader ? " leader-slot" : ""}" aria-label="Slot ${index + 1}${isLeader ? ", líder" : ""}: ${escapeHtml(names.join(" ou "))}">
+      ${monsterChip(primaryId, side, false, isLeader)}
+      ${alternatives.map((id) => `<div class="alternative-row"><span>ou</span>${monsterChip(id, side, true, isLeader)}</div>`).join("")}
     </div>`;
 }
 
-function monsterChip(id, side, isAlternative = false) {
+function monsterChip(id, side, isAlternative = false, isLeader = false) {
   const monster = getMonster(id);
   if (id === "*") {
     const label = side === "attack" ? "Sem terceiro" : "Qualquer um";
@@ -1190,7 +1280,8 @@ function monsterChip(id, side, isAlternative = false) {
     ? `<img class="monster-image ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />`
     : `<span class="monster-image fallback-avatar">${escapeHtml(displayName.slice(0, 2).toUpperCase())}</span>`;
   const externalId = monster.externalIds?.com2us ? ` · ID ${monster.externalIds.com2us}` : "";
-  return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}">${image}<span>${escapeHtml(displayName)}</span></span>`;
+  const leaderTitle = isLeader ? ` · Líder: ${leaderSkillDescription(monster)}` : "";
+  return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}${isLeader ? " leader-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}${escapeHtml(leaderTitle)}">${image}${isLeader ? `<span class="leader-slot-badge" aria-label="Líder" title="Leader Skill">${icon("crown")}</span>` : ""}<span>${escapeHtml(displayName)}</span></span>`;
 }
 
 function captureBuildDraft() {
@@ -1260,6 +1351,7 @@ function collectBuildRecommendations() {
 function openStrategyDialog(defenseStrategy = null) {
   editingStrategyId = null;
   $("#strategyForm").reset();
+  clearStrategyFormStatus();
   clearDefenseMatchReview();
   resetSelection();
   dialogDefenseId = defenseStrategy?.defenseId || null;
@@ -1275,6 +1367,7 @@ function openStrategyDialog(defenseStrategy = null) {
 function openEditStrategyDialog(strategy) {
   editingStrategyId = strategy.id;
   dialogDefenseId = null;
+  clearStrategyFormStatus();
   clearDefenseMatchReview();
   const form = $("#strategyForm");
   form.reset();
@@ -1303,6 +1396,7 @@ function closeStrategyDialog() {
   if (monsterDialog.open) monsterDialog.close();
   strategyDialog.close();
   $("#strategyForm").reset();
+  clearStrategyFormStatus();
   dialogDefenseId = null;
   editingStrategyId = null;
   clearDefenseMatchReview();
@@ -1355,11 +1449,13 @@ function renderSelectionSlot(side, index) {
   if (selectedId === "*") renderOptionalWildcard(button);
   else if (!selectedId) {
     button.className = "monster-select";
-    button.innerHTML = `<span class="select-plus">${icon("plus")}</span><span>Selecionar</span>`;
+    button.innerHTML = `<span class="select-plus">${icon("plus")}</span><span>${index === 0 ? "Selecionar líder" : "Selecionar"}</span>`;
   } else {
     const monster = getMonster(selectedId);
     button.className = "monster-select selected";
-    button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small></span>`;
+    const leader = index === 0 ? `<span class="selection-leader-skill"><span class="selection-leader-icon">${monsterLeaderSkill(monster) ? leaderAttributeIcon(monsterLeaderSkill(monster)) : icon("crown")}</span><span>${escapeHtml(leaderSkillDescription(monster))}</span></span>` : "";
+    button.classList.toggle("leader-selection", index === 0);
+    button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span class="selection-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small>${leader}</span>`;
   }
   renderSelectedAlternatives(side, index);
   if (side === "attack") renderBuildRecommendationsEditor();
@@ -1377,10 +1473,11 @@ function renderSelectedAlternatives(side, index) {
   const isLockedDefense = side === "defense" && Boolean(dialogDefenseId);
   const chips = alternatives.map((id) => {
     const monster = getMonster(id);
+    const leader = index === 0 ? `<small>${escapeHtml(leaderSkillDescription(monster))}</small>` : "";
     return `
       <span class="selected-alternative">
         <img class="alternative-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" />
-        <span title="${escapeHtml(displayMonsterName(monster))}">${escapeHtml(displayMonsterName(monster))}</span>
+        <span class="selected-alternative-copy" title="${escapeHtml(displayMonsterName(monster))}"><strong>${escapeHtml(displayMonsterName(monster))}</strong>${leader}</span>
         <button type="button" data-remove-alternative data-side="${side}" data-index="${index}" data-monster-id="${escapeHtml(id)}" aria-label="Remover ${escapeHtml(displayMonsterName(monster))}"${isLockedDefense ? ' disabled aria-disabled="true"' : ""}>${icon("close")}</button>
       </span>`;
   }).join("");
@@ -1403,8 +1500,12 @@ function openMonsterPicker({ side, index, mode = "primary", button = null }) {
     ? `${sideLabel} · alternativa do slot ${Number(index) + 1}`
     : `${sideLabel} · monstro ${Number(index) + 1}${optional}`;
   $("#pickerHelp").textContent = mode === "alternative"
-    ? "Escolha outro monstro que possa cumprir este mesmo papel."
-    : "Escolha pelo nome, elemento ou ID.";
+    ? Number(index) === 0
+      ? "Escolha outro líder para este slot. A Leader Skill de cada opção aparece abaixo."
+      : "Escolha outro monstro que possa cumprir este mesmo papel."
+    : Number(index) === 0
+      ? "O primeiro slot é o líder. Confira a Leader Skill antes de adicionar."
+      : "Escolha pelo nome, elemento ou ID.";
   renderMonsterOptions();
   monsterDialog.showModal();
   setTimeout(() => $("#monsterSearch").focus(), 40);
@@ -1433,7 +1534,7 @@ function renderMonsterOptions() {
   const monsterOptions = visible.map((monster) => `
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
-      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small></span>
+      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small>${pickerSlot?.index === 0 ? `<span class="option-leader-skill"><span>${monsterLeaderSkill(monster) ? leaderAttributeIcon(monsterLeaderSkill(monster)) : icon("crown")}</span>${escapeHtml(leaderSkillDescription(monster))}</span>` : ""}</span>
       <span class="add-label">${pickerSlot?.mode === "alternative" ? "Usar como opção" : "Adicionar"}</span>
     </button>`).join("");
   $("#monsterOptions").innerHTML = wildcardOption + monsterOptions + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") || '<div class="no-options">Nenhum monstro encontrado.</div>';
@@ -1468,6 +1569,26 @@ function showToast(message) {
   toast.classList.add("visible");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove("visible"), 2600);
+}
+
+function clearStrategyFormStatus() {
+  const status = $("#strategyFormStatus");
+  if (!status) return;
+  status.hidden = true;
+  status.className = "strategy-form-status";
+  status.textContent = "";
+}
+
+function showStrategyFormStatus(message, type = "error") {
+  const status = $("#strategyFormStatus");
+  if (!status) {
+    showToast(message);
+    return;
+  }
+  status.textContent = message;
+  status.className = `strategy-form-status is-${type}`;
+  status.hidden = false;
+  requestAnimationFrame(() => status.scrollIntoView({ behavior: "smooth", block: "nearest" }));
 }
 
 function strategyShareUrl(id) {
@@ -1678,16 +1799,17 @@ function selectionValidationError(side) {
 
 $("#strategyForm").addEventListener("submit", async (event) => {
   event.preventDefault();
+  clearStrategyFormStatus();
   const validationError = selectionValidationError("attack") || selectionValidationError("defense");
   if (validationError) {
-    showToast(validationError);
+    showStrategyFormStatus(validationError);
     return;
   }
   const data = new FormData(event.currentTarget);
   const rawVideoUrl = data.get("videoUrl").trim();
   const videoUrl = normalizeYouTubeUrl(rawVideoUrl);
   if (rawVideoUrl && !videoUrl) {
-    showToast("Use um link válido do YouTube, como youtu.be ou youtube.com.");
+    showStrategyFormStatus("Use um link válido do YouTube, como youtu.be ou youtube.com.");
     event.currentTarget.elements.videoUrl.focus();
     return;
   }
@@ -1706,7 +1828,7 @@ $("#strategyForm").addEventListener("submit", async (event) => {
         : localSimilarDefenses();
     } catch (error) {
       console.error(error);
-      showToast("Não foi possível comparar as defesas. Tente salvar novamente.");
+      showStrategyFormStatus("Não foi possível comparar as defesas. Tente salvar novamente.");
       submitButton.disabled = false;
       submitButton.textContent = "Salvar counter";
       return;
@@ -1722,7 +1844,7 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     ? strategies.find((item) => item.id === editingStrategyId)
     : null;
   if (editingStrategyId && !existingStrategy) {
-    showToast("Este counter não está mais disponível. Atualize a página e tente novamente.");
+    showStrategyFormStatus("Este counter não está mais disponível. Atualize a página e tente novamente.");
     return;
   }
   const wasEditing = Boolean(existingStrategy);
@@ -1760,6 +1882,7 @@ $("#strategyForm").addEventListener("submit", async (event) => {
   };
   submitButton.disabled = true;
   submitButton.textContent = "Salvando...";
+  let conflictDetected = false;
   try {
     if (wasEditing && cloudEnabled) {
       const result = await database.updateStrategy(strategy, existingStrategy.updatedAt);
@@ -1799,30 +1922,97 @@ $("#strategyForm").addEventListener("submit", async (event) => {
   } catch (error) {
     console.error(error);
     if (error.code === "STRATEGY_CONFLICT") {
+      conflictDetected = true;
       try {
         await connectCloudUser();
         render();
       } catch (refreshError) {
         console.error(refreshError);
       }
-      showToast("Outra pessoa editou este counter. Suas mudanças foram preservadas; feche e reabra para revisar, ou salve novamente para sobrescrever.");
+      showStrategyFormStatus("Este counter mudou desde que você abriu a edição. Recarregamos a versão mais recente e preservamos seus campos. Revise e clique em “Salvar alterações novamente” para confirmar.", "warning");
     } else {
-      showToast(wasEditing ? "Não foi possível salvar as alterações." : "Não foi possível salvar a estratégia.");
+      showStrategyFormStatus(wasEditing ? "Não foi possível salvar as alterações. Tente novamente; se continuar, atualize a página." : "Não foi possível salvar a estratégia. Tente novamente.");
     }
   } finally {
     submitButton.disabled = false;
-    submitButton.textContent = wasEditing ? "Salvar alterações" : "Salvar counter";
+    submitButton.textContent = conflictDetected ? "Salvar alterações novamente" : wasEditing ? "Salvar alterações" : "Salvar counter";
   }
 });
 
+$("#strategyForm").addEventListener("invalid", (event) => {
+  const field = event.target;
+  const label = field.closest("label")?.querySelector("strong")?.textContent?.trim();
+  showStrategyFormStatus(label ? `Revise o campo “${label}” antes de salvar.` : "Revise os campos obrigatórios antes de salvar.");
+  requestAnimationFrame(() => field.scrollIntoView({ behavior: "smooth", block: "center" }));
+}, true);
+
 $("#strategyList").addEventListener("input", (event) => {
-  const textarea = event.target.closest(".comment-form textarea");
+  const textarea = event.target.closest(".comment-form textarea, .comment-edit-form textarea");
   if (!textarea) return;
-  const counter = textarea.closest(".comment-form")?.querySelector("[data-comment-counter]");
+  const counter = textarea.closest("form")?.querySelector("[data-comment-counter]");
   if (counter) counter.textContent = `${textarea.value.length}/500`;
 });
 
 $("#strategyList").addEventListener("submit", async (event) => {
+  const editForm = event.target.closest("[data-comment-edit-form]");
+  if (editForm) {
+    event.preventDefault();
+    const strategy = strategies.find((item) => item.id === editForm.dataset.strategyId);
+    const comment = strategy?.comments?.find((item) => item.id === editForm.dataset.commentId);
+    const canEdit = comment && (cloudEnabled
+      ? Boolean(currentUserId && comment.authorId === currentUserId)
+      : comment.author === currentUser);
+    if (!strategy || !comment || !canEdit) {
+      editingCommentId = null;
+      render();
+      showToast("Este comentário não está disponível para edição.");
+      return;
+    }
+    const data = new FormData(editForm);
+    const body = String(data.get("body") || "").trim();
+    if (!body) {
+      showToast("O comentário não pode ficar vazio.");
+      editForm.elements.body.focus();
+      return;
+    }
+    const rawVideoUrl = String(data.get("videoUrl") || "").trim();
+    const videoUrl = normalizeYouTubeUrl(rawVideoUrl);
+    if (rawVideoUrl && !videoUrl) {
+      showToast("Cole um link válido de vídeo do YouTube.");
+      editForm.elements.videoUrl.focus();
+      return;
+    }
+    const rawReaction = data.get("reaction");
+    const updatedComment = {
+      ...comment,
+      body,
+      videoUrl,
+      reaction: rawReaction === "1" ? 1 : rawReaction === "-1" ? -1 : null,
+      updatedAt: new Date().toISOString(),
+    };
+    const submitButton = editForm.querySelector("button[type='submit']");
+    submitButton.disabled = true;
+    submitButton.textContent = "Salvando...";
+    try {
+      const savedComment = cloudEnabled
+        ? await database.updateComment(updatedComment, currentUserId)
+        : updatedComment;
+      strategy.comments = strategy.comments.map((item) => item.id === comment.id ? normalizeComment(savedComment) : item);
+      editingCommentId = null;
+      saveStrategies();
+      render();
+      const updatedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === strategy.id);
+      if (updatedCard) updatedCard.open = true;
+      showToast("Comentário atualizado.");
+    } catch (error) {
+      console.error(error);
+      submitButton.disabled = false;
+      submitButton.textContent = "Salvar edição";
+      showToast("Não foi possível atualizar o comentário.");
+    }
+    return;
+  }
+
   const form = event.target.closest("[data-comment-form]");
   if (!form) return;
   event.preventDefault();
@@ -1875,6 +2065,28 @@ $("#strategyList").addEventListener("submit", async (event) => {
 
 $("#strategyList").addEventListener("click", async (event) => {
   if (await handleDefenseNavigation(event)) return;
+
+  const editCommentButton = event.target.closest("[data-edit-comment-id]");
+  if (editCommentButton) {
+    editingCommentId = editCommentButton.dataset.editCommentId;
+    const strategy = strategies.find((item) => item.comments?.some((comment) => comment.id === editingCommentId));
+    render();
+    const updatedCard = strategy
+      ? [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === strategy.id)
+      : null;
+    if (updatedCard) updatedCard.open = true;
+    requestAnimationFrame(() => document.querySelector(`[data-comment-id="${CSS.escape(editingCommentId)}"] textarea`)?.focus());
+    return;
+  }
+
+  if (event.target.closest("[data-cancel-comment-edit]")) {
+    const strategyId = event.target.closest("[data-comment-edit-form]")?.dataset.strategyId;
+    editingCommentId = null;
+    render();
+    const updatedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === strategyId);
+    if (updatedCard) updatedCard.open = true;
+    return;
+  }
 
   const addCounterButton = event.target.closest("[data-add-counter-defense-id]");
   if (addCounterButton) {
@@ -1973,7 +2185,7 @@ document.addEventListener("keydown", (event) => {
 
 async function init() {
   try {
-    const response = await fetch("./data/monsters.json?v=0.7");
+    const response = await fetch("./data/monsters.json?v=0.8");
     if (!response.ok) throw new Error("Catálogo indisponível");
     const catalog = await response.json();
     const preparedCatalog = prepareMonsterCatalog(catalog.monsters);

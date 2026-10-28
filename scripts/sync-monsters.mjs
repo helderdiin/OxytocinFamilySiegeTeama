@@ -27,6 +27,8 @@ const merged = [...localCatalog.monsters];
 for (const remoteMonster of playable) {
   const existingMonster = existingByCom2us.get(remoteMonster.com2us_id);
   if (existingMonster) {
+    existingMonster.gameData ||= {};
+    existingMonster.gameData.leaderSkill = toLeaderSkill(remoteMonster.leader_skill);
     if (remoteMonster.awaken_level === 2) {
       existingMonster.image = `assets/monsters/${basename(remoteMonster.image_filename)}`;
       existingMonster.gameData.awakenLevel = remoteMonster.awaken_level;
@@ -53,6 +55,7 @@ for (const remoteMonster of playable) {
     gameData: {
       awakenLevel: remoteMonster.awaken_level,
       obtainable: remoteMonster.obtainable,
+      leaderSkill: toLeaderSkill(remoteMonster.leader_skill),
       relatedForms: forms,
     },
     identitySource: { providerId: "swarfarm", matchedBy: "name_and_element" },
@@ -78,12 +81,13 @@ await runPool(missingImages, 8, async (monster) => {
 });
 
 const output = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   metadata: {
     identityProvider: "swarfarm",
+    leaderSkillProvider: "swarfarm",
     synchronizedAt: new Date().toISOString(),
     remoteRecordCount: remote.length,
-    selection: "obtainable awakened monsters, including second awakenings",
+    selection: "obtainable awakened monsters, including second awakenings; leader skills are explicit objects or null",
   },
   monsters: deduplicated,
 };
@@ -137,6 +141,77 @@ function toRelatedForm(monster) {
     obtainable: monster.obtainable,
     bestiarySlug: monster.bestiary_slug,
   };
+}
+
+function toLeaderSkill(leaderSkill) {
+  if (!leaderSkill) return null;
+  const attribute = String(leaderSkill.attribute || "").trim();
+  const amount = Number(leaderSkill.amount);
+  const area = leaderSkill.area ? String(leaderSkill.area).trim() : null;
+  const element = leaderSkill.element ? String(leaderSkill.element).toLowerCase() : null;
+  const attributeMeta = leaderAttributeMeta(attribute);
+  return {
+    sourceId: Number(leaderSkill.id) || null,
+    attribute,
+    attributeLabel: attributeMeta.label,
+    amount: Number.isFinite(amount) ? amount : null,
+    area,
+    areaLabel: leaderAreaLabel(area),
+    element,
+    elementLabel: leaderElementLabel(element),
+    icon: attributeMeta.icon,
+    description: leaderSkillDescription({ attributeMeta, amount, area, element }),
+  };
+}
+
+function leaderAttributeMeta(attribute) {
+  const attributes = {
+    "Attack Power": { label: "Poder de Ataque", article: "o", icon: "attack" },
+    "Attack Speed": { label: "Velocidade de Ataque", article: "a", icon: "speed" },
+    Defense: { label: "Defesa", article: "a", icon: "defense" },
+    HP: { label: "HP", article: "o", icon: "hp" },
+    "Critical DMG": { label: "Dano Crítico", article: "o", icon: "critical-damage" },
+    "Critical Rate": { label: "Taxa Crítica", article: "a", icon: "critical-rate" },
+    Accuracy: { label: "Precisão", article: "a", icon: "accuracy" },
+    Resistance: { label: "Resistência", article: "a", icon: "resistance" },
+  };
+  return attributes[attribute] || { label: attribute || "Atributo", article: "o", icon: "generic" };
+}
+
+function leaderAreaLabel(area) {
+  const areas = {
+    Arena: "Arena",
+    Dungeon: "Dungeons",
+    Element: "Elemento",
+    General: "Todos os conteúdos",
+    Guild: "Conteúdo de Guilda",
+  };
+  return area ? (areas[area] || area) : "Todos os conteúdos";
+}
+
+function leaderAreaPhrase(area) {
+  const phrases = {
+    Arena: " na Arena",
+    Dungeon: " nas Dungeons",
+    Element: "",
+    General: "",
+    Guild: " em Batalhas de Guilda",
+  };
+  return area ? (phrases[area] ?? ` em ${leaderAreaLabel(area)}`) : "";
+}
+
+function leaderElementLabel(element) {
+  const elements = { fire: "Fogo", water: "Água", wind: "Vento", light: "Luz", dark: "Trevas" };
+  return element ? (elements[element] || element) : null;
+}
+
+function leaderSkillDescription({ attributeMeta, amount, area, element }) {
+  const scope = element
+    ? ` dos monstros aliados de ${leaderElementLabel(element)}`
+    : " dos monstros aliados";
+  const areaPhrase = leaderAreaPhrase(area);
+  const amountPhrase = Number.isFinite(amount) ? ` em ${amount}%` : "";
+  return `Aumenta ${attributeMeta.article} ${attributeMeta.label}${scope}${areaPhrase}${amountPhrase}.`;
 }
 
 async function runPool(items, concurrency, worker) {

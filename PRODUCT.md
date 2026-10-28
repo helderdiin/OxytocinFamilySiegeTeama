@@ -30,10 +30,10 @@ Given an enemy defense, find a relevant counter and understand, at a glance:
 - Two required monsters and an optional third monster on both attack and defense.
 - Up to four alternative monsters can be attached to each occupied attack or defense slot without duplicating a counter.
 - A new counter can be started from a defense with its monsters and alternatives already linked, while keeping its own plan, builds, risks, author, feedback, and validation status.
-- Monster catalog with images, external IDs, elements, aliases, and preferred 2A variants.
+- Monster catalog with images, external IDs, elements, aliases, preferred 2A variants, and localized Leader Skill data.
 - Structured strategy guidance: game plan, recommended stats/builds, turn order, target priority, third-slot variations, risks, substitutions, and battle evidence.
 - Expandable strategy records and direct share links.
-- Collaborative comments with an optional +1 or -1 result attached to each feedback entry.
+- Collaborative comments with an optional +1 or -1 result attached to each feedback entry; authors can edit their own feedback, reaction, and video afterward.
 - Inactive strategies remain stored but are hidden from the member-facing UI.
 
 ## Product positioning

@@ -61,6 +61,7 @@
       videoUrl: row.video_url || "",
       reaction: row.reaction === 1 || row.reaction === -1 ? row.reaction : null,
       createdAt: row.created_at,
+      updatedAt: row.updated_at || null,
     };
   }
 
@@ -185,7 +186,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategy_comments")
-      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at")
+      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at, updated_at")
       .order("created_at", { ascending: true });
     if (error) throw error;
     return data.map(commentFromDatabase);
@@ -204,7 +205,24 @@
         reaction: comment.reaction,
         created_at: comment.createdAt || new Date().toISOString(),
       })
-      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at")
+      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at, updated_at")
+      .single();
+    if (error) throw error;
+    return commentFromDatabase(data);
+  }
+
+  async function updateComment(comment, userId) {
+    assertConfigured();
+    const { data, error } = await client
+      .from("strategy_comments")
+      .update({
+        body: comment.body,
+        video_url: comment.videoUrl || null,
+        reaction: comment.reaction,
+      })
+      .eq("id", comment.id)
+      .eq("author_id", userId)
+      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at, updated_at")
       .single();
     if (error) throw error;
     return commentFromDatabase(data);
@@ -226,6 +244,7 @@
     updateStrategy,
     listComments,
     createComment,
+    updateComment,
     deleteStrategy,
   };
 })();

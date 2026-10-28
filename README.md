@@ -27,7 +27,7 @@ Abra `http://localhost:4173`.
 - um novo counter pode partir de uma defesa existente, mantendo a composição inimiga bloqueada e preenchendo somente a nova proposta;
 - busca por monstros do counter ou da defesa, conteúdo textual e filtros de segurança/status;
 - compartilhamento por alias curto, abrindo o counter correspondente já expandido sem expor o UUID no link;
-- comentários colaborativos por ataque, com reação opcional `+1` ou `-1` e vídeo opcional do YouTube vinculados ao relato;
+- comentários colaborativos por ataque, com reação opcional `+1` ou `-1` e vídeo opcional do YouTube vinculados ao relato; cada autor pode editar somente os próprios comentários;
 - edição colaborativa de qualquer counter, preservando o autor original e registrando editor e horário no histórico;
 - estratégias podem ser mantidas no banco como inativas sem aparecer na UI;
 - persistência compartilhada no Supabase, com fallback local para desenvolvimento sem configuração remota;
@@ -58,6 +58,7 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261028110000_strategy_short_ids.sql`
 - `supabase/migrations/20261028120000_strategy_comment_videos.sql`
 - `supabase/migrations/20261028130000_defense_identity_and_similarity.sql`
+- `supabase/migrations/20261028140000_strategy_comment_editing.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem criar, comentar e editar qualquer counter. O autor original e o dono do registro são preservados; cada edição grava somente editor e horário em `strategy_edits`, sem armazenar o conteúdo anterior. A exclusão continua restrita ao criador de counters não oficiais, e entradas do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
@@ -91,6 +92,8 @@ O diretório publicado é `dist`. Com a integração Git conectada, pushes na br
 ## Dados
 
 O catálogo em `dist/data/monsters.json` segue o modelo do projeto `SiegeTeamHelper`. Estratégias persistem somente os IDs internos dos monstros:
+
+Cada monstro do catálogo declara `gameData.leaderSkill` como um objeto localizado ou `null` quando não possui Leader Skill. O objeto inclui atributo, valor, escopo, elemento, chave de ícone e descrição pronta para a interface. Em qualquer composição, o monstro do slot 1 é tratado como líder.
 
 ```json
 {
