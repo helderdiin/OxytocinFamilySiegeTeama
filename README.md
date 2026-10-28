@@ -17,6 +17,7 @@ Abra `http://localhost:4173`.
 - identificação por nick, sem senha;
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
 - defesas são registros compartilhados e cada uma pode reunir vários counters independentes;
+- defesas equivalentes são reconhecidas mesmo com slots ou titular/alternativa em outra ordem; composições apenas parecidas exigem uma escolha explícita entre reutilizar a defesa existente ou criar uma nova;
 - cadastro exige pelo menos dois monstros no counter e dois na defesa; o terceiro slot de cada lado é opcional e usa o coringa `X` quando não informado;
 - plano de jogo, ordem de turno, prioridades, variações, riscos, substituições e evidências ficam estruturados por counter;
 - builds recomendadas podem ser informadas por monstro em uma tabela opcional, incluindo runas e metas mínimas de status para titulares e alternativas;
@@ -25,8 +26,8 @@ Abra `http://localhost:4173`.
 - alternativas por slot no counter e na defesa, sem duplicar registros;
 - um novo counter pode partir de uma defesa existente, mantendo a composição inimiga bloqueada e preenchendo somente a nova proposta;
 - busca por monstros do counter ou da defesa, conteúdo textual e filtros de segurança/status;
-- compartilhamento de uma composição por link, abrindo o card correspondente já expandido;
-- comentários colaborativos por ataque, com reação opcional `+1` ou `-1` vinculada ao comentário;
+- compartilhamento por alias curto, abrindo o counter correspondente já expandido sem expor o UUID no link;
+- comentários colaborativos por ataque, com reação opcional `+1` ou `-1` e vídeo opcional do YouTube vinculados ao relato;
 - edição colaborativa de qualquer counter, preservando o autor original e registrando editor e horário no histórico;
 - estratégias podem ser mantidas no banco como inativas sem aparecer na UI;
 - persistência compartilhada no Supabase, com fallback local para desenvolvimento sem configuração remota;
@@ -54,6 +55,9 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261028080000_platy_shihwa_elucia_builds.sql`
 - `supabase/migrations/20261028090000_collaborative_strategy_edits.sql`
 - `supabase/migrations/20261028100000_juno_and_platy_reference_images.sql`
+- `supabase/migrations/20261028110000_strategy_short_ids.sql`
+- `supabase/migrations/20261028120000_strategy_comment_videos.sql`
+- `supabase/migrations/20261028130000_defense_identity_and_similarity.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem criar, comentar e editar qualquer counter. O autor original e o dono do registro são preservados; cada edição grava somente editor e horário em `strategy_edits`, sem armazenar o conteúdo anterior. A exclusão continua restrita ao criador de counters não oficiais, e entradas do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.

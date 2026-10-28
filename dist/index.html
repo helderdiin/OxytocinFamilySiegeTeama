@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=0.23" />
+    <link rel="stylesheet" href="./styles.css?v=0.25" />
   </head>
   <body>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -131,7 +131,7 @@
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.23 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.26 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
@@ -185,8 +185,19 @@
           <label class="strategy-field warning-field"><strong>Riscos — nunca use contra</strong><small>Liste counters, passivas e condições que fazem esse ataque falhar.</small><textarea name="risks" maxlength="700" rows="3" placeholder="Ex.: nunca usar contra anti-crítico, cleanse forte ou ameaça que ignore DEF..."></textarea></label>
           <label class="strategy-field"><strong>Substituições possíveis</strong><small>Quem pode substituir um atacante e quais ajustes essa troca exige.</small><textarea name="substitutions" maxlength="600" rows="3" placeholder="Ex.: Nickel pode substituir Talc contra ameaça Wind, mantendo a mesma ordem..."></textarea></label>
           <label class="strategy-field"><strong>Experiência comprovada</strong><small>Informe onde foi testado, vitórias, derrotas e observações de batalha.</small><textarea name="evidence" maxlength="700" rows="3" placeholder="Ex.: 4 vitórias em Siege G2; uma derrota quando a defesa ganhou a disputa de velocidade..."></textarea></label>
-          <label class="strategy-field video-url-field"><strong>Vídeo da luta</strong><small>Opcional · cole um link do YouTube para a guilda assistir à execução dentro do guia.</small><input name="videoUrl" type="url" inputmode="url" maxlength="200" autocomplete="url" placeholder="https://youtu.be/ID_DO_VIDEO" /></label>
+          <label class="strategy-field video-url-field"><strong>Vídeo da luta</strong><small>Opcional · grave a luta, envie ao seu próprio YouTube como <em>Não listado</em> e cole o link para a guilda assistir à execução.</small><input name="videoUrl" type="url" inputmode="url" maxlength="200" autocomplete="url" placeholder="https://youtu.be/ID_DO_VIDEO" /></label>
         </div>
+        <section class="defense-match-review" id="defenseMatchReview" aria-labelledby="defenseMatchTitle" aria-live="polite" hidden>
+          <div class="defense-match-heading">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-8 9-4.5-1.5-8-4-8-9V5l8-3 8 3v8Z" /><path d="M9 12h6M12 9v6" /></svg>
+            <div><h3 id="defenseMatchTitle">Encontramos uma defesa parecida</h3><p>Confira antes de salvar. Reutilize uma defesa quando este counter também funcionar contra todas as alternativas dela; caso contrário, mantenha uma defesa separada.</p></div>
+          </div>
+          <div class="defense-match-list" id="defenseMatchList"></div>
+          <div class="defense-match-new">
+            <div><strong>É outra defesa?</strong><span>Crie uma página separada quando a diferença mudar quais counters realmente funcionam.</span></div>
+            <button class="button button-ghost" type="button" data-keep-new-defense>Manter como nova defesa</button>
+          </div>
+        </section>
         <div class="dialog-actions"><button class="button button-ghost" id="cancelDialogButton" type="button">Cancelar</button><button class="button button-primary" id="saveStrategyButton" type="submit">Salvar counter</button></div>
       </form>
     </dialog>
@@ -216,7 +227,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
-    <script src="./supabase-store.js?v=0.23"></script>
-    <script src="./app.js?v=0.23"></script>
+    <script src="./supabase-store.js?v=0.26"></script>
+    <script src="./app.js?v=0.26"></script>
   </body>
 </html>

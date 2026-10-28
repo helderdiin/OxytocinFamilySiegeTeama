@@ -14,6 +14,7 @@
   function fromDatabase(row) {
     return {
       id: row.id,
+      shortId: row.short_id,
       defenseId: row.defense_id,
       ownerId: row.owner_id,
       player: row.player_name,
@@ -57,6 +58,7 @@
       authorId: row.author_id,
       author: row.author_name,
       body: row.body,
+      videoUrl: row.video_url || "",
       reaction: row.reaction === 1 || row.reaction === -1 ? row.reaction : null,
       createdAt: row.created_at,
     };
@@ -97,7 +99,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategies")
-      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
+      .select("id, short_id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data.map(fromDatabase);
@@ -118,10 +120,28 @@
     const { data, error } = await client
       .from("strategies")
       .insert(toDatabase(strategy, userId, nick, defenseId))
-      .select("id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
+      .select("id, short_id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
       .single();
     if (error) throw error;
     return fromDatabase(data);
+  }
+
+  async function findSimilarDefenses(monsters, alternatives, limit = 3) {
+    assertConfigured();
+    const { data, error } = await client.rpc("find_similar_defenses", {
+      p_monsters: monsters,
+      p_alternatives: alternatives,
+      p_limit: limit,
+    });
+    if (error) throw error;
+    return (data || []).map((row) => ({
+      id: row.id,
+      defense: row.monsters,
+      defenseAlternatives: row.alternatives || [[], [], []],
+      counterCount: Number(row.counter_count) || 0,
+      matchingSlots: Number(row.matching_slots) || 0,
+      exactSlots: Number(row.exact_slots) || 0,
+    }));
   }
 
   async function listStrategyEdits() {
@@ -165,7 +185,7 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategy_comments")
-      .select("id, strategy_id, author_id, author_name, body, reaction, created_at")
+      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at")
       .order("created_at", { ascending: true });
     if (error) throw error;
     return data.map(commentFromDatabase);
@@ -180,10 +200,11 @@
         author_id: userId,
         author_name: nick,
         body: comment.body,
+        video_url: comment.videoUrl || null,
         reaction: comment.reaction,
         created_at: comment.createdAt || new Date().toISOString(),
       })
-      .select("id, strategy_id, author_id, author_name, body, reaction, created_at")
+      .select("id, strategy_id, author_id, author_name, body, video_url, reaction, created_at")
       .single();
     if (error) throw error;
     return commentFromDatabase(data);
@@ -200,6 +221,7 @@
     ensureUser,
     listStrategies,
     createStrategy,
+    findSimilarDefenses,
     listStrategyEdits,
     updateStrategy,
     listComments,

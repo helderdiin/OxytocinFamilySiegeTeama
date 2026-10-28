@@ -263,6 +263,8 @@ let selection = emptySelection();
 let buildDraft = new Map();
 let dialogDefenseId = null;
 let editingStrategyId = null;
+let approvedNewDefenseFingerprint = null;
+let pendingDefenseMatches = [];
 const initialQuery = new URLSearchParams(window.location.search);
 let sharedStrategyId = initialQuery.get("strategy");
 let selectedDefenseId = initialQuery.get("defense");
@@ -304,6 +306,7 @@ function migrateStrategies(records) {
     const defenseAlternatives = normalizeSlotAlternatives(strategy.defenseAlternatives || strategy.defense_alternatives, defense);
     return {
       ...rest,
+      shortId: strategy.shortId || strategy.short_id || fallbackShortId(strategy.id),
       defenseId: strategy.defenseId || strategy.defense_id || `local:${compositionFingerprint(defense, defenseAlternatives)}`,
       attack,
       defense,
@@ -330,6 +333,20 @@ function migrateStrategies(records) {
   });
 }
 
+function fallbackShortId(id) {
+  const compact = String(id || "").replace(/[^a-z0-9]/gi, "").toUpperCase();
+  return compact.slice(0, 8) || null;
+}
+
+function strategyByShareKey(key) {
+  const normalizedKey = String(key || "").trim().toUpperCase();
+  if (!normalizedKey) return null;
+  return strategies.find((strategy) => (
+    String(strategy.id).toUpperCase() === normalizedKey
+    || String(strategy.shortId || "").toUpperCase() === normalizedKey
+  )) || null;
+}
+
 function normalizeReferenceImage(value) {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   const path = typeof value.path === "string" ? value.path.trim() : "";
@@ -343,10 +360,44 @@ function normalizeReferenceImage(value) {
 }
 
 function compositionFingerprint(primaryIds, alternatives = [[], [], []]) {
-  return JSON.stringify([0, 1, 2].map((index) => ({
-    primary: primaryIds[index] || "*",
-    alternatives: [...(alternatives[index] || [])].map(toMonsterId).filter(Boolean).sort(),
-  })));
+  const slotSets = [0, 1, 2].map((index) => (
+    [...new Set([
+      toMonsterId(primaryIds[index] || "*"),
+      ...(alternatives[index] || []).map(toMonsterId),
+    ].filter(Boolean))].sort()
+  ));
+  return JSON.stringify(slotSets.sort((left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right))));
+}
+
+function slotSets(primaryIds, alternatives = [[], [], []]) {
+  return [0, 1, 2].map((index) => new Set([
+    toMonsterId(primaryIds[index] || "*"),
+    ...(alternatives[index] || []).map(toMonsterId),
+  ].filter(Boolean)));
+}
+
+const slotPermutations = [
+  [0, 1, 2], [0, 2, 1], [1, 0, 2],
+  [1, 2, 0], [2, 0, 1], [2, 1, 0],
+];
+
+function defenseSimilarity(left, right) {
+  const leftSlots = slotSets(left.defense, left.defenseAlternatives);
+  const rightSlots = slotSets(right.defense, right.defenseAlternatives);
+  return slotPermutations.reduce((best, permutation) => {
+    const score = leftSlots.reduce((result, slot, index) => {
+      const candidate = rightSlots[permutation[index]];
+      const hasOverlap = [...slot].some((id) => candidate.has(id));
+      const isExact = slot.size === candidate.size && [...slot].every((id) => candidate.has(id));
+      return {
+        matchingSlots: result.matchingSlots + Number(hasOverlap),
+        exactSlots: result.exactSlots + Number(isExact),
+      };
+    }, { matchingSlots: 0, exactSlots: 0 });
+    if (score.matchingSlots > best.matchingSlots) return score;
+    if (score.matchingSlots === best.matchingSlots && score.exactSlots > best.exactSlots) return score;
+    return best;
+  }, { matchingSlots: 0, exactSlots: 0 });
 }
 
 function emptySelection() {
@@ -425,6 +476,7 @@ function normalizeComment(comment) {
     authorId: comment?.authorId || comment?.author_id || null,
     author: String(comment?.author || comment?.author_name || "Membro da guilda"),
     body: String(comment?.body || "").trim(),
+    videoUrl: normalizeYouTubeUrl(comment?.videoUrl || comment?.video_url),
     reaction: comment?.reaction === 1 || comment?.reaction === -1 ? comment.reaction : null,
     createdAt: comment?.createdAt || comment?.created_at || new Date().toISOString(),
   };
@@ -456,7 +508,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.23 · Supabase" : "v0.23 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.26 · Supabase" : "v0.26 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -638,8 +690,9 @@ function render() {
   const allGroups = groupStrategiesByDefense(activeStrategies);
   const visibleGroups = groupStrategiesByDefense(visibleStrategies);
 
-  if (!selectedDefenseId && sharedStrategyId) {
-    selectedDefenseId = activeStrategies.find((strategy) => strategy.id === sharedStrategyId)?.defenseId || null;
+  const sharedStrategy = strategyByShareKey(sharedStrategyId);
+  if (!selectedDefenseId && sharedStrategy) {
+    selectedDefenseId = sharedStrategy.defenseId || null;
   }
   const selectedGroup = allGroups.find((group) => group.id === selectedDefenseId);
   const isDefenseView = Boolean(selectedGroup);
@@ -667,7 +720,7 @@ function render() {
   }
 
   if (sharedStrategyId && !sharedStrategyOpened) {
-    const sharedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === sharedStrategyId);
+    const sharedCard = [...document.querySelectorAll("[data-strategy-id]")].find((card) => card.dataset.strategyId === sharedStrategy?.id);
     if (sharedCard) {
       sharedStrategyOpened = true;
       sharedCard.open = true;
@@ -936,6 +989,11 @@ function strategyFeedback(strategy, comments, positiveCount, negativeCount) {
       <form class="comment-form" data-comment-form data-strategy-id="${strategyId}">
         <div class="comment-field-heading"><label for="comment-${strategyId}">Adicionar feedback</label><span data-comment-counter>0/500</span></div>
         <textarea id="comment-${strategyId}" name="body" rows="3" minlength="1" maxlength="500" required placeholder="Conte o que aconteceu na luta, o que funcionou ou qual foi o risco real."></textarea>
+        <label class="comment-video-field" for="comment-video-${strategyId}">
+          <span class="comment-video-label"><strong>Vídeo do ataque</strong><small>opcional</small></span>
+          <input id="comment-video-${strategyId}" name="videoUrl" type="url" inputmode="url" maxlength="200" autocomplete="url" placeholder="https://youtu.be/ID_DO_VIDEO" />
+          <small>Grave a luta, envie ao seu próprio YouTube como <em>Não listado</em> e cole o link aqui.</small>
+        </label>
         <div class="comment-form-footer">
           <fieldset class="reaction-picker">
             <legend>Resultado <span>opcional</span></legend>
@@ -958,12 +1016,17 @@ function commentItem(comment) {
     : comment.reaction === -1
       ? `<span class="comment-reaction negative">${icon("thumbsDown")} −1 Não funcionou</span>`
       : "";
+  const videoId = youtubeVideoId(comment.videoUrl);
+  const video = videoId
+    ? `<a class="comment-video-link" href="https://youtu.be/${videoId}" target="_blank" rel="noopener noreferrer">${icon("play")}<span><strong>Assistir vídeo do ataque</strong><small>YouTube · abre em uma nova guia</small></span>${icon("external")}</a>`
+    : "";
   return `
     <article class="comment-item">
       <span class="comment-avatar" aria-hidden="true">${escapeHtml(comment.author.charAt(0).toUpperCase() || "?")}</span>
       <div class="comment-content">
         <div class="comment-meta"><strong>${escapeHtml(comment.author)}</strong><time datetime="${escapeHtml(comment.createdAt)}">${date}</time>${reaction}</div>
         <p>${escapeHtml(comment.body)}</p>
+        ${video}
       </div>
     </article>`;
 }
@@ -1024,6 +1087,86 @@ function buildRecommendationsTable(strategy) {
 function teamComposition(strategy, side) {
   const alternatives = strategy[alternativeKey(side)] || [[], [], []];
   return strategy[side].map((id, index) => compositionSlot(id, alternatives[index] || [], side, index)).join("");
+}
+
+function clearDefenseMatchReview({ resetApproval = true } = {}) {
+  const review = $("#defenseMatchReview");
+  if (review) review.hidden = true;
+  pendingDefenseMatches = [];
+  if (resetApproval) approvedNewDefenseFingerprint = null;
+  const saveButton = $("#saveStrategyButton");
+  if (saveButton) {
+    saveButton.disabled = false;
+    saveButton.textContent = editingStrategyId ? "Salvar alterações" : "Salvar counter";
+  }
+}
+
+function noteDefenseSelectionChanged() {
+  if (!dialogDefenseId) clearDefenseMatchReview();
+}
+
+function localSimilarDefenses() {
+  const requested = {
+    defense: selection.defense,
+    defenseAlternatives: selection.defenseAlternatives,
+  };
+  const requestedFingerprint = compositionFingerprint(requested.defense, requested.defenseAlternatives);
+  const groups = new Map();
+  strategies.forEach((strategy) => {
+    if (strategy.isActive === false) return;
+    const key = strategy.defenseId || `local:${compositionFingerprint(strategy.defense, strategy.defenseAlternatives)}`;
+    const current = groups.get(key);
+    if (current) current.counterCount += 1;
+    else groups.set(key, {
+      id: key,
+      defense: [...strategy.defense],
+      defenseAlternatives: strategy.defenseAlternatives.map((slot) => [...slot]),
+      counterCount: 1,
+    });
+  });
+  return [...groups.values()].map((candidate) => ({
+    ...candidate,
+    ...defenseSimilarity(requested, candidate),
+  })).filter((candidate) => (
+    compositionFingerprint(candidate.defense, candidate.defenseAlternatives) !== requestedFingerprint
+    && candidate.matchingSlots >= 2
+  )).sort((left, right) => (
+    right.matchingSlots - left.matchingSlots
+    || right.exactSlots - left.exactSlots
+    || right.counterCount - left.counterCount
+  )).slice(0, 3);
+}
+
+function renderDefenseMatchReview(matches) {
+  const review = $("#defenseMatchReview");
+  const list = $("#defenseMatchList");
+  if (!review || !list) return;
+  pendingDefenseMatches = matches;
+  list.innerHTML = matches.map((candidate) => {
+    const counterLabel = `${candidate.counterCount} ${candidate.counterCount === 1 ? "counter" : "counters"}`;
+    const relationLabel = candidate.matchingSlots === 3
+      ? `${candidate.exactSlots} ${candidate.exactSlots === 1 ? "slot idêntico" : "slots idênticos"} · ${counterLabel}`
+      : `2 de 3 slots relacionados · ${counterLabel}`;
+    return `
+      <article class="defense-match-option">
+        <div class="defense-match-option-copy">
+          <strong>Defesa existente</strong>
+          <span>${escapeHtml(relationLabel)}</span>
+        </div>
+        <div class="defense-match-team defense-team"><span class="monsters">${teamComposition(candidate, "defense")}</span></div>
+        <button class="button button-secondary" type="button" data-use-defense-id="${escapeHtml(candidate.id)}">Usar esta defesa</button>
+      </article>`;
+  }).join("");
+  review.hidden = false;
+  const saveButton = $("#saveStrategyButton");
+  if (saveButton) {
+    saveButton.disabled = true;
+    saveButton.textContent = "Escolha a defesa abaixo";
+  }
+  requestAnimationFrame(() => {
+    review.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    review.querySelector("[data-use-defense-id]")?.focus({ preventScroll: true });
+  });
 }
 
 function compositionSlot(primaryId, alternatives, side, index) {
@@ -1117,6 +1260,7 @@ function collectBuildRecommendations() {
 function openStrategyDialog(defenseStrategy = null) {
   editingStrategyId = null;
   $("#strategyForm").reset();
+  clearDefenseMatchReview();
   resetSelection();
   dialogDefenseId = defenseStrategy?.defenseId || null;
   if (defenseStrategy) {
@@ -1131,6 +1275,7 @@ function openStrategyDialog(defenseStrategy = null) {
 function openEditStrategyDialog(strategy) {
   editingStrategyId = strategy.id;
   dialogDefenseId = null;
+  clearDefenseMatchReview();
   const form = $("#strategyForm");
   form.reset();
   selection = {
@@ -1160,11 +1305,13 @@ function closeStrategyDialog() {
   $("#strategyForm").reset();
   dialogDefenseId = null;
   editingStrategyId = null;
+  clearDefenseMatchReview();
   resetSelection();
   updateStrategyDialogMode();
 }
 
 function resetSelection() {
+  clearDefenseMatchReview();
   selection = emptySelection();
   buildDraft = new Map();
   ["attack", "defense"].forEach((side) => [0, 1, 2].forEach((index) => renderSelectionSlot(side, index)));
@@ -1294,6 +1441,7 @@ function renderMonsterOptions() {
 
 function selectMonster(id) {
   if (!pickerSlot) return;
+  if (pickerSlot.side === "defense") noteDefenseSelectionChanged();
   if (id === "*") {
     selection[pickerSlot.side][pickerSlot.index] = "*";
     selection[alternativeKey(pickerSlot.side)][pickerSlot.index] = [];
@@ -1325,8 +1473,8 @@ function showToast(message) {
 function strategyShareUrl(id) {
   const url = new URL(window.location.href);
   const strategy = strategies.find((item) => item.id === id);
-  if (strategy?.defenseId) url.searchParams.set("defense", strategy.defenseId);
-  url.searchParams.set("strategy", id);
+  url.search = "";
+  url.searchParams.set("strategy", strategy?.shortId || id);
   url.hash = "";
   return url.toString();
 }
@@ -1455,6 +1603,30 @@ document.querySelectorAll(".monster-select[data-slot]").forEach((button) => butt
 }));
 
 $("#strategyForm").addEventListener("click", (event) => {
+  const useDefenseButton = event.target.closest("[data-use-defense-id]");
+  if (useDefenseButton) {
+    const match = pendingDefenseMatches.find((candidate) => candidate.id === useDefenseButton.dataset.useDefenseId);
+    if (!match) {
+      showToast("Essa defesa não está mais disponível. Verifique novamente.");
+      clearDefenseMatchReview();
+      return;
+    }
+    dialogDefenseId = match.id;
+    selection.defense = [...match.defense];
+    selection.defenseAlternatives = match.defenseAlternatives.map((slot) => [...slot]);
+    clearDefenseMatchReview({ resetApproval: false });
+    [0, 1, 2].forEach((index) => renderSelectionSlot("defense", index));
+    updateStrategyDialogMode();
+    event.currentTarget.requestSubmit();
+    return;
+  }
+  const keepNewButton = event.target.closest("[data-keep-new-defense]");
+  if (keepNewButton) {
+    approvedNewDefenseFingerprint = compositionFingerprint(selection.defense, selection.defenseAlternatives);
+    clearDefenseMatchReview({ resetApproval: false });
+    event.currentTarget.requestSubmit();
+    return;
+  }
   const addButton = event.target.closest("[data-add-alternative]");
   if (addButton) {
     openMonsterPicker({ side: addButton.dataset.side, index: Number(addButton.dataset.index), mode: "alternative" });
@@ -1464,6 +1636,7 @@ $("#strategyForm").addEventListener("click", (event) => {
   if (!removeButton) return;
   const side = removeButton.dataset.side;
   const index = Number(removeButton.dataset.index);
+  if (side === "defense") noteDefenseSelectionChanged();
   selection[alternativeKey(side)][index] = selection[alternativeKey(side)][index].filter((id) => id !== removeButton.dataset.monsterId);
   renderSelectionSlot(side, index);
 });
@@ -1518,6 +1691,33 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     event.currentTarget.elements.videoUrl.focus();
     return;
   }
+  const submitButton = event.currentTarget.querySelector("button[type='submit']");
+  const currentDefenseFingerprint = compositionFingerprint(selection.defense, selection.defenseAlternatives);
+  const shouldReviewDefense = !editingStrategyId
+    && !dialogDefenseId
+    && approvedNewDefenseFingerprint !== currentDefenseFingerprint;
+  if (shouldReviewDefense) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Verificando defesa...";
+    let matches;
+    try {
+      matches = cloudEnabled
+        ? await database.findSimilarDefenses(selection.defense, selection.defenseAlternatives, 3)
+        : localSimilarDefenses();
+    } catch (error) {
+      console.error(error);
+      showToast("Não foi possível comparar as defesas. Tente salvar novamente.");
+      submitButton.disabled = false;
+      submitButton.textContent = "Salvar counter";
+      return;
+    }
+    submitButton.disabled = false;
+    submitButton.textContent = "Salvar counter";
+    if (matches.length) {
+      renderDefenseMatchReview(matches);
+      return;
+    }
+  }
   const existingStrategy = editingStrategyId
     ? strategies.find((item) => item.id === editingStrategyId)
     : null;
@@ -1558,7 +1758,6 @@ $("#strategyForm").addEventListener("submit", async (event) => {
     createdAt: existingStrategy?.createdAt || now,
     updatedAt: now,
   };
-  const submitButton = event.currentTarget.querySelector("button[type='submit']");
   submitButton.disabled = true;
   submitButton.textContent = "Salvando...";
   try {
@@ -1635,6 +1834,13 @@ $("#strategyList").addEventListener("submit", async (event) => {
     showToast("Escreva um comentário antes de publicar.");
     return;
   }
+  const rawVideoUrl = String(data.get("videoUrl") || "").trim();
+  const videoUrl = normalizeYouTubeUrl(rawVideoUrl);
+  if (rawVideoUrl && !videoUrl) {
+    showToast("Cole um link válido de vídeo do YouTube.");
+    form.elements.videoUrl.focus();
+    return;
+  }
   const rawReaction = data.get("reaction");
   const comment = {
     id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random()}`,
@@ -1642,6 +1848,7 @@ $("#strategyList").addEventListener("submit", async (event) => {
     authorId: currentUserId,
     author: currentUser,
     body,
+    videoUrl,
     reaction: rawReaction === "1" ? 1 : rawReaction === "-1" ? -1 : null,
     createdAt: new Date().toISOString(),
   };
