@@ -10,6 +10,9 @@ Use este padrão sempre que o pedido for **“monte uma imagem de referência pa
 - Fonte dos dados: somente o counter salvo no projeto/Supabase e o catálogo local de monstros.
 - Não inventar estatísticas, runas, ordem de turno, riscos, alternativas, validação ou resultados.
 - Retratos só podem vir dos arquivos originais do catálogo local e devem ser inseridos sem redesenho.
+- O ícone de elemento de cada monstro deve vir de `dist/assets/ui/elements/` e aparecer no canto superior direito do retrato correspondente.
+- A imagem de Leader Skill deve vir de `dist/assets/ui/leader-skills/` e aparecer no canto inferior esquerdo do retrato do primeiro slot, somente quando aquele monstro possuir Leader Skill no catálogo.
+- Não substituir a imagem oficial de Leader Skill por coroa, glifo, emoji, SVG genérico ou ícone aproximado.
 - Quando a imagem original de um monstro não puder ser usada, exibir apenas seu nome e elemento; nunca gerar um substituto visual.
 - Se um dado não existir, omitir o bloco correspondente em vez de preencher com conteúdo genérico.
 - Nomes de monstros e números devem ser reproduzidos literalmente.
@@ -23,6 +26,12 @@ Asset type: card tático de referência para um counter de Siege de Summoners Wa
 Input images:
 {{ORIGINAL_MONSTER_ASSETS}}
 Cada imagem listada é um asset original de catálogo. Ela pode ser enquadrada e redimensionada, mas nunca redesenhada, estilizada ou usada apenas como inspiração para uma nova ilustração.
+
+{{ELEMENT_BADGE_ASSETS}}
+Use estes PNGs originais no canto superior direito dos retratos correspondentes.
+
+{{LEADER_SKILL_ASSETS}}
+Use estes PNGs originais no canto inferior esquerdo dos possíveis líderes; omita quando o monstro não possuir Leader Skill.
 
 Primary request:
 Crie uma única imagem de referência operacional, legível em poucos segundos no celular, para ajudar um membro da guilda a confirmar o matchup, montar o time e executar o counter antes de atacar. O resultado deve parecer um guia tático premium e consistente, não uma captura de tela, pôster promocional ou fan art solta.
@@ -46,14 +55,16 @@ Composition/framing:
 - Margem segura de 64 px em todos os lados.
 - Cabeçalho compacto no topo com “COUNTER DE SIEGE”, segurança e validação.
 - Logo O₂ pequeno e discreto, sem competir com os dados.
-- Primeira faixa: defesa inimiga, visualmente marcada em cobre, com nomes e alternativas por slot ligadas por “OU”. Usar retrato quadrado somente quando ele for o arquivo original do catálogo fornecido como asset; sem asset original, usar um slot tipográfico com nome e elemento.
+- Primeira faixa: defesa inimiga, visualmente marcada em cobre, com nomes e alternativas por slot ligadas por “OU”. Usar retrato quadrado somente quando ele for o arquivo original do catálogo fornecido como asset; sem asset original, usar um slot tipográfico com nome e elemento. Alternativas devem continuar legíveis: não reduzir seus retratos ou badges a ponto de a imagem de Leader Skill cobrir o monstro ou o elemento perder definição.
 - Segunda faixa: time do counter, maior e mais proeminente, em aqua, com três slots ordenados e nomes. Usar retrato quadrado somente quando ele for o arquivo original do catálogo fornecido como asset; sem asset original, usar um slot tipográfico com nome e elemento.
+- Em todo retrato válido, sobrepor o PNG oficial do elemento no canto superior direito. No primeiro slot de cada composição, sobrepor também o PNG oficial da Leader Skill no canto inferior esquerdo quando existir. Preservar a proporção original de ambos, sem recolorir ou redesenhar.
 - Terceira área: grade de consulta rápida com ordem de turno, prioridade de alvo, risco crítico e builds mínimas.
 - Quando houver dados de artefatos no counter, mostrar uma linha ou nota de “ARTEFATOS” dentro da área de build, com a recomendação correspondente a cada monstro e alternativa. Esse conteúdo é obrigatório quando estiver presente na fonte e deve ser omitido quando não existir.
 - Rodapé curto com autoria e observação sobre substituições, apenas quando existirem.
 - Hierarquia inequívoca: DEFESA → COUNTER → COMO USAR → BUILD.
 - Muito espaço entre grupos; conteúdo relacionado permanece próximo.
 - Retratos são dados funcionais, não ilustração: preservar os pixels e a identidade do arquivo original, usando apenas enquadramento, escala e borda elemental consistente. Nunca desenhar, reinterpretar ou substituir um monstro.
+- Badges também são dados funcionais: usar somente os PNGs locais oficiais, manter contraste e tamanho legível e impedir que cubram o nome ou a área central do retrato.
 
 Typography:
 - Sans-serif geométrica e legível, com aparência técnica e sóbria.
@@ -74,6 +85,8 @@ Required data — reproduce verbatim:
 - Alternativas: “{{SUBSTITUTIONS}}”
 - Evidência: “{{EVIDENCE}}”
 - Autor: “{{AUTHOR}}”
+- Assets elementais: “{{ELEMENT_BADGE_ASSETS}}”
+- Assets de Leader Skill: “{{LEADER_SKILL_ASSETS}}”
 
 Text rules:
 - Renderize os textos fornecidos literalmente, sem corrigir nomes próprios e sem acrescentar frases.
@@ -85,6 +98,7 @@ Text rules:
 
 Constraints:
 - Mostrar exatamente os monstros e alternativas informados, sem trocar elemento, aparência ou ordem dos slots.
+- Mostrar o elemento correto em todos os retratos e a Leader Skill correta em cada possível líder, inclusive líderes alternativos.
 - O time atacante deve ser o foco visual; a defesa deve continuar claramente identificável.
 - PROIBIDO gerar, ilustrar, redesenhar, estilizar, completar ou reinterpretar qualquer monstro.
 - Um retrato só pode aparecer quando for a imagem original fornecida pelo catálogo do projeto, preservada sem alteração de identidade.
@@ -93,6 +107,7 @@ Constraints:
 - Não usar marcas externas, publicidade, placar, interface de celular, mockup de dispositivo ou watermark.
 - Não inventar conteúdo para preencher espaços vazios.
 - Não cortar retratos, nomes, números ou o logo O₂.
+- Não deixar o badge de elemento ou de Leader Skill ilegível, pixelado por ampliação excessiva ou desproporcional ao retrato.
 
 Output intent:
 Infográfico tático premium, consistente com os demais cards da série, imediatamente compreensível e pronto para ser compartilhado no WhatsApp da guilda.
@@ -114,18 +129,20 @@ Infográfico tático premium, consistente com os demais cards da série, imediat
 {{EVIDENCE}} = Vitória confirmada contra Sylvia + Daphnis + Wind Zenitsu
 {{AUTHOR}} = LETHALX
 {{ORIGINAL_MONSTER_ASSETS}} = Sylvia (Escuridão): assets/monsters/sylvia.png | Moore (Água): assets/monsters/moore.png | Daphnis (Fogo): assets/monsters/daphnis.png | Zenitsu Agatsuma (Vento): assets/monsters/wind-zenitsu.png | Savannah (Vento): assets/monsters/savannah.png | Fire Aragorn (Fogo): assets/monsters/aragorn-fire.png | Racuni (Fogo): assets/monsters/racuni.png | Gyomei Himejima (Vento): assets/monsters/gyomei.png | Windy (Vento): assets/monsters/windy.png
+{{ELEMENT_BADGE_ASSETS}} = Escuridão: assets/ui/elements/dark.png | Água: assets/ui/elements/water.png | Fogo: assets/ui/elements/fire.png | Vento: assets/ui/elements/wind.png
+{{LEADER_SKILL_ASSETS}} = Sylvia: assets/ui/leader-skills/leader_skill_Attack_Speed_Guild.png | Moore: assets/ui/leader-skills/leader_skill_Attack_Speed.png | Fire Aragorn: assets/ui/leader-skills/leader_skill_Resistance_Guild.png
 ```
 
 ## Procedimento de geração
 
 1. Resolver o counter solicitado nos dados do projeto.
-2. Localizar no catálogo os arquivos originais dos monstros que serão exibidos.
+2. Localizar no catálogo os arquivos originais dos monstros, dos elementos e das Leader Skills que serão exibidos.
 3. Preencher os placeholders sem inferir informações ausentes, incluindo `{{ARTIFACTS}}` sempre que houver recomendações de artefatos salvas.
 4. Implementar uma única composição determinística em HTML/CSS, em canvas fixo de 1536 × 1024 px, seguindo o prompt visual.
-5. Inserir diretamente os retratos originais do catálogo, sem redesenho; se algum arquivo não existir, manter o slot tipográfico.
+5. Inserir diretamente os retratos originais do catálogo, os badges oficiais de elemento e as imagens oficiais de Leader Skill, sem redesenho; se algum retrato não existir, manter o slot tipográfico.
 6. Renderizar o HTML em viewport de 1536 × 1024 px e validar no DOM dimensões, carregamento das imagens e ausência de overflow.
 7. Capturar o PNG final em 1536 × 1024 px e inspecioná-lo visualmente.
-8. Conferir nomes, elementos, números, runas, artefatos, ordem visual, retratos e ausência de dados inventados.
+8. Conferir nomes, elementos, Leader Skills, proporção dos badges, números, runas, artefatos, ordem visual, retratos e ausência de dados inventados.
 9. Rejeitar qualquer saída que contenha um monstro inventado ou reinterpretado.
 10. Corrigir apenas defeitos objetivos encontrados.
 11. Entregar e arquivar o HTML-fonte e o PNG final em `dist/assets/counter-references/`.

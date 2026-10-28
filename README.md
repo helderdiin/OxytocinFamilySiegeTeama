@@ -16,6 +16,7 @@ Abra `http://localhost:4173`.
 
 - identificação por nick, sem senha;
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
+- retratos com indicadores elementais e imagens originais de Leader Skill do catálogo público do SWARFARM;
 - defesas são registros compartilhados e cada uma pode reunir vários counters independentes;
 - defesas equivalentes são reconhecidas mesmo com slots ou titular/alternativa em outra ordem; composições apenas parecidas exigem uma escolha explícita entre reutilizar a defesa existente ou criar uma nova;
 - cadastro exige pelo menos dois monstros no counter e dois na defesa; o terceiro slot de cada lado é opcional e usa o coringa `X` quando não informado;
@@ -26,7 +27,7 @@ Abra `http://localhost:4173`.
 - alternativas por slot no counter e na defesa, sem duplicar registros;
 - um novo counter pode partir de uma defesa existente, mantendo a composição inimiga bloqueada e preenchendo somente a nova proposta;
 - busca por monstros do counter ou da defesa, conteúdo textual e filtros de segurança/status;
-- compartilhamento por alias curto, abrindo o counter correspondente já expandido sem expor o UUID no link;
+- compartilhamento por rotas curtas (`/counter/…` e `/defense/…`), com previews específicos para WhatsApp, imagem dinâmica com os retratos reais, status, autor e feedback;
 - comentários colaborativos por ataque, com reação opcional `+1` ou `-1` e vídeo opcional do YouTube vinculados ao relato; cada autor pode editar somente os próprios comentários;
 - edição colaborativa de qualquer counter, preservando o autor original e registrando editor e horário no histórico;
 - estratégias podem ser mantidas no banco como inativas sem aparecer na UI;
@@ -59,6 +60,7 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261028120000_strategy_comment_videos.sql`
 - `supabase/migrations/20261028130000_defense_identity_and_similarity.sql`
 - `supabase/migrations/20261028140000_strategy_comment_editing.sql`
+- `supabase/migrations/20261028150000_share_previews.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem criar, comentar e editar qualquer counter. O autor original e o dono do registro são preservados; cada edição grava somente editor e horário em `strategy_edits`, sem armazenar o conteúdo anterior. A exclusão continua restrita ao criador de counters não oficiais, e entradas do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
@@ -88,6 +90,8 @@ O projeto usa um build mínimo que gera `dist/supabase-config.js` a partir de du
 - `SUPABASE_PUBLISHABLE_KEY`
 
 O diretório publicado é `dist`. Com a integração Git conectada, pushes na branch `main` atualizam a produção automaticamente.
+
+As rotas compartilháveis são atendidas pelas Vercel Functions em `api/`. Elas usam `SUPABASE_URL` e `SUPABASE_PUBLISHABLE_KEY`, consultam somente a RPC sanitizada `get_share_preview` e retornam HTML com metadados Open Graph específicos. A imagem social é gerada em PNG de 1200 × 630 px com os assets reais do catálogo local.
 
 ## Dados
 

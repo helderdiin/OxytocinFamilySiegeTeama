@@ -266,9 +266,21 @@ let editingStrategyId = null;
 let editingCommentId = null;
 let approvedNewDefenseFingerprint = null;
 let pendingDefenseMatches = [];
-const initialQuery = new URLSearchParams(window.location.search);
-let sharedStrategyId = initialQuery.get("strategy");
-let selectedDefenseId = initialQuery.get("defense");
+
+function readShareLocation() {
+  const path = window.location.pathname.replace(/\/+$/, "");
+  const counterMatch = path.match(/^\/counter\/([23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8})$/i);
+  const defenseMatch = path.match(/^\/defense\/([23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8})$/i);
+  return {
+    strategy: counterMatch?.[1] || null,
+    defense: defenseMatch?.[1] || null,
+  };
+}
+
+const initialShareLocation = readShareLocation();
+let sharedStrategyId = initialShareLocation.strategy;
+let sharedDefenseKey = initialShareLocation.defense;
+let selectedDefenseId = null;
 let sharedStrategyOpened = false;
 
 const $ = (selector) => document.querySelector(selector);
@@ -309,6 +321,7 @@ function migrateStrategies(records) {
       ...rest,
       shortId: strategy.shortId || strategy.short_id || fallbackShortId(strategy.id),
       defenseId: strategy.defenseId || strategy.defense_id || `local:${compositionFingerprint(defense, defenseAlternatives)}`,
+      defenseShortId: strategy.defenseShortId || strategy.defense_short_id || fallbackShortId(strategy.defenseId || strategy.defense_id || compositionFingerprint(defense, defenseAlternatives)),
       attack,
       defense,
       attackAlternatives,
@@ -335,17 +348,31 @@ function migrateStrategies(records) {
 }
 
 function fallbackShortId(id) {
-  const compact = String(id || "").replace(/[^a-z0-9]/gi, "").toUpperCase();
-  return compact.slice(0, 8) || null;
+  const alphabet = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+  const source = String(id || "local");
+  let hash = 2166136261;
+  for (let index = 0; index < source.length; index += 1) {
+    hash ^= source.charCodeAt(index);
+    hash = Math.imul(hash, 16777619) >>> 0;
+  }
+  let result = "";
+  for (let index = 0; index < 8; index += 1) {
+    hash = Math.imul(hash ^ (hash >>> 13), 2246822519) >>> 0;
+    result += alphabet[hash % alphabet.length];
+  }
+  return result;
 }
 
 function strategyByShareKey(key) {
   const normalizedKey = String(key || "").trim().toUpperCase();
   if (!normalizedKey) return null;
-  return strategies.find((strategy) => (
-    String(strategy.id).toUpperCase() === normalizedKey
-    || String(strategy.shortId || "").toUpperCase() === normalizedKey
-  )) || null;
+  return strategies.find((strategy) => String(strategy.shortId || "").toUpperCase() === normalizedKey) || null;
+}
+
+function defenseByShareKey(key) {
+  const normalizedKey = String(key || "").trim().toUpperCase();
+  if (!normalizedKey) return null;
+  return strategies.find((strategy) => String(strategy.defenseShortId || "").toUpperCase() === normalizedKey) || null;
 }
 
 function normalizeReferenceImage(value) {
@@ -510,16 +537,18 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.28 · Supabase" : "v0.28 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.32 · Supabase" : "v0.32 · dados locais";
 }
 
 async function connectCloudUser() {
   currentUserId = await database.ensureUser(currentUser);
-  const [strategyRows, comments, edits] = await Promise.all([
+  const [strategyRows, defenseShortIds, comments, edits] = await Promise.all([
     database.listStrategies(),
+    database.listDefenseShortIds(),
     database.listComments(),
     database.listStrategyEdits(),
   ]);
+  const defenseShortIdById = new Map(defenseShortIds.map((item) => [item.id, item.shortId]));
   const commentsByStrategy = new Map();
   comments.forEach((comment) => {
     if (!commentsByStrategy.has(comment.strategyId)) commentsByStrategy.set(comment.strategyId, []);
@@ -532,6 +561,7 @@ async function connectCloudUser() {
   });
   strategies = migrateStrategies(strategyRows).map((strategy) => ({
     ...strategy,
+    defenseShortId: defenseShortIdById.get(strategy.defenseId) || strategy.defenseShortId,
     comments: commentsByStrategy.get(strategy.id) || [],
     edits: editsByStrategy.get(strategy.id) || [],
   }));
@@ -626,19 +656,35 @@ function monsterLeaderSkill(monster) {
   return monster?.gameData?.leaderSkill || null;
 }
 
-function leaderAttributeIcon(skill, className = "") {
-  const paths = {
-    attack: '<path d="m6 18 12-12M14 5l5 5M5 14l5 5M4 20l3-1-2-2-1 3Z" />',
-    speed: '<path d="m13 2-8 12h6l-1 8 9-13h-6V2Z" />',
-    defense: '<path d="M12 3 5 6v5c0 4.6 2.7 8.2 7 10 4.3-1.8 7-5.4 7-10V6l-7-3Z" /><path d="M12 7v10" />',
-    hp: '<path d="M20.8 5.8a5.2 5.2 0 0 0-7.4 0L12 7.2l-1.4-1.4a5.2 5.2 0 1 0-7.4 7.4L12 22l8.8-8.8a5.2 5.2 0 0 0 0-7.4Z" />',
-    "critical-rate": '<circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M12 2v3M22 12h-3M12 22v-3M2 12h3" />',
-    "critical-damage": '<path d="m12 2 2.2 6.3L21 7l-4.2 5 4.2 5-6.8-1.3L12 22l-2.2-6.3L3 17l4.2-5L3 7l6.8 1.3L12 2Z" />',
-    accuracy: '<circle cx="12" cy="12" r="7" /><path d="M12 2v4M22 12h-4M12 22v-4M2 12h4M9 12l2 2 4-5" />',
-    resistance: '<path d="M12 3 5 6v5c0 4.6 2.7 8.2 7 10 4.3-1.8 7-5.4 7-10V6l-7-3Z" /><path d="m8.5 12 2.2 2.2 4.8-4.8" />',
-    generic: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z" />',
-  };
-  return `<svg class="${className}" aria-hidden="true" viewBox="0 0 24 24">${paths[skill?.icon] || paths.generic}</svg>`;
+function leaderSkillAssetFilename(skill) {
+  if (!skill?.attribute) return "";
+  const attribute = String(skill.attribute).trim().replaceAll(" ", "_");
+  const area = String(skill.area || "General");
+  const element = String(skill.element || "");
+  const suffix = area === "Element" && element
+    ? `_${element.charAt(0).toUpperCase()}${element.slice(1).toLowerCase()}`
+    : ["Arena", "Dungeon", "Guild"].includes(area) ? `_${area}` : "";
+  return `leader_skill_${attribute}${suffix}.png`;
+}
+
+function leaderSkillImage(skill, className = "") {
+  const filename = leaderSkillAssetFilename(skill);
+  if (!filename) return "";
+  return `<img class="${escapeHtml(className)}" src="./assets/ui/leader-skills/${escapeHtml(filename)}" alt="" aria-hidden="true" loading="lazy" />`;
+}
+
+function elementBadgeImage(monster) {
+  if (!["water", "fire", "wind", "light", "dark"].includes(monster?.element)) return "";
+  return `<img class="monster-element-badge" src="./assets/ui/elements/${escapeHtml(monster.element)}.png" alt="" aria-hidden="true" loading="lazy" />`;
+}
+
+function monsterPortraitFrame(monster, imageClass, { isLeader = false, loading = false } = {}) {
+  const displayName = displayMonsterName(monster);
+  const portrait = monster.image
+    ? `<img class="${escapeHtml(imageClass)}" src="./${escapeHtml(monster.image)}" alt=""${loading ? ' loading="lazy"' : ""} />`
+    : `<span class="${escapeHtml(imageClass)} fallback-avatar">${escapeHtml(displayName.slice(0, 2).toUpperCase())}</span>`;
+  const skill = isLeader ? monsterLeaderSkill(monster) : null;
+  return `<span class="monster-portrait-frame${isLeader ? " is-leader" : ""}">${portrait}${elementBadgeImage(monster)}${skill ? leaderSkillImage(skill, "leader-slot-image") : ""}</span>`;
 }
 
 function leaderSkillDescription(monster) {
@@ -654,13 +700,13 @@ function leaderSkillSummary(strategy, side, compact = false) {
     const skill = monsterLeaderSkill(monster);
     return `
       <span class="leader-skill-entry${skill ? "" : " is-empty"}">
-        <span class="leader-skill-icon">${skill ? leaderAttributeIcon(skill) : icon("crown")}</span>
+        <span class="leader-skill-icon" aria-hidden="true">${skill ? leaderSkillImage(skill) : ""}</span>
         <span class="leader-skill-copy"><strong>${index ? "Alternativa · " : ""}${escapeHtml(displayMonsterName(monster))}</strong><span>${escapeHtml(leaderSkillDescription(monster))}</span></span>
       </span>`;
   }).join("");
   return `
     <span class="leader-skill-strip${compact ? " is-compact" : ""}" aria-label="Leader Skill do slot 1">
-      <span class="leader-skill-label">${icon("crown")}<span>Leader Skill</span></span>
+      <span class="leader-skill-label"><span>Leader Skill</span></span>
       <span class="leader-skill-entries">${entries}</span>
     </span>`;
 }
@@ -737,8 +783,11 @@ function render() {
   const visibleGroups = groupStrategiesByDefense(visibleStrategies);
 
   const sharedStrategy = strategyByShareKey(sharedStrategyId);
+  const sharedDefense = defenseByShareKey(sharedDefenseKey);
   if (!selectedDefenseId && sharedStrategy) {
     selectedDefenseId = sharedStrategy.defenseId || null;
+  } else if (!selectedDefenseId && sharedDefense) {
+    selectedDefenseId = sharedDefense.defenseId || null;
   }
   const selectedGroup = allGroups.find((group) => group.id === selectedDefenseId);
   const isDefenseView = Boolean(selectedGroup);
@@ -771,7 +820,13 @@ function render() {
       sharedStrategyOpened = true;
       sharedCard.open = true;
       sharedCard.classList.add("shared-strategy");
-      requestAnimationFrame(() => sharedCard.scrollIntoView({ behavior: "smooth", block: "center" }));
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const topbarHeight = $(".topbar")?.getBoundingClientRect().height || 0;
+        const cardTop = window.scrollY + sharedCard.getBoundingClientRect().top;
+        const targetTop = Math.max(0, cardTop - topbarHeight - 16);
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: targetTop, behavior: reduceMotion ? "auto" : "smooth" });
+      }));
     }
   }
 }
@@ -1164,7 +1219,7 @@ function buildRecommendationsTable(strategy) {
           <caption class="sr-only">Build mínima recomendada para os monstros do counter</caption>
           <thead><tr><th scope="col">Atributo</th>${builds.map((build) => {
             const monster = getMonster(build.monsterId);
-            return `<th scope="col"><span class="build-monster-heading"><img class="${escapeHtml(monster.element)}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy"><span><strong>${escapeHtml(displayMonsterName(monster))}</strong>${build.isAlternative ? "<small>Alternativa</small>" : ""}</span></span></th>`;
+            return `<th scope="col"><span class="build-monster-heading">${monsterPortraitFrame(monster, `build-monster-avatar ${monster.element}`, { isLeader: build.slot === 0, loading: true })}<span><strong>${escapeHtml(displayMonsterName(monster))}</strong>${build.isAlternative ? "<small>Alternativa</small>" : ""}</span></span></th>`;
           }).join("")}</tr></thead>
           <tbody>${visibleStats.map((definition) => `<tr><th scope="row"><strong>${definition.label}</strong>${definition.hint ? `<small>${definition.hint}</small>` : ""}</th>${builds.map((build) => `<td>${formatBuildValue(build, definition)}</td>`).join("")}</tr>`).join("")}</tbody>
         </table>
@@ -1276,12 +1331,10 @@ function monsterChip(id, side, isAlternative = false, isLeader = false) {
     return `<span class="monster monster-with-image wildcard-chip" title="${title}"><span class="monster-image wildcard-avatar">X</span><span>${label}</span></span>`;
   }
   const displayName = displayMonsterName(monster);
-  const image = monster.image
-    ? `<img class="monster-image ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />`
-    : `<span class="monster-image fallback-avatar">${escapeHtml(displayName.slice(0, 2).toUpperCase())}</span>`;
+  const portrait = monsterPortraitFrame(monster, `monster-image ${monster.element}`, { isLeader, loading: true });
   const externalId = monster.externalIds?.com2us ? ` · ID ${monster.externalIds.com2us}` : "";
   const leaderTitle = isLeader ? ` · Líder: ${leaderSkillDescription(monster)}` : "";
-  return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}${isLeader ? " leader-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}${escapeHtml(leaderTitle)}">${image}${isLeader ? `<span class="leader-slot-badge" aria-label="Líder" title="Leader Skill">${icon("crown")}</span>` : ""}<span>${escapeHtml(displayName)}</span></span>`;
+  return `<span class="monster monster-with-image${isAlternative ? " alternative-monster" : ""}${isLeader ? " leader-monster" : ""}" title="${isAlternative ? "Alternativa · " : ""}${escapeHtml(elementNames[monster.element] || "")}${externalId}${escapeHtml(leaderTitle)}">${portrait}<span>${escapeHtml(displayName)}</span></span>`;
 }
 
 function captureBuildDraft() {
@@ -1328,7 +1381,7 @@ function renderBuildRecommendationsEditor() {
         <caption class="sr-only">Cadastro de builds mínimas recomendadas</caption>
         <thead><tr><th scope="col">Atributo</th>${references.map((reference) => {
           const monster = getMonster(reference.monsterId);
-          return `<th scope="col"><span class="build-monster-heading"><img class="${escapeHtml(monster.element)}" src="./${escapeHtml(monster.image)}" alt=""><span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>Slot ${reference.slot + 1}${reference.isAlternative ? " · alternativa" : ""}</small></span></span></th>`;
+          return `<th scope="col"><span class="build-monster-heading">${monsterPortraitFrame(monster, `build-monster-avatar ${monster.element}`, { isLeader: reference.slot === 0 })}<span><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>Slot ${reference.slot + 1}${reference.isAlternative ? " · alternativa" : ""}</small></span></span></th>`;
         }).join("")}</tr></thead>
         <tbody>${buildStatDefinitions.map((definition) => `<tr><th scope="row"><strong>${definition.label}</strong>${definition.hint ? `<small>${definition.hint}</small>` : ""}</th>${references.map((reference) => `<td>${buildEditorInput(reference, definition)}</td>`).join("")}</tr>`).join("")}</tbody>
       </table>
@@ -1453,9 +1506,10 @@ function renderSelectionSlot(side, index) {
   } else {
     const monster = getMonster(selectedId);
     button.className = "monster-select selected";
-    const leader = index === 0 ? `<span class="selection-leader-skill"><span class="selection-leader-icon">${monsterLeaderSkill(monster) ? leaderAttributeIcon(monsterLeaderSkill(monster)) : icon("crown")}</span><span>${escapeHtml(leaderSkillDescription(monster))}</span></span>` : "";
+    const skill = monsterLeaderSkill(monster);
+    const leader = index === 0 ? `<span class="selection-leader-skill">${skill ? `<span class="selection-leader-icon">${leaderSkillImage(skill)}</span>` : ""}<span>${escapeHtml(leaderSkillDescription(monster))}</span></span>` : "";
     button.classList.toggle("leader-selection", index === 0);
-    button.innerHTML = `<img class="select-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" /><span class="selection-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small>${leader}</span>`;
+    button.innerHTML = `${monsterPortraitFrame(monster, `select-avatar ${monster.element}`, { isLeader: index === 0 })}<span class="selection-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small>${leader}</span>`;
   }
   renderSelectedAlternatives(side, index);
   if (side === "attack") renderBuildRecommendationsEditor();
@@ -1476,7 +1530,7 @@ function renderSelectedAlternatives(side, index) {
     const leader = index === 0 ? `<small>${escapeHtml(leaderSkillDescription(monster))}</small>` : "";
     return `
       <span class="selected-alternative">
-        <img class="alternative-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" />
+        ${monsterPortraitFrame(monster, `alternative-avatar ${monster.element}`, { isLeader: index === 0 })}
         <span class="selected-alternative-copy" title="${escapeHtml(displayMonsterName(monster))}"><strong>${escapeHtml(displayMonsterName(monster))}</strong>${leader}</span>
         <button type="button" data-remove-alternative data-side="${side}" data-index="${index}" data-monster-id="${escapeHtml(id)}" aria-label="Remover ${escapeHtml(displayMonsterName(monster))}"${isLockedDefense ? ' disabled aria-disabled="true"' : ""}>${icon("close")}</button>
       </span>`;
@@ -1533,8 +1587,8 @@ function renderMonsterOptions() {
     </button>` : "";
   const monsterOptions = visible.map((monster) => `
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
-      <img class="picker-avatar ${monster.element}" src="./${escapeHtml(monster.image)}" alt="" loading="lazy" />
-      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small>${pickerSlot?.index === 0 ? `<span class="option-leader-skill"><span>${monsterLeaderSkill(monster) ? leaderAttributeIcon(monsterLeaderSkill(monster)) : icon("crown")}</span>${escapeHtml(leaderSkillDescription(monster))}</span>` : ""}</span>
+      ${monsterPortraitFrame(monster, `picker-avatar ${monster.element}`, { isLeader: pickerSlot?.index === 0, loading: true })}
+      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small>${pickerSlot?.index === 0 ? `<span class="option-leader-skill">${monsterLeaderSkill(monster) ? `<span>${leaderSkillImage(monsterLeaderSkill(monster))}</span>` : ""}${escapeHtml(leaderSkillDescription(monster))}</span>` : ""}</span>
       <span class="add-label">${pickerSlot?.mode === "alternative" ? "Usar como opção" : "Adicionar"}</span>
     </button>`).join("");
   $("#monsterOptions").innerHTML = wildcardOption + monsterOptions + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") || '<div class="no-options">Nenhum monstro encontrado.</div>';
@@ -1592,31 +1646,27 @@ function showStrategyFormStatus(message, type = "error") {
 }
 
 function strategyShareUrl(id) {
-  const url = new URL(window.location.href);
   const strategy = strategies.find((item) => item.id === id);
-  url.search = "";
-  url.searchParams.set("strategy", strategy?.shortId || id);
-  url.hash = "";
-  return url.toString();
+  const key = strategy?.shortId;
+  if (!key) throw new Error("Counter sem short ID.");
+  return new URL(`/counter/${encodeURIComponent(key)}`, window.location.origin).toString();
 }
 
 function defenseShareUrl(id) {
-  const url = new URL(window.location.href);
-  url.searchParams.set("defense", id);
-  url.searchParams.delete("strategy");
-  url.hash = "";
-  return url.toString();
+  const strategy = strategies.find((item) => item.defenseId === id);
+  const key = strategy?.defenseShortId;
+  if (!key) throw new Error("Defesa sem short ID.");
+  return new URL(`/defense/${encodeURIComponent(key)}`, window.location.origin).toString();
 }
 
 function openDefenseView(id, { pushState = true } = {}) {
   selectedDefenseId = id;
   sharedStrategyId = null;
+  sharedDefenseKey = strategies.find((item) => item.defenseId === id)?.defenseShortId || null;
   sharedStrategyOpened = false;
   if (pushState) {
-    const url = new URL(window.location.href);
-    url.searchParams.set("defense", id);
-    url.searchParams.delete("strategy");
-    window.history.pushState({}, "", url);
+    if (!sharedDefenseKey) throw new Error("Defesa sem short ID.");
+    window.history.pushState({}, "", `/defense/${encodeURIComponent(sharedDefenseKey)}`);
   }
   render();
   window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
@@ -1625,12 +1675,10 @@ function openDefenseView(id, { pushState = true } = {}) {
 function openDefenseCatalog({ pushState = true } = {}) {
   selectedDefenseId = null;
   sharedStrategyId = null;
+  sharedDefenseKey = null;
   sharedStrategyOpened = false;
   if (pushState) {
-    const url = new URL(window.location.href);
-    url.searchParams.delete("defense");
-    url.searchParams.delete("strategy");
-    window.history.pushState({}, "", url);
+    window.history.pushState({}, "", "/");
   }
   render();
   window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
@@ -1889,6 +1937,7 @@ $("#strategyForm").addEventListener("submit", async (event) => {
       const savedStrategy = {
         ...existingStrategy,
         ...result.strategy,
+        defenseShortId: result.strategy.defenseShortId || existingStrategy.defenseShortId,
         comments: existingStrategy.comments || [],
         edits: [...(existingStrategy.edits || []), normalizeStrategyEdit(result.edit)],
       };
@@ -2148,9 +2197,10 @@ $(".brand").addEventListener("click", (event) => {
 });
 
 window.addEventListener("popstate", () => {
-  const query = new URLSearchParams(window.location.search);
-  selectedDefenseId = query.get("defense");
-  sharedStrategyId = query.get("strategy");
+  const location = readShareLocation();
+  selectedDefenseId = null;
+  sharedStrategyId = location.strategy;
+  sharedDefenseKey = location.defense;
   sharedStrategyOpened = false;
   render();
 });

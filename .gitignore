@@ -1,3 +1,4 @@
 dist/supabase-config.js
 .vercel
 .env*
+node_modules/

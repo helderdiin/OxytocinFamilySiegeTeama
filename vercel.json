@@ -1,7 +1,28 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    },
+    {
+      "src": "api/*.js",
+      "use": "@vercel/node"
+    }
+  ],
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/counter/:key",
+      "destination": "/api/share.js?kind=strategy&key=:key"
+    },
+    {
+      "source": "/defense/:key",
+      "destination": "/api/share.js?kind=defense&key=:key"
+    }
+  ]
 }

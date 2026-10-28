@@ -1,8 +1,12 @@
 {
   "name": "oxytocin-family-siege-teams",
-  "version": "0.28.0",
+  "version": "0.32.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.5"
   }
 }

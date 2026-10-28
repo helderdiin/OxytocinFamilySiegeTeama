@@ -16,6 +16,7 @@
       id: row.id,
       shortId: row.short_id,
       defenseId: row.defense_id,
+      defenseShortId: row.defense_record?.short_id || row.defense_short_id || null,
       ownerId: row.owner_id,
       player: row.player_name,
       attack: row.attack,
@@ -100,10 +101,19 @@
     assertConfigured();
     const { data, error } = await client
       .from("strategies")
-      .select("id, short_id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
+      .select("id, short_id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at, defense_record:defenses!strategies_defense_id_fkey(short_id)")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data.map(fromDatabase);
+  }
+
+  async function listDefenseShortIds() {
+    assertConfigured();
+    const { data, error } = await client
+      .from("defenses")
+      .select("id, short_id");
+    if (error) throw error;
+    return (data || []).map((row) => ({ id: row.id, shortId: row.short_id }));
   }
 
   async function createStrategy(strategy, userId, nick) {
@@ -121,10 +131,15 @@
     const { data, error } = await client
       .from("strategies")
       .insert(toDatabase(strategy, userId, nick, defenseId))
-      .select("id, short_id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at")
+      .select("id, short_id, defense_id, owner_id, player_name, attack, defense, attack_alternatives, defense_alternatives, safety, validation_status, sections, is_seed, is_active, created_at, updated_at, defense_record:defenses!strategies_defense_id_fkey(short_id)")
       .single();
     if (error) throw error;
-    return fromDatabase(data);
+    const savedStrategy = fromDatabase(data);
+    if (!savedStrategy.defenseShortId) {
+      const defenseShortIds = await listDefenseShortIds();
+      savedStrategy.defenseShortId = defenseShortIds.find((item) => item.id === defenseId)?.shortId || null;
+    }
+    return savedStrategy;
   }
 
   async function findSimilarDefenses(monsters, alternatives, limit = 3) {
@@ -238,6 +253,7 @@
     isConfigured: () => configured,
     ensureUser,
     listStrategies,
+    listDefenseShortIds,
     createStrategy,
     findSimilarDefenses,
     listStrategyEdits,
