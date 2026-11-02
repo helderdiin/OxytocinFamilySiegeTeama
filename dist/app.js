@@ -1,6 +1,7 @@
 const STORAGE_KEYS = {
   user: "oxytocin-siege-user",
   strategies: "oxytocin-siege-strategies",
+  catalogMode: "oxytocin-siege-catalog-mode",
 };
 const MAX_SLOT_ALTERNATIVES = 4;
 
@@ -253,6 +254,7 @@ let currentUser = localStorage.getItem(STORAGE_KEYS.user) || "";
 let activeSafety = "all";
 let activeStatus = "all";
 let activeElement = "all";
+let catalogMode = localStorage.getItem(STORAGE_KEYS.catalogMode) === "counters" ? "counters" : "defenses";
 let strategies = [];
 let currentUserId = null;
 let monsters = [];
@@ -264,6 +266,7 @@ let buildDraft = new Map();
 let dialogDefenseId = null;
 let editingStrategyId = null;
 let editingCommentId = null;
+let pendingDeleteStrategyId = null;
 let approvedNewDefenseFingerprint = null;
 let pendingDefenseMatches = [];
 
@@ -288,6 +291,7 @@ const loginScreen = $("#loginScreen");
 const appShell = $("#appShell");
 const strategyDialog = $("#strategyDialog");
 const monsterDialog = $("#monsterDialog");
+const deleteStrategyDialog = $("#deleteStrategyDialog");
 const database = window.oxytocinDb;
 const cloudEnabled = Boolean(database?.isConfigured());
 
@@ -537,7 +541,7 @@ function updateStorageUi(mode) {
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
   $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.32 · Supabase" : "v0.32 · dados locais";
+  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.33 · Supabase" : "v0.33 · dados locais";
 }
 
 async function connectCloudUser() {
@@ -791,14 +795,25 @@ function render() {
   }
   const selectedGroup = allGroups.find((group) => group.id === selectedDefenseId);
   const isDefenseView = Boolean(selectedGroup);
+  const isCounterCatalog = !isDefenseView && catalogMode === "counters";
 
   $("#totalStrategies").textContent = activeStrategies.length;
   $("#totalDefenses").textContent = allGroups.length;
   $("#totalPlayers").textContent = new Set(activeStrategies.map((item) => normalize(item.player))).size;
+  document.querySelectorAll("[data-catalog-mode]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.catalogMode === catalogMode));
+  });
+  $("#libraryTitle").textContent = isCounterCatalog ? "Qual counter você quer usar?" : "Qual defesa você encontrou?";
+  $("#librarySubtitle").textContent = isCounterCatalog
+    ? "Explore pelos seus monstros ou pela defesa que apareceu na Siege."
+    : "Pesquise pelos monstros da defesa ou pelos monstros do seu ataque.";
+  $("#resultsTitle").textContent = isCounterCatalog ? "Counters disponíveis" : "Defesas encontradas";
   $("#catalogView").hidden = isDefenseView;
   $("#resultsHeading").hidden = isDefenseView;
   $("#defenseViewIntro").hidden = !isDefenseView;
   $("#strategyList").classList.toggle("is-catalog", !isDefenseView);
+  $("#strategyList").classList.toggle("is-defense-catalog", !isDefenseView && !isCounterCatalog);
+  $("#strategyList").classList.toggle("is-counter-catalog", isCounterCatalog);
   $("#strategyList").classList.toggle("is-defense-detail", isDefenseView);
 
   if (isDefenseView) {
@@ -807,11 +822,16 @@ function render() {
     $("#emptyState").hidden = true;
   } else {
     $("#defenseViewIntro").innerHTML = "";
-    $("#strategyList").innerHTML = visibleGroups.map(defenseCatalogCard).join("");
-    $("#emptyState").hidden = visibleGroups.length > 0;
+    $("#strategyList").innerHTML = isCounterCatalog
+      ? visibleStrategies.map(counterCatalogCard).join("")
+      : visibleGroups.map(defenseCatalogCard).join("");
+    const resultTotal = isCounterCatalog ? visibleStrategies.length : visibleGroups.length;
+    $("#emptyState").hidden = resultTotal > 0;
+    $("#emptyStateTitle").textContent = isCounterCatalog ? "Nenhum counter encontrado" : "Nenhuma defesa encontrada";
+    $("#emptyStateText").textContent = "Tente buscar por menos monstros ou limpe os filtros.";
     const counterLabel = `${visibleStrategies.length} ${visibleStrategies.length === 1 ? "counter" : "counters"}`;
     const defenseLabel = `${visibleGroups.length} ${visibleGroups.length === 1 ? "defesa" : "defesas"}`;
-    $("#resultCount").textContent = `${defenseLabel} · ${counterLabel}`;
+    $("#resultCount").textContent = isCounterCatalog ? `${counterLabel} em ${defenseLabel}` : `${defenseLabel} · ${counterLabel}`;
   }
 
   if (sharedStrategyId && !sharedStrategyOpened) {
@@ -852,6 +872,33 @@ function defenseCatalogCard(group, index) {
     </button>`;
 }
 
+function counterCatalogCard(strategy) {
+  const safetyClass = ["very_safe", "safe"].includes(strategy.safety) ? "safe" : "caution";
+  const statusClass = strategy.status === "proven" ? "proven" : strategy.status === "recommended" ? "safe" : "caution";
+  const attackTitle = attackDisplayTitle(strategy);
+  const defenseTitle = defenseDisplayTitle(strategy);
+  const attackAlternatives = strategy.attackAlternatives || [[], [], []];
+  const attackSlots = strategy.attack
+    .map((id, index) => compositionSlot(id, attackAlternatives[index] || [], "attack", index))
+    .join("");
+  const risk = compactText(strategy.sections?.risks, "Nenhum risco específico foi informado.", 115);
+  return `
+    <button class="counter-catalog-card" data-open-counter-id="${escapeHtml(strategy.id)}" type="button" aria-label="Abrir counter ${escapeHtml(attackTitle)} contra ${escapeHtml(defenseTitle)}">
+      <span class="counter-card-topline">
+        <span class="strategy-badges">
+          <span class="strategy-badge ${safetyClass}">${safetyNames[strategy.safety]}</span>
+          <span class="strategy-badge ${statusClass}">${statusNames[strategy.status]}</span>
+        </span>
+        <span class="counter-card-author">Por <strong>${escapeHtml(strategy.player)}</strong></span>
+      </span>
+      <span class="counter-card-team attack-team"><span class="monsters">${attackSlots}</span></span>
+      <span class="counter-card-title">${escapeHtml(attackTitle)}</span>
+      <span class="counter-card-target"><span>Contra</span><strong>${escapeHtml(defenseTitle)}</strong></span>
+      <span class="counter-card-risk"><span>Risco crítico</span><span>${escapeHtml(risk)}</span></span>
+      <span class="counter-card-footer"><span>Ver counter completo</span>${icon("arrow")}</span>
+    </button>`;
+}
+
 function defenseCounterList(group) {
   const count = group.strategies.length;
   const countLabel = `${count} ${count === 1 ? "counter disponível" : "counters disponíveis"}`;
@@ -871,10 +918,11 @@ function defenseDossier(group) {
   const count = group.strategies.length;
   const provenCount = group.strategies.filter((strategy) => strategy.status === "proven").length;
   const title = defenseDisplayTitle(group.defense);
+  const backLabel = catalogMode === "counters" ? "Todos os counters" : "Todas as defesas";
   return `
     <section class="defense-detail-shell" aria-labelledby="defenseTitle">
       <nav class="defense-detail-actions" aria-label="Navegação da defesa">
-        <button class="back-to-catalog" data-back-catalog type="button">${icon("arrow")}<span>Todas as defesas</span></button>
+        <button class="back-to-catalog" data-back-catalog type="button">${icon("arrow")}<span>${backLabel}</span></button>
         <button class="copy-defense-link" data-copy-defense-id="${escapeHtml(group.id)}" type="button">${icon("link")}<span>Copiar link</span></button>
       </nav>
       <article class="defense-dossier">
@@ -903,6 +951,27 @@ function defenseDisplayTitle(strategy) {
       .map((monsterId) => displayMonsterName(getMonster(monsterId)))
       .join(" ou ");
   }).join(" · ");
+}
+
+function attackDisplayTitle(strategy) {
+  const alternatives = strategy.attackAlternatives || [[], [], []];
+  return strategy.attack.map((id, index) => {
+    if (id === "*") return "Sem terceiro";
+    return [id, ...(alternatives[index] || [])]
+      .map((monsterId) => displayMonsterName(getMonster(monsterId)))
+      .join(" ou ");
+  }).join(" · ");
+}
+
+function openDeleteStrategyConfirmation(strategy) {
+  pendingDeleteStrategyId = strategy.id;
+  $("#deleteStrategyName").textContent = `${attackDisplayTitle(strategy)} vs ${defenseDisplayTitle(strategy)}`;
+  deleteStrategyDialog.showModal();
+}
+
+function closeDeleteStrategyConfirmation() {
+  pendingDeleteStrategyId = null;
+  if (deleteStrategyDialog.open) deleteStrategyDialog.close();
 }
 
 function groupStrategiesByDefense(records) {
@@ -1672,6 +1741,22 @@ function openDefenseView(id, { pushState = true } = {}) {
   window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
+function openCounterView(id, { pushState = true } = {}) {
+  const strategy = strategies.find((item) => item.id === id);
+  if (!strategy?.shortId) {
+    showToast("Não foi possível localizar este counter.");
+    return;
+  }
+  selectedDefenseId = strategy.defenseId;
+  sharedStrategyId = strategy.shortId;
+  sharedDefenseKey = null;
+  sharedStrategyOpened = false;
+  if (pushState) {
+    window.history.pushState({}, "", `/counter/${encodeURIComponent(strategy.shortId)}`);
+  }
+  render();
+}
+
 function openDefenseCatalog({ pushState = true } = {}) {
   selectedDefenseId = null;
   sharedStrategyId = null;
@@ -1685,6 +1770,12 @@ function openDefenseCatalog({ pushState = true } = {}) {
 }
 
 async function handleDefenseNavigation(event) {
+  const counterCard = event.target.closest("[data-open-counter-id]");
+  if (counterCard) {
+    openCounterView(counterCard.dataset.openCounterId);
+    return true;
+  }
+
   const defenseCard = event.target.closest("[data-open-defense-id]");
   if (defenseCard) {
     openDefenseView(defenseCard.dataset.openDefenseId);
@@ -2176,16 +2267,46 @@ $("#strategyList").addEventListener("click", async (event) => {
   if (!id) return;
   const strategy = strategies.find((item) => item.id === id);
   const canDelete = cloudEnabled ? strategy?.ownerId === currentUserId && !strategy?.isSeed : strategy?.player === currentUser;
-  if (!strategy || !canDelete || !window.confirm("Excluir esta estratégia?")) return;
+  if (!strategy || !canDelete) return;
+  openDeleteStrategyConfirmation(strategy);
+});
+
+$("#cancelDeleteStrategyButton").addEventListener("click", closeDeleteStrategyConfirmation);
+
+deleteStrategyDialog.addEventListener("click", (event) => {
+  if (event.target === deleteStrategyDialog) closeDeleteStrategyConfirmation();
+});
+
+deleteStrategyDialog.addEventListener("close", () => {
+  pendingDeleteStrategyId = null;
+});
+
+$("#confirmDeleteStrategyButton").addEventListener("click", async () => {
+  const id = pendingDeleteStrategyId;
+  const strategy = strategies.find((item) => item.id === id);
+  const canDelete = cloudEnabled ? strategy?.ownerId === currentUserId && !strategy?.isSeed : strategy?.player === currentUser;
+  if (!strategy || !canDelete) {
+    closeDeleteStrategyConfirmation();
+    showToast("Este counter não está disponível para exclusão.");
+    return;
+  }
+
+  const confirmButton = $("#confirmDeleteStrategyButton");
+  confirmButton.disabled = true;
+  confirmButton.textContent = "Excluindo...";
   try {
     if (cloudEnabled) await database.deleteStrategy(id, currentUserId);
     strategies = strategies.filter((item) => item.id !== id);
     saveStrategies();
+    closeDeleteStrategyConfirmation();
     render();
-    showToast("Estratégia excluída.");
+    showToast("Counter excluído permanentemente.");
   } catch (error) {
     console.error(error);
-    showToast("Não foi possível excluir a estratégia.");
+    showToast("Não foi possível excluir o counter.");
+  } finally {
+    confirmButton.disabled = false;
+    confirmButton.textContent = "Sim, excluir permanentemente";
   }
 });
 
@@ -2207,6 +2328,13 @@ window.addEventListener("popstate", () => {
 
 $("#searchInput").addEventListener("input", render);
 $("#detailSearchInput").addEventListener("input", render);
+$("#catalogViewSwitch").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-catalog-mode]");
+  if (!button || button.dataset.catalogMode === catalogMode) return;
+  catalogMode = button.dataset.catalogMode === "counters" ? "counters" : "defenses";
+  localStorage.setItem(STORAGE_KEYS.catalogMode, catalogMode);
+  render();
+});
 $("#safetyFilter").addEventListener("change", (event) => {
   activeSafety = event.target.value;
   render();

@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=0.32" />
+    <link rel="stylesheet" href="./styles.css?v=0.33" />
   </head>
   <body>
     <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -81,7 +81,7 @@
             <div>
               <p class="eyebrow">BUSCA RÁPIDA DE COUNTER</p>
               <h1 id="libraryTitle">Qual defesa você encontrou?</h1>
-              <p>Pesquise pelos monstros da defesa ou pelos monstros do seu ataque.</p>
+              <p id="librarySubtitle">Pesquise pelos monstros da defesa ou pelos monstros do seu ataque.</p>
             </div>
             <div class="arsenal-summary" aria-label="Resumo do arsenal">
               <span><strong id="totalStrategies">0</strong> counters ativos</span>
@@ -108,6 +108,13 @@
               <span class="filter-control-label"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="m8.5 12 2.2 2.2 4.8-4.8" /></svg>Status</span>
               <span class="select-shell"><select id="statusFilter"><option value="all">Todos os status</option><option value="proven">Testada</option><option value="recommended">Recomendada</option><option value="needs_testing">Precisa de testes</option></select><svg class="select-chevron" aria-hidden="true" viewBox="0 0 24 24"><path d="m7 9 5 5 5-5" /></svg></span>
             </label>
+            <div class="catalog-view-control">
+              <span class="catalog-view-label">Exibir</span>
+              <div class="catalog-view-switch" id="catalogViewSwitch" role="group" aria-label="Exibir catálogo por defesa ou por counter">
+                <button type="button" data-catalog-mode="defenses" aria-pressed="true"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.7 8.2 7 10 4.3-1.8 7-5.4 7-10V6l-7-3Z" /></svg><span>Defesas</span></button>
+                <button type="button" data-catalog-mode="counters" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 18 12-12M14 5l5 5M5 14l5 5M4 20l3-1-2-2-1 3Z" /></svg><span>Counters</span></button>
+              </div>
+            </div>
             <button class="clear-filters" id="clearFiltersButton" type="button">Limpar</button>
           </div>
         </div>
@@ -126,13 +133,13 @@
           <div class="strategy-list" id="strategyList"></div>
           <div class="empty-state" id="emptyState" hidden>
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3M9 9l6 6M15 9l-6 6" /></svg>
-            <h3>Nenhuma estratégia encontrada</h3><p>Tente buscar por menos monstros ou limpe os filtros.</p>
+            <h3 id="emptyStateTitle">Nenhuma estratégia encontrada</h3><p id="emptyStateText">Tente buscar por menos monstros ou limpe os filtros.</p>
             <button class="button button-secondary" id="emptyAddButton" type="button">Adicionar ataque</button>
           </div>
         </section>
       </main>
 
-      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.32 · conectando...</span></footer>
+      <footer><span>Oxytocin Family · Summoners War</span><span id="footerStorageLabel">v0.33 · conectando...</span></footer>
     </div>
 
     <dialog id="strategyDialog">
@@ -225,11 +232,28 @@
       </div>
     </dialog>
 
+    <dialog id="deleteStrategyDialog" class="confirmation-dialog" aria-labelledby="deleteStrategyTitle" aria-describedby="deleteStrategyDescription">
+      <div class="confirmation-dialog-content">
+        <div class="confirmation-danger-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3 2.8 19a1.4 1.4 0 0 0 1.2 2h16a1.4 1.4 0 0 0 1.2-2L12 3Z" /><path d="M12 9v5M12 18h.01" /></svg>
+        </div>
+        <p class="eyebrow">AÇÃO PERMANENTE</p>
+        <h2 id="deleteStrategyTitle">Excluir este counter?</h2>
+        <p id="deleteStrategyDescription">Você está prestes a apagar permanentemente:</p>
+        <strong class="confirmation-strategy-name" id="deleteStrategyName"></strong>
+        <p class="confirmation-warning">Não existe lixeira nem restauração automática. Builds, plano de jogo, comentários e histórico ligados a este counter também serão perdidos.</p>
+        <div class="dialog-actions confirmation-actions">
+          <button class="button button-ghost" id="cancelDeleteStrategyButton" type="button">Cancelar</button>
+          <button class="button delete-confirm-button" id="confirmDeleteStrategyButton" type="button">Sim, excluir permanentemente</button>
+        </div>
+      </div>
+    </dialog>
+
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./supabase-config.js"></script>
-    <script src="./supabase-store.js?v=0.32"></script>
-    <script src="./app.js?v=0.32"></script>
+    <script src="./supabase-store.js?v=0.33"></script>
+    <script src="./app.js?v=0.33"></script>
   </body>
 </html>
