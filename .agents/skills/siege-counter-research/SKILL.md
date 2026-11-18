@@ -31,11 +31,14 @@ Antes da pesquisa externa detalhada:
 
 Consolide a melhor proposta no formato definido em [form-preview.md](references/form-preview.md). O preview deve espelhar os campos reais do formulário e começar com `PREVIEW — NÃO SALVO`.
 
+Por padrão, use `ZEKKEN` como autoria do counter salvo, salvo quando o usuário pedir explicitamente outro nome. Preserve separadamente na evidência o autor original da sugestão, que não substitui a autoria de persistência.
+
 Quando uma fonte trouxer uma build completa, leia e aplique [build-generalization.md](references/build-generalization.md) antes de preencher as builds do preview. Trate o print ou export completo como evidência observada; no campo de recomendação, priorize mínimos arredondados e somente os atributos que fazem o counter funcionar.
 
 - Diferencie evidência da defesa exata de evidência de uma variação.
 - Diferencie build observada de build mínima recomendada. Nunca apresente todos os números de uma conta específica como requisitos sem justificar cada um.
-- Explicite dados ausentes como `não documentado`; não converta ausência em recomendação.
+- Explicite dados ausentes como `não documentado`. Para runas, stats e resultados, não converta ausência em recomendação.
+- Quando a fonte não trouxer artefatos, pesquise as ameaças elementais e as skills que sustentam a condição de vitória e proponha linhas funcionais para cada monstro. Marque-as como `sugestão pesquisada`, não como build observada, não invente percentuais e explique brevemente a derivação. Não deixe o campo de artefatos vazio no preview apenas porque a fonte original não tinha esses dados.
 - Para counters novos vindos desta pesquisa, use sempre `safety: experimental` e `status: needs_testing` (`Precisa de testes`). As evidências servem para explicar a proposta, não para promover esses campos antes dos testes da equipe.
 - Escreva os campos abertos com palavras simples, frases curtas e instruções diretas. Evite parágrafos longos, termos difíceis e repetir a mesma ideia em vários campos.
 - Inclua URLs, data/frescor, faixa/rank quando disponível, amostra e resultado observado.

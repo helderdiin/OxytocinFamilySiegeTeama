@@ -1,4 +1,4 @@
 interface:
   display_name: "Extrair Counter do Discord"
-  short_description: "Lê uma thread e extrai counters para aprovação"
+  short_description: "Coleta a thread e encaminha evidências para análise"
   default_prompt: "Use $siege-discord-counter-extract para analisar a thread de Fórum do Discord atualmente selecionada."

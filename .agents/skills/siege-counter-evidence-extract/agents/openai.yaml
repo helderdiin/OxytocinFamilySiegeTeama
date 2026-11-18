@@ -1,0 +1,4 @@
+interface:
+  display_name: "Extrair Evidências de Counter"
+  short_description: "Analisa textos e imagens de counters para aprovação"
+  default_prompt: "Use $siege-counter-evidence-extract para analisar estes textos e imagens e extrair os counters encontrados."

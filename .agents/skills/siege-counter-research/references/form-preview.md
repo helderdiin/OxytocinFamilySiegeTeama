@@ -37,6 +37,8 @@ Quando houver uma build completa, aplique [build-generalization.md](build-genera
 - totais de CR, CD, RES e ACC;
 - artefatos.
 
+Se a fonte não trouxer artefatos, não omita silenciosamente o campo. Mostre uma `Sugestão pesquisada de artefatos` por monstro, derivada das ameaças elementais e das skills funcionais do matchup, sem percentuais inventados. Mantenha separado o fato de que os artefatos observados eram `não documentados`.
+
 Não liste todos esses campos por padrão. Omita os que não alteram sobrevivência, ordem, consistência, dano necessário ou condição de vitória. Uma build observada com muitos números não transforma todos eles em requisitos.
 
 Quando houver simplificação relevante, inclua uma nota curta de `Derivação` explicando a fonte e quais stats foram descartados. Preserve a build completa na evidência sem poluir a recomendação principal.

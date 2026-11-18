@@ -49,6 +49,17 @@ Remova linhas incidentais, mesmo que apareçam no print: dano contra elemento ir
 
 Prefira descrições funcionais como `Redução de dano de Água / Precisão da S2 / Dano de bomba`. Preserve porcentagens apenas quando o valor for necessário para atingir uma condição documentada.
 
+### Quando a fonte não trouxer artefatos
+
+Não confunda ausência de evidência com ausência de recomendação. Registre que a build observada não tinha dados de artefatos e, durante a pesquisa, proponha linhas funcionais com base em:
+
+- elementos que realmente ameaçam cada monstro no matchup;
+- skill de controle, strip, debuff ou sustain central para o plano;
+- dano adicional ou modificador que participe diretamente da condição de vitória;
+- efeito sob incapacidade, recuperação ou redução de dano quando a mecânica do counter depender disso.
+
+Identifique essas linhas como `sugestão pesquisada` ou `alvo proposto`. Não atribua porcentagens sem fonte, não apresente a sugestão como observada e não use linhas genéricas apenas para preencher espaço. Se nenhuma linha puder ser justificada pelo matchup ou pelas skills, explique a lacuna no preview em vez de inventar.
+
 ## Mostrar a transformação no preview
 
 Na seção de builds, apresente primeiro a **build mínima recomendada**. Quando houve simplificação relevante, acrescente uma nota curta de derivação, por exemplo:
@@ -62,4 +73,5 @@ Não despeje novamente todos os stats brutos quando isso prejudicar a leitura. A
 - Grave no Supabase somente a recomendação mínima aprovada, não a reprodução integral do print.
 - Use a mesma recomendação simplificada no Guia Visual.
 - Preserve runas, ordem, thresholds e artefatos aprovados sem reintroduzir campos descartados durante a geração da arte.
+- Quando os artefatos forem sugestões pesquisadas por ausência de dados na fonte, preserve essa distinção no preview e grave somente depois da aprovação explícita do usuário.
 - Se o usuário editar a build depois, consulte novamente o registro antes de regenerar o Guia Visual.
