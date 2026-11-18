@@ -1,10 +1,14 @@
 {
   "name": "oxytocin-family-siege-teams",
-  "version": "0.33.0",
+  "version": "0.35.0",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "sync:monsters": "node scripts/sync-monsters.mjs",
+    "test:monster-equivalence": "node --test scripts/monster-equivalence.test.mjs",
+    "siege:batch": "node scripts/siege-batch.mjs",
+    "test:siege-batch": "node --test scripts/siege-batch.test.mjs"
   },
   "dependencies": {
     "sharp": "^0.35.5"

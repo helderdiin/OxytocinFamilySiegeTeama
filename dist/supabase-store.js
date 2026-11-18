@@ -90,10 +90,14 @@
     const userId = sessionData.session?.user?.id;
     if (!userId) throw new Error("Não foi possível criar a sessão anônima.");
 
-    const { error: profileError } = await client
-      .from("profiles")
-      .upsert({ id: userId, nick }, { onConflict: "id" });
-    if (profileError) throw profileError;
+    const profileCacheKey = `oxytocin-profile-nick:${userId}`;
+    if (localStorage.getItem(profileCacheKey) !== nick) {
+      const { error: profileError } = await client
+        .from("profiles")
+        .upsert({ id: userId, nick }, { onConflict: "id" });
+      if (profileError) throw profileError;
+      localStorage.setItem(profileCacheKey, nick);
+    }
     return userId;
   }
 

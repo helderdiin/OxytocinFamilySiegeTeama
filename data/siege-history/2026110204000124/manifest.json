@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "complete_with_warnings",
+  "writeStatus": "written",
+  "path": "2026110204000124",
+  "archivedAt": "2026-11-17T19:36:34.191424+00:00",
+  "summary": "summary.json",
+  "manifest": "manifest.json",
+  "rawDirectory": "raw",
+  "missingRequiredEvents": [],
+  "enemyAttackTeamsAvailable": false,
+  "match": {
+    "match_id": 2026110204000124,
+    "siege_id": 2026110204,
+    "format": "1x1",
+    "guild_count": 2,
+    "start": 1794600000,
+    "finish": 1794620756,
+    "match_type": 4
+  },
+  "guild": {
+    "name": "Egotisthic_BR",
+    "opponents": [
+      "FalconBeast$"
+    ]
+  },
+  "recordCounts": {
+    "players": 25,
+    "offensiveBattles": 101,
+    "defensiveBattles": 128,
+    "rawEvents": 5
+  },
+  "sourceEvents": [
+    {
+      "event": "matchup",
+      "file": "raw/1794944043478-GetGuildSiegeMatchupInfoForFinished.json",
+      "sha256": "8eabff427eed0b95b5581722b696cd6ae9d8e606837ec1035abebaf144ad21f1",
+      "bytes": 22256
+    },
+    {
+      "event": "summary",
+      "file": "raw/1794944043494-getGuildSiegeMatchBattleLogSummary_v2.json",
+      "sha256": "4fef5f41d6c8c462c05fa12afd7543472a3676d7ee39e0df36659172999ed4f8",
+      "bytes": 109044
+    },
+    {
+      "event": "history",
+      "file": "raw/1794944041991-GetGuildSiegeMatchLog.json",
+      "sha256": "2360c3b8e79c71d4767824cc250649748ba86f5eb797b121ccfd324f3cb658cf",
+      "bytes": 9012
+    },
+    {
+      "event": "battle_log_type_1",
+      "file": "raw/1794944039138-GetGuildSiegeBattleLog.json",
+      "sha256": "715beed44cd06cbe4a098aafb8d65e586384c8994075f4a7d532d6c1df4d3e0c",
+      "bytes": 103275
+    },
+    {
+      "event": "battle_log_type_2",
+      "file": "raw/1794944040511-GetGuildSiegeBattleLog.json",
+      "sha256": "96bfd350597b19c75c91f72d74d25d758757e0dcbd58e9ae7f44e931f6fa3db3",
+      "bytes": 119566
+    }
+  ],
+  "warnings": [
+    "Ataques sofridos detalhados: 128; ataques agregados do adversário: 130.",
+    "O log defensivo não expõe o trio atacante inimigo na estrutura observada."
+  ]
+}

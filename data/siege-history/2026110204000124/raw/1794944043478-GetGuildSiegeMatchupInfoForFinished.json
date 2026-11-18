@@ -1,0 +1,1064 @@
+{
+  "command": "GetGuildSiegeMatchupInfoForFinished",
+  "ret_code": 0,
+  "setup_values": {
+    "max_match_score": 20000,
+    "max_deck_count_per_member": 10,
+    "max_attack_unit_count": 30
+  },
+  "match_info": {
+    "match_id": 2026110204000124,
+    "siege_id": 2026110204,
+    "rating_id": 4001,
+    "match_start_time": 1794600000,
+    "match_finish_time": 1794620756,
+    "match_type": 4
+  },
+  "guild_list": [
+    {
+      "siege_id": 2026110204,
+      "guild_id": 313750,
+      "match_id": 2026110204000124,
+      "rating_id": 4001,
+      "pos_id": 1,
+      "match_score": 4251,
+      "match_score_increment": 0,
+      "match_rank": 2,
+      "disqualified": 0,
+      "play_member_count": 25,
+      "attack_count": 101,
+      "attack_unit_count": 303,
+      "guild_name": "Egotisthic_BR",
+      "master_channel_uid": 210130283,
+      "match_score_last_update_time": 1794620756
+    },
+    {
+      "siege_id": 2026110204,
+      "guild_id": 174415,
+      "match_id": 2026110204000124,
+      "rating_id": 4001,
+      "pos_id": 2,
+      "match_score": 20000,
+      "match_score_increment": 66,
+      "match_rank": 1,
+      "disqualified": 0,
+      "play_member_count": 25,
+      "attack_count": 130,
+      "attack_unit_count": 378,
+      "guild_name": "FalconBeast$",
+      "master_channel_uid": 178068947,
+      "match_score_last_update_time": 1794620756
+    }
+  ],
+  "base_list": [
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 1,
+      "base_type": 1,
+      "guild_id": 313750,
+      "base_status": 0,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 2,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794618649,
+      "construct_time": 1794618649
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 3,
+      "base_type": 3,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794614643,
+      "construct_time": 1794614643
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 4,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794614561,
+      "construct_time": 1794614561
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 5,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794622447,
+      "construct_time": 1794622447
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 6,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794616332,
+      "construct_time": 1794616332
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 7,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794612273,
+      "construct_time": 1794612273
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 8,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794611217,
+      "construct_time": 1794611217
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 9,
+      "base_type": 3,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794618709,
+      "construct_time": 1794618709
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 10,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794611567,
+      "construct_time": 1794611567
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 11,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794616946,
+      "construct_time": 1794616946
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 12,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794608277,
+      "construct_time": 1794608277
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 13,
+      "base_type": 3,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794602763,
+      "construct_time": 1794602763
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 14,
+      "base_type": 1,
+      "guild_id": 174415,
+      "base_status": 0,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 15,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 16,
+      "base_type": 3,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 17,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 18,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794610346,
+      "construct_time": 1794610346
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 19,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 20,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 21,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 22,
+      "base_type": 3,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 23,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794612113,
+      "construct_time": 1794612113
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 24,
+      "base_type": 2,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "base_type": 2,
+      "guild_id": 313750,
+      "base_status": 2,
+      "battle_start_time": 1794617976,
+      "construct_time": 1794617976
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 26,
+      "base_type": 3,
+      "guild_id": 174415,
+      "base_status": 2,
+      "battle_start_time": 1794600000,
+      "construct_time": 1794600000
+    }
+  ],
+  "visible_base_number_list": [
+    2,
+    3,
+    4,
+    5,
+    9,
+    10,
+    24,
+    26,
+    22
+  ],
+  "separated_base_number_list": [
+    25
+  ],
+  "defense_deck_assign_list": [
+    {
+      "base_number": 25,
+      "deck_id": 33637109,
+      "status": 1
+    },
+    {
+      "base_number": 25,
+      "deck_id": 33388881,
+      "status": 1
+    },
+    {
+      "base_number": 25,
+      "deck_id": 36142921,
+      "status": 1
+    },
+    {
+      "base_number": 25,
+      "deck_id": 35016000,
+      "status": 1
+    },
+    {
+      "base_number": 25,
+      "deck_id": 35872414,
+      "status": 1
+    },
+    {
+      "base_number": 17,
+      "deck_id": 31654215,
+      "status": 1
+    },
+    {
+      "base_number": 17,
+      "deck_id": 34848541,
+      "status": 1
+    },
+    {
+      "base_number": 19,
+      "deck_id": 35243100,
+      "status": 1
+    },
+    {
+      "base_number": 24,
+      "deck_id": 30334396,
+      "status": 1
+    },
+    {
+      "base_number": 24,
+      "deck_id": 35508381,
+      "status": 1
+    },
+    {
+      "base_number": 19,
+      "deck_id": 28486619,
+      "status": 1
+    },
+    {
+      "base_number": 24,
+      "deck_id": 28945768,
+      "status": 1
+    },
+    {
+      "base_number": 15,
+      "deck_id": 31212499,
+      "status": 1
+    },
+    {
+      "base_number": 19,
+      "deck_id": 32634724,
+      "status": 1
+    },
+    {
+      "base_number": 24,
+      "deck_id": 29175053,
+      "status": 1
+    },
+    {
+      "base_number": 26,
+      "deck_id": 35751625,
+      "status": 1
+    },
+    {
+      "base_number": 26,
+      "deck_id": 28773552,
+      "status": 1
+    },
+    {
+      "base_number": 26,
+      "deck_id": 36065955,
+      "status": 1
+    },
+    {
+      "base_number": 16,
+      "deck_id": 25055839,
+      "status": 1
+    },
+    {
+      "base_number": 16,
+      "deck_id": 36483080,
+      "status": 1
+    },
+    {
+      "base_number": 15,
+      "deck_id": 24566243,
+      "status": 1
+    },
+    {
+      "base_number": 19,
+      "deck_id": 36744559,
+      "status": 1
+    },
+    {
+      "base_number": 15,
+      "deck_id": 36558626,
+      "status": 1
+    },
+    {
+      "base_number": 20,
+      "deck_id": 25057428,
+      "status": 1
+    },
+    {
+      "base_number": 20,
+      "deck_id": 36600523,
+      "status": 1
+    },
+    {
+      "base_number": 20,
+      "deck_id": 36816325,
+      "status": 1
+    },
+    {
+      "base_number": 20,
+      "deck_id": 32505084,
+      "status": 1
+    },
+    {
+      "base_number": 21,
+      "deck_id": 25057217,
+      "status": 1
+    },
+    {
+      "base_number": 21,
+      "deck_id": 36816509,
+      "status": 1
+    },
+    {
+      "base_number": 21,
+      "deck_id": 30740967,
+      "status": 1
+    },
+    {
+      "base_number": 16,
+      "deck_id": 36816326,
+      "status": 1
+    },
+    {
+      "base_number": 15,
+      "deck_id": 33297513,
+      "status": 1
+    },
+    {
+      "base_number": 20,
+      "deck_id": 34950044,
+      "status": 1
+    },
+    {
+      "base_number": 21,
+      "deck_id": 23106449,
+      "status": 1
+    },
+    {
+      "base_number": 17,
+      "deck_id": 36816513,
+      "status": 1
+    },
+    {
+      "base_number": 26,
+      "deck_id": 36871304,
+      "status": 1
+    },
+    {
+      "base_number": 22,
+      "deck_id": 36805629,
+      "status": 1
+    },
+    {
+      "base_number": 22,
+      "deck_id": 35641165,
+      "status": 1
+    },
+    {
+      "base_number": 22,
+      "deck_id": 34435608,
+      "status": 1
+    },
+    {
+      "base_number": 22,
+      "deck_id": 36954767,
+      "status": 1
+    },
+    {
+      "base_number": 15,
+      "deck_id": 34347956,
+      "status": 1
+    },
+    {
+      "base_number": 22,
+      "deck_id": 36784415,
+      "status": 1
+    },
+    {
+      "base_number": 21,
+      "deck_id": 36020643,
+      "status": 1
+    },
+    {
+      "base_number": 16,
+      "deck_id": 36333766,
+      "status": 1
+    },
+    {
+      "base_number": 19,
+      "deck_id": 36570781,
+      "status": 1
+    },
+    {
+      "base_number": 24,
+      "deck_id": 36816508,
+      "status": 1
+    },
+    {
+      "base_number": 26,
+      "deck_id": 37023651,
+      "status": 1
+    },
+    {
+      "base_number": 16,
+      "deck_id": 37023649,
+      "status": 1
+    },
+    {
+      "base_number": 17,
+      "deck_id": 37023652,
+      "status": 1
+    },
+    {
+      "base_number": 17,
+      "deck_id": 37093975,
+      "status": 1
+    },
+    {
+      "base_number": 13,
+      "deck_id": 36816335,
+      "status": 1
+    },
+    {
+      "base_number": 13,
+      "deck_id": 36600271,
+      "status": 1
+    },
+    {
+      "base_number": 13,
+      "deck_id": 34797066,
+      "status": 1
+    },
+    {
+      "base_number": 13,
+      "deck_id": 36909160,
+      "status": 1
+    },
+    {
+      "base_number": 13,
+      "deck_id": 35523604,
+      "status": 1
+    },
+    {
+      "base_number": 12,
+      "deck_id": 35550328,
+      "status": 1
+    },
+    {
+      "base_number": 12,
+      "deck_id": 35246474,
+      "status": 1
+    },
+    {
+      "base_number": 12,
+      "deck_id": 31007067,
+      "status": 1
+    },
+    {
+      "base_number": 12,
+      "deck_id": 26855090,
+      "status": 1
+    },
+    {
+      "base_number": 12,
+      "deck_id": 35470922,
+      "status": 1
+    },
+    {
+      "base_number": 18,
+      "deck_id": 31007062,
+      "status": 1
+    },
+    {
+      "base_number": 18,
+      "deck_id": 36558495,
+      "status": 1
+    },
+    {
+      "base_number": 18,
+      "deck_id": 33329874,
+      "status": 1
+    },
+    {
+      "base_number": 18,
+      "deck_id": 36871308,
+      "status": 1
+    },
+    {
+      "base_number": 18,
+      "deck_id": 35641220,
+      "status": 1
+    },
+    {
+      "base_number": 8,
+      "deck_id": 37035577,
+      "status": 1
+    },
+    {
+      "base_number": 8,
+      "deck_id": 33219591,
+      "status": 1
+    },
+    {
+      "base_number": 8,
+      "deck_id": 27842783,
+      "status": 1
+    },
+    {
+      "base_number": 8,
+      "deck_id": 37093978,
+      "status": 1
+    },
+    {
+      "base_number": 8,
+      "deck_id": 25562650,
+      "status": 1
+    },
+    {
+      "base_number": 10,
+      "deck_id": 36020614,
+      "status": 1
+    },
+    {
+      "base_number": 10,
+      "deck_id": 25056725,
+      "status": 1
+    },
+    {
+      "base_number": 10,
+      "deck_id": 36876968,
+      "status": 1
+    },
+    {
+      "base_number": 10,
+      "deck_id": 36876963,
+      "status": 1
+    },
+    {
+      "base_number": 10,
+      "deck_id": 27855825,
+      "status": 1
+    },
+    {
+      "base_number": 23,
+      "deck_id": 37093974,
+      "status": 1
+    },
+    {
+      "base_number": 23,
+      "deck_id": 36020620,
+      "status": 1
+    },
+    {
+      "base_number": 23,
+      "deck_id": 34848551,
+      "status": 1
+    },
+    {
+      "base_number": 23,
+      "deck_id": 36065970,
+      "status": 1
+    },
+    {
+      "base_number": 23,
+      "deck_id": 35641171,
+      "status": 1
+    },
+    {
+      "base_number": 7,
+      "deck_id": 36805623,
+      "status": 1
+    },
+    {
+      "base_number": 7,
+      "deck_id": 32291539,
+      "status": 1
+    },
+    {
+      "base_number": 7,
+      "deck_id": 36298209,
+      "status": 1
+    },
+    {
+      "base_number": 7,
+      "deck_id": 37093979,
+      "status": 1
+    },
+    {
+      "base_number": 7,
+      "deck_id": 37093980,
+      "status": 1
+    },
+    {
+      "base_number": 4,
+      "deck_id": 34375425,
+      "status": 1
+    },
+    {
+      "base_number": 4,
+      "deck_id": 36784411,
+      "status": 1
+    },
+    {
+      "base_number": 4,
+      "deck_id": 36871306,
+      "status": 1
+    },
+    {
+      "base_number": 4,
+      "deck_id": 35736057,
+      "status": 1
+    },
+    {
+      "base_number": 4,
+      "deck_id": 35523515,
+      "status": 1
+    },
+    {
+      "base_number": 3,
+      "deck_id": 35641559,
+      "status": 1
+    },
+    {
+      "base_number": 3,
+      "deck_id": 25056778,
+      "status": 1
+    },
+    {
+      "base_number": 3,
+      "deck_id": 30932152,
+      "status": 1
+    },
+    {
+      "base_number": 3,
+      "deck_id": 34971773,
+      "status": 1
+    },
+    {
+      "base_number": 3,
+      "deck_id": 35523574,
+      "status": 1
+    },
+    {
+      "base_number": 6,
+      "deck_id": 25260748,
+      "status": 1
+    },
+    {
+      "base_number": 6,
+      "deck_id": 37023654,
+      "status": 1
+    },
+    {
+      "base_number": 6,
+      "deck_id": 35979843,
+      "status": 1
+    },
+    {
+      "base_number": 6,
+      "deck_id": 33783420,
+      "status": 1
+    },
+    {
+      "base_number": 6,
+      "deck_id": 37037314,
+      "status": 1
+    },
+    {
+      "base_number": 11,
+      "deck_id": 37093982,
+      "status": 1
+    },
+    {
+      "base_number": 11,
+      "deck_id": 33783408,
+      "status": 1
+    },
+    {
+      "base_number": 11,
+      "deck_id": 35655057,
+      "status": 1
+    },
+    {
+      "base_number": 11,
+      "deck_id": 33783439,
+      "status": 1
+    },
+    {
+      "base_number": 11,
+      "deck_id": 36871310,
+      "status": 1
+    }
+  ],
+  "defense_deck_status_list": [
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 33637109,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 45856221,
+      "battle_start_time": 1794621085
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 33388881,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 45856221,
+      "battle_start_time": 1794621146
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 35016000,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 45856221,
+      "battle_start_time": 1794621388
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 35872414,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 45856221,
+      "battle_start_time": 1794621443
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 36142921,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 45856221,
+      "battle_start_time": 1794621540
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 33388881,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 13973795,
+      "battle_start_time": 1794641314
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 33637109,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 13973795,
+      "battle_start_time": 1794641357
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 36142921,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 13973795,
+      "battle_start_time": 1794641487
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 35016000,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 13973795,
+      "battle_start_time": 1794641651
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 25,
+      "defense_guild_id": 313750,
+      "deck_id": 35872414,
+      "status": 4,
+      "attack_guild_id": 174415,
+      "attack_wizard_id": 13973795,
+      "battle_start_time": 1794641689
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 22,
+      "defense_guild_id": 174415,
+      "deck_id": 34435608,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 5892558,
+      "battle_start_time": 1794605964
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 10,
+      "defense_guild_id": 174415,
+      "deck_id": 27855825,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 9314907,
+      "battle_start_time": 1794615941
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 4,
+      "defense_guild_id": 174415,
+      "deck_id": 36784411,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 13473962,
+      "battle_start_time": 1794617039
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 10,
+      "defense_guild_id": 174415,
+      "deck_id": 25056725,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 9314907,
+      "battle_start_time": 1794617228
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 10,
+      "defense_guild_id": 174415,
+      "deck_id": 36876963,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 13473962,
+      "battle_start_time": 1794617369
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 4,
+      "defense_guild_id": 174415,
+      "deck_id": 34375425,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 6922294,
+      "battle_start_time": 1794617515
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 4,
+      "defense_guild_id": 174415,
+      "deck_id": 36871306,
+      "status": 3,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 6922294,
+      "battle_start_time": 1794617672
+    },
+    {
+      "siege_id": 2026110204,
+      "match_id": 2026110204000124,
+      "base_number": 4,
+      "defense_guild_id": 174415,
+      "deck_id": 35736057,
+      "status": 4,
+      "attack_guild_id": 313750,
+      "attack_wizard_id": 14548846,
+      "battle_start_time": 1794622476
+    }
+  ],
+  "special_base_rule_info": [],
+  "ts_val": 1993583267,
+  "tvalue": 1794944043,
+  "tvaluelocal": 1794882843,
+  "tzone": "America/Los_Angeles",
+  "tzoffset": -28800,
+  "reqid": "af2a787f-f475-4d70-a67b-b9457300585f",
+  "this_server_id": 4
+}

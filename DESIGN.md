@@ -283,6 +283,10 @@ Inputs feel embedded in the desk until focused, when their operational importanc
 
 The sticky top bar is a 76px petrol slab with a subtle lower border and Chrome Lift. The copper O2 mark anchors the left; guild identity uses Space Grotesk with a small uppercase DM Sans descriptor. Actions and user state sit at right. On narrow screens the bar becomes 66px, nonessential status and user copy disappear, and the add action keeps a concise text label or accessible name.
 
+### Bootstrap & Loading
+
+Returning members enter through the application shell immediately, with their saved identity visible while current guild data loads. A centered neutral bootstrap state is reserved for the brief interval before local identity is known; it must never expose the nick form as a placeholder. Loading uses stepped petrol surfaces, restrained aqua progress motion, and card-shaped skeletons without gradients. Connection failure keeps the remembered identity and shell visible, names the recovery clearly, and offers an explicit retry action. All loading motion stops under reduced-motion preferences.
+
 ### Strategy Record
 
 The signature component presents semantic badges, defense-versus-attack composition with prominent 40px monster portraits, then a three-part decision strip for fit, risk, and turn order. Expansion reveals the playbook, builds, substitutions, and evidence on quieter nested surfaces. The defense label and surface carry copper; the attack side carries aqua; fit remains blue. The entire summary is keyboard focusable, and the disclosure arrow rotates 90 degrees in the open state.

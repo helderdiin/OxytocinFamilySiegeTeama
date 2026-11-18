@@ -1,18 +1,32 @@
 # Oxytocin Siege Teams
 
-## What this product is
+<!-- impeccable:product-schema 1 -->
 
-Oxytocin Siege Teams is an internal web tool for the Oxytocin Family guild in Summoners War: Sky Arena. It maps enemy Siege defenses to attack compositions the guild has tested or recommends.
+## Platform
 
-The product is used in a time-critical moment: a member sees an enemy base, searches by the defending monsters, and needs to decide quickly whether a saved counter fits that exact situation.
+web
 
-## Primary users
+## Users
 
 - Oxytocin Family guild members participating in Siege.
 - Members may use the tool on mobile or desktop while the battle is active.
 - Identification is intentionally lightweight for the current guild rollout: the player enters their in-game nickname while the data model remains ready for authenticated ownership later.
 
-## Core user job
+## Product Purpose
+
+Oxytocin Siege Teams is an internal web tool for the Oxytocin Family guild in Summoners War: Sky Arena. It maps enemy Siege defenses to attack compositions the guild has tested or recommends.
+
+The product is used in a time-critical moment: a member sees an enemy base, searches by the defending monsters, and needs to decide quickly whether a saved counter fits that exact situation.
+
+## Positioning
+
+This is not a general team builder or a public database. It is a defense-first, guild-curated decision tool. Its value is reducing hesitation during Siege by turning accumulated guild experience into a fast, repeatable pre-attack check.
+
+## Operating Context
+
+Members use the tool on mobile or desktop while Siege is active. Identification is intentionally lightweight: the player enters an in-game nickname, backed by an anonymous Supabase session, while the data model remains ready for authenticated ownership later.
+
+The core job is:
 
 Given an enemy defense, find a relevant counter and understand, at a glance:
 
@@ -22,7 +36,7 @@ Given an enemy defense, find a relevant counter and understand, at a glance:
 4. The required turn order.
 5. How to build and pilot the composition.
 
-## Current capabilities
+## Capabilities and Constraints
 
 - Shared strategies stored in Supabase.
 - Search and filters for safety and validation status.
@@ -36,24 +50,21 @@ Given an enemy defense, find a relevant counter and understand, at a glance:
 - Collaborative comments with an optional +1 or -1 result attached to each feedback entry; authors can edit their own feedback, reaction, and video afterward.
 - Inactive strategies remain stored but are hidden from the member-facing UI.
 
-## Product positioning
+## Brand Commitments
 
-This is not a general team builder or a public database. It is a defense-first, guild-curated decision tool. Its value is reducing hesitation during Siege by turning accumulated guild experience into a fast, repeatable pre-attack check.
+- Use the Oxytocin name and O2 mark.
+- Preserve the established guild terminology: defense, counter, build, Siege, safety, validation, and evidence.
+- Monster artwork is functional identification and must remain prominent.
 
-## Evidence and data
+## Evidence on Hand
 
 - Existing entries imported from the guild's previous SiegeTeamHelper project.
 - Reliability and validation labels are attached to each strategy.
 - Monster data and artwork are sourced from the existing local catalog.
 
-## Brand and visual commitments
+No public testimonials, external benchmarks, or formal guild review metrics are currently documented; future work must not fabricate them.
 
-- Use the Oxytocin name and O2 mark.
-- Preserve the dark tactical “war room” visual world without falling into pure-black or neon-gaming conventions.
-- Use deep petrol blue as the primary environment, copper for actions and danger, and desaturated aqua for safe counters.
-- Monster artwork is functional identification and should stay prominent.
-
-## Design principles
+## Product Principles
 
 1. **Defense first.** The enemy team is the member's starting point and must lead search and card hierarchy.
 2. **Decision before documentation.** Match, safety, risk, and turn order appear before long-form guidance.
@@ -63,14 +74,14 @@ This is not a general team builder or a public database. It is a defense-first, 
 6. **Trust is visible.** Proven/recommended/experimental status and evidence must be easy to distinguish.
 7. **Knowledge is preserved.** Strategies can be hidden without being deleted.
 
-## Accessibility and interaction constraints
+## Accessibility & Inclusion
 
 - Strong contrast, visible focus, and minimum 44px touch targets.
 - All important actions must have text or accessible labels, not icon-only meaning.
 - Respect reduced-motion preferences.
 - The experience must remain usable by keyboard and on narrow mobile screens.
 
-## Known unknowns
+## Open Decisions
 
 - Exact distribution of mobile versus desktop usage has not been measured.
 - The guild has not yet defined a formal review/approval workflow for strategies.

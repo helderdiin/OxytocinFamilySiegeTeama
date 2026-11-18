@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resumo Pós-Siege"
+  short_description: "Arquiva e analisa a performance completa da Siege"
+  default_prompt: "Use $siege-postmortem-summary para arquivar localmente a última Siege capturada pelo SWEX-NG e gerar um resumo pós-Siege."

@@ -9,6 +9,15 @@ Execute este fluxo somente após aprovação inequívoca do preview vigente.
 - Prefira reutilizar a defesa exata já cadastrada pelo mecanismo normal do aplicativo.
 - Nunca altere seed data para simular autoria e nunca fabrique um owner.
 
+### Caminho preferido de persistência
+
+- Tente primeiro o dashboard do Supabase pelo navegador interno do Codex (`iab` / `@Browser`). Se essa sessão não autenticar ou apresentar erro de login, use o dashboard na sessão autenticada do Chrome e continue pelo SQL Editor ou Table Editor.
+- Não use o formulário público do Oxytocin Siege Teams para cadastrar campo por campo quando essa sessão autenticada estiver disponível.
+- Antes do SQL, releia as linhas atuais de `profiles`, `defenses` e `strategies`. Resolva o `owner_id` por um perfil existente e inequívoco; se houver zero ou mais de um perfil para o nick aprovado, pare e peça identificação.
+- Execute a mutação em transação, reutilize a defesa exata existente e restrinja qualquer `update` ao ID do counter verificado. Nunca apague nem sobrescreva outro counter para evitar duplicação.
+- Inclua `sections.referenceImage` no mesmo `insert` sempre que possível. Se o counter já tiver sido criado parcialmente, atualize somente esse registro em vez de criar outro.
+- Após a mutação, faça uma consulta de releitura no próprio Supabase e compare todos os campos aprovados.
+
 Se não houver autenticação/autoria válida, pare antes da gravação. Ainda é permitido preparar os artefatos locais aprovados, mas relate que o banco não foi alterado.
 
 ## 2. Gerar o Guia Visual
@@ -26,6 +35,7 @@ Requisitos mínimos:
 - somente escala, enquadramento e borda elemental nos retratos;
 - nome e elemento sem retrato substituto quando o asset original não existir;
 - dados de artefatos quando aprovados e existentes;
+- somente os stats mínimos e artefatos funcionais aprovados; não reintroduza no Guia Visual os valores brutos que foram descartados durante a generalização;
 - nenhum conteúdo inventado;
 - HTML e PNG em `dist/assets/counter-references/`, com nomes correspondentes e descritivos.
 
@@ -52,8 +62,9 @@ Não confunda a criação local do asset com publicação. O caminho pode depend
 
 ## 4. Salvar o counter
 
-- Use o fluxo autenticado do aplicativo/Supabase.
+- Use o dashboard autenticado do Supabase conforme o caminho preferido acima: navegador interno primeiro e Chrome como fallback de autenticação. Recorra ao fluxo autenticado do aplicativo somente quando nenhum dashboard estiver disponível.
 - Grave exatamente ataque, defesa, alternativas, classificação, builds e seções aprovados.
+- Grave a build mínima aprovada. A build completa da fonte permanece como evidência e não deve substituir silenciosamente a recomendação simplificada.
 - Para um counter novo desta pesquisa, confirme `safety: experimental` e `status: needs_testing` antes de gravar.
 - Mantenha os textos dos campos abertos curtos, simples e diretos, como no preview aprovado.
 - Omita campos não documentados em vez de preencher placeholders.
@@ -69,6 +80,7 @@ Leia o registro novamente e valide:
 - defesa resolvida e alternativas;
 - `safety` e `status`;
 - builds e artefatos;
+- ausência dos stats incidentais que o preview decidiu omitir;
 - todas as seções;
 - autoria;
 - metadados `referenceImage`;

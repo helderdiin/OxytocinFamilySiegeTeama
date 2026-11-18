@@ -1,0 +1,4788 @@
+{
+  "command": "getGuildSiegeMatchBattleLogSummary_v2",
+  "ret_code": 0,
+  "guild_list": [
+    {
+      "siege_id": 2026110204,
+      "guild_id": 313750,
+      "match_id": 2026110204000124,
+      "rating_id": 4001,
+      "pos_id": 1,
+      "match_score": 4251,
+      "match_score_increment": 0,
+      "match_rank": 2,
+      "disqualified": 0,
+      "play_member_count": 25,
+      "attack_count": 101,
+      "attack_unit_count": 303,
+      "guild_name": "Egotisthic_BR",
+      "master_channel_uid": 210130283,
+      "match_score_last_update_time": 1794620756
+    },
+    {
+      "siege_id": 2026110204,
+      "guild_id": 174415,
+      "match_id": 2026110204000124,
+      "rating_id": 4001,
+      "pos_id": 2,
+      "match_score": 20000,
+      "match_score_increment": 66,
+      "match_rank": 1,
+      "disqualified": 0,
+      "play_member_count": 25,
+      "attack_count": 130,
+      "attack_unit_count": 378,
+      "guild_name": "FalconBeast$",
+      "master_channel_uid": 178068947,
+      "match_score_last_update_time": 1794620756
+    }
+  ],
+  "wizard_info_list": [
+    {
+      "wizard_id": 464359,
+      "channel_uid": 110909225,
+      "wizard_name": "D.berbel",
+      "wizard_level": 100,
+      "rating_id": 901,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 4438423,
+      "channel_uid": 148362485,
+      "wizard_name": "Danker_",
+      "wizard_level": 100,
+      "rating_id": 1001,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 5892558,
+      "channel_uid": 122944137,
+      "wizard_name": "****PAIN****",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 6922294,
+      "channel_uid": 9773226,
+      "wizard_name": "Jovanebispo",
+      "wizard_level": 100,
+      "rating_id": 1003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 8150725,
+      "channel_uid": 133455374,
+      "wizard_name": "•PhoenixGz",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 9314907,
+      "channel_uid": 137333977,
+      "wizard_name": "ZΞKKΞИ",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 13473962,
+      "channel_uid": 148239471,
+      "wizard_name": "usskiller",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 13892358,
+      "channel_uid": 149505152,
+      "wizard_name": "tiuito",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 14548846,
+      "channel_uid": 151636434,
+      "wizard_name": "ToninhoTankaTD",
+      "wizard_level": 100,
+      "rating_id": 1001,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 16199058,
+      "channel_uid": 158472857,
+      "wizard_name": "Leon³⁰",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 16810125,
+      "channel_uid": 161792250,
+      "wizard_name": "Maxpeti",
+      "wizard_level": 100,
+      "rating_id": 1001,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 16972430,
+      "channel_uid": 163242291,
+      "wizard_name": "™B@$$™",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 18915363,
+      "channel_uid": 185084776,
+      "wizard_name": "iasmim2020",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 18978594,
+      "channel_uid": 176928188,
+      "wizard_name": "Araraquara-SP",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 19934464,
+      "channel_uid": 181598205,
+      "wizard_name": "Max…Ivam",
+      "wizard_level": 100,
+      "rating_id": 1001,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 22778315,
+      "channel_uid": 192804684,
+      "wizard_name": "lASlKAGAMI",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 25168798,
+      "channel_uid": 203213329,
+      "wizard_name": "Storphionix",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 27806103,
+      "channel_uid": 210130283,
+      "wizard_name": "Srcoelho¥",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 29376715,
+      "channel_uid": 217685135,
+      "wizard_name": "MartinsVk",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 35355020,
+      "channel_uid": 229494262,
+      "wizard_name": "Math1994",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 36817889,
+      "channel_uid": 233612400,
+      "wizard_name": "Jacksoncs",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 42894984,
+      "channel_uid": 240101459,
+      "wizard_name": "OverlordMax",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 82877045,
+      "channel_uid": 253517820,
+      "wizard_name": "lASlPrank",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 86924759,
+      "channel_uid": 253368953,
+      "wizard_name": "D@rth",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 119793071,
+      "channel_uid": 254408908,
+      "wizard_name": "JauuunxD",
+      "wizard_level": 100,
+      "rating_id": 1003,
+      "guild_id": 313750
+    },
+    {
+      "wizard_id": 10744339,
+      "channel_uid": 185569099,
+      "wizard_name": "☆Snacks☆",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 10819916,
+      "channel_uid": 187030825,
+      "wizard_name": "Bubblesx3",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 13973795,
+      "channel_uid": 149609618,
+      "wizard_name": "CremChez",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 15359682,
+      "channel_uid": 164310180,
+      "wizard_name": "touchmeNOW",
+      "wizard_level": 100,
+      "rating_id": 901,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 15498279,
+      "channel_uid": 155121294,
+      "wizard_name": "DragonR@ge",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 15615151,
+      "channel_uid": 155244247,
+      "wizard_name": "BlackestBear",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 17641837,
+      "channel_uid": 166627031,
+      "wizard_name": "!!JJ!!",
+      "wizard_level": 100,
+      "rating_id": 4003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 18562737,
+      "channel_uid": 173774061,
+      "wizard_name": "Stryker_Jon",
+      "wizard_level": 100,
+      "rating_id": 901,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 19185445,
+      "channel_uid": 178068947,
+      "wizard_name": "SC♡AkuHime",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 19208392,
+      "channel_uid": 178179168,
+      "wizard_name": "Miles_Far",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 19243490,
+      "channel_uid": 178379826,
+      "wizard_name": "Krldvil",
+      "wizard_level": 100,
+      "rating_id": 1003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 19305876,
+      "channel_uid": 118317256,
+      "wizard_name": "Shorn",
+      "wizard_level": 100,
+      "rating_id": 3503,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 19989545,
+      "channel_uid": 181793619,
+      "wizard_name": "IIIAceIII",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 20423278,
+      "channel_uid": 190646510,
+      "wizard_name": "xlegnaangelx",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 22835468,
+      "channel_uid": 193174707,
+      "wizard_name": "Nat1plz",
+      "wizard_level": 100,
+      "rating_id": 901,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 24217364,
+      "channel_uid": 199602302,
+      "wizard_name": "Masenforth",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 25244477,
+      "channel_uid": 203564515,
+      "wizard_name": "sokata",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 31427636,
+      "channel_uid": 222362220,
+      "wizard_name": "Cake♤2.0",
+      "wizard_level": 100,
+      "rating_id": 1003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 31840810,
+      "channel_uid": 217666810,
+      "wizard_name": "Frank13M",
+      "wizard_level": 100,
+      "rating_id": 1002,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 33409352,
+      "channel_uid": 226432258,
+      "wizard_name": "RealMainah207",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 34560890,
+      "channel_uid": 227755901,
+      "wizard_name": "Melbourne0",
+      "wizard_level": 100,
+      "rating_id": 1003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 37560773,
+      "channel_uid": 236799868,
+      "wizard_name": "ⓟotato",
+      "wizard_level": 100,
+      "rating_id": 2003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 45856221,
+      "channel_uid": 242396715,
+      "wizard_name": "thugonomix",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 51549470,
+      "channel_uid": 244745765,
+      "wizard_name": "3shot",
+      "wizard_level": 100,
+      "rating_id": 3003,
+      "guild_id": 174415
+    },
+    {
+      "wizard_id": 60173968,
+      "channel_uid": 247932496,
+      "wizard_name": "Ejohnpo",
+      "wizard_level": 100,
+      "rating_id": 3503,
+      "guild_id": 174415
+    }
+  ],
+  "used_unit_count_list": [
+    {
+      "wizard_id": 464359,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 4438423,
+      "used_unit_count": 3
+    },
+    {
+      "wizard_id": 5892558,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 6922294,
+      "used_unit_count": 21
+    },
+    {
+      "wizard_id": 8150725,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 9314907,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 13473962,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 13892358,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 14548846,
+      "used_unit_count": 6
+    },
+    {
+      "wizard_id": 16199058,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 16810125,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 16972430,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 18915363,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 18978594,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 19934464,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 22778315,
+      "used_unit_count": 6
+    },
+    {
+      "wizard_id": 25168798,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 27806103,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 29376715,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 35355020,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 36817889,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 42894984,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 82877045,
+      "used_unit_count": 3
+    },
+    {
+      "wizard_id": 86924759,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 119793071,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 10744339,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 10819916,
+      "used_unit_count": 21
+    },
+    {
+      "wizard_id": 13973795,
+      "used_unit_count": 21
+    },
+    {
+      "wizard_id": 15359682,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 15498279,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 15615151,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 17641837,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 18562737,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 19185445,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 19208392,
+      "used_unit_count": 15
+    },
+    {
+      "wizard_id": 19243490,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 19305876,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 19989545,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 20423278,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 22835468,
+      "used_unit_count": 0
+    },
+    {
+      "wizard_id": 24217364,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 25244477,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 31427636,
+      "used_unit_count": 12
+    },
+    {
+      "wizard_id": 31840810,
+      "used_unit_count": 15
+    },
+    {
+      "wizard_id": 33409352,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 34560890,
+      "used_unit_count": 24
+    },
+    {
+      "wizard_id": 37560773,
+      "used_unit_count": 30
+    },
+    {
+      "wizard_id": 45856221,
+      "used_unit_count": 21
+    },
+    {
+      "wizard_id": 51549470,
+      "used_unit_count": 21
+    },
+    {
+      "wizard_id": 60173968,
+      "used_unit_count": 30
+    }
+  ],
+  "guild_used_unit_count_list": [
+    {
+      "guild_id": 313750,
+      "target_guild_id": 174415,
+      "unit_use_count": 309
+    },
+    {
+      "guild_id": 174415,
+      "target_guild_id": 313750,
+      "unit_use_count": 420
+    }
+  ],
+  "wizard_battle_log_list": [
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 18562737,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 1,
+      "log_timestamp": 1794618193
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 18562737,
+      "win_lose": 2,
+      "log_timestamp": 1794618193
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 1,
+      "log_timestamp": 1794618084
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 2,
+      "log_timestamp": 1794618084
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 1,
+      "log_timestamp": 1794618022
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794618022
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 18562737,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 1,
+      "log_timestamp": 1794617895
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 18562737,
+      "win_lose": 2,
+      "log_timestamp": 1794617895
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 1,
+      "log_timestamp": 1794617792
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 2,
+      "log_timestamp": 1794617792
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 2,
+      "log_timestamp": 1794617672
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 1,
+      "log_timestamp": 1794617672
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 2,
+      "log_timestamp": 1794617515
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 1,
+      "log_timestamp": 1794617515
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15615151,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794617468
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15615151,
+      "win_lose": 2,
+      "log_timestamp": 1794617468
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15615151,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 2,
+      "log_timestamp": 1794617369
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15615151,
+      "win_lose": 1,
+      "log_timestamp": 1794617369
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794617228
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 1,
+      "log_timestamp": 1794617228
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794617144
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794617144
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794617098
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 2,
+      "log_timestamp": 1794617098
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19989545,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 2,
+      "log_timestamp": 1794617039
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19989545,
+      "win_lose": 1,
+      "log_timestamp": 1794617039
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616909
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794616909
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 18562737,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794616897
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 18562737,
+      "win_lose": 1,
+      "log_timestamp": 1794616897
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616849
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794616849
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794616809
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794616809
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616726
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794616726
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 10744339,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 2,
+      "log_timestamp": 1794616677
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10744339,
+      "win_lose": 1,
+      "log_timestamp": 1794616677
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794616655
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794616655
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 1,
+      "log_timestamp": 1794616567
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 2,
+      "log_timestamp": 1794616567
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616477
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794616477
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 1,
+      "log_timestamp": 1794616457
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 2,
+      "log_timestamp": 1794616457
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794616404
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794616404
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616376
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794616376
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 2,
+      "log_timestamp": 1794616357
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 1,
+      "log_timestamp": 1794616357
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 2,
+      "log_timestamp": 1794616300
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794616300
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616278
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794616278
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 2,
+      "log_timestamp": 1794616176
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 1,
+      "log_timestamp": 1794616176
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 2,
+      "log_timestamp": 1794616163
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794616163
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794616060
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794616060
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794615941
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794615941
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19989545,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794615659
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19989545,
+      "win_lose": 1,
+      "log_timestamp": 1794615659
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794615146
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794615146
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794615046
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794615046
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18915363,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794614982
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18915363,
+      "win_lose": 1,
+      "log_timestamp": 1794614982
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794614936
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 2,
+      "log_timestamp": 1794614936
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794614883
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794614883
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 2,
+      "log_timestamp": 1794614807
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794614807
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794614642
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794614642
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794614532
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794614532
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794614462
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794614462
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 13973795,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 2,
+      "log_timestamp": 1794614323
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 13973795,
+      "win_lose": 1,
+      "log_timestamp": 1794614323
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 1,
+      "log_timestamp": 1794614259
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794614259
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794614236
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794614236
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794614155
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794614155
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 1,
+      "log_timestamp": 1794614154
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794614154
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 1,
+      "log_timestamp": 1794614108
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794614108
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 1,
+      "log_timestamp": 1794614067
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794614067
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 2,
+      "log_timestamp": 1794613967
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794613967
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 2,
+      "log_timestamp": 1794613894
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 1,
+      "log_timestamp": 1794613894
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 2,
+      "log_timestamp": 1794613872
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 1,
+      "log_timestamp": 1794613872
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 1,
+      "log_timestamp": 1794613837
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794613837
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 2,
+      "log_timestamp": 1794613761
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794613761
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15615151,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 2,
+      "log_timestamp": 1794613754
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15615151,
+      "win_lose": 1,
+      "log_timestamp": 1794613754
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 2,
+      "log_timestamp": 1794613746
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794613746
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 13973795,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 2,
+      "log_timestamp": 1794613646
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 13973795,
+      "win_lose": 1,
+      "log_timestamp": 1794613646
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 2,
+      "log_timestamp": 1794613581
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794613581
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 1,
+      "log_timestamp": 1794613537
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794613537
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 2,
+      "log_timestamp": 1794613502
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794613502
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794613448
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794613448
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794613298
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794613298
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794613189
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794613189
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15498279,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 2,
+      "log_timestamp": 1794613087
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15498279,
+      "win_lose": 1,
+      "log_timestamp": 1794613087
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794612843
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794612843
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19243490,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794612842
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19243490,
+      "win_lose": 2,
+      "log_timestamp": 1794612842
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794612761
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794612761
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794612732
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 1,
+      "log_timestamp": 1794612732
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794612658
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794612658
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 2,
+      "log_timestamp": 1794612408
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 1,
+      "log_timestamp": 1794612408
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794612399
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794612399
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 2,
+      "log_timestamp": 1794612198
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794612198
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794612076
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 1,
+      "log_timestamp": 1794612076
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 2,
+      "log_timestamp": 1794611967
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794611967
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 19934464,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611848
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 19934464,
+      "win_lose": 1,
+      "log_timestamp": 1794611848
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794611821
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794611821
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794611788
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 1,
+      "log_timestamp": 1794611788
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16810125,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611768
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16810125,
+      "win_lose": 1,
+      "log_timestamp": 1794611768
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794611728
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794611728
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 6922294,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611657
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 6922294,
+      "win_lose": 1,
+      "log_timestamp": 1794611657
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611568
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794611568
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611505
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794611505
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 82877045,
+      "win_lose": 1,
+      "log_timestamp": 1794611498
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 82877045,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 2,
+      "log_timestamp": 1794611498
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 19934464,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611464
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 19934464,
+      "win_lose": 1,
+      "log_timestamp": 1794611464
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 22778315,
+      "win_lose": 1,
+      "log_timestamp": 1794611433
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 22778315,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 2,
+      "log_timestamp": 1794611433
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 13973795,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 2,
+      "log_timestamp": 1794611432
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 13973795,
+      "win_lose": 1,
+      "log_timestamp": 1794611432
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15498279,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794611347
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15498279,
+      "win_lose": 1,
+      "log_timestamp": 1794611347
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19243490,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 22778315,
+      "win_lose": 2,
+      "log_timestamp": 1794611293
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 22778315,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19243490,
+      "win_lose": 1,
+      "log_timestamp": 1794611293
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611249
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794611249
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611192
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 1,
+      "log_timestamp": 1794611192
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15615151,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794611150
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15615151,
+      "win_lose": 1,
+      "log_timestamp": 1794611150
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611123
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794611123
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 2,
+      "log_timestamp": 1794611041
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794611041
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16810125,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794610656
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16810125,
+      "win_lose": 1,
+      "log_timestamp": 1794610656
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794610617
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794610617
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794610568
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794610568
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794610473
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794610473
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794610381
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794610381
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794610353
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794610353
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794610313
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794610313
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794610157
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 1,
+      "log_timestamp": 1794610157
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16810125,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794610156
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16810125,
+      "win_lose": 1,
+      "log_timestamp": 1794610156
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794609932
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794609932
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794609871
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 1,
+      "log_timestamp": 1794609871
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794609825
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794609825
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794609767
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794609767
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15498279,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794609764
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15498279,
+      "win_lose": 2,
+      "log_timestamp": 1794609764
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794609730
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 2,
+      "log_timestamp": 1794609730
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794609626
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794609626
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794609616
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794609616
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794609569
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794609569
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794609445
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 1,
+      "log_timestamp": 1794609445
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794609417
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794609417
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 2,
+      "log_timestamp": 1794609377
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794609377
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794609306
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794609306
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794609167
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794609167
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794608546
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794608546
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 464359,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794608408
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 464359,
+      "win_lose": 1,
+      "log_timestamp": 1794608408
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794608207
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794608207
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794608062
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794608062
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794607833
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794607833
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794607696
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794607696
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794607554
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794607554
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 31840810,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794607533
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31840810,
+      "win_lose": 1,
+      "log_timestamp": 1794607533
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794607508
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794607508
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 464359,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794607412
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 464359,
+      "win_lose": 1,
+      "log_timestamp": 1794607412
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19243490,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794607378
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19243490,
+      "win_lose": 2,
+      "log_timestamp": 1794607378
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794607373
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794607373
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 464359,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794607333
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 464359,
+      "win_lose": 1,
+      "log_timestamp": 1794607333
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794607310
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794607310
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794607215
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794607215
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 24217364,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794607146
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 24217364,
+      "win_lose": 1,
+      "log_timestamp": 1794607146
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794607061
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794607061
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794606968
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794606968
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794606903
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794606903
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794606776
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794606776
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 82877045,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 34560890,
+      "win_lose": 2,
+      "log_timestamp": 1794606716
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 34560890,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 82877045,
+      "win_lose": 1,
+      "log_timestamp": 1794606716
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794606638
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 1,
+      "log_timestamp": 1794606638
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794606501
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794606501
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794606387
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794606387
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18915363,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794606128
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18915363,
+      "win_lose": 1,
+      "log_timestamp": 1794606128
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794606009
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794606009
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 2,
+      "log_timestamp": 1794605964
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794605964
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 1,
+      "log_timestamp": 1794605852
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794605852
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794605841
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794605841
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 2,
+      "log_timestamp": 1794605717
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 1,
+      "log_timestamp": 1794605717
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794605657
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794605657
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 51549470,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 2,
+      "log_timestamp": 1794605577
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 51549470,
+      "win_lose": 1,
+      "log_timestamp": 1794605577
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18915363,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794605557
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18915363,
+      "win_lose": 1,
+      "log_timestamp": 1794605557
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 1,
+      "log_timestamp": 1794605498
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 2,
+      "log_timestamp": 1794605498
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794605471
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794605471
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794605416
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794605416
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794605301
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794605301
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 15498279,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794605243
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 15498279,
+      "win_lose": 1,
+      "log_timestamp": 1794605243
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794605204
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 2,
+      "log_timestamp": 1794605204
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 2,
+      "log_timestamp": 1794605060
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794605060
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794605036
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 1,
+      "log_timestamp": 1794605036
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794604979
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 2,
+      "log_timestamp": 1794604979
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18915363,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 1,
+      "log_timestamp": 1794604838
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18915363,
+      "win_lose": 2,
+      "log_timestamp": 1794604838
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794604831
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 2,
+      "log_timestamp": 1794604831
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 10819916,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794604798
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 10819916,
+      "win_lose": 1,
+      "log_timestamp": 1794604798
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794604660
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 1,
+      "log_timestamp": 1794604660
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794604580
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 2,
+      "log_timestamp": 1794604580
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794604548
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 2,
+      "log_timestamp": 1794604548
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794604367
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 1,
+      "log_timestamp": 1794604367
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794604245
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794604245
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 18562737,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794604090
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 18562737,
+      "win_lose": 1,
+      "log_timestamp": 1794604090
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19243490,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 2,
+      "log_timestamp": 1794604025
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19243490,
+      "win_lose": 1,
+      "log_timestamp": 1794604025
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794604003
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 1,
+      "log_timestamp": 1794604003
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31840810,
+      "win_lose": 1,
+      "log_timestamp": 1794603865
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31840810,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 2,
+      "log_timestamp": 1794603865
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31840810,
+      "win_lose": 1,
+      "log_timestamp": 1794603716
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31840810,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 2,
+      "log_timestamp": 1794603716
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 464359,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794603700
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 464359,
+      "win_lose": 1,
+      "log_timestamp": 1794603700
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31840810,
+      "win_lose": 2,
+      "log_timestamp": 1794603567
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31840810,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794603567
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18915363,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31840810,
+      "win_lose": 1,
+      "log_timestamp": 1794603456
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31840810,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18915363,
+      "win_lose": 2,
+      "log_timestamp": 1794603456
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794603424
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 1,
+      "log_timestamp": 1794603424
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31840810,
+      "win_lose": 1,
+      "log_timestamp": 1794603315
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 31840810,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 2,
+      "log_timestamp": 1794603315
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794603107
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794603107
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 33409352,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 2,
+      "log_timestamp": 1794602909
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 33409352,
+      "win_lose": 1,
+      "log_timestamp": 1794602909
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794602900
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794602900
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 36817889,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794602833
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 36817889,
+      "win_lose": 1,
+      "log_timestamp": 1794602833
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794602820
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794602820
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 4438423,
+      "win_lose": 1,
+      "log_timestamp": 1794602710
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 4438423,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 2,
+      "log_timestamp": 1794602710
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794602683
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794602683
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16810125,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794602646
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16810125,
+      "win_lose": 1,
+      "log_timestamp": 1794602646
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 31427636,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794602605
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 31427636,
+      "win_lose": 2,
+      "log_timestamp": 1794602605
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794602283
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 1,
+      "log_timestamp": 1794602283
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 2,
+      "log_timestamp": 1794601576
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 1,
+      "log_timestamp": 1794601576
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794601482
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794601482
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794601460
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 1,
+      "log_timestamp": 1794601460
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794601330
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 1,
+      "log_timestamp": 1794601330
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 17641837,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794601125
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 17641837,
+      "win_lose": 1,
+      "log_timestamp": 1794601125
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600963
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794600963
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600913
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794600913
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794600903
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794600903
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794600901
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794600901
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 2,
+      "log_timestamp": 1794600842
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 1,
+      "log_timestamp": 1794600842
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600830
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794600830
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600799
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794600799
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 1,
+      "log_timestamp": 1794600793
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794600793
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 18562737,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794600791
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 18562737,
+      "win_lose": 1,
+      "log_timestamp": 1794600791
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 37560773,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794600710
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 37560773,
+      "win_lose": 1,
+      "log_timestamp": 1794600710
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794600701
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794600701
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13892358,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794600656
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13892358,
+      "win_lose": 1,
+      "log_timestamp": 1794600656
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600647
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794600647
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600612
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 1,
+      "log_timestamp": 1794600612
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794600602
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 1,
+      "log_timestamp": 1794600602
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 1,
+      "log_timestamp": 1794600589
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794600589
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 119793071,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794600586
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 119793071,
+      "win_lose": 1,
+      "log_timestamp": 1794600586
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 35355020,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600564
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 35355020,
+      "win_lose": 1,
+      "log_timestamp": 1794600564
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 9314907,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600552
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 9314907,
+      "win_lose": 1,
+      "log_timestamp": 1794600552
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 20423278,
+      "win_lose": 2,
+      "log_timestamp": 1794600526
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 20423278,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794600526
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 119793071,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 1,
+      "log_timestamp": 1794600494
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 119793071,
+      "win_lose": 2,
+      "log_timestamp": 1794600494
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16810125,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600484
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16810125,
+      "win_lose": 1,
+      "log_timestamp": 1794600484
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 18978594,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600480
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 18978594,
+      "win_lose": 1,
+      "log_timestamp": 1794600480
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 4438423,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794600438
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 4438423,
+      "win_lose": 1,
+      "log_timestamp": 1794600438
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 22835468,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 2,
+      "log_timestamp": 1794600421
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 22835468,
+      "win_lose": 1,
+      "log_timestamp": 1794600421
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19185445,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794600415
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19185445,
+      "win_lose": 1,
+      "log_timestamp": 1794600415
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 5892558,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794600415
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 5892558,
+      "win_lose": 1,
+      "log_timestamp": 1794600415
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 19934464,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600398
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 19934464,
+      "win_lose": 1,
+      "log_timestamp": 1794600398
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19208392,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 2,
+      "log_timestamp": 1794600361
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19208392,
+      "win_lose": 1,
+      "log_timestamp": 1794600361
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794600340
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794600340
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 18562737,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794600323
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 18562737,
+      "win_lose": 1,
+      "log_timestamp": 1794600323
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600269
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794600269
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 13473962,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600226
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 13473962,
+      "win_lose": 1,
+      "log_timestamp": 1794600226
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 27806103,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 60173968,
+      "win_lose": 2,
+      "log_timestamp": 1794600216
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 60173968,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 27806103,
+      "win_lose": 1,
+      "log_timestamp": 1794600216
+    },
+    {
+      "log_type": 2,
+      "guild_id": 174415,
+      "wizard_id": 19243490,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 29376715,
+      "win_lose": 2,
+      "log_timestamp": 1794600175
+    },
+    {
+      "log_type": 1,
+      "guild_id": 313750,
+      "wizard_id": 29376715,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19243490,
+      "win_lose": 1,
+      "log_timestamp": 1794600175
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600144
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794600144
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 25168798,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 25244477,
+      "win_lose": 2,
+      "log_timestamp": 1794600136
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 25244477,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 25168798,
+      "win_lose": 1,
+      "log_timestamp": 1794600136
+    },
+    {
+      "log_type": 2,
+      "guild_id": 313750,
+      "wizard_id": 16199058,
+      "opp_guild_id": 174415,
+      "opp_wizard_id": 19305876,
+      "win_lose": 2,
+      "log_timestamp": 1794600073
+    },
+    {
+      "log_type": 1,
+      "guild_id": 174415,
+      "wizard_id": 19305876,
+      "opp_guild_id": 313750,
+      "opp_wizard_id": 16199058,
+      "win_lose": 1,
+      "log_timestamp": 1794600073
+    }
+  ],
+  "max_attack_unit_count": 30,
+  "ts_val": 1993583267,
+  "tvalue": 1794944043,
+  "tvaluelocal": 1794882843,
+  "tzone": "America/Los_Angeles",
+  "tzoffset": -28800,
+  "reqid": "8f47eef0-205c-433e-bcd4-22519b228662",
+  "this_server_id": 4
+}

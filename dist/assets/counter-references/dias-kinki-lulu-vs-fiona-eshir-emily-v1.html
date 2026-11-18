@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1536,initial-scale=1">
+  <title>Dias + Kinki + Lulu e suas Amigas vs Fiona + Eshir + Emily</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #0d1b1e;
+      --surface: #172b2f;
+      --surface-2: #122429;
+      --line: #36545a;
+      --text: #f2eee6;
+      --muted: #a8b8ba;
+      --copper: #d07a57;
+      --aqua: #7fb9aa;
+      --blue: #82b4ca;
+      --amber: #e1bd70;
+      --dark: #926cb0;
+      --light: #eadca4;
+      --water: #55a7db;
+    }
+    html, body { width: 1536px; height: 1024px; margin: 0; overflow: hidden; }
+    body {
+      padding: 64px;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    }
+    .canvas {
+      width: 1408px;
+      height: 896px;
+      display: grid;
+      grid-template-rows: 70px 152px 220px 418px;
+      gap: 12px;
+    }
+    .header {
+      display: grid;
+      grid-template-columns: 210px 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .logo {
+      width: 48px; height: 48px; display: grid; place-items: center;
+      border-radius: 11px; background: #b86749; font-size: 22px; font-weight: 900;
+    }
+    .brand strong, .brand span { display: block; }
+    .brand span { margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .16em; }
+    h1 { margin: 0; font-size: 36px; letter-spacing: -.035em; }
+    .badges { display: flex; gap: 8px; }
+    .badge { padding: 11px 13px; border: 1px solid; border-radius: 9px; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+    .experimental { color: #f1d392; border-color: #76623b; background: #302b22; }
+    .testing { color: #b9d8e5; border-color: #527b8b; background: #1d3440; }
+    .panel { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .team { display: grid; grid-template-columns: 180px 1fr; }
+    .intro { display: flex; flex-direction: column; justify-content: center; padding: 20px; border-right: 1px solid var(--line); }
+    .def .intro { background: #392a26; }
+    .atk .intro { background: #1d3934; }
+    .intro span { color: #e3a188; font-size: 10px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .atk .intro span { color: #a8d1c4; }
+    .intro h2 { margin: 6px 0 0; font-size: 27px; }
+    .intro p { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .slots { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .slot { display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--line); }
+    .monster { display: flex; align-items: center; gap: 12px; }
+    .pw { position: relative; flex: 0 0 auto; }
+    .portrait { display: block; object-fit: cover; border: 3px solid; border-radius: 13px; background: #243a3f; image-rendering: auto; }
+    .def .portrait { width: 82px; height: 82px; }
+    .atk .portrait { width: 116px; height: 116px; }
+    .dark { border-color: var(--dark); }
+    .light { border-color: var(--light); }
+    .water { border-color: var(--water); }
+    .element { position: absolute; top: 4px; right: 4px; width: 28px; height: 28px; object-fit: contain; }
+    .atk .element { width: 32px; height: 32px; }
+    .leader { position: absolute; left: 4px; bottom: 4px; width: 39px; height: 39px; object-fit: contain; }
+    .atk .leader { width: 45px; height: 45px; }
+    .copy strong, .copy span { display: block; }
+    .copy strong { max-width: 150px; font-size: 18px; line-height: 1.12; }
+    .atk .copy strong { font-size: 21px; }
+    .copy span { margin-top: 5px; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+    .bottom { min-height: 0; display: grid; grid-template-columns: .94fr 1.06fr; gap: 12px; }
+    .info { min-height: 0; display: flex; flex-direction: column; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .title { margin: 0 0 9px; font-size: 20px; }
+    .list { display: grid; gap: 7px; }
+    .item { display: grid; grid-template-columns: 105px 1fr; gap: 9px; padding: 8px 10px; border-radius: 8px; background: var(--surface-2); }
+    .item span { color: var(--blue); font-size: 8px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+    .item p { margin: 0; font-size: 10.5px; line-height: 1.32; }
+    .risk { background: #302724; }
+    .risk span { color: #e49b7c; }
+    .note { margin-top: 7px; padding: 8px 10px; color: #efd18e; border: 1px solid #6c5c38; border-radius: 8px; background: #2b2921; font-size: 9.5px; font-weight: 800; line-height: 1.32; }
+    .evidence { margin-top: auto; padding-top: 8px; color: var(--muted); border-top: 1px solid var(--line); font-size: 8.7px; line-height: 1.3; }
+    .builds { display: grid; gap: 7px; }
+    .build { min-height: 95px; display: grid; grid-template-columns: 70px 1fr; gap: 10px; padding: 8px 10px; border: 1px solid #36565d; border-radius: 9px; background: var(--surface-2); }
+    .build img { width: 66px; height: 66px; object-fit: cover; border: 2px solid; border-radius: 9px; }
+    .build strong { font-size: 13px; }
+    .build b, .build span, .build em { display: block; margin-top: 3px; }
+    .build b { color: var(--aqua); font-size: 9.5px; }
+    .build span { font-size: 8.7px; line-height: 1.25; }
+    .build em { color: #aabdbc; font-size: 8.1px; font-style: normal; line-height: 1.22; }
+    .author { margin-top: auto; display: flex; justify-content: space-between; padding-top: 8px; color: var(--muted); border-top: 1px solid var(--line); font-size: 9px; }
+    .author strong { color: var(--text); font-size: 11px; }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <header class="header">
+      <div class="brand"><div class="logo">O₂</div><div><strong>Oxytocin</strong><span>SIEGE TEAMS</span></div></div>
+      <h1>Counter de Siege</h1>
+      <div class="badges"><span class="badge experimental">Experimental</span><span class="badge testing">Precisa de testes</span></div>
+    </header>
+
+    <section class="panel team def">
+      <div class="intro"><span>Time inimigo</span><h2>Defesa</h2><p>Confirme os três slots antes de atacar.</p></div>
+      <div class="slots">
+        <div class="slot"><div class="monster"><div class="pw"><img class="portrait dark" src="../monsters/fiona.png" alt="Fiona"><img class="element" src="../ui/elements/dark.png" alt="Escuridão"><img class="leader" src="../ui/leader-skills/leader_skill_Attack_Speed_Guild.png" alt="Leader Skill de Velocidade em Guilda"></div><div class="copy"><strong>Fiona (L)</strong><span>Escuridão</span></div></div></div>
+        <div class="slot"><div class="monster"><div class="pw"><img class="portrait light" src="../monsters/unit_icon_0053_3_1.png" alt="Eshir"><img class="element" src="../ui/elements/light.png" alt="Luz"></div><div class="copy"><strong>Eshir</strong><span>Luz</span></div></div></div>
+        <div class="slot"><div class="monster"><div class="pw"><img class="portrait light" src="../monsters/unit_icon_0049_3_4.png" alt="Emily"><img class="element" src="../ui/elements/light.png" alt="Luz"></div><div class="copy"><strong>Emily</strong><span>Luz</span></div></div></div>
+      </div>
+    </section>
+
+    <section class="panel team atk">
+      <div class="intro"><span>Seu ataque</span><h2>Counter</h2><p>Dias protege o time, Lulu sustenta e Kinki finaliza.</p></div>
+      <div class="slots">
+        <div class="slot"><div class="monster"><div class="pw"><img class="portrait dark" src="../monsters/unit_icon_0024_4_3.png" alt="Dias"><img class="element" src="../ui/elements/dark.png" alt="Escuridão"><img class="leader" src="../ui/leader-skills/leader_skill_Resistance.png" alt="Leader Skill de Resistência"></div><div class="copy"><strong>Dias (L)</strong><span>Escuridão</span></div></div></div>
+        <div class="slot"><div class="monster"><div class="pw"><img class="portrait light" src="../monsters/kinki.png" alt="Kinki"><img class="element" src="../ui/elements/light.png" alt="Luz"></div><div class="copy"><strong>Kinki</strong><span>Luz</span></div></div></div>
+        <div class="slot"><div class="monster"><div class="pw"><img class="portrait water" src="../monsters/unit_icon_0070_3_0.png" alt="Lulu e suas Amigas"><img class="element" src="../ui/elements/water.png" alt="Água"></div><div class="copy"><strong>Lulu e suas Amigas</strong><span>Água · 2A</span></div></div></div>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <article class="info">
+        <h2 class="title">Como usar</h2>
+        <div class="list">
+          <div class="item"><span>Plano</span><p>Deixe a defesa abrir. Lulu limpa a abertura; Dias aplica quebra de ATK/DEF na Fiona; Kinki concentra o dano.</p></div>
+          <div class="item"><span>Ordem</span><p>Lulu → Dias → Kinki.</p></div>
+          <div class="item"><span>Alvo</span><p>Fiona → Emily → Eshir.</p></div>
+          <div class="item"><span>Proteção</span><p>Preserve a S2 da Lulu para salvar o Kinki quando ele receber quebra de DEF.</p></div>
+          <div class="item risk"><span>Risco crítico</span><p>Fiona pode remover os buffs e explodir o Kinki com procs. Kinki precisa de redução de dano de Escuridão.</p></div>
+        </div>
+        <div class="note">Não disputar velocidade. Com a liderança do Dias, 70% RES na tela vira 100% em combate.</div>
+        <div class="evidence"><strong>Evidência:</strong> SWGT 5,0/5 em 3 avaliações; Rosa Midman 5,0/5 em 2 avaliações. Não generalizar para Fiona + Eshir + qualquer terceiro.</div>
+      </article>
+
+      <article class="info">
+        <h2 class="title">Builds mínimas propostas</h2>
+        <div class="builds">
+          <div class="build"><img class="dark" src="../monsters/unit_icon_0024_4_3.png" alt="Dias"><div><strong>Dias</strong><b>Destroy / Shield / 2-set flexível · SPD/HP/HP</b><span>≥ +30k HP · ≥ +700 DEF · ≥ +100 SPD · 70% RES · ~45% ACC</span><em>Artefatos: redução de dano de Luz / Precisão da S2</em></div></div>
+          <div class="build"><img class="light" src="../monsters/kinki.png" alt="Kinki"><div><strong>Kinki</strong><b>Violent / Destroy · SPD/ATK/HP</b><span>≥ +25k HP · ≥ +800 ATK · ≥ +500 DEF · ≥ +80 SPD · 70% RES</span><em>Artefatos: redução de dano de Escuridão / dano adicional por HP ou ATK</em></div></div>
+          <div class="build"><img class="water" src="../monsters/unit_icon_0070_3_0.png" alt="Lulu e suas Amigas"><div><strong>Lulu e suas Amigas</strong><b>Violent / Will · SPD/HP/HP</b><span>≥ +25k HP · ≥ +700 DEF · ≥ +120 SPD · 70% RES</span><em>Artefatos: recuperação da S2/S3 / redução de dano de Escuridão e Luz</em></div></div>
+        </div>
+        <div class="author"><span>Autor: <strong>LETHALX</strong></span><span>Guia v1 · Oxytocin Family</span></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

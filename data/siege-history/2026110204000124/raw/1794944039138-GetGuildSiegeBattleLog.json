@@ -1,0 +1,3691 @@
+{
+  "command": "GetGuildSiegeBattleLog",
+  "ret_code": 0,
+  "log_type": 1,
+  "log_list": [
+    {
+      "guild_info_list": [
+        {
+          "siege_id": 2026110204,
+          "guild_id": 313750,
+          "match_id": 2026110204000124,
+          "rating_id": 4001,
+          "pos_id": 1,
+          "match_score": 4251,
+          "match_score_increment": 0,
+          "match_rank": 2,
+          "disqualified": 0,
+          "play_member_count": 25,
+          "attack_count": 101,
+          "attack_unit_count": 303,
+          "guild_name": "Egotisthic_BR",
+          "master_channel_uid": 210130283,
+          "match_score_last_update_time": 1794620756
+        },
+        {
+          "siege_id": 2026110204,
+          "guild_id": 174415,
+          "match_id": 2026110204000124,
+          "rating_id": 4001,
+          "pos_id": 2,
+          "match_score": 20000,
+          "match_score_increment": 66,
+          "match_rank": 1,
+          "disqualified": 0,
+          "play_member_count": 25,
+          "attack_count": 130,
+          "attack_unit_count": 378,
+          "guild_name": "FalconBeast$",
+          "master_channel_uid": 178068947,
+          "match_score_last_update_time": 1794620756
+        }
+      ],
+      "battle_log_list": [
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 173774061,
+          "opp_wizard_id": 18562737,
+          "opp_wizard_name": "Stryker_Jon",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 224143,
+          "log_timestamp": 1794618193,
+          "view_battle_deck_info": [
+            [
+              19411,
+              18913,
+              14412
+            ],
+            [
+              17411,
+              21315,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 187030825,
+          "opp_wizard_id": 10819916,
+          "opp_wizard_name": "Bubblesx3",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 223053,
+          "log_timestamp": 1794618084,
+          "view_battle_deck_info": [
+            [
+              22115,
+              14411,
+              1000215
+            ],
+            [
+              29812,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 3,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 199602302,
+          "opp_wizard_id": 24217364,
+          "opp_wizard_name": "Masenforth",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 222443,
+          "log_timestamp": 1794618022,
+          "view_battle_deck_info": [
+            [
+              20915,
+              19814,
+              21413
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 173774061,
+          "opp_wizard_id": 18562737,
+          "opp_wizard_name": "Stryker_Jon",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 221073,
+          "log_timestamp": 1794617895,
+          "view_battle_deck_info": [
+            [
+              18311,
+              12032,
+              19911
+            ],
+            [
+              17411,
+              21315,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 187030825,
+          "opp_wizard_id": 10819916,
+          "opp_wizard_name": "Bubblesx3",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 219985,
+          "log_timestamp": 1794617792,
+          "view_battle_deck_info": [
+            [
+              18311,
+              29711,
+              15931
+            ],
+            [
+              29812,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 244745765,
+          "opp_wizard_id": 51549470,
+          "opp_wizard_name": "3shot",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 218787,
+          "log_timestamp": 1794617672,
+          "view_battle_deck_info": [
+            [
+              18311,
+              26811,
+              26113
+            ],
+            [
+              29812,
+              23513,
+              13414
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 9773226,
+          "wizard_id": 6922294,
+          "wizard_name": "Jovanebispo",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 217227,
+          "log_timestamp": 1794617515,
+          "view_battle_deck_info": [
+            [
+              19215,
+              16613,
+              14612
+            ],
+            [
+              29412,
+              28611,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155244247,
+          "opp_wizard_id": 15615151,
+          "opp_wizard_name": "BlackestBear",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 216759,
+          "log_timestamp": 1794617468,
+          "view_battle_deck_info": [
+            [
+              12032,
+              13813,
+              15312
+            ],
+            [
+              17411,
+              17413,
+              21812
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155244247,
+          "opp_wizard_id": 15615151,
+          "opp_wizard_name": "BlackestBear",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 215793,
+          "log_timestamp": 1794617369,
+          "view_battle_deck_info": [
+            [
+              22611,
+              21511,
+              21211
+            ],
+            [
+              21811,
+              25612,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 118317256,
+          "opp_wizard_id": 19305876,
+          "opp_wizard_name": "Shorn",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13205386,
+          "log_id": 214379,
+          "log_timestamp": 1794617228,
+          "view_battle_deck_info": [
+            [
+              22611,
+              21211,
+              21511
+            ],
+            [
+              25211,
+              28913,
+              24712
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 213515,
+          "log_timestamp": 1794617144,
+          "view_battle_deck_info": [
+            [
+              19411,
+              18913,
+              19711
+            ],
+            [
+              17412,
+              17015,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 187030825,
+          "opp_wizard_id": 10819916,
+          "opp_wizard_name": "Bubblesx3",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 213021,
+          "log_timestamp": 1794617098,
+          "view_battle_deck_info": [
+            [
+              26613,
+              35711,
+              15415
+            ],
+            [
+              29812,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 181793619,
+          "opp_wizard_id": 19989545,
+          "opp_wizard_name": "IIIAceIII",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 212417,
+          "log_timestamp": 1794617039,
+          "view_battle_deck_info": [
+            [
+              19215,
+              16613,
+              28311
+            ],
+            [
+              29812,
+              23511,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 173774061,
+          "opp_wizard_id": 18562737,
+          "opp_wizard_name": "Stryker_Jon",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13204945,
+          "log_id": 210903,
+          "log_timestamp": 1794616897,
+          "view_battle_deck_info": [
+            [
+              23915,
+              21014,
+              13413
+            ],
+            [
+              15713,
+              23712,
+              31311
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 4,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 209953,
+          "log_timestamp": 1794616809,
+          "view_battle_deck_info": [
+            [
+              26111,
+              30012,
+              23711
+            ],
+            [
+              29412,
+              28611,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 185569099,
+          "opp_wizard_id": 10744339,
+          "opp_wizard_name": "☆Snacks☆",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 208591,
+          "log_timestamp": 1794616677,
+          "view_battle_deck_info": [
+            [
+              17011,
+              13811,
+              23111
+            ],
+            [
+              15713,
+              31311,
+              23712
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 222362220,
+          "opp_wizard_id": 31427636,
+          "opp_wizard_name": "Cake♤2.0",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 205071,
+          "log_timestamp": 1794616357,
+          "view_battle_deck_info": [
+            [
+              23915,
+              21014,
+              13413
+            ],
+            [
+              18612,
+              31311,
+              34213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 204457,
+          "log_timestamp": 1794616300,
+          "view_battle_deck_info": [
+            [
+              22115,
+              14411,
+              1000215
+            ],
+            [
+              31311,
+              30012,
+              28915
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148239471,
+          "wizard_id": 13473962,
+          "wizard_name": "usskiller",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 199602302,
+          "opp_wizard_id": 24217364,
+          "opp_wizard_name": "Masenforth",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 203231,
+          "log_timestamp": 1794616176,
+          "view_battle_deck_info": [
+            [
+              29311,
+              26811,
+              26113
+            ],
+            [
+              29412,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13203823,
+          "log_id": 200815,
+          "log_timestamp": 1794615941,
+          "view_battle_deck_info": [
+            [
+              22115,
+              14411,
+              1000215
+            ],
+            [
+              31915,
+              28913,
+              25211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 181793619,
+          "opp_wizard_id": 19989545,
+          "opp_wizard_name": "IIIAceIII",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13203476,
+          "log_id": 198003,
+          "log_timestamp": 1794615659,
+          "view_battle_deck_info": [
+            [
+              17412,
+              21012,
+              11414
+            ],
+            [
+              15713,
+              23712,
+              31311
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 149609618,
+          "opp_wizard_id": 13973795,
+          "opp_wizard_name": "CremChez",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13201754,
+          "log_id": 183787,
+          "log_timestamp": 1794614323,
+          "view_battle_deck_info": [
+            [
+              19411,
+              24914,
+              25413
+            ],
+            [
+              29812,
+              23513,
+              13414
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 183079,
+          "log_timestamp": 1794614259,
+          "view_battle_deck_info": [
+            [
+              19615,
+              15233,
+              11613
+            ],
+            [
+              17412,
+              17015,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 181909,
+          "log_timestamp": 1794614154,
+          "view_battle_deck_info": [
+            [
+              18014,
+              23112,
+              18913
+            ],
+            [
+              17412,
+              17015,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13201491,
+          "log_id": 181391,
+          "log_timestamp": 1794614108,
+          "view_battle_deck_info": [
+            [
+              25012,
+              30012,
+              26111
+            ],
+            [
+              17412,
+              17015,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 2,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 179907,
+          "log_timestamp": 1794613967,
+          "view_battle_deck_info": [
+            [
+              22712,
+              14031,
+              21413
+            ],
+            [
+              15713,
+              27911,
+              28312
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 2,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 227755901,
+          "opp_wizard_id": 34560890,
+          "opp_wizard_name": "Melbourne0",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 179057,
+          "log_timestamp": 1794613894,
+          "view_battle_deck_info": [
+            [
+              13514,
+              21014,
+              13413
+            ],
+            [
+              15713,
+              27911,
+              16815
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 2,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 190646510,
+          "opp_wizard_id": 20423278,
+          "opp_wizard_name": "xlegnaangelx",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 178757,
+          "log_timestamp": 1794613872,
+          "view_battle_deck_info": [
+            [
+              18612,
+              16815,
+              14412
+            ],
+            [
+              15713,
+              16114,
+              31311
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 2,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 190646510,
+          "opp_wizard_id": 20423278,
+          "opp_wizard_name": "xlegnaangelx",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 178403,
+          "log_timestamp": 1794613837,
+          "view_battle_deck_info": [
+            [
+              15713,
+              20514,
+              25612
+            ],
+            [
+              15713,
+              16114,
+              31311
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 2,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155244247,
+          "opp_wizard_id": 15615151,
+          "opp_wizard_name": "BlackestBear",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 177473,
+          "log_timestamp": 1794613754,
+          "view_battle_deck_info": [
+            [
+              25213,
+              16613,
+              25613
+            ],
+            [
+              15713,
+              27411,
+              30915
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 2,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 233612400,
+          "wizard_id": 36817889,
+          "wizard_name": "Jacksoncs",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 149609618,
+          "opp_wizard_id": 13973795,
+          "opp_wizard_name": "CremChez",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 176325,
+          "log_timestamp": 1794613646,
+          "view_battle_deck_info": [
+            [
+              17415,
+              28312,
+              16112
+            ],
+            [
+              15713,
+              28611,
+              14612
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 199602302,
+          "opp_wizard_id": 24217364,
+          "opp_wizard_name": "Masenforth",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 174105,
+          "log_timestamp": 1794613448,
+          "view_battle_deck_info": [
+            [
+              19712,
+              25911,
+              31112
+            ],
+            [
+              29412,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 199602302,
+          "opp_wizard_id": 24217364,
+          "opp_wizard_name": "Masenforth",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 172367,
+          "log_timestamp": 1794613298,
+          "view_battle_deck_info": [
+            [
+              26911,
+              19212,
+              25613
+            ],
+            [
+              29412,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 199602302,
+          "opp_wizard_id": 24217364,
+          "opp_wizard_name": "Masenforth",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 171151,
+          "log_timestamp": 1794613189,
+          "view_battle_deck_info": [
+            [
+              21811,
+              16812,
+              26813
+            ],
+            [
+              29412,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155121294,
+          "opp_wizard_id": 15498279,
+          "opp_wizard_name": "DragonR@ge",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 169929,
+          "log_timestamp": 1794613087,
+          "view_battle_deck_info": [
+            [
+              21811,
+              15712,
+              21514
+            ],
+            [
+              29812,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 8,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178379826,
+          "opp_wizard_id": 19243490,
+          "opp_wizard_name": "Krldvil",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 167233,
+          "log_timestamp": 1794612842,
+          "view_battle_deck_info": [
+            [
+              35011,
+              33112,
+              21511
+            ],
+            [
+              29812,
+              16114,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13199381,
+          "log_id": 166035,
+          "log_timestamp": 1794612732,
+          "view_battle_deck_info": [
+            [
+              10411,
+              21012,
+              25613
+            ],
+            [
+              29412,
+              28611,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 9,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 162293,
+          "log_timestamp": 1794612408,
+          "view_battle_deck_info": [
+            [
+              21413,
+              10733,
+              25114
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 226432258,
+          "opp_wizard_id": 33409352,
+          "opp_wizard_name": "RealMainah207",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13198369,
+          "log_id": 158679,
+          "log_timestamp": 1794612076,
+          "view_battle_deck_info": [
+            [
+              27113,
+              15415,
+              35711
+            ],
+            [
+              29111,
+              25912,
+              25914
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 157425,
+          "log_timestamp": 1794611967,
+          "view_battle_deck_info": [
+            [
+              27211,
+              16613,
+              33112
+            ],
+            [
+              29812,
+              23511,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 155781,
+          "log_timestamp": 1794611821,
+          "view_battle_deck_info": [
+            [
+              16613,
+              28915,
+              27212
+            ],
+            [
+              29812,
+              23511,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 118317256,
+          "opp_wizard_id": 19305876,
+          "opp_wizard_name": "Shorn",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13197932,
+          "log_id": 155419,
+          "log_timestamp": 1794611788,
+          "view_battle_deck_info": [
+            [
+              16812,
+              21012,
+              15712
+            ],
+            [
+              29715,
+              34213,
+              25912
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 154771,
+          "log_timestamp": 1794611728,
+          "view_battle_deck_info": [
+            [
+              19215,
+              17012,
+              16613
+            ],
+            [
+              29812,
+              23511,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 22,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 253517820,
+          "wizard_id": 82877045,
+          "wizard_name": "lASlPrank",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 222362220,
+          "opp_wizard_id": 31427636,
+          "opp_wizard_name": "Cake♤2.0",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 152335,
+          "log_timestamp": 1794611498,
+          "view_battle_deck_info": [
+            [
+              21413,
+              11615,
+              10733
+            ],
+            [
+              29715,
+              14034,
+              20714
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 192804684,
+          "wizard_id": 22778315,
+          "wizard_name": "lASlKAGAMI",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 151627,
+          "log_timestamp": 1794611433,
+          "view_battle_deck_info": [
+            [
+              21213,
+              17015,
+              16812
+            ],
+            [
+              29412,
+              28611,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 149505152,
+          "wizard_id": 13892358,
+          "wizard_name": "tiuito",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 149609618,
+          "opp_wizard_id": 13973795,
+          "opp_wizard_name": "CremChez",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 151613,
+          "log_timestamp": 1794611432,
+          "view_battle_deck_info": [
+            [
+              16813,
+              18611,
+              28012
+            ],
+            [
+              15713,
+              28611,
+              14612
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155121294,
+          "opp_wizard_id": 15498279,
+          "opp_wizard_name": "DragonR@ge",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13197286,
+          "log_id": 150701,
+          "log_timestamp": 1794611347,
+          "view_battle_deck_info": [
+            [
+              18014,
+              24514,
+              10514
+            ],
+            [
+              15713,
+              23712,
+              19211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 192804684,
+          "wizard_id": 22778315,
+          "wizard_name": "lASlKAGAMI",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178379826,
+          "opp_wizard_id": 19243490,
+          "opp_wizard_name": "Krldvil",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 0,
+          "log_id": 150157,
+          "log_timestamp": 1794611293,
+          "view_battle_deck_info": [
+            [
+              31311,
+              34712,
+              25613
+            ],
+            [
+              16813,
+              32812,
+              34411
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155244247,
+          "opp_wizard_id": 15615151,
+          "opp_wizard_name": "BlackestBear",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13197008,
+          "log_id": 148685,
+          "log_timestamp": 1794611150,
+          "view_battle_deck_info": [
+            [
+              17412,
+              21012,
+              11414
+            ],
+            [
+              15713,
+              27411,
+              30915
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13196266,
+          "log_id": 142937,
+          "log_timestamp": 1794610617,
+          "view_battle_deck_info": [
+            [
+              18311,
+              26811,
+              29711
+            ],
+            [
+              15713,
+              27911,
+              28312
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13196196,
+          "log_id": 142385,
+          "log_timestamp": 1794610568,
+          "view_battle_deck_info": [
+            [
+              28912,
+              21012,
+              11414
+            ],
+            [
+              15713,
+              27911,
+              28312
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 9,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13195851,
+          "log_id": 139957,
+          "log_timestamp": 1794610353,
+          "view_battle_deck_info": [
+            [
+              16214,
+              25411,
+              30114
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 9,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 118317256,
+          "opp_wizard_id": 19305876,
+          "opp_wizard_name": "Shorn",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13195501,
+          "log_id": 137813,
+          "log_timestamp": 1794610157,
+          "view_battle_deck_info": [
+            [
+              16214,
+              25411,
+              30113
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13195160,
+          "log_id": 135137,
+          "log_timestamp": 1794609932,
+          "view_battle_deck_info": [
+            [
+              19212,
+              23711,
+              25613
+            ],
+            [
+              29412,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 9,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 158472857,
+          "wizard_id": 16199058,
+          "wizard_name": "Leon³⁰",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13195034,
+          "log_id": 134407,
+          "log_timestamp": 1794609871,
+          "view_battle_deck_info": [
+            [
+              16214,
+              25411,
+              30114
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155121294,
+          "opp_wizard_id": 15498279,
+          "opp_wizard_name": "DragonR@ge",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13194886,
+          "log_id": 133179,
+          "log_timestamp": 1794609764,
+          "view_battle_deck_info": [
+            [
+              23915,
+              31913,
+              13413
+            ],
+            [
+              15713,
+              23712,
+              19211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 6,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 190646510,
+          "opp_wizard_id": 20423278,
+          "opp_wizard_name": "xlegnaangelx",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13194367,
+          "log_id": 129629,
+          "log_timestamp": 1794609445,
+          "view_battle_deck_info": [
+            [
+              28012,
+              15712,
+              21811
+            ],
+            [
+              15713,
+              16114,
+              31311
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 217666810,
+          "opp_wizard_id": 31840810,
+          "opp_wizard_name": "Frank13M",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13191117,
+          "log_id": 108091,
+          "log_timestamp": 1794607533,
+          "view_battle_deck_info": [
+            [
+              16812,
+              21012,
+              15311
+            ],
+            [
+              29111,
+              25912,
+              28013
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 11,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178379826,
+          "opp_wizard_id": 19243490,
+          "opp_wizard_name": "Krldvil",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 106257,
+          "log_timestamp": 1794607378,
+          "view_battle_deck_info": [
+            [
+              22611,
+              18611,
+              25312
+            ],
+            [
+              16813,
+              32812,
+              34411
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 9,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 199602302,
+          "opp_wizard_id": 24217364,
+          "opp_wizard_name": "Masenforth",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13190399,
+          "log_id": 103531,
+          "log_timestamp": 1794607146,
+          "view_battle_deck_info": [
+            [
+              30113,
+              25411,
+              16214
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13189415,
+          "log_id": 97427,
+          "log_timestamp": 1794606638,
+          "view_battle_deck_info": [
+            [
+              18311,
+              26811,
+              29711
+            ],
+            [
+              20115,
+              23514,
+              28211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 22,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 187030825,
+          "opp_wizard_id": 10819916,
+          "opp_wizard_name": "Bubblesx3",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13188073,
+          "log_id": 89003,
+          "log_timestamp": 1794605964,
+          "view_battle_deck_info": [
+            [
+              26613,
+              14034,
+              24414
+            ],
+            [
+              29715,
+              14031,
+              20012
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13187817,
+          "log_id": 87503,
+          "log_timestamp": 1794605841,
+          "view_battle_deck_info": [
+            [
+              18612,
+              14512,
+              15712
+            ],
+            [
+              20115,
+              23514,
+              28211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 222362220,
+          "opp_wizard_id": 31427636,
+          "opp_wizard_name": "Cake♤2.0",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13187557,
+          "log_id": 86077,
+          "log_timestamp": 1794605717,
+          "view_battle_deck_info": [
+            [
+              25911,
+              23711,
+              13515
+            ],
+            [
+              29412,
+              23513,
+              19211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 244745765,
+          "opp_wizard_id": 51549470,
+          "opp_wizard_name": "3shot",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13187255,
+          "log_id": 84345,
+          "log_timestamp": 1794605577,
+          "view_battle_deck_info": [
+            [
+              20515,
+              26811,
+              29711
+            ],
+            [
+              15713,
+              14612,
+              18011
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13187001,
+          "log_id": 82973,
+          "log_timestamp": 1794605471,
+          "view_battle_deck_info": [
+            [
+              22614,
+              21812,
+              19211
+            ],
+            [
+              20115,
+              23514,
+              28211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13186963,
+          "log_id": 82243,
+          "log_timestamp": 1794605416,
+          "view_battle_deck_info": [
+            [
+              28013,
+              13811,
+              25613
+            ],
+            [
+              29812,
+              23511,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 155121294,
+          "opp_wizard_id": 15498279,
+          "opp_wizard_name": "DragonR@ge",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13186512,
+          "log_id": 80065,
+          "log_timestamp": 1794605243,
+          "view_battle_deck_info": [
+            [
+              18614,
+              13231,
+              28211
+            ],
+            [
+              29111,
+              25912,
+              25115
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 9,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13186424,
+          "log_id": 79547,
+          "log_timestamp": 1794605204,
+          "view_battle_deck_info": [
+            [
+              20832,
+              16533,
+              20613
+            ],
+            [
+              16214,
+              25411,
+              25114
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13186143,
+          "log_id": 77381,
+          "log_timestamp": 1794605036,
+          "view_battle_deck_info": [
+            [
+              21213,
+              25611,
+              17012
+            ],
+            [
+              25211,
+              28913,
+              14512
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 222362220,
+          "opp_wizard_id": 31427636,
+          "opp_wizard_name": "Cake♤2.0",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13185921,
+          "log_id": 76619,
+          "log_timestamp": 1794604979,
+          "view_battle_deck_info": [
+            [
+              21814,
+              16613,
+              21512
+            ],
+            [
+              29412,
+              23513,
+              19211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 74705,
+          "log_timestamp": 1794604831,
+          "view_battle_deck_info": [
+            [
+              27214,
+              28112,
+              32512
+            ],
+            [
+              25211,
+              28913,
+              14512
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 187030825,
+          "opp_wizard_id": 10819916,
+          "opp_wizard_name": "Bubblesx3",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13185522,
+          "log_id": 74241,
+          "log_timestamp": 1794604798,
+          "view_battle_deck_info": [
+            [
+              19212,
+              25613,
+              23711
+            ],
+            [
+              29812,
+              13414,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 12,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 118317256,
+          "opp_wizard_id": 19305876,
+          "opp_wizard_name": "Shorn",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13185215,
+          "log_id": 72421,
+          "log_timestamp": 1794604660,
+          "view_battle_deck_info": [
+            [
+              16812,
+              15712,
+              21012
+            ],
+            [
+              29715,
+              34213,
+              25912
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 71289,
+          "log_timestamp": 1794604580,
+          "view_battle_deck_info": [
+            [
+              12034,
+              23113,
+              10911
+            ],
+            [
+              25211,
+              28913,
+              14512
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 70883,
+          "log_timestamp": 1794604548,
+          "view_battle_deck_info": [
+            [
+              21814,
+              21512,
+              16613
+            ],
+            [
+              25211,
+              28913,
+              14512
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13184520,
+          "log_id": 68559,
+          "log_timestamp": 1794604367,
+          "view_battle_deck_info": [
+            [
+              18311,
+              12032,
+              29711
+            ],
+            [
+              17412,
+              17015,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13184218,
+          "log_id": 66887,
+          "log_timestamp": 1794604245,
+          "view_battle_deck_info": [
+            [
+              17411,
+              30715,
+              21012
+            ],
+            [
+              31915,
+              28913,
+              25211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 10,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 173774061,
+          "opp_wizard_id": 18562737,
+          "opp_wizard_name": "Stryker_Jon",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13183870,
+          "log_id": 64789,
+          "log_timestamp": 1794604090,
+          "view_battle_deck_info": [
+            [
+              22613,
+              20611,
+              11032
+            ],
+            [
+              25211,
+              28913,
+              26414
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 12,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 176928188,
+          "wizard_id": 18978594,
+          "wizard_name": "Araraquara-SP",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178379826,
+          "opp_wizard_id": 19243490,
+          "opp_wizard_name": "Krldvil",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13183729,
+          "log_id": 63943,
+          "log_timestamp": 1794604025,
+          "view_battle_deck_info": [
+            [
+              22611,
+              21211,
+              21511
+            ],
+            [
+              16813,
+              32812,
+              34411
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 12,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13183676,
+          "log_id": 63643,
+          "log_timestamp": 1794604003,
+          "view_battle_deck_info": [
+            [
+              19714,
+              20511,
+              22613
+            ],
+            [
+              29412,
+              28611,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 12,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 247932496,
+          "opp_wizard_id": 60173968,
+          "opp_wizard_name": "Ejohnpo",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13182100,
+          "log_id": 55349,
+          "log_timestamp": 1794603424,
+          "view_battle_deck_info": [
+            [
+              17411,
+              23513,
+              15714
+            ],
+            [
+              28012,
+              19211,
+              26813
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 12,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 137333977,
+          "wizard_id": 9314907,
+          "wizard_name": "ZΞKKΞИ",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 226432258,
+          "opp_wizard_id": 33409352,
+          "opp_wizard_name": "RealMainah207",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13180442,
+          "log_id": 47081,
+          "log_timestamp": 1794602909,
+          "view_battle_deck_info": [
+            [
+              23111,
+              13811,
+              25114
+            ],
+            [
+              29111,
+              25912,
+              25914
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 148362485,
+          "wizard_id": 4438423,
+          "wizard_name": "Danker_",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 0,
+          "log_id": 43605,
+          "log_timestamp": 1794602710,
+          "view_battle_deck_info": [
+            [
+              29111,
+              18611,
+              32913
+            ],
+            [
+              29812,
+              23511,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 5,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 222362220,
+          "opp_wizard_id": 31427636,
+          "opp_wizard_name": "Cake♤2.0",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13179354,
+          "log_id": 41783,
+          "log_timestamp": 1794602605,
+          "view_battle_deck_info": [
+            [
+              23915,
+              21014,
+              13413
+            ],
+            [
+              29412,
+              23513,
+              19211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 18,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 203564515,
+          "opp_wizard_id": 25244477,
+          "opp_wizard_name": "sokata",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13178320,
+          "log_id": 36661,
+          "log_timestamp": 1794602283,
+          "view_battle_deck_info": [
+            [
+              32413,
+              21012,
+              13811
+            ],
+            [
+              24511,
+              21112,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 18,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13176886,
+          "log_id": 27013,
+          "log_timestamp": 1794601576,
+          "view_battle_deck_info": [
+            [
+              26112,
+              26113,
+              26811
+            ],
+            [
+              24511,
+              19212,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 18,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 203564515,
+          "opp_wizard_id": 25244477,
+          "opp_wizard_name": "sokata",
+          "opp_wizard_level": 100,
+          "win_lose": 2,
+          "request_type": 1,
+          "match_score_var": 0,
+          "replay_rid_ref": 13176675,
+          "log_id": 25595,
+          "log_timestamp": 1794601482,
+          "view_battle_deck_info": [
+            [
+              22611,
+              21511,
+              21211
+            ],
+            [
+              24511,
+              21112,
+              23513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 18,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 118317256,
+          "opp_wizard_id": 19305876,
+          "opp_wizard_name": "Shorn",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13176640,
+          "log_id": 25245,
+          "log_timestamp": 1794601460,
+          "view_battle_deck_info": [
+            [
+              18014,
+              10514,
+              19915
+            ],
+            [
+              27712,
+              26811,
+              22613
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 18,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 236799868,
+          "opp_wizard_id": 37560773,
+          "opp_wizard_name": "ⓟotato",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13176382,
+          "log_id": 23157,
+          "log_timestamp": 1794601330,
+          "view_battle_deck_info": [
+            [
+              18311,
+              20711,
+              29012
+            ],
+            [
+              24511,
+              30312,
+              19214
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 23,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 166627031,
+          "opp_wizard_id": 17641837,
+          "opp_wizard_name": "!!JJ!!",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13175779,
+          "log_id": 19579,
+          "log_timestamp": 1794601125,
+          "view_battle_deck_info": [
+            [
+              16812,
+              21012,
+              13811
+            ],
+            [
+              29111,
+              25912,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 23,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13174993,
+          "log_id": 15401,
+          "log_timestamp": 1794600901,
+          "view_battle_deck_info": [
+            [
+              16813,
+              25613,
+              13811
+            ],
+            [
+              29111,
+              25912,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 23,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 118317256,
+          "opp_wizard_id": 19305876,
+          "opp_wizard_name": "Shorn",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13174779,
+          "log_id": 14235,
+          "log_timestamp": 1794600842,
+          "view_battle_deck_info": [
+            [
+              17411,
+              17012,
+              28913
+            ],
+            [
+              29111,
+              23712,
+              32213
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 23,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 173774061,
+          "opp_wizard_id": 18562737,
+          "opp_wizard_name": "Stryker_Jon",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13174595,
+          "log_id": 13263,
+          "log_timestamp": 1794600791,
+          "view_battle_deck_info": [
+            [
+              18311,
+              32613,
+              13413
+            ],
+            [
+              29111,
+              25912,
+              26115
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 23,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 236799868,
+          "opp_wizard_id": 37560773,
+          "opp_wizard_name": "ⓟotato",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13174293,
+          "log_id": 11639,
+          "log_timestamp": 1794600710,
+          "view_battle_deck_info": [
+            [
+              19212,
+              25613,
+              23711
+            ],
+            [
+              29111,
+              29412,
+              27513
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 18,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 190646510,
+          "opp_wizard_id": 20423278,
+          "opp_wizard_name": "xlegnaangelx",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13173866,
+          "log_id": 9483,
+          "log_timestamp": 1794600602,
+          "view_battle_deck_info": [
+            [
+              28913,
+              30613,
+              26813
+            ],
+            [
+              15713,
+              16114,
+              31311
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 122944137,
+          "wizard_id": 5892558,
+          "wizard_name": "****PAIN****",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 193174707,
+          "opp_wizard_id": 22835468,
+          "opp_wizard_name": "Nat1plz",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13173085,
+          "log_id": 5917,
+          "log_timestamp": 1794600421,
+          "view_battle_deck_info": [
+            [
+              19411,
+              18913,
+              14412
+            ],
+            [
+              25211,
+              28913,
+              14512
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178068947,
+          "opp_wizard_id": 19185445,
+          "opp_wizard_name": "SC♡AkuHime",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13173040,
+          "log_id": 5795,
+          "log_timestamp": 1794600415,
+          "view_battle_deck_info": [
+            [
+              22115,
+              14411,
+              1000215
+            ],
+            [
+              31915,
+              28913,
+              25211
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 210130283,
+          "wizard_id": 27806103,
+          "wizard_name": "Srcoelho¥",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178179168,
+          "opp_wizard_id": 19208392,
+          "opp_wizard_name": "Miles_Far",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13172917,
+          "log_id": 4747,
+          "log_timestamp": 1794600361,
+          "view_battle_deck_info": [
+            [
+              14413,
+              11615,
+              35912
+            ],
+            [
+              25211,
+              25714,
+              28913
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 173774061,
+          "opp_wizard_id": 18562737,
+          "opp_wizard_name": "Stryker_Jon",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13172650,
+          "log_id": 4041,
+          "log_timestamp": 1794600323,
+          "view_battle_deck_info": [
+            [
+              14413,
+              11615,
+              35912
+            ],
+            [
+              25211,
+              28913,
+              26414
+            ]
+          ]
+        },
+        {
+          "log_type": 1,
+          "siege_id": 2026110204,
+          "match_id": 2026110204000124,
+          "base_number": 25,
+          "guild_id": 313750,
+          "guild_name": "Egotisthic_BR",
+          "channel_uid": 217685135,
+          "wizard_id": 29376715,
+          "wizard_name": "MartinsVk",
+          "wizard_level": 100,
+          "opp_guild_id": 174415,
+          "opp_guild_name": "FalconBeast$",
+          "opp_channel_uid": 178379826,
+          "opp_wizard_id": 19243490,
+          "opp_wizard_name": "Krldvil",
+          "opp_wizard_level": 100,
+          "win_lose": 1,
+          "request_type": 1,
+          "match_score_var": 15,
+          "replay_rid_ref": 13171959,
+          "log_id": 1547,
+          "log_timestamp": 1794600175,
+          "view_battle_deck_info": [
+            [
+              19411,
+              20711,
+              15414
+            ],
+            [
+              26115,
+              28913,
+              25211
+            ]
+          ]
+        }
+      ],
+      "season_type": 1
+    }
+  ],
+  "ts_val": 1993583278,
+  "tvalue": 1794944038,
+  "tvaluelocal": 1794882838,
+  "tzone": "America/Los_Angeles",
+  "tzoffset": -28800,
+  "reqid": "9c98ddac-88cc-4909-b6eb-6c69017118f1",
+  "this_server_id": 4
+}

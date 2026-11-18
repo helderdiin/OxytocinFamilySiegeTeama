@@ -23,7 +23,7 @@ Pesquise primeiro a defesa exata e depois variações claramente identificadas. 
 2. Three Monster Defenses, de Rosa Midman: counters, estratégias e avaliações comunitárias.
 3. PlayerDojo Siege Counter: biblioteca adicional; trate como beta e verifique independentemente.
 4. Reddit `r/summonerswar`: relatos, armadilhas de build, rank e contexto; trate como evidência anedótica.
-5. YouTube, especialmente criadores de Siege: confirme visualmente trio, ataque, resultado, builds e contexto. Use transcript somente como apoio; não presuma que fala implica demonstração.
+5. YouTube, especialmente criadores de Siege: tente a transcrição uma única vez. Se ela não bastar, faça no máximo uma verificação visual curta do trecho já indicado para confirmar trio, ataque, resultado ou contexto. Não procure quadro a quadro, não teste vários timestamps e não acompanhe a luta inteira. Se continuar insuficiente, marque a evidência como parcial ou não verificada; não presuma que fala implica demonstração.
 6. Discord oficial e comunidades de Siege: use para descoberta e contexto, registrando a dificuldade de citação quando aplicável.
 7. SiegeForge ou sugestões por IA: use somente para levantar hipóteses.
 8. SWLens: use para validar viabilidade de box/runas, não como prova primária de eficácia.
@@ -35,6 +35,7 @@ Não trate bibliotecas vazias, páginas sem metodologia ou agregadores sem trans
 - Pesquise os três nomes juntos e combinações com `counter`, `siege`, `G3`, `P3`, `S3` e equivalentes relevantes.
 - Confirme que a defesa tem os mesmos três monstros; registre separadamente quando só dois coincidem.
 - Para cada candidato de ataque, capture: trio, alternativas, estratégia, ordem de turno, alvo inicial, builds, artefatos, riscos, substituições, vídeo, rank, placar/amostra e data.
+- Quando encontrar builds completas, preserve os valores literais como evidência e aplique [build-generalization.md](build-generalization.md) para propor mínimos operacionais. Não confunda o que foi observado com o que será recomendado.
 - Deduplicate a mesma batalha ou recomendação republicada em fontes diferentes.
 - Registre URLs diretas para o conteúdo, não apenas para a página inicial.
 

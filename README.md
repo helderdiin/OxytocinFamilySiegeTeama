@@ -16,6 +16,7 @@ Abra `http://localhost:4173`.
 
 - identificação por nick, sem senha;
 - catálogo normalizado com IDs internos, IDs Com2uS/SWARFARM, elementos, aliases e imagens; quando existe 2A, a forma antiga é ocultada e seus IDs são redirecionados para a Segunda Despertada;
+- versões de colaboração e suas versões permanentes de Summoners War compartilham uma única identidade, podem ser buscadas por qualquer nome/ID e usam um retrato dividido com os dois PNGs originais;
 - retratos com indicadores elementais e imagens originais de Leader Skill do catálogo público do SWARFARM;
 - defesas são registros compartilhados e cada uma pode reunir vários counters independentes;
 - defesas equivalentes são reconhecidas mesmo com slots ou titular/alternativa em outra ordem; composições apenas parecidas exigem uma escolha explícita entre reutilizar a defesa existente ou criar uma nova;
@@ -34,6 +35,62 @@ Abra `http://localhost:4173`.
 - persistência compartilhada no Supabase, com fallback local para desenvolvimento sem configuração remota;
 
 Enquanto a configuração do Supabase não estiver preenchida, os dados continuam somente no `localStorage` do navegador.
+
+## Análise batch das bases da Siege
+
+Com o SWEX-NG configurado para exportar os eventos, o comando abaixo procura cliques de bases ainda não processados:
+
+```bash
+npm run siege:batch
+```
+
+O batch lê por padrão:
+
+```text
+~/Library/Application Support/com.diegomn.swexng/profiles/captures/
+```
+
+Ele cruza `GetGuildSiegeBaseDefenseUnitList`, `GetGuildSiegeParticipationInfo` e `GetGuildSiegeMatchupInfo`, resolve os monstros pelo catálogo local e:
+
+- ignora bases aliadas;
+- ignora arquivos já processados;
+- ignora uma base inimiga que não mudou;
+- trata versões de colaboração com o mesmo `skillGroupId` como a mesma assinatura de pesquisa;
+- recoloca na fila somente bases inimigas novas ou materialmente alteradas;
+- informa quais composições entraram ou saíram quando uma base muda.
+
+O estado e o último relatório ficam em `.siege-batch/`, que é ignorado pelo Git. Uma base permanece pendente até o resumo completo ser entregue. Depois da análise:
+
+```bash
+npm run siege:batch -- --ack-all
+```
+
+Para inspecionar o relatório normalizado ou testar sem alterar o estado:
+
+```bash
+npm run siege:batch -- --json
+npm run siege:batch -- --dry-run
+```
+
+Eventos `GetGuildSiegeBaseDefenseUnitListPreset` são ignorados por padrão porque representam presets aliados. Para testes explícitos, use `--include-presets`.
+
+## Histórico local pós-Siege
+
+O histórico detalhado das Sieges encerradas fica em `data/siege-history/`, sem usar o Supabase. Para normalizar e arquivar a última Siege capturada:
+
+```bash
+python .agents/skills/siege-postmortem-summary/scripts/analyze_siege.py --archive --format json
+```
+
+Cada `match_id` recebe `summary.json`, `manifest.json` e uma pasta `raw/` com os eventos utilizados. `data/siege-history/index.json` cataloga todas as partidas. O resumo preserva cada ataque e defesa disponível, além dos agregados por jogador, composição e confronto.
+
+Antes de apagar os captures, valide a integridade:
+
+```bash
+python .agents/skills/siege-postmortem-summary/scripts/verify_archive.py --match-id MATCH_ID
+```
+
+Um arquivo `partial` não deve substituir um arquivo completo nem justificar a limpeza dos captures.
 
 ## Supabase
 
@@ -61,6 +118,7 @@ A primeira migration e o seed oficial estão em:
 - `supabase/migrations/20261028130000_defense_identity_and_similarity.sql`
 - `supabase/migrations/20261028140000_strategy_comment_editing.sql`
 - `supabase/migrations/20261028150000_share_previews.sql`
+- `supabase/migrations/20261118090000_collab_monster_equivalence.sql`
 - `supabase/seed.sql`
 
 O desenho usa sessões anônimas do Supabase Auth para manter a entrada por nick. Todos os membros autenticados podem criar, comentar e editar qualquer counter. O autor original e o dono do registro são preservados; cada edição grava somente editor e horário em `strategy_edits`, sem armazenar o conteúdo anterior. A exclusão continua restrita ao criador de counters não oficiais, e entradas do seed são protegidas. A defesa é normalizada em uma entidade própria, permitindo vários counters com autores, validações, instruções e feedback independentes.
@@ -151,7 +209,9 @@ O valor `"*"` representa a ausência do terceiro atacante ou qualquer terceiro m
 O catálogo é gerado a partir da API pública do SWARFARM e mantém somente monstros obtíveis e despertados, incluindo segundas evoluções. As imagens são baixadas para o próprio site, portanto a aplicação não consulta serviços externos durante o uso.
 
 ```bash
-node scripts/sync-monsters.mjs
+npm run sync:monsters
 ```
 
-O sincronizador preserva IDs internos existentes, adiciona novas unidades por `externalIds.com2us`, evita duplicações e grava a data da sincronização em `metadata.synchronizedAt`.
+O sincronizador preserva IDs internos existentes, adiciona novas unidades por `externalIds.com2us`, atualiza metadados e Leader Skills, evita duplicações e grava a data da sincronização em `metadata.synchronizedAt`.
+
+Ele também detecta automaticamente equivalências entre collab e versão permanente. A ligação só é criada quando as duas unidades possuem o mesmo `skillGroupId`, elemento, estrelas, despertar, atributos base, skill-ups e Leader Skill; compartilhar apenas o grupo de skills não é suficiente. A versão permanente de Summoners War vira o ID canônico e os dois nomes, IDs e retratos continuam disponíveis para busca e exibição.

@@ -45,30 +45,37 @@ function wrapText(value, maxCharacters = 54, maxLines = 2) {
 async function loadPortraits(slots, origin) {
   const portraits = new Map();
   await Promise.all(slots.map(async (slot) => {
-    if (!slot.image || portraits.has(slot.id)) return;
-    try {
-      const response = await fetch(new URL(`/${slot.image.replace(/^\/+/, "")}`, origin));
-      if (!response.ok) return;
-      const contentType = response.headers.get("content-type") || "image/png";
-      const buffer = Buffer.from(await response.arrayBuffer());
-      portraits.set(slot.id, `data:${contentType};base64,${buffer.toString("base64")}`);
-    } catch (error) {
-      console.error("share_portrait_failed", { monsterId: slot.id, message: error?.message });
-    }
+    if (!slot.images?.length || portraits.has(slot.id)) return;
+    const loaded = await Promise.all(slot.images.map(async (image) => {
+      try {
+        const response = await fetch(new URL(`/${image.replace(/^\/+/, "")}`, origin));
+        if (!response.ok) return null;
+        const contentType = response.headers.get("content-type") || "image/png";
+        const buffer = Buffer.from(await response.arrayBuffer());
+        return `data:${contentType};base64,${buffer.toString("base64")}`;
+      } catch (error) {
+        console.error("share_portrait_failed", { monsterId: slot.id, message: error?.message });
+        return null;
+      }
+    }));
+    portraits.set(slot.id, loaded.filter(Boolean));
   }));
   return portraits;
 }
 
-function portrait(slot, dataUri, x, y, id) {
+function portrait(slot, dataUris, x, y, id) {
   const name = compactText(slot.name, 19);
   const alternatives = slot.alternatives.length
     ? compactText(`ou ${slot.alternatives.join(" / ")}`, 25)
     : "";
-  const picture = dataUri
-    ? `<image href="${dataUri}" x="${x}" y="${y}" width="96" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-${id})" />`
+  const picture = dataUris?.length
+    ? dataUris.slice(0, 2).map((dataUri, index, images) => `<image href="${dataUri}" x="${x}" y="${y}" width="96" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#clip-${id}${images.length === 2 ? `-${index}` : ""})" />`).join("")
     : `<text x="${x + 48}" y="${y + 60}" text-anchor="middle" font-size="38" font-weight="700" fill="#c3cccb">${slot.id === "*" ? "X" : "?"}</text>`;
+  const clips = dataUris?.length === 2
+    ? `<clipPath id="clip-${id}-0"><rect x="${x}" y="${y}" width="48" height="96" rx="12" /></clipPath><clipPath id="clip-${id}-1"><rect x="${x + 48}" y="${y}" width="48" height="96" rx="12" /></clipPath>`
+    : `<clipPath id="clip-${id}"><rect x="${x}" y="${y}" width="96" height="96" rx="12" /></clipPath>`;
   return `
-    <defs><clipPath id="clip-${id}"><rect x="${x}" y="${y}" width="96" height="96" rx="12" /></clipPath></defs>
+    <defs>${clips}</defs>
     <rect x="${x - 3}" y="${y - 3}" width="102" height="102" rx="15" fill="${slot.elementColor}" />
     <rect x="${x}" y="${y}" width="96" height="96" rx="12" fill="#142428" />
     ${picture}

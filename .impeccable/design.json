@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-27T12:40:05Z",
+  "generatedAt": "2026-11-18T11:47:57Z",
   "title": "Design System: Oxytocin Siege Teams",
   "extensions": {
     "colorMeta": {
@@ -173,6 +173,11 @@
         "purpose": "Toast entrance and exit."
       },
       {
+        "name": "loading-state",
+        "value": "1200ms ease-in-out",
+        "purpose": "Restrained progress and skeleton pulse while current guild data loads. Removed under reduced motion."
+      },
+      {
         "name": "reduced-motion",
         "value": "none",
         "purpose": "Remove transitions and smooth scrolling when reduced motion is requested."
@@ -190,6 +195,13 @@
     ]
   },
   "components": [
+    {
+      "name": "Application Loading State",
+      "kind": "custom",
+      "description": "Keeps a returning member inside the application shell while current counters load, with an explicit retry state on failure.",
+      "html": "<section class=\"ds-app-loading\" aria-live=\"polite\" aria-busy=\"true\"><span class=\"ds-loading-mark\" aria-hidden=\"true\"><i></i><i></i><i></i></span><div><h2>Atualizando o arsenal…</h2><p>Buscando os counters mais recentes da guilda.</p></div></section>",
+      "css": ".ds-app-loading { display: flex; align-items: center; gap: 18px; padding: 22px 24px; border: 1px solid #365158; border-radius: 14px; background: #1a2e32; color: #f0eee6; box-shadow: 0 12px 34px rgba(4,13,15,.2); } .ds-app-loading h2 { margin: 0; font: 600 24px/1.15 'Space Grotesk', sans-serif; letter-spacing: -.025em; } .ds-app-loading p { margin: 6px 0 0; color: #9dacaf; font: 400 14px/1.5 'DM Sans', sans-serif; } .ds-loading-mark { width: 38px; height: 38px; display: flex; align-items: end; justify-content: center; gap: 3px; padding-bottom: 9px; border-radius: 10px; background: #284348; } .ds-loading-mark i { width: 4px; height: 9px; border-radius: 2px; background: #7fac9f; animation: ds-loading-bars .9s ease-in-out infinite alternate; } .ds-loading-mark i:nth-child(2) { height: 15px; animation-delay: -.3s; } .ds-loading-mark i:nth-child(3) { height: 12px; animation-delay: -.6s; } @keyframes ds-loading-bars { to { transform: scaleY(.45); opacity: .5; } } @media (prefers-reduced-motion: reduce) { .ds-loading-mark i { animation: none; } }"
+    },
     {
       "name": "Primary Button",
       "kind": "button",

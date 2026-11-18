@@ -288,6 +288,7 @@ let sharedStrategyOpened = false;
 
 const $ = (selector) => document.querySelector(selector);
 const loginScreen = $("#loginScreen");
+const bootstrapScreen = $("#bootstrapScreen");
 const appShell = $("#appShell");
 const strategyDialog = $("#strategyDialog");
 const monsterDialog = $("#monsterDialog");
@@ -540,35 +541,60 @@ function updateStorageUi(mode) {
   const chip = $("#syncChip");
   chip.classList.toggle("cloud", mode === "cloud");
   chip.classList.toggle("error", mode === "error");
-  $("#syncLabel").textContent = mode === "cloud" ? "Sincronizado" : mode === "error" ? "Supabase indisponível" : "Salvo neste dispositivo";
-  $("#footerStorageLabel").textContent = mode === "cloud" ? "v0.33 · Supabase" : "v0.33 · dados locais";
+  $("#syncLabel").textContent = mode === "cloud"
+    ? "Sincronizado"
+    : mode === "error"
+      ? "Supabase indisponível"
+      : mode === "loading"
+        ? "Atualizando…"
+        : "Salvo neste dispositivo";
+  $("#footerStorageLabel").textContent = mode === "cloud"
+    ? "v0.35 · Supabase"
+    : mode === "loading"
+      ? "v0.35 · conectando…"
+      : "v0.35 · dados locais";
 }
 
 async function connectCloudUser() {
   currentUserId = await database.ensureUser(currentUser);
-  const [strategyRows, defenseShortIds, comments, edits] = await Promise.all([
+  const [strategyRows, defenseShortIds] = await Promise.all([
     database.listStrategies(),
     database.listDefenseShortIds(),
-    database.listComments(),
-    database.listStrategyEdits(),
   ]);
   const defenseShortIdById = new Map(defenseShortIds.map((item) => [item.id, item.shortId]));
-  const commentsByStrategy = new Map();
-  comments.forEach((comment) => {
-    if (!commentsByStrategy.has(comment.strategyId)) commentsByStrategy.set(comment.strategyId, []);
-    commentsByStrategy.get(comment.strategyId).push(normalizeComment(comment));
-  });
-  const editsByStrategy = new Map();
-  edits.forEach((edit) => {
-    if (!editsByStrategy.has(edit.strategyId)) editsByStrategy.set(edit.strategyId, []);
-    editsByStrategy.get(edit.strategyId).push(normalizeStrategyEdit(edit));
-  });
   strategies = migrateStrategies(strategyRows).map((strategy) => ({
     ...strategy,
     defenseShortId: defenseShortIdById.get(strategy.defenseId) || strategy.defenseShortId,
-    comments: commentsByStrategy.get(strategy.id) || [],
-    edits: editsByStrategy.get(strategy.id) || [],
   }));
+
+  void Promise.all([database.listComments(), database.listStrategyEdits()])
+    .then(([comments, edits]) => {
+      const commentsByStrategy = new Map();
+      comments.forEach((comment) => {
+        if (!commentsByStrategy.has(comment.strategyId)) commentsByStrategy.set(comment.strategyId, []);
+        commentsByStrategy.get(comment.strategyId).push(normalizeComment(comment));
+      });
+      const editsByStrategy = new Map();
+      edits.forEach((edit) => {
+        if (!editsByStrategy.has(edit.strategyId)) editsByStrategy.set(edit.strategyId, []);
+        editsByStrategy.get(edit.strategyId).push(normalizeStrategyEdit(edit));
+      });
+      strategies = strategies.map((strategy) => ({
+        ...strategy,
+        comments: commentsByStrategy.get(strategy.id) || [],
+        edits: editsByStrategy.get(strategy.id) || [],
+      }));
+      if (!appShell.hidden && !appShell.classList.contains("is-loading")) {
+        const openStrategyIds = [...document.querySelectorAll(".strategy-card[open]")]
+          .map((card) => card.dataset.strategyId);
+        render();
+        openStrategyIds.forEach((strategyId) => {
+          const card = document.querySelector(`.strategy-card[data-strategy-id="${CSS.escape(strategyId)}"]`);
+          if (card) card.open = true;
+        });
+      }
+    })
+    .catch((error) => console.error("Não foi possível atualizar comentários e histórico.", error));
 }
 
 function escapeHtml(value) {
@@ -651,9 +677,25 @@ function monsterVariantKey(monster) {
   return `${normalize(monsterBaseName(monster))}|${monster.element}`;
 }
 
-function displayMonsterName(monster) {
+function monsterVisualVariants(monster) {
+  return Array.isArray(monster?.visualVariants) && monster.visualVariants.length
+    ? monster.visualVariants
+    : [monster];
+}
+
+function individualMonsterName(monster) {
   const name = String(monster.name || monster.canonicalName || monster.id).replace(/\s+2A$/i, "").trim();
   return monsterAwakenLevel(monster) === 2 ? `${name} 2A` : name;
+}
+
+function displayMonsterName(monster) {
+  return [...new Set(monsterVisualVariants(monster).map(individualMonsterName))].join(" / ");
+}
+
+function monsterExternalIdLabel(monster) {
+  return [...new Set(monsterVisualVariants(monster)
+    .map((variant) => variant?.externalIds?.com2us)
+    .filter(Boolean))].join(" / ");
 }
 
 function monsterLeaderSkill(monster) {
@@ -684,7 +726,11 @@ function elementBadgeImage(monster) {
 
 function monsterPortraitFrame(monster, imageClass, { isLeader = false, loading = false } = {}) {
   const displayName = displayMonsterName(monster);
-  const portrait = monster.image
+  const visualVariants = monsterVisualVariants(monster);
+  const splitVariants = visualVariants.length === 2 && visualVariants.every((variant) => variant.image);
+  const portrait = splitVariants
+    ? `<span class="split-monster-portrait ${escapeHtml(imageClass)}" aria-hidden="true">${visualVariants.map((variant) => `<img src="./${escapeHtml(variant.image)}" alt=""${loading ? ' loading="lazy"' : ""} />`).join("")}</span>`
+    : monster.image
     ? `<img class="${escapeHtml(imageClass)}" src="./${escapeHtml(monster.image)}" alt=""${loading ? ' loading="lazy"' : ""} />`
     : `<span class="${escapeHtml(imageClass)} fallback-avatar">${escapeHtml(displayName.slice(0, 2).toUpperCase())}</span>`;
   const skill = isLeader ? monsterLeaderSkill(monster) : null;
@@ -724,16 +770,53 @@ function prepareMonsterCatalog(records) {
     if (!current || monsterAwakenLevel(monster) > monsterAwakenLevel(current)) preferredByVariant.set(key, monster);
   }
 
-  const preferred = [...preferredByVariant.values()];
+  const selectedByRecordId = new Map();
+  for (const monster of records) {
+    selectedByRecordId.set(monster.id, preferredByVariant.get(monsterVariantKey(monster)));
+  }
+
+  const logicalByCanonicalId = new Map();
+  for (const selected of preferredByVariant.values()) {
+    const canonicalId = selected.equivalence?.canonicalId || selected.id;
+    if (logicalByCanonicalId.has(canonicalId)) continue;
+    const canonical = selectedByRecordId.get(canonicalId) || selected;
+    const visualVariants = (selected.equivalence?.variantIds || [canonical.id])
+      .map((id) => selectedByRecordId.get(id))
+      .filter((variant, index, variants) => variant && variants.indexOf(variant) === index);
+    const aliases = [...new Set(visualVariants.flatMap((variant) => [
+      variant.id,
+      variant.name,
+      variant.canonicalName,
+      individualMonsterName(variant),
+      variant.externalIds?.com2us,
+      variant.externalIds?.swarfarm,
+      ...(variant.aliases || []),
+    ]).filter(Boolean).map(String))];
+    logicalByCanonicalId.set(canonicalId, {
+      ...canonical,
+      id: canonicalId,
+      aliases,
+      visualVariants,
+    });
+  }
+
+  const preferred = [...logicalByCanonicalId.values()]
+    .sort((left, right) => displayMonsterName(left).localeCompare(displayMonsterName(right), "en") || left.element.localeCompare(right.element));
   const byId = new Map();
   const byName = new Map();
 
   for (const monster of records) {
-    const selected = preferredByVariant.get(monsterVariantKey(monster));
+    const preferredVariant = selectedByRecordId.get(monster.id);
+    const selected = logicalByCanonicalId.get(preferredVariant.equivalence?.canonicalId || preferredVariant.id);
     byId.set(monster.id, selected);
-    for (const name of [monster.name, monster.canonicalName, displayMonsterName(monster), ...(monster.aliases || [])]) {
+    for (const name of [monster.id, monster.name, monster.canonicalName, individualMonsterName(monster), ...(monster.aliases || [])]) {
       if (name) byName.set(normalize(name), selected);
     }
+  }
+
+  for (const monster of preferred) {
+    for (const alias of monster.aliases) byName.set(normalize(alias), monster);
+    byName.set(normalize(displayMonsterName(monster)), monster);
   }
 
   return { preferred, byId, byName };
@@ -744,11 +827,41 @@ function getMonster(id) {
   return monsterById.get(id) || { id, name: id, element: "neutral", image: null, externalIds: {} };
 }
 
-function showApp() {
-  loginScreen.hidden = true;
-  appShell.hidden = false;
+function setCurrentUserUi() {
   $("#currentUser").textContent = currentUser;
   $("#avatar").textContent = currentUser.charAt(0).toUpperCase();
+}
+
+function showLogin() {
+  bootstrapScreen.hidden = true;
+  appShell.hidden = true;
+  appShell.classList.remove("is-loading", "is-error");
+  loginScreen.hidden = false;
+}
+
+function showAppLoading({ error = false } = {}) {
+  bootstrapScreen.hidden = true;
+  loginScreen.hidden = true;
+  appShell.hidden = false;
+  appShell.classList.add("is-loading");
+  appShell.classList.toggle("is-error", error);
+  setCurrentUserUi();
+  $("#appLoading").setAttribute("aria-busy", String(!error));
+  $("#appLoadingTitle").textContent = error ? "Não conseguimos atualizar o arsenal" : "Atualizando o arsenal…";
+  $("#appLoadingText").textContent = error
+    ? "Sua identificação continua salva. Verifique a conexão e tente novamente."
+    : "Buscando os counters mais recentes da guilda.";
+  $("#retryConnectionButton").hidden = !error;
+  $("#openFormButton").disabled = true;
+}
+
+function showApp() {
+  bootstrapScreen.hidden = true;
+  loginScreen.hidden = true;
+  appShell.hidden = false;
+  appShell.classList.remove("is-loading", "is-error");
+  setCurrentUserUi();
+  configureCollaborativeMode();
   render();
 }
 
@@ -793,7 +906,7 @@ function render() {
   } else if (!selectedDefenseId && sharedDefense) {
     selectedDefenseId = sharedDefense.defenseId || null;
   }
-  const selectedGroup = allGroups.find((group) => group.id === selectedDefenseId);
+  const selectedGroup = allGroups.find((group) => group.id === selectedDefenseId || group.defenseIds.includes(selectedDefenseId));
   const isDefenseView = Boolean(selectedGroup);
   const isCounterCatalog = !isDefenseView && catalogMode === "counters";
 
@@ -977,20 +1090,33 @@ function closeDeleteStrategyConfirmation() {
 function groupStrategiesByDefense(records) {
   const groups = new Map();
   records.forEach((strategy) => {
-    const key = strategy.defenseId || `local:${compositionFingerprint(strategy.defense, strategy.defenseAlternatives)}`;
-    if (!groups.has(key)) groups.set(key, { id: key, defense: strategy, strategies: [] });
-    groups.get(key).strategies.push(strategy);
+    const fingerprint = compositionFingerprint(strategy.defense, strategy.defenseAlternatives);
+    const key = `identity:${fingerprint}`;
+    if (!groups.has(key)) groups.set(key, { fingerprint, strategies: [], sourceCounts: new Map() });
+    const group = groups.get(key);
+    const defenseId = strategy.defenseId || `local:${fingerprint}`;
+    group.strategies.push(strategy);
+    group.sourceCounts.set(defenseId, (group.sourceCounts.get(defenseId) || 0) + 1);
   });
   const statusPriority = { proven: 3, recommended: 2, needs_testing: 1 };
   const safetyPriority = { very_safe: 4, safe: 3, situational: 2, experimental: 1 };
-  return [...groups.values()].map((group) => ({
-    ...group,
-    strategies: group.strategies.sort((left, right) => {
-      const leftScore = (statusPriority[left.status] || 0) * 10 + (safetyPriority[left.safety] || 0);
-      const rightScore = (statusPriority[right.status] || 0) * 10 + (safetyPriority[right.safety] || 0);
-      return rightScore - leftScore || new Date(right.createdAt) - new Date(left.createdAt);
-    }),
-  }));
+  return [...groups.values()].map((group) => {
+    const defenseIds = [...group.sourceCounts.keys()].sort((left, right) => (
+      group.sourceCounts.get(right) - group.sourceCounts.get(left) || left.localeCompare(right)
+    ));
+    const id = defenseIds[0] || `local:${group.fingerprint}`;
+    const defense = group.strategies.find((strategy) => (strategy.defenseId || `local:${group.fingerprint}`) === id) || group.strategies[0];
+    return {
+      id,
+      defenseIds,
+      defense,
+      strategies: group.strategies.sort((left, right) => {
+        const leftScore = (statusPriority[left.status] || 0) * 10 + (safetyPriority[left.safety] || 0);
+        const rightScore = (statusPriority[right.status] || 0) * 10 + (safetyPriority[right.safety] || 0);
+        return rightScore - leftScore || new Date(right.createdAt) - new Date(left.createdAt);
+      }),
+    };
+  });
 }
 
 function defenseGroupCard(group) {
@@ -1327,11 +1453,12 @@ function localSimilarDefenses() {
   const groups = new Map();
   strategies.forEach((strategy) => {
     if (strategy.isActive === false) return;
-    const key = strategy.defenseId || `local:${compositionFingerprint(strategy.defense, strategy.defenseAlternatives)}`;
+    const fingerprint = compositionFingerprint(strategy.defense, strategy.defenseAlternatives);
+    const key = `identity:${fingerprint}`;
     const current = groups.get(key);
     if (current) current.counterCount += 1;
     else groups.set(key, {
-      id: key,
+      id: strategy.defenseId || `local:${fingerprint}`,
       defense: [...strategy.defense],
       defenseAlternatives: strategy.defenseAlternatives.map((slot) => [...slot]),
       counterCount: 1,
@@ -1578,7 +1705,7 @@ function renderSelectionSlot(side, index) {
     const skill = monsterLeaderSkill(monster);
     const leader = index === 0 ? `<span class="selection-leader-skill">${skill ? `<span class="selection-leader-icon">${leaderSkillImage(skill)}</span>` : ""}<span>${escapeHtml(leaderSkillDescription(monster))}</span></span>` : "";
     button.classList.toggle("leader-selection", index === 0);
-    button.innerHTML = `${monsterPortraitFrame(monster, `select-avatar ${monster.element}`, { isLeader: index === 0 })}<span class="selection-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${monster.externalIds.com2us}</small>${leader}</span>`;
+    button.innerHTML = `${monsterPortraitFrame(monster, `select-avatar ${monster.element}`, { isLeader: index === 0 })}<span class="selection-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ${escapeHtml(monsterExternalIdLabel(monster))}</small>${leader}</span>`;
   }
   renderSelectedAlternatives(side, index);
   if (side === "attack") renderBuildRecommendationsEditor();
@@ -1641,7 +1768,7 @@ function renderMonsterOptions() {
     ...(selection[alternativeKey(pickerSlot?.side)] || []).flat(),
   ]);
   const matching = monsters.filter((monster) => {
-    const names = [monster.id, monster.name, monster.canonicalName, monster.externalIds?.com2us, monster.externalIds?.swarfarm, ...(monster.aliases || [])].join(" ");
+    const names = [monster.id, monster.name, monster.canonicalName, ...(monster.aliases || [])].join(" ");
     return normalize(names).includes(query) && (activeElement === "all" || monster.element === activeElement) && !selectedIds.has(monster.id);
   });
   const visible = matching.slice(0, 80);
@@ -1657,7 +1784,7 @@ function renderMonsterOptions() {
   const monsterOptions = visible.map((monster) => `
     <button class="monster-option" data-monster-id="${monster.id}" type="button">
       ${monsterPortraitFrame(monster, `picker-avatar ${monster.element}`, { isLeader: pickerSlot?.index === 0, loading: true })}
-      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · ID ${monster.externalIds.com2us}</small>${pickerSlot?.index === 0 ? `<span class="option-leader-skill">${monsterLeaderSkill(monster) ? `<span>${leaderSkillImage(monsterLeaderSkill(monster))}</span>` : ""}${escapeHtml(leaderSkillDescription(monster))}</span>` : ""}</span>
+      <span class="option-copy"><strong>${escapeHtml(displayMonsterName(monster))}</strong><small>${elementNames[monster.element]} · IDs ${escapeHtml(monsterExternalIdLabel(monster))}</small>${pickerSlot?.index === 0 ? `<span class="option-leader-skill">${monsterLeaderSkill(monster) ? `<span>${leaderSkillImage(monsterLeaderSkill(monster))}</span>` : ""}${escapeHtml(leaderSkillDescription(monster))}</span>` : ""}</span>
       <span class="add-label">${pickerSlot?.mode === "alternative" ? "Usar como opção" : "Adicionar"}</span>
     </button>`).join("");
   $("#monsterOptions").innerHTML = wildcardOption + monsterOptions + (matching.length > visible.length ? `<div class="results-hint">Mostrando ${visible.length} de ${matching.length}. Digite o nome ou ID para encontrar os demais.</div>` : "") || '<div class="no-options">Nenhum monstro encontrado.</div>';
@@ -1827,6 +1954,7 @@ $("#loginForm").addEventListener("submit", async (event) => {
   submitButton.disabled = true;
   submitButton.textContent = cloudEnabled ? "Conectando..." : "Entrando...";
   try {
+    await initializationPromise;
     currentUser = nextUser;
     if (cloudEnabled) await connectCloudUser();
     else strategies = migrateStrategies(readStoredStrategies());
@@ -1846,9 +1974,15 @@ $("#loginForm").addEventListener("submit", async (event) => {
 $("#logoutButton").addEventListener("click", () => {
   localStorage.removeItem(STORAGE_KEYS.user);
   currentUser = "";
-  appShell.hidden = true;
-  loginScreen.hidden = false;
+  currentUserId = null;
+  showLogin();
   $("#playerName").focus();
+});
+
+$("#retryConnectionButton").addEventListener("click", async () => {
+  showAppLoading();
+  updateStorageUi("loading");
+  await init();
 });
 
 configureCollaborativeMode();
@@ -2362,27 +2496,28 @@ document.addEventListener("keydown", (event) => {
 });
 
 async function init() {
+  if (currentUser) showAppLoading();
+  else showLogin();
   try {
-    const response = await fetch("./data/monsters.json?v=0.8");
+    const response = await fetch("./data/monsters.json?v=0.9");
     if (!response.ok) throw new Error("Catálogo indisponível");
     const catalog = await response.json();
     const preparedCatalog = prepareMonsterCatalog(catalog.monsters);
     monsters = preparedCatalog.preferred;
     monsterById = preparedCatalog.byId;
     monsterByName = preparedCatalog.byName;
-    updateStorageUi(cloudEnabled ? "cloud" : "local");
+    updateStorageUi(cloudEnabled ? "loading" : "local");
     if (cloudEnabled) {
       strategies = [];
       if (currentUser) {
         try {
           await connectCloudUser();
+          updateStorageUi("cloud");
           showApp();
         } catch (error) {
           console.error(error);
           updateStorageUi("error");
-          localStorage.removeItem(STORAGE_KEYS.user);
-          currentUser = "";
-          showToast("Supabase conectado, mas o banco ainda precisa da migration e do seed.");
+          showAppLoading({ error: true });
         }
       }
     } else {
@@ -2393,8 +2528,9 @@ async function init() {
   } catch (error) {
     console.error(error);
     strategies = seedStrategies;
-    showToast("Não foi possível carregar o catálogo de monstros.");
+    if (currentUser) showAppLoading({ error: true });
+    else showToast("Não foi possível carregar o catálogo de monstros.");
   }
 }
 
-init();
+const initializationPromise = init();

@@ -29,7 +29,7 @@ Os dois primeiros slots não podem ser wildcard. O terceiro pode ser `*` somente
 
 #### Builds do ataque
 
-Para cada monstro do ataque, mostre apenas os dados documentados:
+Quando houver uma build completa, aplique [build-generalization.md](build-generalization.md). Para cada monstro, mostre primeiro a **build mínima recomendada**, usando somente os dados relevantes para o funcionamento do counter:
 
 - runas;
 - speed tune;
@@ -37,7 +37,11 @@ Para cada monstro do ataque, mostre apenas os dados documentados:
 - totais de CR, CD, RES e ACC;
 - artefatos.
 
-No preview, escreva `não documentado` nos campos ausentes para tornar a lacuna visível. Na persistência, omita dados ausentes; nunca salve o texto como se fosse build.
+Não liste todos esses campos por padrão. Omita os que não alteram sobrevivência, ordem, consistência, dano necessário ou condição de vitória. Uma build observada com muitos números não transforma todos eles em requisitos.
+
+Quando houver simplificação relevante, inclua uma nota curta de `Derivação` explicando a fonte e quais stats foram descartados. Preserve a build completa na evidência sem poluir a recomendação principal.
+
+No preview, escreva `não documentado` apenas para campos relevantes que deveriam existir, mas estão ausentes. Na persistência, omita dados ausentes; nunca salve o texto como se fosse build.
 
 #### Seções estratégicas
 

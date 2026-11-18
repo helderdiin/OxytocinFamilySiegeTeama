@@ -1,4 +1,4 @@
 interface:
   display_name: "Pesquisa de Counters de Siege"
-  short_description: "Pesquisa, preview, aprovação e cadastro de counters"
+  short_description: "Pesquisa, simplifica builds e cadastra counters"
   default_prompt: "Use $siege-counter-research para pesquisar uma defesa trending e preparar um counter para aprovação."

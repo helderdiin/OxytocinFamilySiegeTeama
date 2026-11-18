@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resumo Rápido de Base Siege"
+  short_description: "Filtra bases novas e sugere counters para WhatsApp"
+  default_prompt: "Use $siege-base-counter-summary para analisar as bases novas capturadas na Siege e gerar resumos curtos de counters para WhatsApp."

@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { detectEquivalentMonsterGroups } from "../lib/monster-equivalence.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const catalogPath = resolve(root, "dist/data/monsters.json");
@@ -20,14 +21,22 @@ const playable = remote.filter((monster) =>
 );
 
 const remoteByFamily = Map.groupBy(playable, (monster) => monster.family_id);
-const existingByCom2us = new Map(localCatalog.monsters.map((monster) => [monster.externalIds.com2us, monster]));
+const existingByCom2us = new Map(localCatalog.monsters.map((monster) => [monster.externalIds?.com2us, monster]));
 const usedIds = new Set(localCatalog.monsters.map((monster) => monster.id));
 const merged = [...localCatalog.monsters];
 
 for (const remoteMonster of playable) {
   const existingMonster = existingByCom2us.get(remoteMonster.com2us_id);
   if (existingMonster) {
+    existingMonster.familyId = remoteMonster.family_id;
+    existingMonster.skillGroupId = remoteMonster.skill_group_id;
+    existingMonster.bestiarySlug = remoteMonster.bestiary_slug;
     existingMonster.gameData ||= {};
+    existingMonster.gameData.awakenLevel = remoteMonster.awaken_level;
+    existingMonster.gameData.obtainable = remoteMonster.obtainable;
+    existingMonster.gameData.relatedForms = (remoteByFamily.get(remoteMonster.family_id) || [])
+      .filter((form) => form.com2us_id !== remoteMonster.com2us_id)
+      .map(toRelatedForm);
     existingMonster.gameData.leaderSkill = toLeaderSkill(remoteMonster.leader_skill);
     if (remoteMonster.awaken_level === 2) {
       existingMonster.image = `assets/monsters/${basename(remoteMonster.image_filename)}`;
@@ -65,6 +74,21 @@ for (const remoteMonster of playable) {
 merged.sort((a, b) => a.name.localeCompare(b.name, "en") || a.element.localeCompare(b.element));
 const deduplicated = [...new Map(merged.map((monster) => [monster.externalIds.com2us, monster])).values()];
 
+deduplicated.forEach((monster) => delete monster.equivalence);
+const catalogByCom2us = new Map(deduplicated.map((monster) => [monster.externalIds.com2us, monster]));
+const equivalentGroups = detectEquivalentMonsterGroups(playable);
+for (const group of equivalentGroups) {
+  const variants = group.variantCom2usIds.map((com2usId) => catalogByCom2us.get(com2usId)).filter(Boolean);
+  const canonical = catalogByCom2us.get(group.canonicalCom2usId);
+  if (!canonical || variants.length !== group.variantCom2usIds.length) continue;
+  const equivalence = {
+    key: group.key,
+    canonicalId: canonical.id,
+    variantIds: variants.map((monster) => monster.id),
+  };
+  variants.forEach((monster) => { monster.equivalence = equivalence; });
+}
+
 await mkdir(imageDirectory, { recursive: true });
 const missingImages = deduplicated.filter((monster) => !existsSync(resolve(root, "dist", monster.image)));
 let downloaded = 0;
@@ -81,12 +105,13 @@ await runPool(missingImages, 8, async (monster) => {
 });
 
 const output = {
-  schemaVersion: 3,
+  schemaVersion: 4,
   metadata: {
     identityProvider: "swarfarm",
     leaderSkillProvider: "swarfarm",
     synchronizedAt: new Date().toISOString(),
     remoteRecordCount: remote.length,
+    equivalentKitCount: equivalentGroups.length,
     selection: "obtainable awakened monsters, including second awakenings; leader skills are explicit objects or null",
   },
   monsters: deduplicated,
@@ -98,6 +123,7 @@ console.log(JSON.stringify({
   playableRecords: playable.length,
   previousCatalog: localCatalog.monsters.length,
   currentCatalog: deduplicated.length,
+  equivalentKits: equivalentGroups.length,
   downloadedImages: downloaded,
 }, null, 2));
 
