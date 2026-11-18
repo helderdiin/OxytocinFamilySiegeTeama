@@ -104,6 +104,15 @@ test("Fiona e Ciri compartilham nome, retratos e identidade nas prévias", () =>
   assert.equal(slot.images.length, 2);
 });
 
+test("nome localizado aparece junto da versão collab nas prévias", () => {
+  const gyomei = monsterForShare("gyomei-himejima");
+  const [slot] = teamSlots(["gyomei-himejima"], [[], [], []], "attack");
+
+  assert.equal(gyomei.displayName, "Campeão Tartaruga Negra / Gyomei Himejima");
+  assert.equal(slot.name, "Campeão Tartaruga Negra / Gyomei Himejima");
+  assert.equal(slot.images.length, 2);
+});
+
 test("migração do banco contém exatamente os aliases gerados pelo catálogo", async () => {
   const sql = await readFile(new URL("supabase/migrations/20261118090000_collab_monster_equivalence.sql", root), "utf8");
   const encodedMap = sql.match(/select coalesce\(\s*'([^']+)'::jsonb ->> p_id/)?.[1];

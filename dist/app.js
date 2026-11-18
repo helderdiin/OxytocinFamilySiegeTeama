@@ -684,7 +684,7 @@ function monsterVisualVariants(monster) {
 }
 
 function individualMonsterName(monster) {
-  const name = String(monster.name || monster.canonicalName || monster.id).replace(/\s+2A$/i, "").trim();
+  const name = String(monster.localizedName || monster.name || monster.canonicalName || monster.id).replace(/\s+2A$/i, "").trim();
   return monsterAwakenLevel(monster) === 2 ? `${name} 2A` : name;
 }
 
@@ -787,6 +787,7 @@ function prepareMonsterCatalog(records) {
       variant.id,
       variant.name,
       variant.canonicalName,
+      variant.localizedName,
       individualMonsterName(variant),
       variant.externalIds?.com2us,
       variant.externalIds?.swarfarm,
@@ -801,7 +802,7 @@ function prepareMonsterCatalog(records) {
   }
 
   const preferred = [...logicalByCanonicalId.values()]
-    .sort((left, right) => displayMonsterName(left).localeCompare(displayMonsterName(right), "en") || left.element.localeCompare(right.element));
+    .sort((left, right) => displayMonsterName(left).localeCompare(displayMonsterName(right), "pt-BR") || left.element.localeCompare(right.element));
   const byId = new Map();
   const byName = new Map();
 
@@ -809,7 +810,7 @@ function prepareMonsterCatalog(records) {
     const preferredVariant = selectedByRecordId.get(monster.id);
     const selected = logicalByCanonicalId.get(preferredVariant.equivalence?.canonicalId || preferredVariant.id);
     byId.set(monster.id, selected);
-    for (const name of [monster.id, monster.name, monster.canonicalName, individualMonsterName(monster), ...(monster.aliases || [])]) {
+    for (const name of [monster.id, monster.name, monster.canonicalName, monster.localizedName, individualMonsterName(monster), ...(monster.aliases || [])]) {
       if (name) byName.set(normalize(name), selected);
     }
   }
