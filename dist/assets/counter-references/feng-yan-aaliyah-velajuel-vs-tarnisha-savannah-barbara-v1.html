@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1536, initial-scale=1">
+  <title>Counter Feng Yan + Aaliyah + Velajuel vs Tarnisha + Savannah + Barbara</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { --bg:#0f1d20; --surface:#192c30; --deep:#142529; --line:#3e5a60; --text:#f3efe6; --muted:#a8b8ba; --copper:#dd8764; --copper-deep:#3a2925; --aqua:#8dc7b7; --aqua-deep:#203b36; --blue:#8ebed1; --amber:#e1b45e; --wind:#c4d965; --water:#67a9dc; --fire:#df735e; }
+    html, body { width:1536px; height:1024px; margin:0; overflow:hidden; }
+    body { padding:20px 24px; color:var(--text); background:var(--bg); font-family:Inter,"Helvetica Neue",Arial,sans-serif; -webkit-font-smoothing:antialiased; }
+    .canvas { height:984px; display:grid; grid-template-rows:76px 160px 244px 468px; gap:12px; }
+    .header { display:grid; grid-template-columns:200px minmax(0,1fr) auto; align-items:center; gap:18px; padding:0 16px; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:11px; }
+    .logo { width:50px; height:50px; display:grid; place-items:center; border-radius:12px; color:#fff8ef; background:#b86749; font-size:23px; font-weight:800; letter-spacing:-.05em; }
+    .brand-copy strong,.brand-copy span { display:block; }
+    .brand-copy strong { font-size:16px; }
+    .brand-copy span { margin-top:3px; color:var(--muted); font-size:9px; font-weight:800; letter-spacing:.17em; }
+    h1 { margin:0; font-size:38px; line-height:1.1; letter-spacing:-.035em; }
+    .header-badges { display:flex; gap:9px; }
+    .badge { min-height:39px; display:flex; align-items:center; padding:0 15px; border:1px solid; border-radius:9px; font-size:12px; font-weight:900; letter-spacing:.04em; text-transform:uppercase; }
+    .experimental { color:#f1ca82; border-color:#806d43; background:#332d22; }
+    .testing { color:#b5d6e4; border-color:#517b8c; background:#203642; }
+    .panel { overflow:hidden; border:1px solid var(--line); border-radius:15px; background:var(--surface); box-shadow:0 12px 30px rgba(3,12,14,.2); }
+    .band { display:grid; grid-template-columns:188px minmax(0,1fr); }
+    .panel-intro { display:flex; flex-direction:column; justify-content:center; padding:22px; border-right:1px solid var(--line); }
+    .panel-intro span { font-size:11px; font-weight:900; letter-spacing:.14em; text-transform:uppercase; }
+    .panel-intro h2 { margin:7px 0 0; font-size:29px; letter-spacing:-.025em; }
+    .panel-intro p { margin:8px 0 0; color:var(--muted); font-size:12px; line-height:1.4; }
+    .defense-panel { border-color:#7b5046; }
+    .defense-panel .panel-intro { background:var(--copper-deep); border-color:#7b5046; }
+    .defense-panel .panel-intro span { color:#e6a58e; }
+    .attack-panel { border-color:#547a71; }
+    .attack-panel .panel-intro { background:var(--aqua-deep); border-color:#547a71; }
+    .attack-panel .panel-intro span { color:#add6ca; }
+    .slots { display:grid; grid-template-columns:repeat(3,1fr); }
+    .slot { display:flex; align-items:center; justify-content:center; gap:14px; border-left:1px solid var(--line); }
+    .slot:first-child { border-left:0; }
+    .portrait-wrap { position:relative; flex:0 0 auto; }
+    .portrait { display:block; object-fit:cover; border:3px solid; border-radius:14px; background:#243a3f; box-shadow:0 8px 18px rgba(2,10,12,.32); }
+    .defense-panel .portrait { width:100px; height:100px; }
+    .attack-panel .portrait { width:138px; height:138px; }
+    .wind { border-color:var(--wind)!important; }
+    .water { border-color:var(--water)!important; }
+    .fire { border-color:var(--fire)!important; }
+    .element-badge { position:absolute; z-index:4; top:4px; right:4px; width:31px; height:31px; object-fit:contain; filter:drop-shadow(0 2px 3px rgba(0,0,0,.8)); }
+    .attack-panel .element-badge { width:36px; height:36px; }
+    .leader-badge { position:absolute; z-index:4; left:4px; bottom:4px; width:43px; height:43px; object-fit:contain; filter:drop-shadow(0 3px 4px rgba(0,0,0,.8)); }
+    .attack-panel .leader-badge { width:50px; height:50px; }
+    .monster-copy { min-width:0; max-width:190px; }
+    .monster-copy strong,.monster-copy span { display:block; }
+    .monster-copy strong { font-size:21px; line-height:1.08; }
+    .attack-panel .monster-copy strong { font-size:24px; }
+    .monster-copy span { margin-top:6px; color:var(--muted); font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .attack-role { margin-top:10px!important; color:var(--aqua)!important; font-size:9px!important; line-height:1.3; }
+    .split-portrait { position:relative; display:block; overflow:hidden; }
+    .split-portrait > img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .split-portrait > img:first-child { clip-path:inset(0 50% 0 0); }
+    .split-portrait > img:last-child { clip-path:inset(0 0 0 50%); }
+    .split-portrait::after { content:""; position:absolute; z-index:2; top:0; bottom:0; left:50%; width:1px; background:rgba(240,238,230,.48); box-shadow:0 0 3px rgba(4,13,15,.75); transform:translateX(-.5px); }
+    .bottom { min-height:0; display:grid; grid-template-columns:.92fr 1.08fr; gap:12px; }
+    .info-panel { min-height:0; display:flex; flex-direction:column; padding:16px 18px; border:1px solid var(--line); border-radius:14px; background:var(--surface); overflow:hidden; }
+    .panel-title { display:flex; align-items:center; gap:10px; margin:0 0 11px; font-size:22px; letter-spacing:-.02em; }
+    .panel-title i { width:10px; height:10px; border-radius:3px; background:var(--blue); }
+    .quick-list { display:grid; gap:7px; }
+    .quick-item { display:grid; grid-template-columns:112px minmax(0,1fr); gap:10px; padding:8px 10px; border-radius:9px; background:var(--deep); }
+    .quick-item span { padding-top:2px; color:var(--blue); font-size:9px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; }
+    .quick-item p { margin:0; color:#e0e6e3; font-size:10.5px; line-height:1.35; }
+    .target { background:#26342f; }
+    .target span { color:var(--aqua); }
+    .risk { background:#332825; }
+    .risk span { color:#e89c7e; }
+    .evidence { margin-top:auto; padding:9px 10px; color:#d9c89f; border:1px solid #6d603f; border-radius:9px; background:#2d2a22; font-size:9.5px; line-height:1.32; }
+    .evidence strong { color:var(--amber); text-transform:uppercase; }
+    .build-grid { display:grid; grid-template-rows:repeat(3,1fr); gap:8px; min-height:0; }
+    .build { min-height:0; display:grid; grid-template-columns:64px 1fr; gap:11px; padding:10px 11px; border:1px solid #36565d; border-radius:10px; background:var(--deep); }
+    .build > img { width:62px; height:62px; object-fit:cover; border:2px solid; border-radius:9px; }
+    .build-copy { min-width:0; }
+    .build-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+    .build-head strong { font-size:15px; }
+    .build-head b { color:var(--aqua); font-size:11px; }
+    .stats { display:block; margin-top:5px; color:#e2e8e5; font-size:10.5px; font-weight:700; line-height:1.3; }
+    .artifact { display:block; margin-top:5px; color:#aebfc0; font-size:9px; line-height:1.32; }
+    .artifact em { color:var(--blue); font-style:normal; font-weight:900; text-transform:uppercase; }
+    .author { margin-top:auto; display:flex; align-items:center; justify-content:space-between; gap:15px; padding-top:9px; color:var(--muted); border-top:1px solid var(--line); font-size:10px; }
+    .author strong { color:var(--text); font-size:12px; }
+    .author span:last-child { color:#80979a; text-align:right; }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <header class="header"><div class="brand"><div class="logo">O₂</div><div class="brand-copy"><strong>Oxytocin</strong><span>SIEGE TEAMS</span></div></div><h1>Counter de Siege</h1><div class="header-badges"><span class="badge experimental">Experimental</span><span class="badge testing">Precisa de testes</span></div></header>
+    <section class="panel band defense-panel"><div class="panel-intro"><span>Time inimigo</span><h2>Defesa</h2><p>Tarnisha / Yennefer é uma única identidade.</p></div><div class="slots">
+      <div class="slot"><div class="portrait-wrap"><span class="portrait split-portrait fire" role="img" aria-label="Tarnisha e Yennefer"><img src="../monsters/tarnisha.png" alt="" aria-hidden="true"><img src="../monsters/unit_icon_0143_1_2.png" alt="" aria-hidden="true"></span><img class="element-badge" src="../ui/elements/fire.png" alt="Fogo"><img class="leader-badge" src="../ui/leader-skills/leader_skill_Attack_Speed.png" alt="Leader Skill de Velocidade"></div><div class="monster-copy"><strong>Tarnisha / Yennefer (L)</strong><span>Fogo · SW / collab</span></div></div>
+      <div class="slot"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/savannah.png" alt="Savannah"><img class="element-badge" src="../ui/elements/wind.png" alt="Vento"></div><div class="monster-copy"><strong>Savannah</strong><span>Vento</span></div></div>
+      <div class="slot"><div class="portrait-wrap"><img class="portrait water" src="../monsters/unit_icon_0054_0_0.png" alt="Barbara"><img class="element-badge" src="../ui/elements/water.png" alt="Água"></div><div class="monster-copy"><strong>Barbara</strong><span>Água</span></div></div>
+    </div></section>
+    <section class="panel band attack-panel"><div class="panel-intro"><span>Seu ataque</span><h2>Counter</h2><p>Segundo turno com imunidade, DEF buff e sustain.</p></div><div class="slots">
+      <div class="slot"><div class="portrait-wrap"><img class="portrait wind" src="../monsters/feng-yan.png" alt="Feng Yan"><img class="element-badge" src="../ui/elements/wind.png" alt="Vento"><img class="leader-badge" src="../ui/leader-skills/leader_skill_Defense_Guild.png" alt="Leader Skill de Defesa em Guilda"></div><div class="monster-copy"><strong>Feng Yan (L)</strong><span>Vento</span><span class="attack-role">DEF Break e finalização</span></div></div>
+      <div class="slot"><div class="portrait-wrap"><img class="portrait water" src="../monsters/aaliyah.png" alt="Aaliyah"><img class="element-badge" src="../ui/elements/water.png" alt="Água"></div><div class="monster-copy"><strong>Aaliyah</strong><span>Água</span><span class="attack-role">DEF buff e sustain</span></div></div>
+      <div class="slot"><div class="portrait-wrap"><img class="portrait fire" src="../monsters/velajuel.png" alt="Velajuel"><img class="element-badge" src="../ui/elements/fire.png" alt="Fogo"></div><div class="monster-copy"><strong>Velajuel</strong><span>Fogo</span><span class="attack-role">Cleanse e imunidade</span></div></div>
+    </div></section>
+    <section class="bottom">
+      <article class="info-panel"><h2 class="panel-title"><i></i>Como usar</h2><div class="quick-list">
+        <div class="quick-item"><span>Plano</span><p>Absorva a abertura. Velajuel limpa e aplica imunidade; Aaliyah mantém DEF buff e sustain. Feng Yan quebra a DEF e elimina uma Beast Rider por vez.</p></div>
+        <div class="quick-item"><span>Ordem</span><p>Velajuel → Aaliyah → Feng Yan. Referência: 292 → 290 → 199 de VEL total.</p></div>
+        <div class="quick-item target"><span>Alvo</span><p>Barbara → Savannah → Tarnisha. Finalize também a forma desmontada antes de trocar o foco.</p></div>
+        <div class="quick-item risk"><span>Risco crítico</span><p>Barbara remove buffs e ganha ignore DEF; Savannah aplica DEF Break e reduz ATB; Tarnisha pode bloquear cleanse, aplicar Oblivion ou roubar imunidade.</p></div>
+      </div>
+      <div class="evidence"><strong>Evidência:</strong> vitória exata observada no material do usuário. SWGT confirma a defesa e a família do ataque; rank e URL do vídeo não foram informados.</div></article>
+      <article class="info-panel"><h2 class="panel-title"><i></i>Build mínima recomendada</h2><div class="build-grid">
+        <div class="build"><img class="wind" src="../monsters/feng-yan.png" alt="Feng Yan"><div class="build-copy"><div class="build-head"><strong>Feng Yan</strong><b>Violent / Will</b></div><span class="stats">≥ +20k HP · ≥ +2.000 DEF · 100% RES · ≥ 35% ACC · depois dos suportes</span><span class="artifact"><em>Artefatos sugeridos:</em> redução de Fogo / precisão S1 / dano adicional por DEF e HP</span></div></div>
+        <div class="build"><img class="water" src="../monsters/aaliyah.png" alt="Aaliyah"><div class="build-copy"><div class="build-head"><strong>Aaliyah</strong><b>Violent / Will</b></div><span class="stats">≥ +30k HP · ≥ +800 DEF · 100% RES · entre Velajuel e Feng Yan</span><span class="artifact"><em>Artefatos sugeridos:</em> redução de Vento / recuperação das S1 e S3</span></div></div>
+        <div class="build"><img class="fire" src="../monsters/velajuel.png" alt="Velajuel"><div class="build-copy"><div class="build-head"><strong>Velajuel</strong><b>Violent / Will</b></div><span class="stats">≥ +20k HP · ≥ +1.000 DEF · 100% RES · ≥ 15% ACC · primeiro do ataque</span><span class="artifact"><em>Artefatos sugeridos:</em> redução de Água / precisão e recuperação da S2</span></div></div>
+      </div><div class="author"><span>Autor: <strong>ZEKKEN</strong></span><span>Oxytocin Family · Guia Visual v1</span></div></article>
+    </section>
+  </main>
+  <script>
+    addEventListener('load', () => {
+      const images = [...document.images];
+      const overflow = [...document.querySelectorAll('body *')].filter((el) => el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1).map((el) => el.className || el.tagName);
+      const clippedText = [...document.querySelectorAll('strong, span, p, h1, h2')].filter((el) => el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1).map((el) => el.textContent.trim());
+      document.body.dataset.validation = JSON.stringify({ width: document.documentElement.scrollWidth, height: document.documentElement.scrollHeight, viewport: [innerWidth, innerHeight], images: images.length, loaded: images.filter((img) => img.complete && img.naturalWidth > 0).length, overflow, clippedText });
+    });
+  </script>
+</body>
+</html>
